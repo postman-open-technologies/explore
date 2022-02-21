@@ -1,0 +1,152 @@
+---
+- blueprints:
+  - High-level API governance
+  - Always investing in standards
+  - More organizational visibility
+  collection_id: 0f4f5c87-5124-48ee-9d5f-315925c6597b
+  description: We are several years into our API strategy, with a center of excellence,
+    and governance guidelines in place, but we need to achieve much wider buy-in across
+    teams when it comes to every we recommend as part of our strategy, beginning with
+    design, but also documentation, testing, security, and understanding API-first.
+    There are examples of teams who have embraced API-first, but there are many other
+    teams who are lagging behind.
+  name: Optimized But Needs to More Transformation
+  questions:
+  - How are you reporting on your existing governance efforts?
+  - Are you needing more internal or external engagement?
+  - Are there additional Internet standards you could apply?
+- blueprints:
+  - Starting with a reference collection
+  - How to set up your public workspace
+  - The most important API metric is time to first call
+  collection_id: f79ad162-416e-4e7e-bd0b-ca8c8a04b7bf
+  description: Our organization has spent the last decade optimizing around a microservices
+    approach to operating our business and has found a lot of success driven by the
+    central governance and architecture team. We still need to better map out and
+    transform operations at scale across teams, but this has been well in motion for
+    a number of years. Where we need more help is with our public APIs, which aren’t
+    seen as the most developer-friendly experience, are difficult to discover, and
+    are generally seen as being behind the competition within our industry.
+  name: Internally Optimized, but Publicly Need Help
+  questions:
+  - Would having an onboarding collection help new users?
+  - Does your public workspace have OpenAPI behind collections?
+  - Have you created a video of you trying out your own onboarding?
+- blueprints:
+  - Generate OpenAPI using code annotations
+  - API documentation is fundamental
+  - The base of the API lifecycle
+  description: There is an energized group of individuals across a variety of roles
+    who are committed to API-first transformation across our organization. We have
+    put a lot of work into design first thinking, documentation, testing, and management
+    of our workspaces. However, when we talk to many other teams they aren’t interested
+    or aggressively against the concept of API design first, and are insistent that
+    code-first is more effective than designing OpenAPIs for APIs first. There is
+    support for being API-first at leadership levels, but we need to demonstrate why
+    it matters effectively.
+  name: Energized Group Ready to Change Culture
+  questions:
+  - What types of tests are applied to code-first APIs?
+  - Is there up to date documentation available for all APIs?
+  - Is it possible to have multiple entry points for the API lifecycle?
+  collection_id: b5b556c3-6da2-411d-8faf-a93e5af8c5b7
+- blueprints:
+  - Internal landscape mapping
+  - API workspaces as the foundation
+  - The base of the API lifecycle
+  collection_id: 658c917b-c5b4-41eb-a5cf-ec2c13a6e46e
+  description: We have invested ten years in making sure our public APIs are the best
+    they can be and we lead our industry, but we have not put as much work into how
+    we do microservices internally and APIs without partners. Each team has a lot
+    of autonomy which means that there are very different approaches to designs, documentation,
+    testing, and other patterns in place when it comes to delivering APIs. This design
+    also means that it is providing difficult to standardize internally when it comes
+    to delivering APIs across the lifecycle.
+  name: Rocking It Publicly, But Not Internally
+  questions:
+  - Do you have the ability to search across API operations?
+  - Do you have a standard workspace checklist?
+  - Is there an agreed-upon lifecycle across your teams?
+- blueprints:
+  - Prioritizing API-first
+  - API discovery is the default
+  - Internal landscape mapping
+  collection_id: 71151a21-601e-4d13-baf4-a491a23478bc
+  description: We have many APIs supporting a variety of applications and integrations,
+    as well as many legacy SOAP web services. Leadership is finally convinced of the
+    importance of having an API strategy and moving to be API-first, but we do not
+    know where to begin. We missed out on doing microservices and do not have any
+    public APIs, but have a strong desire to be more organized when it comes to doing
+    APIs, but it just seems like such a massive undertaking to begin, and we are unsure
+    of how to start.
+  name: How Do We Start From the Beginning
+  questions:
+  - Do you have the buy-in of leadership when it comes to API-first?
+  - Are all teams using OpenAPI when it comes to synchronous APIs?
+  - Are all of your teams using the same source control system?
+- blueprints:
+  - Internal landscape mapping
+  - Fundamental API testing
+  - Versioning governance
+  collection_id: afdda598-288b-45ee-8569-b5490832f29a
+  description: We have some strong examples of high-performing teams and have found
+    a lot of success with an internal, partner, and public APIs over the last few
+    years. Our leadership and most of our teams realize that to continue being successful
+    we need to get better at standardizing how to test our APIs, begin governing the
+    design of our APIs, but we are having trouble finding all of our teams and our
+    APIs. It is the right time to begin investing in quality and governance, but we
+    need to establish more of a strategy for what we are doing while also investing
+    in some foundational skills across teams.
+  name: Need More Foundational Before we Optimize
+  questions:
+  - Do you have a standard workspace checklist?
+  - Do you have a common set of tests applied to APIs?
+  - Do you manage multiple versions of each API together?
+- blueprints:
+  - What are APIs
+  - Prioritizing API-first
+  - API regulation is here
+  collection_id: fe43bac5-a4bb-44f6-b89f-252ca55ca859
+  description: Our team keeps hearing from trusted advisors and investors that we
+    need to be doing APIs. We aren’t really sure what APIs are for and why they matter
+    to our business. We’d like to start investing in APIs, but lack the technical
+    skills to put together a plan, and would like help from someone to tell us what
+    we should be doing, and how APIs fit into our existing business strategy.
+  name: We Keep Hearing That We Need APIs
+  questions:
+  - Do you know where all of your existing APIs are?
+  - Do you have APIs meant just for partner use?
+  - Are there industry standards you need to adopt?
+- blueprints:
+  - How to set up your public workspace
+  - The most important API metric is time to first call
+  - Increasing adoption of an API with a public workspace
+  collection_id: 6ead209a-5983-40fa-9b63-202a524f4e13
+  description: We are an early-stage startup that has a killer application that we
+    built in an API-first way. We have API documentation, SDKs, a forum, and other
+    resources via a developer portal to support our community, but we don’t have a
+    lot of developers building on us yet. What can we do to make our API more discoverable
+    and something that the community knows about and wants to put to use in web, mobile,
+    or device applications? Where should we be investing when it comes to getting
+    the attention of developers, but also establishing a feedback loop with them to
+    help us iterate and deliver the versions of our platform.
+  name: An API-first Startup That Doesn’t Have Much Attention
+  questions:
+  - Do you have an OpenAPI available for your API?
+  - Have you created a video of you trying out your own onboarding?
+  - Do you use workspaces as part of any demonstrations?
+- blueprints:
+  - API documentation is fundamental
+  - API design first
+  - Platform Governance
+  collection_id: 03bf153b-d9b8-4191-838f-bfb7f04bbb38
+  description: Some of our developers are using Postman for testing, but we are not
+    really in the market for another API testing solution right now. Maybe at some
+    point in the future we will evaluate our need for a testing solution, but right
+    now we have other areas of our API operations that are in need of attention, and
+    we have several software testing solutions in place right now.
+  name: We Do Not Need an API Testing Solution
+  questions:
+  - Does your documentation have examples for each API?
+  - Have you considered going design first for only new APIs?
+  - Do you have observability dashboards for your API governance?

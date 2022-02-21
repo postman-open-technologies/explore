@@ -1,0 +1,14 @@
+title: Explore
+description: Exploring the lifecycle
+
+image: https://postman-toolboxes2.s3.amazonaws.com/assets/api.png
+url: https://rules.linting.org
+#url: /
+email: kin@postman.com
+
+github_user: postman-open-technologies
+github_repo: explore
+github_branch: main
+
+version:      1.1.1
+markdown:     kramdown

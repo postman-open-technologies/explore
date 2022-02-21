@@ -1,0 +1,3449 @@
+---
+- name: API Lifecycle
+  version: '2021-09-21'
+  description: A shared definition of the steps needed to bring an API to life, develop
+    it, push it to production, and sustain it for the rest of its life. Providing
+    a common view of what it takes to deliver APIs in a consistent way across an organization,
+    no matter which team is delivering or sustaining private, partner, or public APIs.
+  collection_id: 12959542-f2ef14af-cf9f-43a1-a3cf-c3872af5cd89
+  links:
+  - title: The Base of the API Lifecycle
+    url: https://www.postman.com/postman/workspace/postman-open-technologies-lifecycle/documentation/12959542-93680462-9da4-464e-9703-a064c31bd763
+  - title: Postman API LifeCycle Platform Makes It Easy for Developers to Integrate
+      External APIs
+    url: https://thenewstack.io/postman-adds-api-consumption-api-lifecycle-platform/
+  video: https://www.youtube.com/watch?v=TzOxqPCIAPA
+- name: APIs
+  version: ''
+  description: Providing programmatic interfaces for a variety of desktop, web, mobile,
+    device, and other applications using HTTP, HTTP/2, HTTP/3, TCP, MQTT, and other
+    protocols, while supporting a mix of patterns like REST, RPC, GraphQL, and event-driven
+    to meet the growing demands of increasingly digital organizations.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Activity
+  version: '2021-09-21'
+  description: The changes made to any aspect of operations by team members, providing
+    observability into when APIs, mock servers, documentation, testing, monitors,
+    and other critical elements of API operations are changed, configured-- helping
+    give a log of everything that happens at the operational level.
+  collection_id: 12959542-43ab9dd3-a7d9-484d-b52d-67ade5820dcf
+  links:
+  - title: View Workspace Activity
+    url: https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/changelog-and-restoring-collections/#viewing-workspace-activity
+  - title: Filtering the Activity Feed
+    url: https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/changelog-and-restoring-collections/#filtering-the-activity-feed
+  - title: Filtering by Entity
+    url: https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/changelog-and-restoring-collections/#filtering-by-entity
+  video: ''
+  screenshots:
+  - title: Workspace Activity
+    url: images/elements/activity-1.png
+  - title: Filter by User
+    url: images/elements/activity-2.png
+  - title: Filter by Element
+    url: images/elements/activity-3.png
+- name: Application Performance Management (APM)
+  version: '2021-09-21'
+  description: The monitoring and management of performance and availability of APIs,
+    actively detecting and diagnosing performance problems to maintain an expected
+    level of service, translating API operational metrics into business meaning value
+    at scale across hundreds or thousands of internal or external APIs.
+  collection_id: 12959542-f4d9f8c1-7c73-4a8d-90b4-a3d32af7795a
+  links:
+  - title: Wikipedia Page
+    url: https://en.wikipedia.org/wiki/Application_performance_management
+  - title: Observing an API
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/observing-an-api/
+  - title: Using Postman with Datadog APIs
+    url: https://docs.datadoghq.com/getting_started/api/
+  video: ''
+- name: Applications
+  version: '2021-09-21'
+  description: Desktop, web, mobile, device, or network applications that apply API
+    resources and capabilities delivering the intended business value of API resources
+    and capabilities, putting individual or series of API requests to work powering
+    business operations.
+  collection_id: 12959542-821f9c0d-dee4-4094-90af-6d01e47b811c
+  links: []
+  video: ''
+- name: Archive
+  version: '2021-09-21'
+  description: Establishing a formal process for how APIs are taken down, stored,
+    and kept for potential usage in the future, avoiding the deletion of each API
+    soon as it is deprecated.
+  collection_id: 12959542-3fe0fa00-476c-41aa-9fd3-517acbab42c6
+  links: []
+  video: ''
+- name: Artifacts
+  version: ''
+  description: Machine-readable artifacts create and generated as part of the design,
+    development, deployment, operation, and deprecation of APIs to power applications
+    and integrations, providing important metadata regarding every stop along the
+    API lifecycle that can be used to make decisions.
+  collection_id: ''
+  links: []
+  video: ''
+- name: AsyncAPI
+  version: '2021-10-12'
+  description: AsyncAPI is a machine-readable specification for describing the surface
+    area of your asynchronous APIs. OpenAPI is meant for describing synchronous APIs
+    like REST using HTTP, and AsymcAPI is for describing WebSockets, MQTT, Kafka,
+    NATS, and other synchronous, event-driven, and message APIs.
+  collection_id: 12959542-12b95c3f-d6f4-47c4-b56f-35f8af5e1c37
+  links:
+  - title: Website
+    url: https://www.asyncapi.com/
+  - title: Github
+    url: https://github.com/asyncapi
+  - title: Twitter
+    url: https://twitter.com/AsyncAPISpec
+  video: https://www.youtube.com/watch?v=pU71J-F7pfI
+- name: Audit
+  version: '2021-09-21'
+  description: Auditing the usage and operations of each API, or a group of APIs to
+    understand how APIs work, what dependencies are to understand the actual state
+    of any part of API infrastructure is performing or under-performing, to better
+    inform the road map for API operations.
+  collection_id: 12959542-002affe3-56f7-43f3-a3b7-5887971b6ca4
+  links:
+  - title: Utilizing audit logs
+    url: https://learning.postman.com/docs/administration/audit-logs/
+  - title: Logged Events
+    url: https://learning.postman.com/docs/administration/audit-logs/#logged-events
+  - title: Use audit logs to better manage your Enterprise team
+    url: https://blog.postman.com/use-audit-logs-to-better-manage-your-enterprise-team/
+  video: ''
+  screenshots:
+  - title: Audit Log Listing
+    url: images/elements/audit-2.png
+- name: Authentication
+  version: '2021-09-21'
+  description: The consistent application of standard authentication as part of a
+    standardized API management layer strikes a balance between access to digital
+    resources and ensuring that undesirable actors do not have access to valuable
+    assets.
+  collection_id: 12959542-cb9c7bf1-a800-46ed-b7e8-0bfed426cc73
+  links:
+  - title: Authorizing Requests
+    url: https://learning.postman.com/docs/sending-requests/authorization/
+  - title: Specifying authorization details
+    url: https://learning.postman.com/docs/sending-requests/authorization/#specifying-authorization-details
+  - title: Syncing Cookies
+    url: https://learning.postman.com/docs/sending-requests/authorization/#syncing-cookies
+  video: https://www.youtube.com/watch?v=Q23wkkfezfM
+- name: Authorization Variables
+  version: ''
+  description: Creation, management, and application of variables specifically for
+    authorization and authentication with APIs using API keys, tokens, JWT, OAuth,
+    and other common patterns, providing a way to centrally manage and store authentication
+    secrets, but then easily apply across operations via collections.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Automation
+  version: '2021-09-21'
+  description: Automated production or consumption of API resources, allowing for
+    repeatable API-driven processes to be triggered or scheduled, allowing teams to
+    define and set into motions certain aspects of operations while focusing on the
+    more manual, creative, and human aspects of doing APIs.
+  collection_id: 12959542-c5a3f492-8cb1-42db-bdcf-6826d1600cfb
+  links:
+  - title: Automated Testing with Postman
+    url: https://www.postman.com/automated-testing/
+  - title: Automate Your API Tests with Postman
+    url: https://www.postman.com/use-cases/api-testing-automation/
+  video: https://www.youtube.com/watch?v=lar1gzDbY78
+- name: Bitbucket Repository
+  version: '2021-09-21'
+  description: A dedicated Bitbucket repository for an API provides a single place
+    where code and other artifacts can be managed, with a pipeline, issues, and other
+    supporting elements an API will need to operate.
+  collection_id: 12959542-94675d25-eba1-4cf9-aebb-97cf4f82cc13
+  links:
+  - title: Configuring a Bitbucket Integration
+    url: https://learning.postman.com/docs/integrations/available-integrations/bitbucket/
+  - title: Backing Up Collections on Bitbucket
+    url: https://learning.postman.com/docs/integrations/available-integrations/bitbucket/#backing-up-collections-on-bitbucket
+  - title: POstman Integrations Page
+    url: https://www.postman.com/integrations/#postman-integrations
+  video: ''
+  screenshots:
+  - title: BitBucket Integration
+    url: images/elements/bitbucket-1.jpeg
+  - title: BitBucket Configuration
+    url: images/elements/bitbucket-2.jpeg
+  - title: BitBucket Backup
+    url: images/elements/bitbucket-3.jpeg
+- name: Blog Page Views
+  version: ''
+  description: Tracking on each view of a page or post of a blog, providing one possible
+    metric to tune into when looking to understand which stories are popular with
+    a community, helping shape our understanding of the makeup of a community, and
+    increase the likelihood of being able to engage in some meaningful way.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Blog Post
+  version: ''
+  description: A short form post on a blog, providing a story that can be consumed
+    in usually ten minutes or less, leaving reader walking away with some new insight,
+    access to useful and relevant information, but also ideally something they can
+    actually apply and use in their world like an API, collection, or tool.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Browse
+  version: ''
+  description: Having the ability to browse through a network of workspaces, API,
+    documentation, testing, and automation collections that are made available to
+    a private, partner, or public audience, allowing technical and non-technical stakeholders
+    and consumers to find the resources and activity they need.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Business Logic
+  version: '2021-09-21'
+  description: The custom rules or algorithms that handle the exchange of information
+    between a database and user interface, defining the logic that exists in between
+    APIs and backend systems, allowing data, content, media, and other resources to
+    be transformed, remixed, and personalized for consumers, optimizing the overall
+    experience.
+  collection_id: 12959542-f8330889-d07a-4f85-8fc1-fe70d271d322
+  links: []
+  video: ''
+- name: CI/CD
+  version: ''
+  description: Operating in a state of continuous integration and continuous deployment
+    involving APIs, ensuring that the process involved with consuming and producing
+    APIs are as reliable, high quality, and resulting in consistent outcomes that
+    benefit everyone involved, and powers useful applications.
+  collection_id: ''
+  links: []
+  video: ''
+- name: CI/CD Pipeline
+  version: ''
+  description: Like other aspects of the software development lifecycle, APIs benefit
+    from well defined, repeatable CI/CD pipelines to deploy, test, automate, and orchestrate
+    throughout the API lifecycle, publishing APIs to development, staging, production,
+    and other stages, but then also ensuring other elements like publishing of documentation,
+    and tests are baked into the process.
+  collection_id: 12959542-2709284a-d2c0-41bc-b5c7-78a3f6fbd2dd
+  links:
+  - title: Continuous Integration (CI) with Postman API
+    url: https://learning.postman.com/docs/running-collections/using-newman-cli/continuous-integration/
+  - title: CI with Postman API
+    url: https://learning.postman.com/docs/running-collections/using-newman-cli/continuous-integration/
+  - title: Running collections on the command line with Newman
+    url: https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/
+  video: https://www.youtube.com/watch?v=ZlTzOIv88o8
+- name: CLI Governance
+  version: '2021-10-12'
+  description: Governance can be applied at the command line interface (CLI) level,
+    enforcing API governance locally during development, ensuring that APIs are 100%
+    compliant with rules, contract, and script-based API governance established centrally
+    as part of broader governance efforts.
+  collection_id: 12959542-3c18244c-cb3a-49bb-a531-fcf13772daf1
+  links: []
+  video: ''
+- name: Change Log
+  version: ''
+  description: A detailed history of the changes that have been made specifically
+    to an API, showing all of the changes to the structure of an API as part of the
+    design and development process, providing a single list of what has changed for
+    consumers, and other stakeholders to get up to speed.
+  collection_id: 12959542-f61b7b6b-9b89-4d26-8e0b-3bc4c0749c43
+  links:
+  - title: Viewing the collection changelog
+    url: https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/changelog-and-restoring-collections/#viewing-the-collection-changelog
+  video: ''
+  screenshots:
+  - title: Screenshot Description
+    url: images/elements/change-log-1.jpeg
+- name: Changes
+  version: ''
+  description: Dealing with the inevitable change that is happening within any industry,
+    and across enterprise operations in response to a changing world, taking the time
+    to regularly assess what change is occurring, establishing common practices for
+    managing and communicating around change across teams and with consumers.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Client
+  version: ''
+  description: A web or desktop client for making calls to APIs, providing a way for
+    anyone to make requests or publish messages to APIs, see the responses, and put
+    APIs to work without having to write code, helping make authentication and other
+    recurring aspects of API usage easier.
+  collection_id: 12959542-f64e852a-0204-4f62-bb2b-18447192a30b
+  links:
+  - title: Postman API Client
+    url: https://www.postman.com/product/api-client/
+  video: ''
+- name: Client SDKs
+  version: ''
+  description: The software development kits (SDKs) in a variety of programming languages
+    that API consumers can use to bootstrap their application development and integrations,
+    helping reduce friction when it comes to developers building on top of APIs.
+  collection_id: 12959542-5714363f-7e09-441f-8edc-c9e1437fff0f
+  links:
+  - title: How (and Why) We Created an SDK Generator for Postman Collections
+    url: https://blog.postman.com/how-and-why-we-created-an-sdk-generator-for-postman-collections/
+  - title: Postman Collection Code Generators
+    url: https://github.com/postmanlabs/postman-collection-code-generators
+  - title: Generate Code for Your Front-end Apps
+    url: https://blog.postman.com/use-your-work-in-postman-to-generate-code-for-your-apps/
+  video: https://www.youtube.com/embed/VTtS4-r2oSs
+- name: Client Snippets
+  version: ''
+  description: Simple easy to apply snippets of code in a variety of programming languages
+    for each individual API request, providing ready-to-go resources for developers
+    to use when learning about how an API works, while also potentially jump-starting
+    integration and putting it to use in applications.
+  collection_id: 12959542-b2cb86a2-0e15-4622-a4e1-21198c6a64be
+  links:
+  - title: How (and Why) We Created an SDK Generator for Postman Collections
+    url: https://blog.postman.com/how-and-why-we-created-an-sdk-generator-for-postman-collections/
+  - title: Postman Collection Code Generators
+    url: https://github.com/postmanlabs/postman-collection-code-generators
+  - title: Generate Code for Your Front-end Apps
+    url: https://blog.postman.com/use-your-work-in-postman-to-generate-code-for-your-apps/
+  video: https://www.youtube.com/embed/VTtS4-r2oSs
+  screenshots:
+  - title: Code Snippets in Documentation
+    url: images/elements/client-snippets-1.png
+- name: Code
+  version: ''
+  description: Instructions for a computer program in any language that can be used
+    to power APIs on the back or integrate, automate, and orchestrate on the client
+    side, providing executable instructions that accomplish a specific business object,
+    providing what operations needs to power information technology across an organization.
+  collection_id: 12959542-dabeaa4a-ead9-43be-b950-fe04d202247e
+  links: []
+  video: ''
+- name: Code Annotations
+  version: ''
+  description: Language specific code annotations can be used to generate OpenAPI
+    definitions for APIs in a variety of programming languages, allowing developers
+    to provide the necessary information to create an APi contract from within their
+    natural development environment, embracing a code-first approach to the API lifecycle
+    while still ensuring there is an OpenAPI to be used for the rest of the lifecycle.
+  collection_id: 12959542-5e92f3d1-fc6f-4810-9f6e-21cddf95d4bc
+  links: []
+  video: ''
+- name: Cognitive Load
+  version: ''
+  description: Being aware of the work and experienced required to make sense of a
+    technical concept, working to ensure that the load is small, and teams and consumers
+    are able to learn about and absorb concepts in smaller pieces, helping minimize
+    the investment and time needed to learn something new.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Collection
+  version: ''
+  description: A machine-readable artifact that acts as a container for storing and
+    organizing multiple API requests, providing an executable, self-documented reference
+    for a complete API, a subset of an API, as well as workflows containing multiple
+    requests from across many different APIs in a specific order, with a precise business
+    function.
+  collection_id: 12959542-5468c6eb-c110-4216-b65b-df0415513b6b
+  links:
+  - title: Stay Organized with Postman Collections
+    url: https://www.postman.com/collection/
+  - title: Collection SDK
+    url: https://learning.postman.com/docs/developer/collection-sdk/
+  - title: Creating your first collection
+    url: https://learning.postman.com/docs/getting-started/creating-the-first-collection/
+  - title: Using the Collection Runner
+    url: https://learning.postman.com/docs/running-collections/intro-to-collection-runs/
+  actions:
+  - name: Import Collection
+  - name: Generate Collection from OpenAPI
+  - name: Generate OpenAPI from Collection
+  - name: Sync Collection to Github
+  - name: Watch Collection
+  - name: Fork Collection
+  - name: Comment on Collection
+  video: https://www.youtube.com/embed/QKxukXJWRPI
+- name: Collection Button
+  version: ''
+  description: Publishing an HTML / JavaScript button from a single collection, allowing
+    the collection to be published to any website, documentation, or other format,
+    enabling anyone to fork the collection and run in their own workspace, opening
+    up endless ways API producers can engage with API consumers via embeddable buttons.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Collection Fork
+  version: ''
+  description: Taking an existing API collection and creating a copy of it that is
+    still connected to the original collection, allowing anyone to create a copy of
+    the collection for their own use within a personal or team workspace while being
+    able to receive updates to the collection and potentially contribute back with
+    a pull request.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Collection Governance
+  version: ''
+  description: A Postman collection for applying governance provides a flexible way
+    to apply rules, schema, or script-based governance, allowing governance to be
+    defined as modular collections which can be manually run by developers, scheduled
+    using a monitor, or easily dropped into a CI/CD pipeline.
+  collection_id: 12959542-4d86cd92-6a63-4092-82d0-84ff2dc7569a
+  links: []
+  video: ''
+- name: Collection Merge
+  version: ''
+  description: Accepting a pull request made to a collection, merging the changes
+    made by another user back into the original collection, allowing API consumers
+    and other team members to make changes to a collection that require a review and
+    resulting merge before the changes are accepted back into the original.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Collection Pull Request
+  version: ''
+  description: Submitting a pull request for a collection that has been forked and
+    had changes made to the documentation, authentication, requests, scripts, and
+    other details of a collection, providing the collection owner with a set of changes
+    they can review and consider accepting back as part of the original collection.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Collection URL
+  version: ''
+  description: 'Using the URL of a collection to share with another user, allowing
+    the intended audience to use within the existing workspace if they have permissions,
+    or fork the collection to one of their own workspaces, making documentation, tests,
+    automation, and other types of collections sharable with anyone.
+
+    '
+  collection_id: ''
+  links: []
+  video: ''
+- name: Collection Watch
+  version: ''
+  description: Being able to watch a collection, opting in for receiving updates anyone
+    a collection changes, allowing team members and API consumers to watch a collection
+    they are interested in or dependent on, establishing a tighter connection between
+    API producer and consumer across the API lifecycle.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Comments
+  version: ''
+  description: Comments on APIs, collections and other elements of API operations
+    allow for more tightly coupled and inline conversations to occur around entire
+    elements or specific parts and pieces of elements, allowing teams to collaborate
+    and communicate across the API lifecycle.
+  collection_id: 12959542-f53ceeb6-ae16-4b85-8e39-79a35e4b6442
+  links:
+  - title: New Inline Comments Make Collaboration Easier in Postman
+    url: https://blog.postman.com/new-inline-comments-make-collaboration-even-easier-in-postman/
+  - title: Commenting on Collections
+    url: https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections/
+  - title: Commenting on a Request
+    url: https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections/#commenting-on-a-request
+  - title: Commenting on a Folder
+    url: https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections/#commenting-on-a-folder
+  - title: Commenting on a Request Parameter
+    url: https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections/#adding-a-comment-on-request-parameters
+  - title: Adding an Inline Comment
+    url: https://learning.postman.com/docs/collaborating-in-postman/commenting-on-collections/#adding-an-inline-comment
+  video: https://www.youtube.com/embed/fkYiyCj43uk
+- name: Components
+  version: ''
+  description: Reusable components for API operations, derived from the components
+    object within the OpenAPI specification, but also as part of any other area of
+    operations, helping push for more reusability of existing standards and patterns
+    across APIs, and the lifecycle that moves them forward with each version.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Contact
+  version: ''
+  description: Providing contact information for each API, ensuring there is always
+    someone who can answer questions about what is happening with each API, what has
+    changed recently, and what the future holds, helping make sure there are no orphaned
+    APIs laying around that nobody is accountable for.
+  collection_id: ''
+  links: []
+  video: ''
+- name: Contact Governance Rules
+  version: ''
+  description: Rules can be defined to govern the contact details provided for each
+    API, leveraging the contact object for OpenAPI or AsyncAPI contracts, but then
+    apply specific ruling looking for common patterns to be present like the contact
+    name, email, or URL of an API, meeting specific guidelines regarding what contact
+    is needed.
+  collection_id: 12959542-0dd713c1-38dc-4c89-a7ea-14965ced0ab4
+  links:
+  - title: Contact Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-contact
+  video: ''
+- name: Contract Testing
+  version: ''
+  description: Contract tests can be derived from API artifacts like OpenAPI, JSON
+    Schema, and GraphQL, and used to ensure there are no changes to what has been
+    promised when an API was designed or developed, providing a repeatable test that
+    can be run manually, on a schedule from multiple regions, or as part of a CI/CD
+    pipeline to ensure contracts with consumers are upheld.
+  links:
+  - title: Consumer-driven Contract Testing using Postman
+    url: https://medium.com/better-practices/consumer-driven-contract-testing-using-postman-f3580dba5370
+  video: https://www.youtube.com/embed/Ynfr-y_1WRs
+  screenshots:
+  - title: Contract Testing
+    url: images/elements/contract-testing-1.png
+  collection_id: 12959542-27528184-e0a3-4953-95e9-54efa9ba6e92
+- name: Contract Testing Monitor
+  version: ''
+  description: Monitors can be set up for all API contract testing, scheduling the
+    run of contract testing when needed and configuring to run from the regions that
+    matter most to business operations, making sure that each individual API contract
+    is never breaking with consumers, making sure that each API is delivering as expected
+    on a 24/7 schedule.
+  links: []
+  video: ''
+  collection_id: 12959542-41f309fb-9b22-43fe-822d-8c2b7d7f16f0
+- name: Contract Testing Monitor Report
+  version: ''
+  description: A report that allows the one-time or historical results of contract
+    testing monitors to be visualized, providing visibility into whether or not an
+    API contract has been broken at any point in time as defined the schedule of the
+    contract testing monitor runs.
+  links: []
+  video: ''
+  collection_id: 12959542-834e5d3f-0903-44ef-a8ca-1407d760140f
+- name: Contract Testing Pipeline
+  version: ''
+  description: Applying contract tests for an API as part of the CI/CD pipeline, making
+    sure that the contract for each API is valid, taking the JSON Schema from the
+    OpenAPI for an API and then validating staging or production API responses as
+    the build is occurring via the CI/CD pipeline.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Contract Testing Results
+  version: ''
+  description: The results of any contract testing run can be rendered as test results,
+    presented using visualizer, and posted to existing APM or other destination that
+    can be used as part of wider observability systems, allowing contract tests across
+    all APIs to be centralized for understanding API performance at scale.
+  links: []
+  video: ''
+  collection_id: 12959542-a4e65fcd-9e6f-4a2b-808c-93b573dbbb6e
+- name: Contract-Based Linting
+  version: ''
+  description: Contract-based linting allows for the validation of OpenAPI, AsyncAPI,
+    and other artifacts used as part of the API lifecycle against specific contracts
+    as defined by JSON Schema, providing a definition of what should exist as part
+    of the design for each API, but done in a way that allows it to be verified across
+    the API lifecycle.
+  links: []
+  video: ''
+  collection_id: 12959542-d6d2c393-061b-492c-8dc2-241c8d2cb421
+- name: Contributors
+  version: ''
+  description: The individual contributors to the APIs, collections, and other artifacts
+    and activity occurring within workspaces, tracking and acknowledging the contribution
+    of team members and 3rd party contributors who are helping make small or large
+    changes to any aspect of what is happening in a workspace.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Cookies
+  version: ''
+  description: Small blocks of data are created by a server when a website or sometimes
+    an API is accessed by a consumer, allowing the server to store stateful information,
+    such as email, account, and other useful information that helps make consumption
+    of data, content, and media more personalized.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Data Sources
+  version: ''
+  description: Providing the sources of where an API retrieves its data, mapping the
+    API to backend databases that contain the actual resources that will be made available
+    via each API, allowing each API to be able to find data as requests are made by
+    consumers.
+  links: []
+  video: ''
+  collection_id: 12959542-8ad63359-20a0-4a38-841e-a41c74455a56
+- name: Date-Based Versioning
+  version: ''
+  description: Applying a date to each version of an API, marking each change of an
+    API with a date, allowing consumers to adopt an API on a specific date, integrate
+    with it, and choose if they want to upgrade to the next version based upon the
+    release date. Providing a simple way for defining change, and then communicating
+    it with consumers.
+  links: []
+  video: ''
+- name: Define
+  version: ''
+  description: Establishing the nature, scope, and meaning of some part of API operations,
+    providing more details about the surface area of an API, or even the lifecycle
+    around each API, providing primary or secondary data that can be used to understand
+    the state and purpose of each API by a human or another machine.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Deploy
+  version: ''
+  description: Using an API gateway to deploy and manage APIs provides a single or
+    federated approach to providing access to backend services using well-defined
+    APIs, standardizing how APIs are published to development, staging, production,
+    or other environments, while also consistently applying authentication, logging,
+    and the other elements needed to properly manage APIs at scale.
+  links: []
+  video: ''
+  collection_id: 12959542-86fa1d8b-c705-42ee-b018-ca25b533187c
+- name: Deprecate
+  version: ''
+  description: API deprecation occurs eventually for all APIs, and having a formal
+    process to the deprecation of APIs or specific versions of an API helps API producers
+    prepare for this inevitable future in a way that keeps consumers properly informed
+    about what is happening, allowing the deprecation of APIs to happen consistently
+    across all teams, groups, and the entire enterprise organization.
+  links: []
+  video: ''
+  collection_id: 12959542-b7ab2d4e-17b4-4e23-b07e-7de1e4d90d7b
+- name: Design
+  version: ''
+  description: The functional shape, surface, and details of any type of an API provided
+    in a way that can be collaborated around and shared with other stakeholders, providing
+    a set of human and machine-readable instructions for what each API is able to
+    do that demonstrates a great deal of thought has gone into its form and function.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Design Governance
+  version: ''
+  description: Governing the shape, surface, and details of the design of any API,
+    dictating that characteristics of each API follow existing standards and patterns
+    that are defined as part of the Internet, within an industry, and as part of regular
+    enterprise operations, ensuring the consistency of APIs across teams.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Design Patterns
+  version: ''
+  description: Utilizing common design patterns and standards for the design, development,
+    and operation of APIs helps ensure APIs leverage a common vocabulary and increases
+    the chances that consumers will understand how to put an API to work in their
+    applications, increasing the effectiveness of an API, and helping increase the
+    productivity and velocity of producers and consumers.
+  links: []
+  video: ''
+  collection_id: 12959542-1f82a8c8-480a-4062-8532-aef0ae0464ae
+- name: Design Review
+  version: ''
+  description: The API design review process ensures that all APIs being put into
+    production go through a rigorous review to ensure that they comply with the standards
+    set by the organization, ensuring all APIs are as consistent as possible.
+  links: []
+  video: ''
+  screenshots:
+  - title: Screenshot Description
+    url: https://postman-open-technologies.github.io/lifecycle//images/postman-screenshot.png
+  collection_id: 12959542-403f3046-4e16-43a5-8d9a-cb7397ae16e1
+- name: Design Review Feedback
+  version: ''
+  description: Feedback as part of an API design review is essential for each designer
+    or developer to learn and progress in the design of an individual API, but also
+    will evolve their skills in support of future APIs.
+  links: []
+  video: ''
+  screenshots:
+  - title: Screenshot Description
+    url: https://postman-open-technologies.github.io/lifecycle//images/postman-screenshot.png
+  collection_id: 12959542-9fbde439-df6a-4bd2-96bc-5631943dd08b
+- name: Design Review Outcomes
+  version: ''
+  description: Every review process should have a well-defined outcome, providing
+    details on whether an API meets expectations when it comes to an organization's
+    design guidelines, or it needs to go back for work and resubmission when ready.
+  links: []
+  video: ''
+  screenshots:
+  - title: Screenshot Description
+    url: https://postman-open-technologies.github.io/lifecycle//images/postman-screenshot.png
+  collection_id: 12959542-09669600-60b3-411f-8b8d-fa8fd3748ca2
+- name: Design Review Timeline
+  version: ''
+  description: Having a standardized timeline for how long API design reviews will
+    take place, ensuring that all APIs are moved through the process as efficiently
+    and effectively as possible.
+  links: []
+  video: ''
+  screenshots:
+  - title: Screenshot Description
+    url: https://postman-open-technologies.github.io/lifecycle//images/postman-screenshot.png
+  collection_id: 12959542-77516d78-749e-441f-a149-96b51e78e9fa
+- name: Design Rules
+  version: ''
+  description: Machine-readable rules that can be applied at design, development,
+    or build time to govern the design of each API, evaluating artifacts to ensure
+    that specific design patterns are followed when crafting each API, helping make
+    sure that APIs follow common API patterns within an industry, or as defined by
+    the enterprise organization.
+  links: []
+  video: ''
+  collection_id: 12959542-cf13fe0b-f29b-4342-a727-f1b46590e9b4
+- name: Design Time Governance
+  version: ''
+  description: Governance can be applied and automated at design time, providing real-time
+    or manually triggered application of governance rules, contracts, and scripts,
+    providing a tighter feedback loop with API designers in regards to the guidance
+    around what is expected of the design of each API.
+  links: []
+  video: ''
+  collection_id: 12959542-d2807baa-f483-4e93-9d88-1be039541425
+- name: Develop
+  version: ''
+  description: The development of some part of APIs and the operations around them,
+    working on something that is entirely new or improving on some existing part of
+    the system by evolving the API or how it is operated, moving forward some part
+    of the enterprise system in response to a new application or integration.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Development Environments
+  version: ''
+  description: Machine-readable environments for APIs allow for abstracting away common
+    elements of an API development environment from the definition of each API, allowing
+    different environments to be paired with collections for each API at design, development,
+    and build time.
+  links:
+  - title: Managing environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/
+  - title: Adding Environment Variables
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#adding-environment-variables
+  - title: Accessing Environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Working with Environments as a Team
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Managing Environment Roles
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  video: ''
+  collection_id: 12959542-0666caeb-96cc-4c60-a854-3eebf77d42db
+- name: Device
+  version: ''
+  description: A physical object that is connected to the Internet using Bluetooth,
+    wired, or wireless networks, extending the existing physical nature of the object
+    with some new digital capabilities, leveraging APIs to send data back and forth
+    between the object and the cloud to provide value to the object or network.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Device Applications
+  version: ''
+  description: Software applications that operate on a physical object that is connected
+    to the Internet using Bluetooth, wired, or wireless networks, providing a useful
+    application of the data gathered as part of an object's operation, or from the
+    capabilities enabled by the device, allowing for digital engagement with each
+    object.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Discovery
+  version: ''
+  description: The ability to find APIs when new applications and integrations are
+    being developed, or maybe a new API is being developed to ensure a version of
+    it doesn't already exist, at run time as part of a service mesh, or just randomly
+    introducing people to the APIs that exist within an industry or organization.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Documentation
+  version: ''
+  description: Documentation published as human consumable HTML pages help potential
+    API consumers learn about what an API does by describing the paths, channels,
+    parameters, headers, schema, messages, and other building blocks of APIs, showing
+    examples of what is possible or by providing an API client to make calls to each
+    API as part of the documentation.
+  links:
+  - title: Create API Documentation with Postman
+    url: https://www.postman.com/api-documentation-tool/
+  - title: Documenting Your API
+    url: https://learning.postman.com/docs/publishing-your-api/documenting-your-api/
+  video: https://www.youtube.com/watch?v=XNVo9WkCoak
+  collection_id: 12959542-1f8e0370-52d1-48e9-b291-484e58de3fbd
+- name: Documentation Description
+  version: ''
+  description: Providing simple and concise descriptions to overall API documentation
+    and sections of the documentation that is defined by collection folders, ensuring
+    that every API, automation, integration, and other purpose is properly documented,
+    but the documentation descriptions are as useful as they possibly can.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Documentation Examples
+  version: ''
+  description: Offering examples of API requests, responses, schema, and the other
+    moving parts of APIs, making sure that every possible use case has an example
+    of the expected outcomes can look like, ensuring that documentation doesn't explain,
+    but also demonstrates what the value of each API actually is.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Documentation Governance
+  version: ''
+  description: Actively requiring that there is documentation available for each API,
+    providing guidance for teams when it comes to what is expected regarding completeness
+    and quality of documentation, and also automating the monitoring and verification
+    that documentation exists and is up to date.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Documentation Requests
+  version: ''
+  description: Providing detailed descriptions and as much detail for each individual
+    API request, channel, or other parts of the surface area of each API, making sure
+    that consumers have everything they need to make a successful request, and understand
+    the scope of requests that they can make while using each API.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Documentation Rules
+  version: ''
+  description: Machine-readable or codified rules that govern whether or not documentation
+    exists for each API, making sure there is accessible HTML documentation available
+    for API consumers, and even validating there are examples and other specific parts
+    of API documentation present.
+  links: []
+  video: ''
+  collection_id: 12959542-9a05ce16-60a7-4919-9d06-248706ddf0a3
+- name: Documentation Snippets
+  version: ''
+  description: Providing auto-generated client snippets in a variety of programming
+    languages with API documentation, providing a snippet that can be quickly copied
+    and pasted to provide the starting point for playing around with each API in the
+    language of choice for the consumer, moving from documentation to integration
+    as quickly as possible.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Documentation Title
+  version: ''
+  description: A simple, concise, yet information and potentially creative title for
+    API documentation help increase the documentation will be discovered and explored
+    by consumers, helping API stand out in a world where there are not just hundreds,
+    but thousands of APIs, and increase the chance that will be put to use.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Domains
+  version: ''
+  description: The establishment of domains within the enterprise, allowing for logical
+    separation of business concerns as dictated by the domain experts, helps prevent
+    information overload, unnecessary dependencies, and other challenges that arise
+    due to sprawl and complexity across the enterprise.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Engagement
+  version: ''
+  description: The relationship between API producer and consumer, defining the number
+    of ways in which they can engage synchronously and asynchronously, helping provide
+    a rich feedback loop that ensures consumers have what they need, but producers
+    have the insight they need to move forward as part of API operations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Environment
+  version: ''
+  description: Machine-readable environments for APIs allow for abstracting away common
+    elements of an API environment from the definition of each API, allowing different
+    environments to be paired with OpenAPI and collections for each API at design,
+    development, and build time.
+  links:
+  - title: Managing environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/
+  - title: Adding Environment Variables
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#adding-environment-variables
+  - title: Accessing Environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Working with Environments as a Team
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Managing Environment Roles
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  video: https://www.youtube.com/watch?v=oCEDjp3XMco
+  collection_id: 12959542-811d5926-7928-4762-926b-e4dd61954963
+- name: Events
+  version: ''
+  description: Meaningful occurrences across business operations that trigger notifications
+    or make calls to other APIs when resources are added, updated, deleted, viewed,
+    or other action is taken with an individual API or the operations surrounding
+    the API, making activity across API operations more interactive, dynamic, and
+    alive.
+  links: []
+  video: ''
+  collection_id: 12959542-dd5d1a72-46a7-4a3f-9eaf-4f9ab57a1763
+- name: Examples
+  version: ''
+  description: Examples of the API request, responses, and messages used across API
+    operations helps provide a versioned, evolvable, and reusable set of example and
+    synthetic data that can make documentation richer and testing more relevant to
+    actual business needs.
+  links:
+  - title: What is an Example?
+    url: https://learning.postman.com/docs/sending-requests/examples/#what-is-an-example
+  - title: Why Use Examples?
+    url: https://learning.postman.com/docs/sending-requests/examples/#why-use-examples
+  - title: Accessing Your Saved Examples
+    url: https://learning.postman.com/docs/sending-requests/examples/#accessing-your-saved-examples
+  - title: How Examples Appear in Your API Documentation
+    url: https://learning.postman.com/docs/sending-requests/examples/#how-your-examples-appear-in-postman-documentation
+  video: ''
+  screenshots:
+  - title: Request Example
+    url: images/elements/examples-1.png
+  collection_id: 12959542-dbadf8ec-f29e-4471-83eb-2a76f17ead6b
+- name: Fast Healthcare Interoperability Resources (FHIR)
+  version: '2021-11-22'
+  description: Fast Healthcare Interoperability Resources, or FHIR, is a standard
+    describing data formats and APIs for exchanging electronic health records (EHR),
+    providing a common set of digital object and API paths for accessing digital healthcare
+    records using modern API infrastructure.
+  links:
+  - title: FHIR Specification
+    url: https://www.hl7.org/fhir/
+  - title: Helping US States Navigate the Healthcare API Interoperability Rules
+    url: https://blog.postman.com/helping-states-navigate-cms-healthcare-api-interoperability-rules/
+  - title: HHS and CMS Finalizes Rules to Provide Patients More Control of Their Health
+      Data Using APIs
+    url: https://apievangelist.com/2020/05/05/hhs-and-cms-finalizes-rules-to-provide-patients-more-control-of-their-health-data-using-apis/
+  - title: Validating the FHIR API Contract as You Use the API and Then Leaving Inline
+      Comments on the OpenAPI
+    url: https://apievangelist.com/2021/03/03/validating-the-fhir-api-contract-as-you-use-api-then-leaving-inline-comments-on-the-openapi/
+  - title: Unofficial Workspace
+    url: https://www.postman.com/api-evangelist/workspace/fast-healthcare-interoperability-resources-fhir/overview
+  video: ''
+  collection_id: 12959542-99986e44-abc1-4f78-a4ea-ff268e374054
+- name: First Impression
+  version: ''
+  description: The mark you make on an individual consumer with the overall design,
+    delivery, documentation, and quality of the API and operations around them, often
+    setting the stage for what the future relationship will be like, or if there is
+    a relationship at all, making for an important moment to get right when doing
+    at scale.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Folder Pre-Request Scripts
+  version: ''
+  description: Postman collection folders can have pre-request scripts applied to
+    them. Defining scripts using JavaScript that runs before any of the requests within
+    the folder execute. Each request has its own scripting ability, but folder-level
+    pre-request scripts allow you to automate and orchestrate before the execution
+    of individual API requests that exist within each folder.
+  links:
+  - title: Writing pre-request scripts
+    url: https://learning.postman.com/docs/writing-scripts/pre-request-scripts/
+  video: ''
+  collection_id: 7d70dc44-13ad-4a09-af3f-599a30d5c0d6
+- name: Folder Test Scripts
+  version: ''
+  description: Postman collection folders can have test request scripts applied to
+    them. Defining scripts using JavaScript that runs after all of the requests within
+    the folder execute. Each request has its own scripting ability, but folder-level
+    test request scripts allow you to automate and orchestrate after the execution
+    of individual API requests that exist within each folder.
+  links:
+  - title: Writing Tests
+    url: https://learning.postman.com/docs/writing-scripts/test-scripts/
+  video: ''
+  collection_id: a67d7ab6-5f39-4ff9-a190-a3d8a5a99c96
+- name: Folders
+  version: ''
+  description: Logical separators within a collection for organizing and sequencing
+    API requests for browsing by humans, but also automating with a runner or as part
+    of a CI/CD pipeline, helping organize reference API collections, choreograph automation,
+    and orchestrations across many different APIs as part of a single collection.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Forks
+  version: ''
+  description: Making a linked copy of an API, or the mocks, documentation, tests,
+    and other areas of the lifecycle defined as a collection to another workspace,
+    allowing anyone to run on their own, make changes and enhancements, then if they
+    desire, contribute back to the original and receive regular updates over time.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Gateway
+  version: ''
+  description: API gateways provide a centralized or federated approach to the deployment
+    and management of APIs at scale across an organization, leveraging commercial
+    or open-source API gateways to deploy APIs into development, staging, production,
+    or other environments, allowing for the standardization of common elements of
+    API management, and configuring APIs using common policies.
+  links:
+  - title: Introducing Postman’s AWS API Gateway Integration
+    url: https://blog.postman.com/aws-api-gateway-integration-postman/
+  - title: Configuring AWS API Gateway
+    url: https://learning.postman.com/docs/integrations/available-integrations/aws-api-gateway/#uploading-api-schemas-to-aws-api-gateway
+  - title: Uploading API schemas to AWS API Gateway
+    url: https://learning.postman.com/docs/integrations/available-integrations/aws-api-gateway/#uploading-api-schemas-to-aws-api-gateway
+  video: https://www.youtube.com/embed/fy5ZWJh_sN8
+  collection_id: 12959542-7244193a-8ed1-4ca0-94a0-55efacebef81
+- name: Gateway Usage Report
+  version: ''
+  description: A usage report for an API provided by the gateway, providing data regarding
+    consumption of API resources and capabilities, offering detailed or aggregate
+    views of what is happening with each API and across operations, providing observability
+    into how APIs are being put to use within applications and as part of integrations.
+  links: []
+  video: ''
+  collection_id: 12959542-8499de49-e2e3-415f-ba04-b923c1979894
+- name: Github Repository
+  version: ''
+  description: Having a dedicated Github repository for an API provides a single place
+    where code and other artifacts can be managed, with a pipeline, issues, and other
+    supporting elements an API will need to operate.
+  links:
+  - title: Github Integration
+    url: https://learning.postman.com/docs/integrations/available-integrations/github/
+  - title: Backing Up Collections on Github
+    url: https://learning.postman.com/docs/integrations/available-integrations/github/#backing-up-collections-on-github
+  - title: Syncing Your API Schemas on GitHub
+    url: https://learning.postman.com/docs/integrations/available-integrations/github/#syncing-your-api-schemas-on-github
+  video: ''
+  screenshots:
+  - title: Schema Github Sync
+    url: images/elements/github-repository-1.png
+  collection_id: 12959542-663b5919-9101-4e85-8458-015591575d4d
+- name: Gitlab Repository
+  version: ''
+  description: Having a dedicated Gitlab repository for an API provides a single place
+    where code and other artifacts can be managed, with a pipeline, issues, and other
+    supporting elements an API will need to operate.
+  links:
+  - title: Gitlab Integration
+    url: https://learning.postman.com/docs/integrations/available-integrations/gitlab/
+  - title: Configuring a backup for Postman Collections in GitLab
+    url: https://learning.postman.com/docs/integrations/available-integrations/gitlab/#configuring-a-backup-for-postman-collections-in-gitlab
+  - title: Back up your Postman Collections to GitLab
+    url: https://learning.postman.com/docs/integrations/available-integrations/gitlab/#back-up-your-postman-collections-to-gitlab
+  video: ''
+  screenshots:
+  - title: Schema Gitlab Sync
+    url: images/elements/gitlab-repository-1.png
+  collection_id: 12959542-4f880afa-5c62-4f2c-b04d-6a49c6b26bab
+- name: Goals
+  version: ''
+  description: Ensuring the goals behind an API are well defined and accessible as
+    part of the operation of an API help ground a team's activity when it comes to
+    supporting consumers and iterating upon API, helping ensure that the API design
+    and operation are in alignment with business objectives.
+  links: []
+  video: ''
+  collection_id: 12959542-9b425c7e-708e-4dbe-9ec8-7ec303fa1de5
+- name: Governance
+  version: ''
+  description: Defining all the practices and processes across the organization for
+    delivering APIs, establishing well-known and communicated areas, elements, and
+    actions that shape how API operations function, providing all teams with what
+    they need to effectively deliver API infrastructure from start to finish.
+  links: []
+  video: https://www.youtube.com/embed/mYZz_0mTrn0
+  collection_id: 12959542-97608f21-96d4-4ce2-8b48-6c2aa9a0cf76
+- name: Governance Guidelines
+  version: '2021-10-12'
+  description: Often published as API design guidelines, governance guidelines provide
+    details on the standards for the design of APIs, but also provide guidance on
+    documentation, testing, and other aspects of API operations. Providing a human-readable
+    document that is maintained centrally or across teams, helping API designers and
+    developers understand what makes for good quality APIs.
+  links: []
+  video: ''
+  screenshots:
+  - title: Workspace Activity
+    url: images/elements/activity-1.png
+  - title: Filter by User
+    url: images/elements/activity-2.png
+  - title: Filter by Element
+    url: images/elements/activity-3.png
+  collection_id: 12959542-bdccd71f-ffb6-4f0f-b42c-be3a4845bb10
+- name: Governance Leadership
+  version: ''
+  description: Establishing a group of individuals from across the business and technical
+    leadership, bringing together a mix of skills and domain expertise together to
+    work on the overall API governance strategy, meeting regularly, and actively communicating
+    across teams who are helping lead API governance efforts.
+  links: []
+  video: ''
+  collection_id: 12959542-43845b72-4972-4549-8d07-b3e7c014cdf0
+- name: Governance Strategy
+  version: ''
+  description: 'Establishing a formal strategy for what API governance is, and what
+    the goals are when it comes to governing API operations. Starting simple, but
+    then rapidly iterating upon the strategy to keep it evolving based upon the needs
+    of an organization, and what is possible across teams. '
+  links: []
+  video: ''
+  collection_id: 12959542-56913be7-1206-4fb2-a362-af7385fb0c0b
+- name: Governance Structure
+  version: ''
+  description: Providing a clear structure for how governance will be executed, balancing
+    efforts across a top-down, but then also a bottom-up approach to moving things
+    forward. Establishing an agreed-upon scaffolding for how everyone will work together
+    to govern the design, documentation, testing, and other elements of API operations
+    in a consistent way.
+  links: []
+  video: ''
+  collection_id: 12959542-b2861165-de6a-4336-a002-6948ba4c98a6
+- name: Groups
+  version: ''
+  description: Establishing a logical separate of teams, grouping by domain, line
+    of business, project, or another bounded context that makes sense to the human
+    part of operations, but will ultimately shape the workspaces, APIs, documentation,
+    and other elements of API operations, helping shape the API factory floor.
+  links: []
+  video: ''
+  collection_id: ''
+- name: HTTP Methods
+  version: ''
+  description: Leveraging a resource-based approach to using HTTP methods such as
+    GET, POST, PUT, DELETE when making calls to APIs, using GET to retrieve resources,
+    POST to add a resource, PUT to update a resource, and DELETE to remove a resource
+    from the system, providing a common set of verbs across API implementations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Headers
+  version: ''
+  description: Key / Value pairs of data that can be passed back and forth as part
+    of API requests, confirming to the HTTP standard, and relying on the IANA registry
+    of headers to define and shape the routing and prioritization of requests being
+    made to APIs when using HTTP as the transport protocol between client and server.
+  links: []
+  video: ''
+  collection_id: ''
+- name: History
+  version: ''
+  description: Having access to the history of requests and other activity associated
+    with API operations, providing an accounting of what is happening from both producer
+    or a consumer point of view, relying on logging, but making it much more usable
+    as part of team or consumer working within any API workspace.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Human-Readable Artifact
+  version: ''
+  description: An artifact produced as part of regular AP operations that is fit for
+    consumption by a human, either technical or non-technical., providing an output
+    from any stage of the API lifecycle that can be used to inform decision making
+    by API producers and consumers, helping keep operations always informed.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Internet Assigned Numbers Authority (IANA)
+  version: ''
+  description: The Internet Assigned Numbers Authority (IANA) is a standards organization
+    that oversees global IP address allocation, autonomous system number allocation,
+    root zone management in the Domain Name System (DNS), media types, and other Internet
+    Protocol-related symbols and Internet numbers.
+  links: []
+  video: ''
+  collection_id: ''
+- name: IDE Governance
+  version: '2021-10-12'
+  description: Governance can be applied at the integrated development environment
+    (IDE) level, enforcing API governance locally during development, ensuring that
+    APIs are 100% compliant with rules, contract, and script-based API governance
+    established centrally as part of broader governance efforts.
+  links: []
+  video: ''
+  collection_id: 12959542-dadb49d0-ffba-4ea9-8f55-00cdc1b96eeb
+- name: Industry
+  version: ''
+  description: A branch of an economy that produces a closely-related set of raw materials,
+    goods, or services, which often evolves over time, and are shaped by the companies
+    that operate within each industry, and the consumer and regulatory influences
+    over what happens, providing a logical grouping to think about how business works.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Industry Standards
+  version: ''
+  description: Industry standards are voluntary agreements that establish requirements
+    for products, practices, or operations in a given field, providing an existing
+    set of patterns that can be applied to the schema, APIs, and other aspects of
+    API operations, dictating the design and delivery of APIs within specific business
+    sectors.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Information
+  version: ''
+  description: General information about an API, providing a set of metadata that
+    can be used across documentation, discovery, automation, and other aspects of
+    operation, making sure that consumers have what they need to understand what an
+    API is and what it does, helping them understand the value it provides.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Info Governance Rules
+  version: ''
+  description: Rules can be defined to govern the information provided for each API,
+    leveraging the info block for OpenAPI or AsynCaPI contracts, but then apply specific
+    ruling looking for common patterns to be present like the title and description
+    of an API, meeting specific guidelines regarding what information is needed.
+  links:
+  - title: Info Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-info
+  video: ''
+  collection_id: 12959542-e15a0d83-534e-4a73-8f28-dcf9aae8f98f
+- name: Inform
+  version: ''
+  description: Ensure that all stakeholders for an API have all the relevant facts
+    and information regarding an API, keeping teams behind APIs up to speed all that
+    they need to know to design, develop, and manage an API across its evolution,
+    allowing everyone to make the best possible decisions when it comes to delivering
+    APIs.
+  links: []
+  video: ''
+  collection_id: 12959542-732d5f21-e56d-4d1c-95da-e8e159ad5f30
+- name: Inline Comments
+  version: ''
+  description: Comment threads that are associated with specific properties of an
+    OpenAPI or collection, and since collections can be used for mocks, documentation,
+    testing, and many other purposes, provide the ability for inline comments to existing
+    for not just each part of an API, but also the operations around them.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Integration Monitor
+  version: ''
+  description: Monitors can be set up for all API integration testing, scheduling
+    the run of integrations tests when needed, making sure that each individual API
+    is regularly certified as working as expected, ensuring that APIs do not become
+    a liability due to changes, but also keeping all APIs compliant with the latest
+    level of integration testing that is occurring across an entire organization.
+  links: []
+  video: ''
+  collection_id: 12959542-be708c46-6e2d-44e6-8308-f04afb9fcf76
+- name: Integration Monitor Results
+  version: ''
+  description: The results of any integration testing run can be rendered as test
+    results, presented using visualizer, and posted to existing APM or other destination
+    that can be used as part of wider observability systems, allowing integration
+    tests across all APIs to be centralized for understanding API performance at scale.
+  links: []
+  video: ''
+  collection_id: 12959542-26d5d6fe-e78c-43b5-8b4c-5ffd8cbb83db
+- name: Integration Testing
+  version: ''
+  description: Integration tests can be defined for any API using executable and shareable
+    collections, testing integrations, as well as other more custom scenarios or business
+    approaches, providing a single or suite of integration tests that can be manually
+    run, scheduled across multiple regions, or executed as part of a CI/CD pipeline,
+    automating integration testing consistently across APIs.
+  links: []
+  video: ''
+  collection_id: 12959542-4b5628d0-376c-4983-8397-9809585820c5
+- name: Integration Testing Monitor Report
+  version: ''
+  description: A report that allows the one-time or historical results of integration
+    testing monitors to br visualized, providing visibility into whether or not an
+    API integration has been broken at any point in time as defined the schedule of
+    the integration testing monitor.
+  links: []
+  video: ''
+  collection_id: 12959542-fd361915-2266-462d-a045-57415d121d73
+- name: Integrations
+  version: ''
+  description: Providing a software connection between two platforms or systems, using
+    APIs to establish a well-defined flow of data, execution of capabilities, and
+    relationship between many different systems, relying upon many different systems
+    to move forward your own system using a platform approach.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Intelligence
+  version: ''
+  description: The acquisition of knowledge from across API operations, providing
+    the data that is needed to make decisions regarding the operation and evolution
+    of each API, ensuring that teams are well informed and have what they need to
+    do what matters the most to business.
+  links: []
+  video: ''
+  collection_id: 12959542-6c376ab7-60f0-4b2e-9730-eee274402f4b
+- name: Interceptor
+  version: ''
+  description: Running traffic through Interceptor in Chrome to capture API traffic,
+    allowing the details of requests and responses to be translated into a collection
+    that can be re-run, organized, shared, monitored, automated, and put to work consuming
+    API resources, or even used to inform the evolution of an API by defining the
+    surface area of each API based upon how it is used.
+  links:
+  - title: Chrome Extension
+    url: https://chrome.google.com/webstore/detail/postman-interceptor/aicmkgpgakddgnaphhhpliifpcfhicfo?hl=en
+  - title: Using Postman Interceptor
+    url: https://learning.postman.com/docs/sending-requests/capturing-request-data/interceptor/
+  - title: Installing Interceptor
+    url: https://learning.postman.com/docs/sending-requests/capturing-request-data/interceptor/#installing-interceptor
+  - title: Syncing cookies
+    url: https://learning.postman.com/docs/sending-requests/capturing-request-data/interceptor/#syncing-cookies
+  - title: Capturing requests
+    url: https://learning.postman.com/docs/sending-requests/capturing-request-data/interceptor/#capturing-requests
+  video: ''
+  collection_id: 12959542-2c566d92-c8e1-4814-b66f-e9df8ae67f21
+- name: Internal Network
+  version: ''
+  description: Having an internal network where team members can publish API, collections,
+    and the other elements of API operations, providing a browsable, searchable catalog
+    of API resources and capabilities that are only accessible by internal teams,
+    with further access-controlled defined by administrators.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Internet
+  version: ''
+  description: 'The Internet is the global system of interconnected computer networks
+    that uses the Internet protocol suite (TCP/IP) to communicate between networks
+    and devices, providing a network of networks that consists of private, public,
+    academic, business, and government networks of local to global scope, linked by
+    a broad array of electronic, wireless, and optical networking technologies. '
+  links: []
+  video: ''
+  collection_id: ''
+- name: Internet Standards
+  version: ''
+  description: The normative specification of a technology that is appropriate for
+    the Internet, allowing interoperation of hardware and software from different
+    sources which allow the internet to function, acting as the lingua franca of worldwide
+    communications across a digital business landscape.
+  links: []
+  video: ''
+  collection_id: ''
+- name: JSON Schema
+  version: ''
+  description: JSON Schema is a vocabulary that allows you to annotate and validate
+    JSON documents., allowing you to model objects and then validate those objects
+    as part of the design, delivery, and operation of APIs, providing a way to describe
+    and validate the digital payload behind applications and integrations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Key
+  version: ''
+  description: API keys provide the simplest form of access to an API, allowing consumers
+    to sign up for an account, define what their application is, and then receive
+    a key they can include in headers or other parameters to identify themselves,
+    ensuring that API producers are fully aware of everyone who has access to an API,
+    and all consumers have a way to clearly identify themselves and receive personalized
+    usage data for each key.
+  links:
+  - title: Securely Using API Keys in Postman
+    url: https://blog.postman.com/how-to-use-api-keys/
+  - title: Generating a Postman API key
+    url: https://learning.postman.com/docs/developer/intro-api/#generating-a-postman-api-key
+  video: ''
+  collection_id: 12959542-dc3ad8a3-924e-494f-a92c-50b3d7207728
+- name: License
+  version: ''
+  description: A legal instrument for governing the use or redistribution of software
+    involved in the design, delivery, and operation of APIs, giving API producers
+    the mechanisms they need to protect their proprietary code, interfaces, and other
+    elements, but then also simultaneously invest in and support openly licensed elements
+    of the API lifecycle as well.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Lifecycle
+  version: ''
+  description: A logical set of steps for designing, delivering, operating, and deprecating
+    an API, providing what is needed to productively and reliably deliver API infrastructure
+    for internal or external use in a consistent, measurable, and reliable way that
+    provides value to consumers building applications and integrations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Linting
+  version: ''
+  description: Validating an API schema against a known set of constraints, ensuring
+    that all artifacts in use across API operations are well defined and match known
+    and intended schema for use as part of requests, responses, and the messages being
+    sent, published, and subscribed to across API operations.
+  links: []
+  video: ''
+  collection_id: 12959542-1722b404-e864-467d-bac6-8884131312f3
+- name: Machine-Readable Artifact
+  version: ''
+  description: An output as part of API operations that is able to be automatically
+    read by a system, service, or tool, allowing it to import the artifact and understand
+    the semantics of the artifact structure, and apply the artifact to some process
+    associated with the API lifecycle, helping automate and orchestrate across operations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Management
+  version: ''
+  description: The overall general management of API operations, providing a comprehensive
+    way for describing many of the common operational resources and capabilities needed
+    to design, deliver, and sustain APIs throughout their life, using a single, or
+    multiple vendors to satisfy what is needed across all areas of API operations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Management Rules
+  version: ''
+  description: The governance rules to apply to API management, ensuring that policies
+    are being applied consistently across APIs, standardizing how APIs are managed
+    in production, making sure there are limitations, constraints, and observability
+    present across all APIs in ways that are defined as part of a centralized governance
+    strategy.
+  links: []
+  video: ''
+  collection_id: 12959542-73605139-2408-4f0f-8d35-8b1db7143793
+- name: Members
+  version: ''
+  description: The individual and collective members of a specific team are involved
+    in producing and consuming APIs, identifying the human beings behind API operations,
+    organizing them into logical groups, applying designated roles and access permissions,
+    helping be more organized about how API operations are defined.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Mobile
+  version: ''
+  description: An iPhone, Android, or another mobile phone device, providing a cellular
+    Internet-connected device that is being used for personal or professional purposes,
+    offering a standardized way for telephony, but more importantly the operation
+    of mobile software applications by each mobile user.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Mobile Applications
+  version: ''
+  description: Software applications that run on an iPhone, Android, or another mobile
+    phone device, applying specific digital resources and capabilities for mobile
+    device users to apply for messaging, calendaring, social, photos, and the many
+    other ways in which mobile phones have become ubiquitous in our world.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Mock Server
+  version: ''
+  description: A mock server helps replicate as much of the functionality and API
+    would have in production, before the time to actually have to write any code,
+    making APIs be more tangible and real early on in the lifecycle, allowing teams
+    to rapidly design an API that meets the needs of everyone involved, providing
+    usable elements that power design, documentation, testing, and other elements
+    of the API lifecycle.
+  links:
+  - title: Setting up mock servers
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/
+  - title: Configuring mock details
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/#configuring-mock-details
+  - title: Making requests to mocks
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/#making-requests-to-mocks
+  - title: Viewing mock calls
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/#viewing-mock-calls
+  - title: Troubleshooting mock calls
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/#troubleshooting-mock-calls
+  video: https://www.youtube.com/embed/n_7UUghLpco
+  collection_id: 12959542-dc23dee6-5bb3-4ccb-bcaf-0377d4d4d785
+- name: Monitor
+  version: ''
+  description: Monitoring any process across API operations defined as a collection,
+    then bundled with any environment, setting a schedule for the execution of the
+    collection, and viewing or publishing of the results to any other location, providing
+    a very wide definition of what monitoring can mean across API operations.
+  links:
+  - title: Monitoring your APIs
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/intro-monitors/
+  - title: Viewing monitor usage
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/intro-monitors/#viewing-monitor-usage
+  - title: Running collections in a monitor
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/intro-monitors/#running-collections-in-a-monitor
+  - title: Multi-region monitoring
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/intro-monitors/#multi-region-monitoring
+  video: https://www.youtube.com/embed/tDQzY1Hn2LY
+  collection_id: 12959542-c6ce1a5d-5732-4ad5-9ac0-34bd7b895c01
+- name: Multi-Factor Authentication (MFA)
+  version: ''
+  description: Multi-Factor Authentication (or MFA) is an authentication method to
+    ensure digital user is who they say they are. During an MFA process, a user is
+    granted access to a software system only after successfully presenting two or
+    more pieces of evidence to the authentication service. Evidence may be in the
+    form of knowledge (a password), possession (a device), or inherence (biometric
+    data). MFA significantly increases the security of logins, with each additional
+    factor decreasing the ability for an unauthorized individual to pretend to be
+    a legitimate user.
+  links: ''
+  video: ''
+  collection_id: 12959542-e4a3aee0-1260-49bc-adcb-99ee60ac61e5
+- name: Network
+  version: ''
+  description: A place to connect to API, browsing, searching, consuming, and automating
+    with APIs from across private, partner, and public sources, providing a network
+    of digital resources and capabilities for using across applications and integrations,
+    meeting the needs of an enterprise organization.
+  links: []
+  video: ''
+  collection_id: ''
+- name: New APIs
+  version: ''
+  description: Beginning a new API project and taking the time to properly define
+    what is expected of an API, ensure that the API isn't redundant, and provides
+    value to consumers, taking full advantage of the moment to reuse standards and
+    common patterns, including consumers in the conversation, and deliver the best
+    possible API we can.
+  links: []
+  video: ''
+  collection_id: ''
+- name: New Applications
+  version: ''
+  description: Beginning a new desktop, web, mobile, device, or network application
+    from many existing API resources, but also potentially some new APIs to provide
+    the resources and capabilities needed in the application, acknowledging the needs
+    of the new application, but also the wider needs of the enterprise operation.
+  links: []
+  video: ''
+  collection_id: ''
+- name: New Integrations
+  version: ''
+  description: Beginning to consider how to migrate data, content, media, and other
+    digital resources between two systems, taking the time to properly define the
+    integration, utilize existing APIs as part of the system interoperability, while
+    also introducing new API resources into the equation when necessary to meet the
+    needs of the system to system integration.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Newman
+  version: ''
+  description: Newman is an open-source collection runner, allowing Postman collections
+    to be executed as part of CI/CD pipeline runs, executing all of the API requests,
+    pre-request, and post-request scripts, and providing results reporting that can
+    be used as part of testing and automation.
+  links:
+  - title: Newman on Github
+    url: https://github.com/postmanlabs/newman
+  - title: Running collections on the command line with Newman
+    url: https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/
+  - title: NPM Package
+    url: https://www.npmjs.com/package/newman
+  video: https://www.youtube.com/embed/3pMyO5ggq8I
+  collection_id: 12959542-e6c1686e-1085-4a1d-b1eb-49f2dcc3370e
+- name: Notifications
+  version: ''
+  description: Providing notifications about activity around the operation of any
+    API, allowing for in-application, email, or type of message via integration with
+    common platforms, providing real-time updates about what is happening across API
+    operations.
+  links: []
+  video: ''
+  collection_id: 12959542-7e325e64-d489-4f37-b2f1-661c15360ebc
+- name: Observability
+  version: ''
+  description: Leveraging the existing outputs from a system to observe the state
+    of the system, leveraging existing APIs and the infrastructure behind them to
+    understand the overall health and state of the complex enterprise system, then
+    using the outputs to make operations more visible via dashboards and reports.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Observe
+  version: ''
+  description: View dashboards, reports, history, and logs to observe the state of
+    a single API, the operations around it, and even across many different APIs and
+    domains, taking advantage of the existing outputs that exist across operations
+    to develop an awareness of API operations and how everything works.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Onboarding
+  version: ''
+  description: Offering a consistent and well-defined onboarding experience for all
+    APIs, making it as easy and straightforward for consumers to onboard with an API,
+    while also providing API producers with an easy way to onboard new consumers with
+    their APIs without any custom work required, reducing friction when it comes to
+    putting APIs to work by utilizing well-known approaches to onboarding.
+  links: []
+  video: ''
+  collection_id: 12959542-6b467501-5f91-4333-9f24-70f630371094
+- name: Onboarding Documentation
+  version: ''
+  description: It can be helpful to provide new users with documentation designed
+    specifically for onboarding new consumers to an API, only introducing them to
+    the most relevant paths of an API, reducing the cognitive load when it comes to
+    getting started with an API, and complimenting more complete reference documentation
+    showing everything that is possible with an API.
+  links: []
+  video: ''
+  collection_id: 12959542-e20d7806-27ec-4bb8-b497-6926b1c5e108
+- name: Open Banking
+  version: '2021-11-22'
+  description: Open banking is a banking practice that provides third-party financial
+    service providers open access to consumer banking, transaction, and other financial
+    data from banks and non-bank financial institutions through the use of application
+    programming interfaces (APIs).
+  links:
+  - title: Open Banking UK
+    url: https://www.openbanking.org.uk/
+  - title: Everything you need to know about PSD2
+    url: https://www.bbva.com/en/everything-need-know-psd2/
+  - title: Managing Multiple Versions of the UK Open Banking OpenAPIs in a Public
+      API Workspace
+    url: https://apievangelist.com/2021/03/03/managing-multiple-versions-of-the-uk-open-banking-openapis-in-a-public-workspace/
+  - title: Unofficial Workspace
+    url: https://www.postman.com/api-evangelist/workspace/uk-public-banking/overview
+  video: ''
+  collection_id: 12959542-62ae375f-02a1-4c6e-9331-f6e740ec2674
+- name: OpenAPI
+  version: ''
+  description: The OpenAPI specification provides a common vocabulary for describing
+    the surface area of request and response APIs, as well as webhooks, ensuring that
+    API producers and consumers are on the same page when it comes to integration,
+    but also helps stabilize multiple areas of the API lifecycle providing a contract
+    that can be used for delivering documentation, mocks, testing, and more.
+  links:
+  - title: OpenAPI Initiative Website
+    url: https://www.openapis.org/
+  - title: Specification Documentation
+    url: https://spec.openapis.org/oas/latest.html
+  - title: Postman Learning Center
+    url: https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/
+  actions:
+  - name: Import OpenAPI
+  - name: Generate Collection from OpenAPI
+  - name: Generate OpenAPI from Collection
+  - name: Generate OpenAPI from Code Annotations
+  - name: Sync OpenAPI to Github
+  - name: Watch OpenAPI
+  - name: Comment on OpenAPI
+  - name: Sync OpenAPI to AWS API Gateway
+  - name: Generate Client Code from OpenAPI
+  - name: Generate Server Code from OpenAPI
+  video: https://www.youtube.com/embed/V2PWRA6q3jE
+  collection_id: 12959542-016a70e1-9689-46de-af50-fee859cb4740
+- name: Operations
+  version: ''
+  description: The active and functioning state of an enterprise, something that is
+    increasingly being shaped and defined by APIs, provides the business functions
+    needed to deliver the products and services an organization provides, which are
+    increasingly accessed and purchased via web and mobile applications.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Operations Governance Rules
+  version: ''
+  description: Rules can be defined to govern the operations provided for each API,
+    leveraging the objects of the operation for OpenAPI contracts, but then apply
+    specific ruling looking for common patterns to be present like summary, description,
+    operation ids, and other elements of operations.
+  links:
+  - title: Info Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-info
+  video: ''
+  collection_id: 12959542-59cb123f-2e38-42fb-9b70-be3adb5f5ea7
+- name: Orchestration
+  version: ''
+  description: The planning, coordination, scripting, and automation of enterprise
+    operations, providing the relevant configuration and execution of common infrastructure
+    and business workflows beneath the applications and integrations used to drive
+    business, helping augment and expand upon what is possible by a human workforce.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Organization
+  version: ''
+  description: An entity, such as a company, an institution, or an association that
+    is comprised of one or more people and having a particular purpose, providing
+    a legal construct for doing business, and engaging in regular activity for a specific
+    function,  engaging offline, but also increasingly purely via online engagements.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Organizational Standards
+  version: ''
+  description: The establishment of common definitions, specifications, and patterns
+    that help shape APIs and the operations around them, providing a set of guidance,
+    but also services and tooling that help teams be aware of standards and put them
+    to use when designing and delivering APIs, helping make operations more consistent
+    and efficient.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Overview
+  version: ''
+  description: Providing a single overview of an API so that all the moving parts
+    of an API viewed in a single dashboard helps ensure that all team members will
+    be able to get up to speed on the overall picture of an API in a way that doesn't
+    require another meeting, making sure every artifact, documentation, test, and
+    another element has a useful overview provided.
+  links: []
+  video: ''
+  collection_id: 12959542-c9f94fcb-5500-4f51-a9e6-04a084a17969
+- name: PSD2
+  version: ''
+  description: A European Union (EU) Directive, administered by the European Commission
+    to regulate payment services and payment service providers throughout the European
+    Union (EU) and European Economic Area (EEA), providing a common set of industry
+    API standards for financial enterprises, service, and tooling providers to follow
+    when delivering API infrastructure.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Pagination
+  version: ''
+  description: Providing a standardized way of navigating through large sets of data
+    and content via an API, limiting the results that are returned with each request,
+    but providing consumers with visibility into how to navigate results and shape
+    their API requests to achieve the most optimum outcomes for both API producer
+    and consumer.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Parameter Governance Rules
+  version: ''
+  description: Rules can be defined to govern the parameter details provided for each
+    API, leveraging the parameter object for OpenAPI or AsyncAPI contracts, but then
+    apply specific ruling looking for common patterns to be present like the parameter
+    name and description meet specific guidelines regarding what is expected of a
+    parameter.
+  links:
+  - title: Parameters Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-parameters
+  video: ''
+  collection_id: 12959542-4c9c2dee-5632-423e-b81b-d2685ccae467
+- name: Partner
+  version: ''
+  description: An established relationship between two organizations around a common
+    activity, leveraging APIs as the way in which data, content, media, and other
+    digital resources and capabilities are made available, helping ensure the partnership
+    benefits both parties involved, but leverages APIs to ensure interoperability
+    and access to partner benefits.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Partner APIs
+  version: ''
+  description: A class of APIs that are only accessible to trusted partners, providing
+    access to entirely new digital resources and capabilities, or also increases the
+    access and scope of usage upon existing API resources and capabilities, entering
+    into a trusted relationship between entities that leverage APIs to deliver the
+    partner value.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Partner Network
+  version: ''
+  description: A network exclusively for partners to browse, search, and use digital
+    resources and capabilities that are being offered outside the firewall of an enterprise
+    organization, but not being made available to a wide 3rd party audience, and exclusively
+    for the use by trusted partners who oftentimes have entered into a well-defined
+    business relationship.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Partner Workspace
+  version: ''
+  description: A workspace just for a specific partner or group of partners, providing
+    an invite-only location to collaborate around the production or consumption of
+    an API, making API operations accessible to trusted partners, but not to the general
+    public, establishing a trusted space for the iteration and integration with an
+    API.
+  links: []
+  video: ''
+  collection_id: 12959542-ef164c8d-fda8-4b6a-85ac-bf7afacc3dce
+- name: Path Governance Rules
+  version: ''
+  description: Rules can be defined to govern the paths provided for each API, leveraging
+    the path object for OpenAPI or AsyncAPI contracts, but then apply specific ruling
+    looking for common patterns to be present like words used, ensure no acronyms
+    exist in the path, meeting specific guidelines regarding what a path can contain.
+  links:
+  - title: Path Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-paths
+  video: ''
+  collection_id: 12959542-7b99a69e-68e5-4a60-95b2-71a118e11b22
+- name: Paths
+  version: ''
+  description: Individual paths that can be taken when making requests to a specific
+    API, providing a series URL path parts derived from keywords that are relevant
+    to digital resources and capabilities, allowing API consumers to select specific
+    paths they choose to take when requesting data, content, media, and algorithms
+    via APIs.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Performance Testing
+  version: ''
+  description: Performance tests can be defined as individual tests using collections,
+    pulling from one or many individual API paths and measuring the time it takes
+    for the response to be sent, providing a test that can be run manually, scheduled
+    across multiple geographic regions, or executed as part of a CI/CD pipeline, helping
+    ensure an API is always meeting it's expected performance benchmarks.
+  links: []
+  video: ''
+  collection_id: 12959542-9ce0eef5-09f1-4ef8-8dd9-8362ed4143c4
+- name: Performance Testing Monitor
+  version: ''
+  description: Monitors can be setup for all API performance testing, scheduling the
+    run of performance testing when needed and configuring to run from the regions
+    where performance makes the most difference on business, making sure that each
+    individual API SLA is met, identifying API performance issues early on and responding
+    to ensure there is no significant business impact.
+  links: []
+  video: ''
+  collection_id: 12959542-958372fb-e0bf-4c03-af16-fe81ee7a7b73
+- name: Performance Testing Monitor Report
+  version: ''
+  description: A report that allows the one time or historical results of performance
+    testing monitors to br visualized, providing visibility into whether or not an
+    API performance has been reduced at any point in time as defined the schedule
+    of the performance testing monitor.
+  links: []
+  video: ''
+  collection_id: 12959542-9c31e787-b7e0-4928-a818-b3c031cb6945
+- name: Performance Testing Monitor Results
+  version: ''
+  description: The results of any performance testing run can be rendered as test
+    results, presented using visualizer, and posted to existing APM or other destination
+    that can be used as part of wider observability systems, allowing performance
+    tests across all APIs to be centralized for understanding API performance at scale.
+  links: []
+  video: ''
+  collection_id: 12959542-34e32f7b-bcbe-4361-91f9-3ad5f34a6953
+- name: Personal Workspace
+  version: ''
+  description: A workspace setup just for a single user to use within their space,
+    establishing a place for working on the production or consumption of APIs that
+    is only accessible to a single user within their own account, preventing it from
+    being access by other team members, partners, and the public.
+  links: []
+  video: ''
+  collection_id: 12959542-1e511375-641f-4f62-aa67-485bb32888b4
+- name: Pipeline
+  version: ''
+  description: A CI/CD pipeline is a series of steps that must be performed in order
+    to deliver a new version of an API or an integration., providing a reliable and
+    repeatable way tor producing or consuming APIs that contributes a high level of
+    quality and productivity across teams, allowing for more reliable operations across
+    domains.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Pipeline Governance
+  version: '2021-09-21'
+  description: Governance can be applied at the pipeline level, enforcing API governance
+    at build time, ensuring that APIs are 100% compliant with rules, contract, and
+    script-based API governance established centrally as part of broader governance
+    efforts, working to automate the testing of the surface area of APIs, and other
+    parts of operations in service of platform-wide API governance efforts.
+  links: []
+  video: ''
+  collection_id: 12959542-55055cb5-3afc-4ad9-bc10-5b2c6063610b
+- name: Pre-Request Scripts
+  version: ''
+  description: Scripts that execute before a single request is being executed, allowing
+    for the automation of configuration, authentication, and other relevant tasks
+    that need to run in the moment before a request to an API is made, allowing for
+    more customization and orchestration to occur before each individual request is
+    made, helping improve testing, security, governance, and other types of areas
+    of operating APIs at scale.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Private
+  version: ''
+  description: Keeping something only accessible internally by a designated team of
+    stakeholders, keeping workspaces, API, collections, environments, and monitors
+    only accessible to team members who have been invited to access, then further
+    delegating access control based upon their role, ensuring they can only view,
+    or possibly edit all the artifacts and operations around any API with a private
+    visibility.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Private APIs
+  version: ''
+  description: Keeping APIs, their artifacts, and the operations around them private
+    and something that is only accessible by a trusted group of team members, limiting
+    who has visibility into the workspace where APIs are being designed, developed,
+    and managed, helping minimize the visibility of certain APIs, limiting who knows
+    about an API, keeping all the technical details safe from being available with
+    too wide of an audience inside the enterprise.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Private Network
+  version: ''
+  description: Private API networks all organizations, groups, and teams to establish
+    private catalogs of APIs, collections, and the other artifacts and elements around
+    them, making it easier for producers and consumers to find APIs that are being
+    designed, developed, or operating in production, making APIs more accessible but
+    only to an intended audience.
+  links:
+  - title: Your Private API Network
+    url: https://learning.postman.com/docs/collaborating-in-postman/adding-private-network/
+  - title: Folders in Private API Network
+    url: https://learning.postman.com/docs/collaborating-in-postman/adding-private-network/#folders-in-private-api-network
+  - title: Discovering and consuming private APIs
+    url: https://learning.postman.com/docs/collaborating-in-postman/adding-private-network/#discovering-and-consuming-private-apis
+  video: ''
+  collection_id: 12959542-3d192d96-3ba4-49da-93af-d957dbbdbfd4
+- name: Private Workspace
+  version: ''
+  description: There will be APIs that require limited visibility across teams depending
+    on where it is at in it's lifecycle, or the nature of resources or capabilities
+    it provides access to, making a private workspace something that is necessary
+    to tightly control who has access and visibility.
+  links: []
+  video: ''
+  collection_id: 12959542-fe6462cf-3eb0-43f9-b8fc-20e4e59d7d6a
+- name: Production Environment
+  version: ''
+  description: Machine readable environments for APIs allow for abstracting away common
+    elements of an API production environments from the definition of each API, allowing
+    different environments to be paired with collections for each API at design, develop,
+    and build time.
+  links:
+  - title: Managing environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/
+  - title: Adding Environment Variables
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#adding-environment-variables
+  - title: Accessing Environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Working with Environments as a Team
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Managing Environment Roles
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  video: ''
+  collection_id: 12959542-c75f924d-03d1-4e28-a1e9-0467e89c5c1a
+- name: Prototype Collection
+  version: ''
+  description: Prototyping an API using a Postman collection provides a quick and
+    intuitive way to articulate what an API should do in a way that can be documented,
+    mocked, and shared with other team members and consumers, offering an alterative
+    approach to the API design first methodology which can push the need for an OpenAPI
+    artifact further downstream in the process, but achieving similar outcomes.
+  links: []
+  video: https://www.youtube.com/embed/7F3f4WOFs38
+  collection_id: 12959542-efb442f9-b85c-4a21-8477-103bbdc133d9
+- name: Proxy
+  version: ''
+  description: Running traffic through a proxy to capture activity to capture the
+    details of each request and response, then generating a collection that provides
+    a machine readable and executable representation of API traffic that can then
+    be executed, tested, automated, monitored, and documented as part of the production
+    or consumption of APIs.
+  links:
+  - title: Using a proxy
+    url: https://learning.postman.com/docs/sending-requests/capturing-request-data/proxy/
+  - title: What is a proxy?
+    url: https://learning.postman.com/docs/sending-requests/capturing-request-data/proxy/#what-is-a-proxy
+  - title: Using a system proxy
+    url: https://learning.postman.com/docs/sending-requests/capturing-request-data/proxy/#using-a-system-proxy
+  video: ''
+  collection_id: 12959542-305e9f30-ec42-43a0-b9c7-ce7950c3fbaf
+- name: Public
+  version: ''
+  description: Designating a workspace, APIs, collections, environments, and monitors
+    having a public visibility that makes them discoverable via the public API network
+    and search engines, increasing the audience for an API by making it available
+    publicly, while still limiting who can actually edit artifacts and change configuration,
+    limiting engagement with public consumers to watches, forks, and commenting on
+    APIs and collections.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public APIs
+  version: ''
+  description: Making APIs available publicly via a workspace, which opens them up
+    for browsing and searching via the public API network, and via Google, expanding
+    the potential reach of an API, allowing any potential consumer to see artifacts
+    and activity around each API, but then can only watch and comment on the API within
+    the workspace, striking a balance between producer and consumer by making things
+    more visible.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Network
+  version: ''
+  description: Public API networks allow for teams, APIs, collections, and other elements
+    to be made available for searching and browsing by a public audience, helping
+    API producers reach a larger audience, but also allowing consumers to quickly
+    find the APIs and other resources they need in their applications and integrations,
+    networking consumers with producers in an ongoing and collaborative way.
+  links:
+  - title: Postman Public Network
+    url: https://www.postman.com/explore
+  - title: Postman Public API Network Is Now the World’s Largest Public API Hub
+    url: https://blog.postman.com/postman-public-api-network-is-now-the-worlds-largest-public-api-hub/
+  video: ''
+  collection_id: 12959542-ea1ee93a-e6a7-48fc-b5bd-941e4730cbfb
+- name: Public Profile APIs
+  version: ''
+  description: 'The APIs listed as part of a public profile, listing any APIs that
+    are made visible via workspaces, providing a summary and link to the API within
+    the workspace, allowing any browsing or searching the network or a search engine
+    to find the API, then view the OpenAPI, WSDL, GraphQL, or RAML definition, watch
+    the API, and see the other meta data and supporting documentation, mock servers,
+    and tests that are available via the workspace. '
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Profile Appearance
+  version: ''
+  description: The overall appearance of a public profile, taking into consideration
+    the images, background, workspaces, APIs, links, and description provided, focusing
+    on making the profile deliver a great first impression for anyone who is coming
+    across it as part of a search on the public API network, or via public search
+    engines, helping increase the visibility of workspaces, APIs, and collections
+    that are made available.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Profile Collections
+  version: ''
+  description: The collections that are made available via workspace that have had
+    had their visibility changed to be public, allowing reference, onboarding, workflow,
+    operations, automation, and other types of collections available publicly, showcasing
+    the work as part of a single profile, providing easy access to all the work under
+    a single, publicly available profile, with supporting workspaces.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Profile Completeness
+  version: ''
+  description: Considering how complete a public profile is, taking into account the
+    name, description, images, workspaces, APIs, collections, and links that are made
+    available, meeting a minimal viable state where it offers value to anyone who
+    discovers it, and will find the work there useful and well defined, reducing the
+    work necessary to understand what work has been done by each individual who publishes
+    their profile.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Profile Overview
+  version: ''
+  description: The description of a public profile, and looking at how well crafted
+    it is, and considering if it describes the profile well, making for a good first
+    impression when anyone comes across the profile, demonstrating an effort to help
+    engage with the network around the APIs being produced or consumed.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Profile Team Members
+  version: ''
+  description: The listing of team members associated with a public profile, providing
+    a roster of who is involved with the team being made public, revealing some of
+    the personalities behind the APIs being made publicly available, making API operations
+    a little more human, while also showcasing the hard work of the team who are delivering
+    and support the public APis.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Profile Workspaces
+  version: ''
+  description: The listing of workspaces for a profile that have changed the visibility
+    to be publicly available, listing all workspaces and summaries on the profile,
+    and making the APIs, collections, environments, mock servers, and monitors available
+    publicly for anyone to view, then encouraging engagement via watching and commenting
+    on APIs and collections, but also the ability to fork individual collections into
+    any workspace.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Public Workspace
+  version: ''
+  description: Some APIs will benefit from establishing a public workspace where 3rd
+    party consumers can learn about an API, view the moving parts of it's operation,
+    and engage with the team behind, making the API lifecycle much more transparent.
+  links:
+  - title: Introducing Postman Public Workspaces - The First Massively Multiplayer
+      API Experience
+    url: https://blog.postman.com/introducing-postman-public-workspaces/
+  - title: Creating workspaces
+    url: https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/creating-workspaces/
+  video: https://www.youtube.com/embed/XIlWsobZ61Y
+  collection_id: 12959542-55b1859f-8de7-4b9b-b4e6-5096c12fc18c
+- name: Query Parameters
+  version: ''
+  description: The parameters available after an API path separated by a question
+    mark, providing one or many individual key / value pairs that can be used to shape
+    and define each API request being made, providing many different ways an API consumer
+    can access data, content, media, and other digital resources or capabilities via
+    a simple web API, leverage web technology to deliver useful APIs.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Role Based Access Control (RBAC)
+  version: ''
+  description: The ability to assign roles individual team members then shape access
+    to workspaces, APIs, collections, and environments based upon their role in producing
+    or consuming APIs, allowing for the protection of artifacts and other elements
+    from unwanted changes, while still making them available to the widest possible
+    team members for use, striking the right balance across domains, groups, and workspaces.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Request for Comments (RFCs)
+  version: ''
+  description: A Request for Comments is a publication in a series, from the principal
+    technical development and standards-setting bodies for the Internet, most prominently
+    the Internet Engineering Task Force, authored by individuals or groups of engineers
+    and computer scientists in the form of a memorandum describing methods, behaviors,
+    research, or innovations applicable to the working of the Internet and Internet-connected
+    systems.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Reference
+  version: ''
+  description: Providing a complete reference by offering a complete representation
+    of all resources, capabilities, and events available for an API, offering an exhaustive
+    list of everything available, leaving it up to the API consumer to find what they
+    are looking for, and not holding anything back, unless it is meant for a different
+    audience or access level, leaving a complete accounting of everything that is
+    possible with an API.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Reference Documentation
+  version: ''
+  description: It is helpful for API consumers to have complete documentation for
+    the entire surface area of an API, providing a complete reference of what is possible
+    with an API to help consumers explore every path, parameter, schema, and other
+    details of how an API works, making the resources and capabilities available within
+    API something consumers can find and put to use without much work.
+  links: []
+  video: ''
+  collection_id: 12959542-5caa3b10-6fd0-4995-969e-ac024e941875
+- name: Relationships
+  version: ''
+  description: Defining and understanding the way in two concepts, objects, or people
+    are connected with APIs, helping connect the dots between the more human and business
+    operations side of how APIs work, acknowledging that people and process are a
+    critical part of how APIs work, and will influence there usage and evolution over
+    time.
+  links: []
+  video: ''
+  collection_id: 12959542-14136ad6-cb40-4f15-bc02-7c24af080c51
+- name: Reports
+  version: ''
+  description: Visual reports that aggregate data from across operations, making APIs
+    and the operations around them something that team members can see activity, history,
+    and other dimension of what is happening across API operations, allowing different
+    views to be organized and presented via dashboards.
+  links:
+  - title: Analyzing with reports
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/
+  - title: Team Activity
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/#team-activity-reports
+  - title: All API Reports
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/#all-api-reports
+  - title: Private API Network Reports
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/#private-network-api-reports
+  - title: Security Audit Reports
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/#security-audit-reports
+  - title: Individual API Reports
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/#individual-api-view-reports
+  video: ''
+  collection_id: 12959542-e5796b6d-110b-4f13-adba-01f96dd90f9c
+- name: Repository
+  version: ''
+  description: A virtual container often associated with source control solutions
+    used to start code, artifacts, and other objects associated with producing and
+    consuming of APIs, building on existing software development practices to make
+    the development and delivery of APIs across operations more collaborative, reliable,
+    and consistent across domains, and teams.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Request
+  version: ''
+  description: An individual request being made to an API, possessing all of the technical
+    details to make the request, including URL, authorization, headers, body, and
+    even scripting to apply business logic before a request is being made to any API.
+  links:
+  - title: Sending your first request
+    url: https://learning.postman.com/docs/getting-started/sending-the-first-request/
+  - title: Postman Echo API
+    url: https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65?ctx=documentation
+  video: ''
+  collection_id: 12959542-465ab29e-9623-4c5f-a66a-ab520bd2ff39
+- name: Request Bodies
+  version: ''
+  description: The body of a request being sent, usually employed the POST, PATCH,
+    and PUT HTTP methods, submitting form encoded, XML, JSON, or other machine readable
+    format, using the body as a container for the message payload being submitted,
+    allowing potentially large amounts of data to be submitting via HTTP, and ideally
+    also providing a standardized schema format for submission across all APIs.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Request Bodies Governance Rules
+  version: ''
+  description: Rules can be defined to govern the request body details provided for
+    each API, leveraging the request body object for OpenAPI contracts, but then apply
+    specific ruling looking for common patterns to be present like whether it should
+    have a body, the media type, example, and other details of an API, meeting specific
+    guidelines regarding what contact is needed.
+  links:
+  - title: Request Bodies Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-request-bodies
+  video: ''
+  collection_id: 12959542-45e1e9ea-640c-4f7a-9b84-9fcb09806304
+- name: Request Headers
+  version: ''
+  description: 'The key./ value pair data that can be sent along with each HTTP request,
+    providing transport level meta data to shape the request being made, influencing
+    the routing, network, and other transport level considerations using a standardized
+    set of headers that are defined by the Internet Assigned Numbers Authority, or
+    IANA for short, to ensure consistency across API outcomes. '
+  links: []
+  video: ''
+  collection_id: ''
+- name: Request Pre-Request Scripts
+  version: ''
+  description: Postman collection requests can have pre-request scripts applied to
+    them. Defining scripts using JavaScript that runs before the request itself executes.
+    Request pre-request scripts allow you to automate and orchestrate before the execution
+    of individual API requests, preparing authentication, variables, data, and other
+    elements you will need to make each API request.
+  links:
+  - title: Writing pre-request scripts
+    url: https://learning.postman.com/docs/writing-scripts/pre-request-scripts/
+  collection_id: 62c1194b-4a69-4a05-b486-6eec7fb7ac06
+- name: Request Settings
+  version: ''
+  description: The settings for each API request being made as part of a client, runner,
+    and automation, shifting how APIs will be worked with across different collections
+    and requests, configuring the details for each individual possibility, helping
+    ensure that API testing, security, governance, and other types of automation runs
+    as expected and results in the desired outcomes.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Request Test Scripts
+  version: ''
+  description: Postman collection requests can have test request scripts applied to
+    them. Defining scripts using JavaScript that run after all the request itself
+    executes. Test request scripts allow you to automate and orchestrate after the
+    execution of an individual API request is run, taking the response body and other
+    details and testing for what is needed to ensure the quality of the API.
+  links:
+  - title: Writing Tests
+    url: https://learning.postman.com/docs/writing-scripts/test-scripts/
+  collection_id: 5fcd65fb-392a-41e9-9d7a-bc234d515a53
+- name: Resolvers
+  version: ''
+  description: The bindings that map incoming queries to specific data sources so
+    that APIs know where to find resources, distilling down API requests into meaningful
+    queries that will make sense to backend systems, connecting the front end requests
+    to the backend stores, routing API requests to where they need to go.
+  links: []
+  video: ''
+  collection_id: 12959542-8c853771-24eb-4643-8849-7b96e44e314d
+- name: Response Body
+  version: ''
+  description: The XML, SON or other type of body returned as part of each API response,
+    carry the response payload based upon the request being made, making data, content,
+    media, algorithms, and other digital resources and capabilities available via
+    an API, and describable as an HTTP response in a variety of media types.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Response Governance Rules
+  version: ''
+  description: Rules can be defined to govern the response details provided for each
+    API, leveraging the response object for OpenAPI or AsyncAPI contracts, but then
+    apply specific ruling looking for common patterns to be present like the status
+    code, media type, and other details of an API, meeting specific guidelines regarding
+    what responses should look like.
+  links:
+  - title: Response Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-responses
+  video: ''
+  collection_id: 12959542-c12a9bc8-d148-49ee-a888-56380f03e4c8
+- name: Response Headers
+  version: ''
+  description: The key / value pair datas returns as part of the HTTP response, providing
+    more detail about the API routing, response, and other transport related details,
+    providing much needed information returned from the server to the client about
+    the API, the response from this individual path, and potentially what else is
+    possible with using an API.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Response Network
+  version: ''
+  description: Detail about the network layer for each API response, informing the
+    client about latency, protocols, certificates, and other detail about how the
+    API response made it from the server to the client, helping separate what the
+    API producer is responsible for and what the internet connection is responsible
+    for, helping better inform the client regarding what is happening.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Response Time
+  version: ''
+  description: The details about the time it took for the client to receive the API
+    response from the server, breaking down the time into each leg of the journey,
+    helping provide even more detail about how each API response is returned, and
+    where the most amount of time has been spent on the return leg of each API request.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Responses
+  version: ''
+  description: The HTTP response from an API request, returning successful or unsuccessful
+    responses for each client request, returning XML, JSON, or other payload, providing
+    data, content, media, or other types of outcomes for an API that are accompanied
+    by the appropriate HTTP status code to help make handling as contextually relevant
+    as possible.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Results
+  version: ''
+  description: The results of a test, security, automation, ,or other collection run,
+    returned manually, or automated via runner, monitors, and CI/CD pipelines, providing
+    the results of test assertions defined in each request test script, returning
+    pass or fail for every request defined in a collection, providing an artifact
+    that can then be published, stored, and used as part of API observability and
+    reporting.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Retire
+  version: ''
+  description: The retirement of an API or specific version of an API is an inevitable
+    thing and there should be a formal process in place to inform API producers about
+    what the steps are in a process to retired, and set in motion the deprecation
+    of an API, keeping an API or version of an API active for a specific amount of
+    time, while acknowledging that at some point it will go away.
+  links: []
+  video: ''
+  collection_id: 12959542-3ee94808-c136-4846-b096-2cef38af19e0
+- name: Retweets
+  version: ''
+  description: The sharing of a tweet, amplifying the existing message of a user,
+    helping spread the message with each retweet, resulting in. a potentially growing
+    reach among users, providing a metric for how popular a message, link, media,
+    and other resource is, providing a way to understand what the community is interested
+    in when it comes to interesting and useful resources.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Role Based Access Control
+  version: ''
+  description: Role based access control allows for the artifacts and elements for
+    each API to have clear team access to only viewing and running or being able to
+    actually edit and change, helping prevent unwanted changes to API elements across
+    the lifecycle.
+  links:
+  - title: Defining Roles
+    url: https://learning.postman.com/docs/collaborating-in-postman/roles-and-permissions/
+  - title: Streamline Access Control with Extended Roles & Permissions
+    url: https://blog.postman.com/streamline-access-control-with-extended-roles-permissions/
+  - title: The Basics of Postman Role Based Access Control (RBAC)
+    url: https://apievangelist.com/2020/05/05/the-basics-of-postman-role-based-access-control-rbac/
+  video: ''
+  collection_id: 12959542-eac97d55-1e34-4e4d-b469-4e59d68d921b
+- name: Roles
+  version: ''
+  description: Identifying the roles of each team member working on an API helps establish
+    clear directives for who can make changes to an API, something that can drive
+    and configure other elements applying to an API across the lifecycle.
+  links:
+  - title: Defining Roles
+    url: https://learning.postman.com/docs/collaborating-in-postman/roles-and-permissions/
+  - title: Streamline Access Control with Extended Roles & Permissions
+    url: https://blog.postman.com/streamline-access-control-with-extended-roles-permissions/
+  - title: The Basics of Postman Role Based Access Control (RBAC)
+    url: https://apievangelist.com/2020/05/05/the-basics-of-postman-role-based-access-control-rbac/
+  video: ''
+  collection_id: 12959542-be11b197-e424-4c9a-86f7-9cee33d80388
+- name: Rules
+  version: ''
+  description: Machine readable rules in YAML or JSON that can be used to lint any
+    other YAML or JSON artifact, allowing for common or specialized rules to be established
+    to help check for consistency in the design, development, deployment, and management
+    of APIs, helping codify standards and health practices for delivering APIs into
+    the API lifecycle across domains and teams.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Rules-Based Linting
+  version: ''
+  description: Rules-based linting allows for the defining of YAML or JSON rules for
+    elements of API governance and applying them in a programmatic way against OpenAPI,
+    AsyncAPI, and other machine readable artifacts, helping apply desired constraints
+    to the design or other area of the design, development, and operation of an API.
+  links: []
+  video: ''
+  collection_id: 12959542-d3760f63-2ca2-48ba-91bd-ff261ce49e26
+- name: Schema
+  version: ''
+  description: Defining all objects use as part of API operations using JSON Schema
+    provides for a definitions that can be used as part of modeling and the API design
+    process, as well as for validation at development, build, or even run time.
+  links:
+  - title: Postman Schema
+    url: https://schema.postman.com/
+  - title: Validating APIs
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/validating-elements-against-schema/
+  - title: Validating schema
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/validating-elements-against-schema/#validating-schema
+  video: ''
+  collection_id: 12959542-f83edec3-238f-4be8-92db-ac87d6916649
+- name: Schema Governance Rules
+  version: ''
+  description: Rules can be defined to govern the schema details provided for each
+    API, leveraging the schema object for OpenAPI or AsyncAPI contracts, but then
+    apply specific ruling looking for common patterns to be present like the schema
+    name and description meeting specific guidelines regarding what is expected of
+    a schema.
+  links:
+  - title: Schema Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-schema
+  video: ''
+  collection_id: 12959542-a8e5fc3c-636d-44c4-b571-bcf3fc7bfecb
+- name: Script-Based Governance
+  version: ''
+  description: A script-based approach to governance involves using the same collection
+    based approach used to apply contract, performance, and other types of testing
+    with Postman collections, but instead of testing an instance of an API, you are
+    testing the surface area of the API by pulling the OpenAPI and writing test scripts
+    for specific governance assertions.
+  links: []
+  video: ''
+  collection_id: 12959542-a423c78a-84ee-494f-94dd-add392a64b60
+- name: Scripts
+  version: ''
+  description: Lightweight scripts that can be run as part of each API request, providing
+    pre-request scripting, or post-request scripting that help appy business logic
+    at either end of the request, helping transform, test, and automate with each
+    API request.
+  links:
+  - title: Scripting in Postman
+    url: https://learning.postman.com/docs/writing-scripts/intro-to-scripts/
+  - title: Writing Pre-request Scripts
+    url: https://learning.postman.com/docs/writing-scripts/pre-request-scripts/
+  - title: Writing Test Scripts
+    url: https://learning.postman.com/docs/writing-scripts/test-scripts/
+  - title: Postman JavaScript Reference
+    url: https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/
+  video: ''
+  collection_id: 12959542-f64adc96-5c44-4245-a996-59574a3e9b75
+- name: Search
+  version: ''
+  description: Ensuring APIs are always available via search helps make sure that
+    APIs can be found by consumers, but also by other producers who are looking to
+    develop similar APIs, making search for APIs, as well as the operations around
+    each API a critical aspect of the API lifecycle that should be considered as early
+    on in the design and development of an API, but at least as it is deployed into
+    production.
+  links: []
+  video: ''
+  collection_id: 12959542-8e7dcc16-c3fc-422d-b215-24f44e39a872
+- name: Secure
+  version: ''
+  description: Ensuring that an API is secure from threats and vulnerabilities, making
+    for a pretty wide spectrum of different processes and technologies that ensure
+    digital resources and capabilities made available via APIs are only accessible
+    to an intended audience and bad actors are not able to find ways to get access
+    via an API.
+  links: []
+  video: ''
+  collection_id: 12959542-5057eed2-b901-42d7-9d6a-4a5e72775f12
+- name: Security
+  version: ''
+  description: The security of APIs spans multiple domains, beginning with encryption
+    of API requests and responses in transport, but then moving to identity and access
+    management using keys, tokens, and other standards, while also ensuring that you
+    scan, audit, fuzz, and ensure that the surface area of APIs are free from common
+    vulnerabilities, and malicious actors are unable to get access to the resources
+    and capabilities available via APIs.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Security Monitor Results
+  version: ''
+  description: The results of any security testing run can be rendered as test results,
+    presented using visualizer, and posted to existing APM or other destination that
+    can be used as part of wider observability systems, allowing security tests across
+    all APIs to be centralized for understanding API security at scale.
+  links: []
+  video: ''
+  collection_id: 12959542-8653959b-5938-47f6-bed6-eb162d3aefc4
+- name: Security Testing
+  version: ''
+  description: Security tests can be defined for any API using executable and shareable
+    collections, testing for common OWASP vulnerabilities, as well as other more custom
+    scenarios or business approaches, providing a single or suite of security tests
+    that can be manually run, scheduled across multiple regions, or executed as part
+    of a CI/CD pipeline, automating security consistently across APIs.
+  links: []
+  video: ''
+  collection_id: 12959542-1cfdc44b-ab09-4bd8-8fd2-a07cef8b5dc5
+- name: Security Testing Monitor
+  version: ''
+  description: Monitors can be setup for all API security testing, scheduling the
+    run of security tests when needed, making sure that each individual API is regularly
+    certified as being secured, ensuring that APIs do not become a liability due to
+    changes, but also keeping all APIs compliant with the latest level of security
+    testing that is occurring across an entire organization.
+  links: []
+  video: ''
+  collection_id: 12959542-74dbbfd5-c03a-456e-bf7e-6eed4664fdca
+- name: Security Testing Monitor Report
+  version: ''
+  description: A report that allows the one time or historical results of security
+    testing monitors to br visualized, providing visibility into whether or not an
+    API security has been compromised at any point in time as defined the schedule
+    of the security testing monitor.
+  links: []
+  video: ''
+  collection_id: 12959542-ae974331-dc0b-4049-8248-439708834c5c
+- name: Security Testing Pipeline
+  version: ''
+  description: Conducting security tests as part of the CI/CD pipeline, taking collections
+    that test for common security vulnerabilities and an environment for an API and
+    executing them as part of the pipeline workflow, ensuring that all APIs are having
+    security tests applied as part of the build process.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Semantic Versioning
+  version: ''
+  description: Applying a dotted notion for defining major, minor, and patch versions
+    of an API, articulating the different between a breaking change, and non-breaking
+    or fixes to an API for errors that may have be introduced via previous versions.
+    Providing a very structured way for defining, but also communicating change occurring
+    with each individual API.
+  links: []
+  video: ''
+- name: Server Code Generation
+  version: ''
+  description: Generation of code in a variety of programming languages so that it
+    can be used on the server for the deployment and deliver of APIs, providing code
+    stubs that help reduce the repetitive work for developers.
+  links:
+  - title: OpenAPI Generator
+    url: https://github.com/OpenAPITools/openapi-generator
+  video: ''
+  collection_id: 12959542-e7a152ab-83db-431e-9b20-f528c5ebd0be
+- name: Servers
+  version: ''
+  description: A piece of computer hardware or software (computer program) that provides
+    functionality for other programs or devices, called "clients", utilizing a client–server
+    model to provide various functionalities, often called "services", such as sharing
+    data or resources among multiple clients, or performing computation for a client.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Sharing
+  version: ''
+  description: Sharing of elements used to produce or consume APIs across workspaces,
+    externally with consumers, allowing an intended audience to view, download, and
+    access artifacts and other elements of API operations so they and collaborate
+    around the production or consumption of API resources and capabilities.
+  links:
+  - title: Sharing your Work
+    url: http://example.com
+  - title: Sharing to workspaces
+    url: https://learning.postman.com/docs/collaborating-in-postman/sharing/#sharing-to-workspaces
+  - title: Sharing by Link
+    url: https://learning.postman.com/docs/collaborating-in-postman/sharing/#sharing-by-link
+  - title: Creating Run in Postman Buttons
+    url: https://learning.postman.com/docs/publishing-your-api/run-in-postman/creating-run-button/
+  video: ''
+  collection_id: 12959542-df4bc4f6-a68b-4e2f-a6d1-56b33432342f
+- name: Single Purpose
+  version: ''
+  description: Having a specific focus for an API, and supporting resources, ensuring
+    that things are as modular, reusable, and requires the minimal amount of brain
+    power to understand what was happening with an API, helping make things as focused
+    and precise as possible, increasing the utility of each individual resource or
+    capability being made available via APIs.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Single Sign On (SSO)
+  version: ''
+  description: Single sign-on (or SSO) is an authentication approach that allows users
+    to access several related yet independent software systems with a single set of
+    credentials. When fully implemented, SSO allows a user to log in once and access
+    services without re-entering authentication factors.
+  links: ''
+  video: ''
+  collection_id: 12959542-104cbc45-b39a-4801-ac05-57a53203ec9b
+- name: Source
+  version: ''
+  description: The definitive place where an artifact or other element can be obtained,
+    making sure there aren't multiple locations to find the same OpenAPI, JSON Schema,
+    AsyncAPI, or other artifact, and making sure that consumers and other stakeholders
+    can always trust a source as a reliable place to understand what is happening
+    with an API without having to look in multipl eplaces.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Source Control
+  version: ''
+  description: A systems responsible for managing changes to computer programs, documents,
+    large websites, APIs and other collections of information, providing a single
+    source of truth for the code, artifacts and other assets powering API integrations
+    and deployments, and details about each branch, commit, and conversation involved
+    with move each individual API forward.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Staging Environment
+  version: ''
+  description: Machine readable environments for APIs allow for abstracting away common
+    elements of an API staging environments from the definition of each API, allowing
+    different environments to be paired with collections for each API at design, develop,
+    and build time.
+  links:
+  - title: Managing environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/
+  - title: Adding Environment Variables
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#adding-environment-variables
+  - title: Accessing Environments
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Working with Environments as a Team
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  - title: Managing Environment Roles
+    url: https://learning.postman.com/docs/sending-requests/managing-environments/#accessing-environments
+  video: ''
+  collection_id: 12959542-c75f924d-03d1-4e28-a1e9-0467e89c5c1a
+- name: States
+  version: ''
+  description: State is about managing the context between interactions across APIs,
+    understanding the context of consumption by applications and integrations across
+    many paths with a single API, and across multiple APIs, maintaining an awareness
+    across the way resources and capabilities are being put to use, above and beyond
+    the individual resources and capabilities being made available via APIs.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Swagger
+  version: ''
+  description: Swagger 2.0 is a common specification used by teams to describe what
+    an API does. It is common for Swagger files to be manually or automatically created
+    as part of API Operations. Swagger artifacts provide what is needed to power documentation,
+    mock servers, testing, and what are make it so that teams can browse and search
+    for APIs via catalogs and networks.
+  links: ''
+  video: ''
+- name: Tag Governance Rules
+  version: ''
+  description: Rules can be defined to govern the tag details provided for each API,
+    leveraging the tag object for OpenAPI or AsyncAPI contracts, but then apply specific
+    ruling looking for common patterns to be present like the tag name and description
+    meeting specific guidelines regarding what is expected of a tag.
+  links:
+  - title: Tags Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-tags
+  video: ''
+  collection_id: 12959542-c3cfe59e-b964-4335-aefe-cf4e630df81d
+- name: Tags Governance Rules
+  version: ''
+  description: Linting governance rules that focus on making sure that API artifacts
+    like OpenAPI and AsyncAPI are applying tags to elements of the API, ensuring that
+    operations and other elements are able to be filtered and organized based upon
+    different characteristics allowing documentation to be organized, grouped, and
+    presented in a logical way, helping reduce complexity and make APIs more accessible
+    to consumers.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team
+  version: ''
+  description: The team of people who are behind API operations, providing name, role,
+    and other relevant details about who they are and what they will be contributing
+    to API operations, helping manage the human side of operations, allowing hundreds
+    or thousands of team members to be organized and managed for optimal delivery
+    and consumption of APIs across operations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team APIs
+  version: ''
+  description: The APIs available as part of a team profile, listing the APIs that
+    are produced and made available to consumers, showcasing the resources and capabilities
+    being made available from a team, cataloging the API contracts behind enterprise
+    applications.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team About
+  version: ''
+  description: A brief and informative description of a team, making sure a teams
+    profile adequately described what a team does, helping make a team more accessible,
+    and the APIs, collections, and other API resource produced accessible, helping
+    consumers build trust with what a team produces.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Cover Photo
+  version: ''
+  description: Providing a cover photo for a team, helping make the profile a little
+    more splashy and visual, making a team profile better represent what they do,
+    and provide a personality behind the team.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Favicon
+  version: ''
+  description: Offering a favorite icon that will show in the browser when any consumer
+    is browsing a teams profile, helping customize the experience of network users
+    exploring each team and their work.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Github
+  version: ''
+  description: Sharing the link to a team's Github organization or user, helping connect
+    the public Github presence with the team API network profile, and bridge the benefit
+    the Github and Postman community brings.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Groups
+  version: ''
+  description: Teams can be organized by groups that reflect lines of business, and
+    business domains. Establishing bounded context for assigning team members to,
+    allowing API operations, workspaces, artifacts, and other resources to be organized,
+    accessed, and reported upon via logical groups.
+  links:
+  - title: Managing User Groups
+    url: https://learning.postman.com/docs/administration/managing-your-team/user-groups/
+  video: ''
+- name: Team Logo
+  version: ''
+  description: Providing an image for the team logo, offering some visual reference
+    for users to associate with when it comes to engaging with the API network profile.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member About
+  version: ''
+  description: Providing an informative and concise description of what a team does,
+    helping consumers and other people exploring profiles with details about what
+    a team delivers.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member Cover Photo
+  version: ''
+  description: Having a cover photo for each team profile, helping spice up the page
+    and make it more visually appealing to consumers, finding a way to make it stand
+    out amongst all the other team profiles.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member Github
+  version: ''
+  description: Providing a link to a team members Github profile, helping continue
+    to connect the dots between the API network profiles and Github presence and activity.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member Name
+  version: ''
+  description: Showing the name of each team member, showcasing the names of each
+    person who is part of the team preence.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member Photo
+  version: ''
+  description: Having a unique photo for each team member, helping bring a human face,
+    or at least more personality to each team member.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member Twitter
+  version: ''
+  description: Providing a link to the team member profile, helping link the social
+    network to the team profile.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member Username
+  version: ''
+  description: Choosing a unique user name that best represents the team members,
+    going beyond generated user names and making things more personal.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Member Website
+  version: ''
+  description: Providing a link to the team member website, linking other resources
+    behind the team to the API network profile for API consumers to explore and learn
+    more.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Members
+  version: ''
+  description: Formerly defining who the team will be moving an API forward through
+    all stages of it's lifecycle, providing a clear definition of who is responsible
+    for each part of producing an API.
+  links:
+  - title: Managing your Team
+    url: https://learning.postman.com/docs/administration/managing-your-team/managing-your-team/
+  - title: Inviting Your Team
+    url: https://learning.postman.com/docs/administration/managing-your-team/managing-your-team/#invites
+  video: ''
+  collection_id: 12959542-8c7a9b28-133d-4d7e-95d9-65df7bae8411
+- name: Team Name
+  version: ''
+  description: Having an appropriate and descriptive name for your team, making sure
+    visitors to your profile are able to understand what your team is and does, putting
+    more thought into what your team will look like from the outside in.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Public URL
+  version: ''
+  description: Selecting a descriptive and memorable URL for your profile, providing
+    a simple, attention grabbing URL that might even be something people remember
+    instead of just bookmarking.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Roles
+  version: ''
+  description: API teams can be assigned a specific role that is in alignment with
+    their involvement in the API lifecycle, allowing them to have the access to APIs,
+    artifacts, and resources based upon their role in the process. Allowing teams
+    to play the part they have been assigned, while also still ensuring the integrity
+    of operations, helping ensure more reliability, but also productivity in how teams
+    work.
+  links:
+  - title: Defining Roles
+    url: https://learning.postman.com/docs/collaborating-in-postman/roles-and-permissions/
+  video: ''
+- name: Team Twitter
+  version: ''
+  description: Providing a link to the teams twitter profile, linking the social network
+    to your profile, offering yet another channel it which users can tune into what
+    is happening with an API.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Website
+  version: ''
+  description: Having a link to the official website for a team, allowing visitors
+    to the profile to further validate and connect with the presence of the company
+    around the team, and better understand what a team is focused on building.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Workspace
+  version: ''
+  description: Establishing and properly setting up a dedicated workspace for each
+    API helps ensure there is always a single place to go to find everything that
+    is happening with an API across it's entire lifecycle.
+  links:
+  - title: Working with team workspaces
+    url: https://learning.postman.com/docs/collaborating-in-postman/collaboration-intro/#working-with-team-workspaces
+  video: ''
+  collection_id: 12959542-075adee6-065d-4c61-9062-3cb04a3caace
+- name: Techniques
+  version: ''
+  description: There are numerous techniques that assist API producers in better defining
+    their operations and the APIs and microservices they are delivering across these
+    operations, such as Microservices Canvas, Jobs to be Done (JTBD), Event-Storming,
+    Domain-Driven Design, and other well known elements of the API lifecycle.
+  links: []
+  video: ''
+  collection_id: 12959542-f27f23c9-61d6-4e9d-aaba-b2c6e1a88834
+- name: Test Results
+  version: ''
+  description: The response panel within Postman API requests allows you to see the
+    JSON, XML, and other response formats, but provides you with a specialized window
+    for aggregating the results of all test scripts being executed at the folder or
+    request level with a collection. Providing a robust visualized way of seeing whether
+    tests passed or failed, displaying each test assertion, as well as signaling green
+    or red depending on whether or not the test has passed.
+  links:
+  - title: Writing Tests
+    url: https://learning.postman.com/docs/writing-scripts/test-scripts/
+  video: ''
+  collection_id: 52f68675-5868-4ab8-83de-fed7656b7f5d
+- name: Test Scripts
+  version: ''
+  description: Scripts that are defined for each individual request defined as part
+    of a collection and run after each request is executed, allowing the response
+    to be used to test for certain assertions, but also process, manipulate, store,
+    and execute other processes in response to whether assertions are met, helping
+    provide for a powerful scripting layer that can be used for automation, quality,
+    and governance across operations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Testing
+  version: ''
+  description: Developing Individual tests using scripts that evaluate and attempt
+    to make specific assertions about responses returned from APIs, or the operations
+    surrounding APIs, providing very modular tests for specific outcomes or series
+    of outcomes, then manually executing, or automating using monitors and CI/CD pipelines,
+    evaluating and storing the individual results, but also using in aggregate to
+    understand the productivity, quality, and overall governance of a system.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Testing APM Integration
+  version: ''
+  description: Test collections can be integrated into existing APM solutions using
+    monitors. Scheduling the run of tests from specific cloud regions, but then piping
+    the test results into APM solutions, allowing it to be viewed alongside other
+    operational observability efforts. Bringing API testing from across any team into
+    a centralized location where results can be observed and responded to by the appropriate
+    team, helping bring more observability to operations.
+  links:
+  - title: Observing an API
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/observing-an-api/
+  video: ''
+  collection_id: ac04397d-98ce-4546-9d82-2ab68623210f
+- name: Testing Governance
+  version: ''
+  description: Establish guidance, rules, and tests that ensure that testing exists
+    for APIs, making sure that all teams are developing, monitoring, and enforcing
+    testing across all APIs in a consistent way, taking testing to another level and
+    actually testing to make sure there is as close to 100% testing coverage in place
+    across all APIs, going beyond governing the design of the API, but also the quality
+    of the API in production.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Testing Monitors
+  version: ''
+  description: Collections can be executed using a monitor, scheduling the run of
+    tests on a recurring basis from a variety of cloud regions where usage is occurring.  Automating
+    AI testing on a schedule in the locations needed to ensure that API quality meets
+    the needs of consumers in specific locations and time zones.
+  links:
+  - title: Monitoring Your APIs
+    url: https://learning.postman.com/docs/monitoring-your-api/intro-monitors/
+  video: ''
+  collection_id: 3d8620c5-97ef-4461-a8b2-f0cfb9bf9f41
+- name: Testing Pipelines
+  version: ''
+  description: Collections can be executed using a CI/CD pipeline, allowing test scripts
+    to be triggered and run as part of the regular build process used to produce or
+    consume APIs. Ensuring that tests are always be run before any new features are
+    introduced or bugs are fixed for any API that is in production.
+  links:
+  - title: Automated API Testing
+    url: https://www.postman.com/automated-testing/
+  video: ''
+  collection_id: 21a6db34-2ff0-4c0d-b61d-4d60b0e98f9e
+- name: Testing Reporting
+  version: ''
+  description: You can view native reports on the availability of testing across teams
+    and APIs within the Postman enterprise tier, providing more observability across
+    operations regarding quality across operations. Going beyond just the individual
+    results of API tests, but including API testing as part of wider API governance,
+    ensuring that all teams are testing their APIs, establishing organizational-wide
+    test coverage for APIs.
+  links:
+  - title: Analyzing with Reports
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/
+  video: ''
+  collection_id: 65e74c45-d9e1-42bd-9acb-bf2291719da6
+- name: Testing Rules
+  version: ''
+  description: Having machine readable or codified rules that ensure there is required
+    testing in place for all APIs helps make sure that a baseline set of tests exist
+    across all APIs, ensuring that contracts are upheld, integrations are maintained,
+    performance is at acceptable levels, and there are not security vulnerabilities
+    present in any API in production.
+  links: []
+  video: ''
+  collection_id: 12959542-bc804efe-29f3-490e-a7fa-470c3dbf5db5
+- name: Testing Runners
+  version: ''
+  description: Collections can be executed using a collection run, executing tests
+    in the desired order, displaying the results for any team member to review and
+    respond to. Allowing API testing to be manually triggered, but automated regarding
+    the sequence of requests, and providing an aggregate view of results.
+  links:
+  - title: Using Collection Runners
+    url: https://learning.postman.com/docs/running-collections/intro-to-collection-runs/
+  video: ''
+  collection_id: e805581f-8976-4ba5-9c50-5ac99a4f778c
+- name: Time to First Call
+  version: ''
+  description: The time it takes to learn that an API exists to when you actually
+    make a request of the API, highlighting the friction API consumers may encounter
+    when it comes to learning about what an API does, getting access to the API, and
+    actually are able to make a successful request, obtain a valid response, establishing
+    a very important metric we can tune into when it comes to making our APIs available
+    to consumer.s
+  links: []
+  video: ''
+  collection_id: ''
+- name: Traffic Collection
+  version: ''
+  description: A collection that exists specifically for aggregating web and API traffic,
+    using Interceptor or a proxy to route requests into a designated collection, turning
+    a collection into a sort of log file, that can then be used to reverse engineer
+    web, mobile, and device applications, but also document, testing, and automate
+    with APIs that are powering web applications and integrations.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Tweet
+  version: ''
+  description: A single message on Twitter, providing text, media, links, and other
+    meta data surrounding a specific message at a specific point in time, offering
+    a very versatile messaging format for humans, but also for automation and orchestration
+    across many APIs, which is also available via an API, which can then be used to
+    understand the reach of a message over time.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Tweet Likes
+  version: ''
+  description: The number of times an individual Twitter Tweet has been liked by other
+    users, providing one possible metric for understanding the popularity and reach
+    of any single message, media, link, or other resource represented as a single
+    Tweet..
+  links: []
+  video: ''
+  collection_id: ''
+- name: URL
+  version: ''
+  description: A Uniform Resource Locator (URL), colloquially termed a web address
+    is a reference to a web resource that specifies its location on a computer network
+    and a mechanism for retrieving it, providing the base for each API request to
+    digital resources and capabilities.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Uptime Monitor
+  version: ''
+  description: A monitor for the uptime testing, making sure that each API is available
+    on a well defined scheduling, making requests to an API to make sure it is always
+    available for applications and integrations, allowing notifications and events
+    to be triggered if any API becomes unresponsive so that teams can respond to make
+    sure APIs are brought back into a healthy state.
+  links: []
+  video: ''
+  collection_id: 12959542-7e582114-81d7-4be6-a3d4-c190b92a3bff
+- name: Uptime Testing Monitor Report
+  version: ''
+  description: A report that allows the one time or historical results of uptime testing
+    monitors to br visualized, providing visibility into whether or not an API uptime
+    has been maintained as defined the schedule of the uptime testing monitor.
+  links: []
+  video: ''
+  collection_id: 12959542-774fb7ff-ea2e-433f-8ba2-cc719214643a
+- name: Uptime Testing Monitor Results
+  version: ''
+  description: The results of any uptime testing run can be rendered as test results,
+    presented using visualizer, and posted to existing APM or other destination that
+    can be used as part of wider observability systems, allowing uptime tests across
+    all APIs to be centralized for understanding API performance at scale.
+  links: []
+  video: ''
+  collection_id: 12959542-09c71357-fc02-44b7-83b6-94d3df9f18db
+- name: Usage Plan
+  version: ''
+  description: Offering a standardized and well-defined set of usage plans for all
+    APIs using commercial or open source API gateway or management solutions helps
+    ensure that access to all APIs is done in a secure way that prevents exploitation
+    by limiting the number of requests being made, or even billing for usage of an
+    API based upon different dimensions defined within the usage plans applied.
+  links: []
+  video: ''
+  collection_id: 12959542-4e05aea4-f04d-4d33-b84e-358d87ab2721
+- name: Use Cases
+  version: ''
+  description: Establishing a list of real world business uses cases of an API helps
+    clarify the purpose an API, ensuring that the design and development of the API
+    matches the business objects, and the needs of potential consumers.
+  links: []
+  video: ''
+  collection_id: 12959542-14578333-6760-4f26-9594-f8806b082682
+- name: Variables
+  version: ''
+  description: Key / value pairs of data that can be defined independently and stored
+    within environments, but then applied across collections, providing variables
+    that can be used for authentication, pagination, and other common aspects of working
+    with APIs, allowing secrets to be abstracted away from each individual collection,
+    but also other context that has little to do with the collection, or may define
+    a state across multiple APIs and collections.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Versioning
+  version: ''
+  description: Applying semantic versioning to individual artifacts to help manage
+    change across each API and wider operations, providing a structured approach to
+    how APIs are evolved, helping identify minor changes from patches, and clearly
+    defining major revisions that would introduce breaking changes.
+  links:
+  - title: Versioning APIs
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/versioning-an-api/
+  - title: Keep Your Team Up to Date with Version Control
+    url: https://www.postman.com/product/api-versioning/
+  - title: Semantic Versioning
+    url: https://semver.org/
+  video: ''
+  collection_id: 12959542-af932670-cf66-4a4f-9033-41e48315e036
+- name: Versioning Governance Rules
+  version: ''
+  description: Rules can be defined to govern the information provided for each API,
+    leveraging the OpenAPI or AsynCaPI contracts, but then apply specific ruling looking
+    for common versioning patterns in the path, parameters, headers, and other details
+    of an API, meeting specific guidelines regarding what information is needed.
+  links:
+  - title: Versioning Spectral Rulesets
+    url: https://rules.linting.org/#rulesets-versioning
+  video: ''
+  collection_id: 12959542-a4075da7-d472-4ac4-a0dd-06c699ca6e60
+- name: Video
+  version: ''
+  description: Providing moving media that educates, informs, and entertains the community
+    regarding specific aspects of the API industry, providing a rich way to advocate
+    for APIs, but also demonstrate APIs using the Youtube and other video APIs, offering
+    a rich way to engage with consumers, and amplify the presence of an API across
+    video and social media channels.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Video Views
+  version: ''
+  description: The number of times a video has been viewed, providing a way to understand
+    the popularity and usefulness of media produced to support API operations, and
+    educate and inform the community around the value of APIs, providing us with one
+    way to understand if our media is reach the intended audience.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Visualizer
+  version: ''
+  description: The Postman visualizer can provide a visual response to any API response,
+    allowing API calls made to be rendered as HTML, charts, and other visual elements,
+    helping make API resources, capabilities, and the APIs themselves for visible.
+  links:
+  - title: Visualizing responses
+    url: https://learning.postman.com/docs/sending-requests/visualizer/
+  - title: Visualize API Data
+    url: https://www.postman.com/api-visualizer/
+  - title: 'Postman Visualizer: More Than Meets the Eye'
+    url: https://blog.postman.com/how-to-visualize-api-data-in-postman/
+  video: https://www.youtube.com/watch?v=i1jU-kivApg
+  collection_id: 12959542-63892e8e-41c1-4ef1-9745-651d4e5520c7
+- name: WSDL
+  version: ''
+  description: WSDL is an XML format for describing network services as a set of endpoints
+    operating on messages containing either document-oriented or procedure-oriented
+    information, providing the operations and messages are described abstractly, and
+    then bound to a concrete network protocol and message format to define an endpoint.
+  links: []
+  video: ''
+  collection_id: 12959542-c8b472c6-5ce6-4a5a-abf7-f8f4ad9bf8ce
+- name: Watch
+  version: ''
+  description: Watching of some element of API operations, allowing team members,
+    partners, or public users to signal they want to receive notifications of any
+    change to an API and it's supporting elements, making API operations more observable
+    and something that all stakeholders are able to stay in tune with as they evolve
+    and change.
+  links:
+  - title: Watching an API
+    url: https://learning.postman.com/docs/designing-and-developing-your-api/watching-an-api/
+  video: ''
+  collection_id: 12959542-e933db77-d17f-4ba8-94cd-30de8ea19a35
+- name: Web
+  version: ''
+  description: The World Wide Web (WWW), commonly known as the Web, is an information
+    system where documents and other web resources are identified by Uniform Resource
+    Locators (URLs, such as https://example.com/), which may be interlinked by hyperlinks,
+    and are accessible over the Internet, providing the foundation for how APIs function.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Web Applications
+  version: ''
+  description: Software applications that are designed to run on the web using HTTP,
+    providing more interactivity and functionality than a simple static website, and
+    using digital resources and capabilities from across multiple domains using APIs,
+    providing a specific type of experience for users via a web browser, usually via
+    a laptop or desktop computer.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workflow Collection
+  version: ''
+  description: Defining workflows across many APIs and API paths provide a rich way
+    to design and document common business workflows and practices, providing a specific
+    sequence of API requests needed to accomplish a business objective, or just a
+    subset of a larger API that meets the needs of a specific business sector, helping
+    go beyond just a reference of everything an API does and getting closer to the
+    business value.
+  links: []
+  video: ''
+  collection_id: 12959542-9f8ae822-8798-4945-bdc5-0cf6b199d69b
+- name: Workflow Documentation
+  version: ''
+  description: Providing documentation for workflow collections help introduce consumers
+    to what a workflow define across multiple API requests can accomplish, and potentially
+    provide a sequential walk through of each step of the flow, allowing API consumers
+    to quickly understand what a workflow accomplishes, but also provides all the
+    details of the workflow in an well documented executable format.
+  links: []
+  video: ''
+  collection_id: 12959542-2e1fd049-ddb1-4acf-87a2-358c8e401e93
+- name: Workflow Testing
+  version: ''
+  description: Establishing tests for specific business workflows helps to ensure
+    that critical business capabilities are always available, defining simple or complex
+    scenarios that mimic real world functionality complete with synthetic or actual
+    data to try and make sure the tests reflects what will actually be happening in
+    real life.
+  links: []
+  video: ''
+  collection_id: 12959542-7f831b8e-17a5-431b-bd04-82e9a6537af5
+- name: Workflow Testing Monitor
+  version: ''
+  description: Monitors can be setup for all workflow testing, scheduling the run
+    of workflow tests when needed and configuring to run from the regions that matter
+    most to business operations, making sure that essential business capabilities
+    are working as designed and delivering as expected on a 24/7 schedule.
+  links: []
+  video: ''
+  collection_id: 12959542-8a836703-8ac2-4538-8f7c-4c530ad5118b
+- name: Workflow Testing Monitor Results
+  version: ''
+  description: The results of a workflow testing monitor, taking the results, then
+    publishing and storing results to a CDN, data lake, APM, or other location and
+    evaluating the outcomes of each individual business workflow, while also looking
+    across the results from my different business workflows within a domain, testing
+    not just the success or failure of APIs, but specifically the success or failure
+    of business processes.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workflows
+  version: ''
+  description: Workflows are a series of individual requests organized using a collection,
+    providing a documented, sharable, forkabble, and executabble representation of
+    a specific workflow which can be manually run byb a user within workspaces, or
+    automated on a schedule using monitors, or via CI/CD pipelines, providing a very
+    powerful unit of value when it comes to automating and orchestrating business
+    processes.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workspace
+  version: ''
+  description: A virtual space for doing API work, providing a location that has a
+    name, description, and private, team, partner, or public visibility, where work
+    on APIs, collections, mock servers, environments, monitors, and other elements
+    of API operations can exist, providing a single location for API producers and
+    consumers to engage across the API lifecycle, and move APIs forward in a collaborative
+    way.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workspace Watches
+  version: ''
+  description: The number of people who are watching a workspace, which is defined
+    by the number in internal  or external watches triggered for a workspace, offering
+    a metric for understand the audience and reach a workspace and the APIs, collections,
+    environments, mock servers, monitors, and other elements contained with in it
+    possess.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Know your Audience
+  version: ''
+  description: The first key step in any software project is to find the stakeholders.
+    These are the folks — both business and technical — who will set the game board,
+    make the rules, and let you know if your team is actually winning.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Speak the Language
+  version: ''
+  description: Sometimes, we just nod and smile when we don't understand each other.
+    And maybe that's fine if we're video chatting during the awkward networking phase
+    of our favorite virtual API conference. When it comes to building software, finding
+    a common vocabulary is a productivity hack. In Domain-Driven Design, this is known
+    as the Ubiquitous Language. Domain experts know more about how the business functions,
+    and this creates information asymmetry.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Use the Network
+  version: ''
+  description: Communications move through several network layers. We can take advantage
+    of this, often transparently. API Gateways are proxies that apply security, message
+    transformation, custom routing, and more to centralize policy management.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Caching Strategy
+  version: ''
+  description: This isn't just part of a terrible whiteboard interview to optimize
+    a search algorithm. HTTP allows caching at the client, the server, and intermediaries.
+    Bust out that Cache-Control header! It's a quick performance win.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workspace Guidance
+  version: ''
+  description: Providing detailed guidance for workspace setup.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workspace Name
+  version: ''
+  description: Providing guidance for how workspaces should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workspace Overview
+  version: ''
+  description: Providing guidance for how workspaces overviews should be crated.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Workspace RBAC
+  version: ''
+  description: Providing guidance for how workspaces RBAC should be applied,
+  links: []
+  video: ''
+  collection_id: ''
+- name: API Names
+  version: ''
+  description: Providing guidance for how APIs should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: API Descriptions
+  version: ''
+  description: Providing guidance for how APIs descriptions should be crafted.
+  links: []
+  video: ''
+  collection_id: ''
+- name: API RBAC
+  version: ''
+  description: Providing guidance for how RBAC should be applied to APIs.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Collection Names
+  version: ''
+  description: Providing guidance for how collections should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Collection Descriptions
+  version: ''
+  description: Providing guidance for how collection descriptions should be crafted.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Collection Variables
+  version: ''
+  description: Providing guidance for how collection variables should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Collection RBAC
+  version: ''
+  description: Providing guidance for how collection RBAC should be applied.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Environment Names
+  version: ''
+  description: Providing guidance for how environments should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Environment Variables
+  version: ''
+  description: Providing guidance for how environment variables should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Environment RBAC
+  version: ''
+  description: Providing guidance for how RBAC should be applied to environments.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Mock Server Names
+  version: ''
+  description: Providing guidance for how mock servers should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Environment RBAC
+  version: ''
+  description: Providing guidance for how monitors should be named.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Increased Developer Productivity
+  version: ''
+  description: Increasing developer productivity.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Improved Developer Satisfaction
+  version: ''
+  description: Improving developer satisfaction.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Team Onboarding
+  version: ''
+  description: Onboarding internal team members to an API via a workspace.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Consumer Onboarding
+  version: ''
+  description: Onboarding external consumers to an API via a workspace.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Environment Type
+  version: ''
+  description: Providing a variety of standard types of environment (ie. staging,
+    production)
+  links: []
+  video: ''
+  collection_id: ''
+- name: Collection Base URL
+  version: ''
+  description: Establishing a standard for how the base URL is applied to collections.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Collection Authentication
+  version: ''
+  description: Defining how collection authentication is applied.
+  links: []
+  video: ''
+  collection_id: ''
+- name: Collection Folders
+  version: ''
+  description: Sharing guidance for how collection forlders are used.
+  links: []
+  video: ''
+  collection_id: ''

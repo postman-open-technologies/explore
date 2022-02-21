@@ -1,0 +1,673 @@
+---
+- name: Postman
+  website: https://www.postman.com/
+  tags:
+  - Design
+  - Automation
+  - Discovery
+  - Documentation
+  - Environments
+  - Governance
+  - Mock Server
+  - Monitor
+  - Observability
+  - Reports
+  - Security
+  - Testing
+  - Versioning
+  - Workspaces
+  - Orchestration
+  - Teams
+  - Analytics
+  - Change
+  - Collections
+  api: https://www.postman.com/postman/workspace/postman-public-workspace/documentation/12959542-c8142d51-e97c-46b6-bd77-52bb66712c9a
+  workspace: https://www.postman.com/postman/workspace/postman-open-technologies-openapi/overview
+  rating: 1
+- name: OpenAPI
+  website: https://www.openapis.org/
+  tags:
+  - Define
+  api: ''
+  workspace: https://www.postman.com/postman/workspace/postman-open-technologies-openapi/overview
+  rating: 3
+- name: AsyncAPI
+  website: https://www.asyncapi.com/
+  tags:
+  - Define
+  api: ''
+  workspace: https://www.postman.com/postman/workspace/postman-open-technologies-asyncapi/overview
+  rating: 3
+- name: JSON Schema
+  website: https://json-schema.org/
+  tags:
+  - Define
+  api: ''
+  workspace: https://www.postman.com/postman/workspace/postman-open-technologies-json-schema/overview
+  rating: 3
+- name: GraphQL
+  website: https://graphql.org/
+  tags:
+  - Define
+  api: ''
+  workspace: https://postman.postman.co/workspace/Postman-Open-Technologies---Gra~735ad267-55bf-4faf-85bc-877c9df9dbba/overview
+  rating: 3
+- name: Apache Thrift
+  website: https://thrift.apache.org/
+  tags:
+  - Define
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Protocol Buffers
+  website: https://developers.google.com/protocol-buffers
+  tags:
+  - Define
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Web Services Description Language (WSDL)
+  website: https://www.w3.org/TR/wsdl.html
+  tags:
+  - Define
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Apache Avro
+  website: https://avro.apache.org/
+  tags:
+  - Define
+  api: ''
+  workspace: ''
+  rating: 3
+- name: RAML
+  website: https://raml.org/
+  tags:
+  - Define
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Stoplight
+  website: https://stoplight.io/
+  rating: 3
+  tags:
+  - Design
+  - Mock Server
+  - Documentation
+  - Collaboration
+  - Governance
+  api: ''
+  workspace: ''
+- name: ReadyAPI
+  website: https://smartbear.com/product/ready-api/overview/
+  tags:
+  - Design
+  - Mock Server
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Insomnia
+  website: https://insomnia.rest/
+  tags:
+  - Design
+  - Mock Server
+  - Client
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Apiary
+  website: https://apiary.io/
+  tags:
+  - Design
+  - Mock Server
+  api: ''
+  workspace: ''
+  rating: 2
+- name: Readme
+  website: https://readme.com/
+  tags:
+  - Documentation
+  api: 'https://docs.readme.com/reference/intro-to-the-readme-api '
+  workspace: https://www.postman.com/api-evangelist/workspace/readme
+  rating: 2
+- name: SwaggerHub
+  website: https://swagger.io/tools/swaggerhub/
+  tags:
+  - Documentation
+  - Discovery
+  api: https://app.swaggerhub.com/apis/swagger-hub/registry-api/1.0.63
+  workspace: https://www.postman.com/api-evangelist/workspace/swaggerhub
+  rating: 1
+- name: Redoc.ly
+  website: https://redoc.ly/
+  tags:
+  - Documentation
+  api: ''
+  workspace: ''
+  rating: 3
+- name: SoapUI
+  website: https://www.soapui.org/
+  tags:
+  - Testing
+  - Client
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Tricentis
+  website: https://www.tricentis.com/
+  tags:
+  - Testing
+  api: https://support-hub.tricentis.com/open?id=tricentis_tosca
+  workspace: https://www.postman.com/api-evangelist/workspace/tricentis
+  rating: 2
+- name: Up9
+  website: https://up9.com/
+  tags:
+  - Testing
+  api: ''
+  workspace: ''
+  rating: 3
+- name: mabl
+  website: https://www.mabl.com/
+  tags:
+  - Testing
+  api: https://help.mabl.com/reference/post_events-deployment
+  workspace: https://www.postman.com/api-evangelist/workspace/mabl/overview
+  rating: 2
+- name: 42Crunch
+  website: https://42crunch.com/
+  tags:
+  - Security
+  api: https://www.postman.com/get-42crunch/workspace/42crunch-api/overview
+  workspace: https://www.postman.com/get-42crunch/workspace/42crunch-api/overview
+  rating: 1
+- name: Noname
+  website: https://nonamesecurity.com/
+  tags:
+  - Security
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Salt Security
+  website: https://salt.security/
+  tags:
+  - Security
+  api: ''
+  workspace: ''
+  rating: 3
+- name: APISec.ai
+  website: https://www.apisec.ai/
+  tags:
+  - Security
+  api: ''
+  workspace: ''
+  rating: 1
+- name: Cequence Security
+  website: https://www.cequence.ai/
+  tags:
+  - Security
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Datadog
+  website: https://www.datadoghq.com/
+  tags:
+  - Monitor
+  - APM
+  api: https://docs.datadoghq.com/api/latest/
+  workspace: https://www.postman.com/datadog/workspace/datadog-s-public-workspace/overview
+  rating: 1
+- name: Checkly
+  website: https://www.checklyhq.com/
+  tags:
+  - Monitor
+  api: https://www.checklyhq.com/docs/api
+  workspace: https://www.postman.com/api-evangelist/workspace/checkly/overview
+  rating: 1
+- name: Runscope
+  website: https://www.runscope.com/
+  tags:
+  - Monitor
+  api: ''
+  workspace: ''
+  rating: 2
+- name: Alertsite
+  website: https://smartbear.com/product/alertsite/overview/
+  tags:
+  - Monitor
+  api: ''
+  workspace: ''
+  rating: 3
+- name: APIMetrics
+  website: https://apimetrics.io/
+  tags:
+  - Monitor
+  api: https://apimetrics.readme.io/docs/using-the-apimetrics-api
+  workspace: ''
+  rating: 2
+- name: RapidAPI Hub
+  website: https://rapidapi.com/hub
+  tags:
+  - Discovery
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Backstage
+  website: https://backstage.io/
+  tags:
+  - Discovery
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Cortex
+  website: https://www.cortex.io/post/microservice-catalog-tool
+  tags:
+  - Discovery
+  api: https://docs.getcortexapp.com/api
+  workspace: https://www.postman.com/api-evangelist/workspace/cortex/overview
+  rating: 2
+- name: Buf
+  website: https://buf.build/
+  tags:
+  - Discovery
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Paw
+  website: https://paw.cloud/
+  tags:
+  - Client
+  api: ''
+  workspace: ''
+  rating: 2
+- name: Apollo
+  website: https://www.apollographql.com/
+  tags:
+  - Client
+  - GraphQL
+  api: ''
+  workspace: ''
+  rating: 3
+- name: GitHub
+  website: https://github.com/
+  tags:
+  - Source Control
+  - Change
+  - Discovery
+  - CI/CD
+  api: https://docs.github.com/en/rest
+  workspace: https://www.postman.com/api-evangelist/workspace/github/overview
+  rating: 1
+- name: Gitlab
+  website: https://about.gitlab.com/
+  tags:
+  - Source Control
+  - CI/CD
+  api: https://docs.gitlab.com/ee/api/
+  workspace: https://www.postman.com/api-evangelist/workspace/gitlab/overview
+  rating: 1
+- name: Bitbucket
+  website: https://bitbucket.org/product
+  tags:
+  - Source Control
+  - CI/CD
+  api: https://developer.atlassian.com/cloud/bitbucket/rest/
+  workspace: https://www.postman.com/api-evangelist/workspace/bitbucket/overview
+  rating: 1
+- name: AWS Code Commit
+  website: https://aws.amazon.com/codecommit/
+  tags:
+  - Source Control
+  api: https://docs.aws.amazon.com/codecommit/latest/APIReference/Welcome.html
+  workspace: https://www.postman.com/api-evangelist/workspace/aws-code-commit/overview
+  rating: 1
+- name: Azure Repos
+  website: https://azure.microsoft.com/en-us/services/devops/repos/
+  tags:
+  - Source Control
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Jenkins
+  website: https://www.jenkins.io/
+  tags:
+  - CI/CD
+  api: https://www.jenkins.io/doc/book/using/remote-access-api/
+  workspace: https://www.postman.com/api-evangelist/workspace/jenkins/overview
+  rating: 2
+- name: CircleCI
+  website: https://circleci.com/
+  tags:
+  - CI/CD
+  api: https://circleci.com/docs/api/v2/
+  workspace: https://www.postman.com/api-evangelist/workspace/circleci/overview
+  rating: 1
+- name: JFrog
+  website: https://github.com/
+  tags:
+  - CI/CD
+  api: https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API
+  workspace: https://www.postman.com/api-evangelist/workspace/jfrog/overview
+  rating: 1
+- name: TravisCI
+  website: https://jfrog.com/
+  tags:
+  - CI/CD
+  api: https://docs.travis-ci.com/api/
+  workspace: https://www.postman.com/api-evangelist/workspace/travisci/overview
+  rating: 2
+- name: Harness
+  website: https://harness.io/
+  tags:
+  - CI/CD
+  api: https://docs.harness.io/category/l2p3i03l4a-api
+  workspace: https://www.postman.com/api-evangelist/workspace/harness/overview
+  rating: 1
+- name: AWS CodePipeline
+  website: https://aws.amazon.com/codepipeline/
+  tags:
+  - CI/CD
+  api: https://docs.aws.amazon.com/codepipeline/latest/APIReference/Welcome.html
+  workspace: https://www.postman.com/api-evangelist/workspace/aws-codepipeline/overview
+  rating: 1
+- name: Azure Pipeline
+  website: https://azure.microsoft.com/en-us/services/devops/pipelines/
+  tags:
+  - CI/CD
+  api: https://docs.microsoft.com/en-us/rest/api/azure/devops/pipelines/?view=azure-devops-rest-6.0
+  workspace: https://www.postman.com/api-evangelist/workspace/azure-pipeline/overview
+  rating: 1
+- name: CI/CD on Google Cloud
+  website: https://cloud.google.com/docs/ci-cd
+  tags:
+  - CI/CD
+  api: https://cloud.google.com/functions/docs/testing/test-cicd
+  workspace: https://www.postman.com/api-evangelist/workspace/google-cloud-ci-cd/overview
+  rating: 2
+- name: Teamcity
+  website: https://www.jetbrains.com/teamcity/
+  tags:
+  - CI/CD
+  api: https://www.jetbrains.com/help/teamcity/rest-api.html
+  workspace: https://www.postman.com/api-evangelist/workspace/teamcity/overview
+  rating: 1
+- name: AWS API Gateway
+  website: https://aws.amazon.com/api-gateway/
+  tags:
+  - Gateway
+  api: https://docs.aws.amazon.com/apigateway/index.html
+  workspace: https://www.postman.com/api-evangelist/workspace/aws-api-gateway/overview
+  rating: 1
+- name: Azure API Management
+  website: https://azure.microsoft.com/en-us/services/api-management/#overview
+  tags:
+  - Gateway
+  api: https://docs.microsoft.com/en-us/rest/api/apimanagement/
+  workspace: https://www.postman.com/api-evangelist/workspace/azure-api-management/overview
+  rating: 1
+- name: Apigee
+  website: https://cloud.google.com/apigee
+  tags:
+  - Gateway
+  api: https://apidocs.apigee.com/
+  workspace: https://www.postman.com/api-evangelist/workspace/apigee/overview
+  rating: 1
+- name: Mulesoft
+  website: https://www.mulesoft.com/platform/api/manager
+  tags:
+  - Gateway
+  api: https://docs.mulesoft.com/mule-management-console/3.8/rest-api-reference
+  workspace: https://www.postman.com/api-evangelist/workspace/mulesoft/overview
+  rating: 1
+- name: Kong
+  website: https://konghq.com/
+  tags:
+  - Gateway
+  api: https://docs.konghq.com/gateway-oss/2.5.x/admin-api/
+  workspace: https://www.postman.com/api-evangelist/workspace/kong/overview
+  rating: 1
+- name: " Software AG"
+  website: https://www.softwareag.com/en_corporate/platform/integration-apis/api-management.html
+  tags:
+  - Gateway
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Tyk
+  website: https://tyk.io/
+  tags:
+  - Gateway
+  api: https://tyk.io/docs/tyk-apis/
+  workspace: https://www.postman.com/api-evangelist/workspace/tyk/overview
+  rating: 1
+- name: Axway Amplify
+  website: https://www.axway.com/en/products/amplify-api-management-platform
+  tags:
+  - Gateway
+  api: https://docs.axway.com/
+  workspace: https://www.postman.com/api-evangelist/workspace/axway/overview
+  rating: 1
+- name: Layer 7 API Gateway
+  website: https://www.broadcom.com/products/software/api-management/layer7-api-gateways
+  tags:
+  - Gateway
+  api: ''
+  workspace: ''
+  rating: 3
+- name: " RedHat 3Scale"
+  website: https://www.redhat.com/en/technologies/jboss-middleware/3scale
+  tags:
+  - Gateway
+  api: ''
+  workspace: ''
+  rating: 3
+- name: Ambassador
+  website: https://www.getambassador.io/
+  tags:
+  - Gateway
+  api: ''
+  workspace: ''
+  rating: 3
+- name: IBM API Connect
+  website: https://www.ibm.com/cloud/api-connect
+  tags:
+  - Gateway
+  api: ''
+  workspace: ''
+  rating: 3
+- name: New Relic
+  website: https://newrelic.com/
+  tags:
+  - APM
+  api: https://docs.newrelic.com/docs/apis/rest-api-v2/
+  workspace: https://www.postman.com/api-evangelist/workspace/new-relic/overview
+  rating: 1
+- name: Big Panda
+  website: https://www.bigpanda.io/
+  tags:
+  - APM
+  api: https://docs.bigpanda.io/reference/introduction
+  workspace: https://www.postman.com/api-evangelist/workspace/big-panda/overview
+  rating: 2
+- name: Splunk
+  website: https://www.splunk.com/
+  tags:
+  - APM
+  api: https://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTprolog
+  workspace: https://www.postman.com/api-evangelist/workspace/splunk/overview
+  rating: 1
+- name: Grafana
+  website: https://grafana.com/
+  tags:
+  - APM
+  api: https://grafana.com/docs/grafana/latest/http_api/
+  workspace: https://www.postman.com/api-evangelist/workspace/grafana/overview
+  rating: 2
+- name: Kubernetes
+  website: https://kubernetes.io/
+  tags:
+  - Orchestration
+  api: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  workspace: https://www.postman.com/api-evangelist/workspace/kubernetes/overview
+  rating: 1
+- name: Akita Software
+  website: https://www.akitasoftware.com/
+  tags:
+  - Observability
+  api: ''
+  workspace: ''
+  rating: 2
+- name: Optic
+  website: https://www.useoptic.com/
+  tags:
+  - Observability
+  api: ''
+  workspace: ''
+  rating: 2
+- name: Okta
+  website: https://www.okta.com/
+  tags:
+  - Authentication
+  api: https://developer.okta.com/docs/reference/
+  workspace: https://api-evangelist.postman.co/workspace/Okta~ebf11b25-e12e-4678-808c-274d71f60473/overview
+  rating: 1
+- name: Auth0
+  website: https://auth0.com/
+  tags:
+  - Authentication
+  api: https://auth0.com/docs/api
+  workspace: https://www.postman.com/api-evangelist/workspace/auth0
+  rating: 1
+- name: Zapier
+  website: https://zapier.com/
+  tags:
+  - Automation
+  api: https://zapier.com/platform
+  workspace: https://www.postman.com/api-evangelist/workspace/zapier
+  rating: 2
+- name: Cloud Elements
+  website: https://zapier.com/
+  tags:
+  - Automation
+  api: https://docs.cloud-elements.com/home/platform-api-reference-accounts
+  workspace: https://www.postman.com/api-evangelist/workspace/cloud-elements/overview
+  rating: 1
+- name: Moesif
+  website: https://www.moesif.com/
+  tags:
+  - Analytics
+  api: https://www.moesif.com/docs/api
+  workspace: https://www.postman.com/api-evangelist/workspace/moesif/overview
+  rating: 2
+- name: Wazuh
+  website: https://wazuh.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/wazuh/overview
+  rating: 1
+- name: WatchGuard
+  website: https://www.watchguard.com
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/watchguard/overview
+  rating: 1
+- name: The Hive
+  website: https://thehive-project.org
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/the-hive/overview
+  rating: 1
+- name: " Sumo Logic"
+  website: https://www.sumologic.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/sumo-logic/overview
+  rating: 1
+- name: Sophos
+  website: https://www.sophos.com
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/sophos/overview
+  rating: 1
+- name: Snyk
+  website: https://snyk.io/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/snyk/overview
+  rating: 1
+- name: SentinelOne
+  website: https://www.sentinelone.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/sentinelone/overview
+  rating: 1
+- name: Recorded Future
+  website: https://www.recordedfuture.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/recorded-future/overview
+  rating: 1
+- name: Qualys
+  website: https://www.qualys.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/qualys/overview
+  rating: 1
+- name: IBM Security QRadar
+  website: https://www.ibm.com/qradar
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/ibm-security-qradar/overview
+  rating: 1
+- name: Patrowl
+  website: https://patrowl.io/patrowl
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/patrowl/overview
+  rating: 1
+- name: Palo Alto networks
+  website: https://www.paloaltonetworks.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/palo-alto-networks/overview
+  rating: 1
+- name: Mimecast
+  website: https://www.mimecast.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/mimecast/overview
+  rating: 1
+- name: Rapid7
+  website: https://www.rapid7.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/rapid7/overview
+  rating: 1
+- name: Imperva
+  website: https://www.imperva.com/
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/imperva/overview
+  rating: 1
+- name: DarkTrace
+  website: https://www.darktrace.com
+  tags:
+  - Security
+  api: ''
+  workspace: https://www.postman.com/api-evangelist/workspace/darktrace/overview
+  rating: 1

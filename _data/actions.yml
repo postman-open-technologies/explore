@@ -1,0 +1,343 @@
+---
+- name: Author an OpenAPI in API Builder
+  description: Editing an OpenAPI definition using the Postman API builder, managing
+    multiple versions of the API, and associated with any documentation, mock server,
+    or testing collections that are supporting it.
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-b6852b81-c31f-4b94-81ba-ceb3d5ba645e
+- name: Author an OpenAPI in an Open Source Editor
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-6df79f56-66e0-4c4b-bc3e-67fdb43028f1
+- name: Change Visibility of a Workspace to Private
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-7ca69816-c289-4854-a9c8-a78b69efb322
+- name: Change Visibility of a Workspace to Public
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-81948b18-eac4-4d65-982e-663773de7acd
+- name: Change Visibility of a Workspace to Team
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-6986c869-7da2-4854-8709-e1db1f7232d6
+- name: Change the Stage of an OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-ea03e6d7-b706-4354-82dd-b263f3b2a0fa
+- name: Comment on Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-15793c73-080e-4271-afea-9c1a87c3e1d3
+- name: Comment on OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-2906db92-fceb-49e4-b405-91ea06108b63
+- name: Connect OpenAPI to Bitbucket Repository
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-7079ab2e-5c6f-495b-847b-ac065fd19686
+- name: Connect OpenAPI to Github Repository
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-630c0f7f-afa2-4166-a8ae-e0d019b79be3
+- name: Create New OpenAPI
+  description: ''
+  links: []
+  tools:
+  - title: Swagger Editor
+    description: Design, describe, and document your API on the first open source
+      editor fully dedicated to OpenAPI-based APIs.
+    url: https://swagger.io/tools/swagger-editor/
+  - title: Stoplight OpenAPI Editor
+    description: Build web APIs with a powerful, free visual OpenAPI Specification
+      editor that allows you to create API designs and share within minutes
+    url: https://stoplight.io/design/free/
+  - title: Apicurio
+    description: An open source API editor from Red Hat, for designing APIs using
+      the OpenAPI specification.
+    url: https://www.apicur.io/
+  video: ''
+  collection_id: 12959542-66da719c-a432-459b-a917-51d47e07c086
+- name: Create a New Version of an OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-e20a53d8-8f2e-4c08-b233-a439815b422e
+- name: Export Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-c0d9331c-5e56-48a8-acf1-924fbdefb24b
+- name: Export an Environment
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-824cd3df-a3bc-46fd-9d3b-5909bbe7479d
+- name: Export an Environment
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-824cd3df-a3bc-46fd-9d3b-5909bbe7479d
+- name: Fork Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-dd6ace24-b640-45b7-bc39-9b6399d6edd6
+- name: Fork an Environment
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-2397c770-6ee9-49e9-b6e4-b79b4eea3742
+- name: Generate Client Code from OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-24f9af26-d3fd-41fe-b882-3268272f3347
+- name: Generate Collection from OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-19b8805e-e5a5-4bd5-bfbf-816284c974f2
+- name: Generate Contract Tests from OpenAPI
+  description: ''
+  links: []
+  tools:
+  - title: Postman Contract Test Generator
+    description: Postman collection and environment that will take an Open API Spec,
+      validate component adherence, generate contract tests, and execute them.
+    url: https://github.com/allenheltondev/postman-contract-test-generator
+  video: https://www.youtube.com/embed/fzN67jPLpqI
+  collection_id: 12959542-2f036daa-c055-42d0-8846-1c0a297c8503
+- name: Generate Documentation from an OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-cdd220ff-fac3-45f2-b68b-aea8a197df83
+- name: Generate Mock Server from an OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-3e9fda3e-d10d-4c93-a69e-63877c607ab8
+- name: Generate OpenAPI from Code Annotations
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-fd349353-5bed-4d4f-94d5-6da291be442a
+- name: Generate OpenAPI from Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-6cecd873-9c4b-4074-8be0-c22d24097bbb
+- name: Generate Server Code from OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-8242228c-a0c3-4ff6-b23a-0b51a9878bd2
+- name: Generate Tests from an OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-190e142c-c4b3-45c6-83d9-8fde999ac523
+- name: Import Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-07769101-7aa7-4326-ae2f-0803c5b55465
+- name: Import OpenAPI
+  description: ''
+  links:
+  - title: OpenAPI in Postman
+    url: https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/
+  tools:
+  video: ''
+  collection_id: 12959542-baa9aae2-e141-44e7-8a88-6407c546e33f
+- name: Integrate with Azure DevOps
+  description: ''
+  links:
+  - title: Azure DevOps
+    url: https://azure.microsoft.com/en-us/services/devops/
+  - title: Workspace
+    url: https://api-evangelist.postman.co/workspace/Azure-DevOps~261535e3-3f7c-4373-b04d-96704545a682/overview
+  - title: Collections
+    url: https://github.com/hkamel/azuredevops-postman-collections
+  tools: []
+  video: ''
+  collection_id: 12959542-32ae97b1-f7ce-4499-8f33-c8ada893edb7
+- name: Integrate with PingFederate
+  description: ''
+  links:
+  - title: PingFederate
+    url: https://www.pingidentity.com/en/software/pingfederate.html
+  - title: Link Title
+    url: http://example.com
+  - title: Link Title
+    url: http://example.com
+  tools:
+  video: ''
+  collection_id: 12959542-53e4eef8-a101-4f12-9a7f-6345ee57164c
+- name: Invite Team Member to Workspace
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-44400985-2b97-4252-a956-3814c2a42b6e
+- name: Lint OpenAPI Using Rules in API Builder
+  description: ''
+  links:
+  - title: Rules Project Site
+    url: https://rules.linting.org/
+  - title: Rules Project Repo
+    url: https://github.com/postman-open-technologies/linting-rules
+  - title: OpenAPI Linting Public Workspace
+    url: https://www.postman.com/postman/workspace/openapi-linting/overview
+  tools:
+  video: ''
+  collection_id: 12959542-71067bbd-4b5f-4663-ae35-f08d6524a283
+- name: Manage Roles for a Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-7b14777f-69cc-4306-9488-b022e63e605a
+- name: Manage Roles for a Environment
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-c2ff60b9-a53b-4b70-a4f6-fa178e4aadf4
+- name: Manage Roles for an OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-fb40a9c6-232f-4ff7-bd8f-0c6e81b376ad
+- name: Mock a Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-f93d790f-e4e7-456d-ab0a-e46c945268e5
+- name: Monitor a Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-72559e01-a94a-4ad9-82ea-587d3f1dca86
+- name: Public OpenAPI to Private Network
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-6c741c8c-21bf-4ee2-95cc-34a1140ae904
+- name: Run a Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-3a903f50-4519-451d-a334-1f43055f564e
+- name: Share Collection to a Workspace
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-34b3a20a-ce24-49d4-bd1f-9f949e4d33f3
+- name: Share Collection via a Link
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-ad6fc581-1742-431c-915a-ed54ee22e6fc
+- name: Share Collection with a Run in Postman Button
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-2d3729a7-bbd6-40a9-9cb1-4744aa8f423f
+- name: Share Environment to a Workspace
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-ed596232-f3cf-4495-a7ff-a309a22f7066
+- name: Share OpenAPI to a Workspace
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-a67132b6-df6c-4f31-bb25-f6b7a0aa8fe2
+- name: Sync Collection to Github
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-04f46b0c-1e28-4d9b-aeb5-2e09a42c24a3
+- name: Sync OpenAPI Using the Postman API
+  description: ''
+  links:
+  - title: Postman API Workspace
+    url: https://www.postman.com/postman/workspace/postman-public-workspace/documentation/12959542-c8142d51-e97c-46b6-bd77-52bb66712c9a
+  tools:
+  video: ''
+  collection_id: 12959542-a6d51d12-9f75-45a8-bd01-2c8e89af381a
+- name: Sync OpenAPI to AWS API Gateway
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-0b926cf5-e849-415b-ac64-ae9046d0c307
+- name: Sync OpenAPI to Github
+  description: ''
+  links:
+  - title: Github Integration
+    url: https://learning.postman.com/docs/integrations/available-integrations/github/
+  tools:
+  video: ''
+  collection_id: 12959542-7ca3244e-89d9-47ea-92e1-e34d2016c0e5
+- name: Watch Collection
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-39736976-1a46-4fec-a368-1bf5291c8964
+- name: Watch OpenAPI
+  description: ''
+  links: []
+  tools: []
+  video: ''
+  collection_id: 12959542-df2d7a08-d6ee-43c3-abc2-a4a39cd652c0
