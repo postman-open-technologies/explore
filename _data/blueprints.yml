@@ -10,13 +10,6 @@
   image: images/blueprints/api-design-first.jpeg
   tags:
   - Design
-  - OpenAPI
-  - Mock Server
-  - Documentation
-  - Testing
-  - Comments
-  - Notifications
-  - Sharing
   roles:
   - Advocate
   - Backend
@@ -83,23 +76,7 @@
   image: images/blueprints/prioritizing-api-first.jpeg
   conclusion: Text
   tags:
-  - Applications
-  - Integrations
-  - OpenAPI
-  - AsyncAPI
-  - JSON Schema
-  - Collection
-  - Team
-  - Workspace
-  - Search
-  - Network
-  - Monitor
-  - History
-  - Activity
-  - Reports
-  - APM
-  - Standards
-  - Governance
+  - API-First
   roles:
   - Advocate
   - Architect
@@ -275,22 +252,6 @@
   level: 115
   tags:
   - Applications
-  - Mobile
-  - Devices
-  - Integrations
-  - Workflows
-  - Network
-  - Discovery
-  - Design
-  - Development
-  - Deployment
-  - Observability
-  - Testing
-  - Security
-  - Monitor
-  - Pipeline
-  - APM
-  - Reports
   roles:
   - Architect
   - CIO
@@ -390,11 +351,6 @@
   tags:
   - Workflows
   - Business
-  - Workspace
-  - Collection
-  - Documentation
-  - Testing
-  - Monitor
   roles:
   - Advocate
   - Architect
@@ -482,20 +438,7 @@
   image: images/blueprints/defining-capabilities-using-collections.jpeg
   tags:
   - Capabilities
-  - Collection
-  - Automation
-  - Orchestration
-  - Engagement
-  - Authentication
-  - Folders
-  - Request
-  - Scripts
-  - Examples
-  - Environment
-  - Variables
-  - Buttons
-  - Watch
-  - Forks
+  - Collections
   roles:
   - Advocate
   - Architect
@@ -606,16 +549,6 @@
   image: images/blueprints/creating-a-new-graphql-api.jpeg
   tags:
   - GraphQL
-  - Schema
-  - Data
-  - Resolvers
-  - Documentation
-  - Testing
-  - Authentication
-  - Security
-  - Monitor
-  - Search
-  - Network
   roles:
   - Architect
   - Backend
@@ -752,18 +685,8 @@
   collection_id: 12959542-111b534f-ed6c-4a83-abc2-d2eb818a16bf
   image: images/blueprints/an-api-design-review.jpeg
   tags:
-  - OpenAPI
   - Design
-  - Workspace
-  - Repository
-  - Team
-  - Rules
-  - Documentation
-  - Examples
-  - Mock Server
-  - Testing
-  - Timeline
-  - Feedback
+  - Governance
   roles:
   - Architect
   - Backend
@@ -848,15 +771,6 @@
   image: images/blueprints/discovery-as-the-default.jpeg
   tags:
   - Discovery
-  - Workspace
-  - APIs
-  - Documentation
-  - Mock Server
-  - Testing
-  - Monitor
-  - Search
-  - Applications
-  - Integrations
   roles:
   - Advocate
   - Architect
@@ -962,14 +876,6 @@
   image: images/blueprints/api-documentation-is-fundamental.jpeg
   tags:
   - Documentation
-  - Examples
-  - Snippets
-  - Collection
-  - Buttons
-  - Watch
-  - Forks
-  - Pull Requests
-  - Merging
   roles:
   - Advocate
   - Architect
@@ -1038,17 +944,8 @@
     APIs we depend on behind our applications.
   image: images/blueprints/generate-collection-from-mobile-application.jpeg
   tags:
-  - OpenAPI
-  - Mobile
-  - Proxy
-  - Traffic
-  - Documentation
-  - Testing
-  - Security
-  - Monitor
-  - Networks
-  - Search
-  - Discovery
+  - Applications
+  - Collections
   roles:
   - Advocate
   - Architect
@@ -1142,17 +1039,8 @@
   image: images/blueprints/generate-collection-from-web-application.png
   collection_id: 12959542-e9816f6c-985c-44dd-8c57-28ce79c115a5
   tags:
-  - OpenAPI
   - Applications
-  - Interceptor
-  - Traffic
-  - Collection
-  - Documentation
-  - Testing
-  - Security
-  - Monitor
-  - Networks
-  - Search
+  - Collections
   roles:
   - Advocate
   - Architect
@@ -1246,21 +1134,8 @@
   image: images/blueprints/generate-openapi-using-code-annotations.png
   conclusion: ''
   tags:
-  - OpenAPI
+  - Code-First
   - Code Annotations
-  - Code
-  - Workspace
-  - Team
-  - Repository
-  - Pipeline
-  - Documentation
-  - Testing
-  - Security
-  - Authentication
-  - Monitor
-  - Discovery
-  - Search
-  - Networks
   roles:
   - Advocate
   - Architect
@@ -1425,15 +1300,7 @@
   collection_id: 12959542-154eeef0-faa5-4c72-828b-ab4e149fbabd
   image: images/blueprints/high-level-api-governance.jpeg
   tags:
-  - OpenAPI
   - Governance
-  - Lifecycle
-  - Strategy
-  - Guidelines
-  - Rules
-  - Reports
-  - Visualizer
-  - APM
   roles:
   - Architect
   - CIO
@@ -1529,16 +1396,6 @@
   tags:
   - WSDL
   - SOAP
-  - Web Service
-  - Workspace
-  - Team
-  - Documentation
-  - Testing
-  - Security
-  - Authentication
-  - Monitor
-  - Search
-  - Networks
   roles:
   - Advocate
   - Architect
@@ -1677,13 +1534,9 @@
   conclusion: Text
   tags:
   - Groups
-  - Team
+  - Teams
   - Roles
-  - Documentation
-  - Swagger
-  - OpenAPI
-  - Workspace
-  - Repository
+  - Domains
   roles:
   - Advocate
   - Architect
@@ -1758,19 +1611,7 @@
   collection_id: 12959542-92aeade8-8095-4e24-adb5-9e789266e3e3
   image: images/blueprints/low-level-api-governance.jpeg
   tags:
-  - OpenAPI
-  - AsyncAPI
   - Governance
-  - Linting
-  - Rules
-  - Collection
-  - IDE
-  - CLI
-  - Design
-  - Pipeline
-  - Reports
-  - APM
-  - Visualizer
   roles:
   - Advocate
   - Architect
@@ -1890,15 +1731,8 @@
   collection_id: 12959542-8769f222-c46b-413c-a7fb-b642254a9d6c
   image: images/blueprints/manually-define-collection-for-existing-api.jpeg
   tags:
-  - Collection
-  - Documentation
-  - Testing
-  - Security
-  - Authentication
-  - Monitor
-  - Discovery
-  - Search
-  - Networks
+  - Collections
+  - Existing
   roles:
   - Advocate
   - Architect
@@ -2038,17 +1872,8 @@
   image: images/blueprints/new-api-using-the-asyncapi-specification.jpeg
   conclusion: ''
   tags:
+  - New
   - AsyncAPI
-  - Design
-  - Schema
-  - Events
-  - Relationships
-  - Applications
-  - Code
-  - Business Logic
-  - Deployment
-  - Security
-  - Monitor
   roles:
   - Nobody  
   state: Ready for Use
@@ -2114,25 +1939,7 @@
   image: images/blueprints/new-api-using-the-openapi-specification.jpg
   tags:
   - OpenAPI
-  - Design
-  - Team
-  - Workspace
-  - Repository
-  - Mock Server
-  - Examples
-  - Documentation
-  - Pipeline
-  - Gateways
-  - Use Plans
-  - Keys
-  - Testing
-  - Security
-  - Authentication
-  - Monitor
-  - Discovery
-  - Search
-  - Networks
-  - Deprecation
+  - New
   roles:
   - Advocate
   - Architect
@@ -2368,24 +2175,6 @@
   image: images/blueprints/bringing-more-observability-to-operations.jpeg
   tags:
   - Observability
-  - Team
-  - Groups
-  - RBAC
-  - Watch
-  - History
-  - Activity
-  - Change
-  - Comments
-  - Discovery
-  - Design
-  - Deployment
-  - APIs
-  - Security
-  - Authentication
-  - Source Control
-  - APM
-  - CI/CD
-  - Gateways
   roles:
   - Advocate
   - Architect
@@ -2528,19 +2317,8 @@
   collection_id: 12959542-bd297b8a-9026-42ae-80ec-51b912c9a3cb
   image: images/blueprints/providing-onboarding-collections.png
   tags:
-  - Collection
-  - Onboarding
-  - Engagement
-  - Authentication
-  - Folders
-  - Request
-  - Examples
-  - Environment
-  - Variables
-  - Watch
-  - Forks
-  - Pull Requests
-  - Merge
+  - Collections
+  - Documentation
   roles:
   - Advocate
   - Operations
@@ -2647,14 +2425,6 @@
   conclusion: Text
   tags:
   - OpenAPI
-  - Artifacts
-  - Lifecycle
-  - Documentation
-  - Mock Server
-  - Testing
-  - Security
-  - Schema
-  - Examples
   roles:
   - CIO
   - CISO
@@ -2760,15 +2530,7 @@
   image: images/blueprints/community-theatrical-production.jpeg
   conclusion: Text
   tags:
-  - Storytelling
-  - Production
-  - Workspace
-  - Collection
-  - Blogs
-  - Tweets
-  - Watch
-  - Forks
-  - Videos
+  - Devrel
   roles:
   - Advocate  
   state: Work in Progress
@@ -2838,24 +2600,8 @@
   image: images/blueprints/improving-team-productivity.png
   conclusion: Text
   tags:
-  - Team
+  - Teams
   - Productivity
-  - Workspace
-  - APIs
-  - Discovery
-  - Design
-  - Development
-  - Deployment
-  - Observability
-  - OpenAPI
-  - Mock Server
-  - Documentation
-  - Testing
-  - Watch
-  - Comments
-  - Notifications
-  - Sharing
-  - Forks
   roles:
   - Architect
   - Backend
@@ -2976,23 +2722,8 @@
     define the contract for how it will work.
   image: images/blueprints/prototyping-a-new-api-using-a-postman-collection.jpeg
   tags:
-  - Collection
-  - Workspace
-  - Team
-  - OpenAPI
-  - Mock Server
-  - Examples
-  - Documentation
-  - Pipeline
-  - Gateways
-  - Usage Plans
-  - Keys
-  - Testing
-  - Security
-  - Authentication
-  - Monitor
-  - Search
-  - Networks
+  - Collections
+  - New
   roles:
   - Advocate
   - Architect
@@ -3213,8 +2944,9 @@
   tags:
   - Team
   - APIs
-  - Collection
-  - Workspace
+  - Collections
+  - Workspaces
+  - Public
   roles:
   - Advocate
   - Engineering
@@ -3330,15 +3062,7 @@
   image: images/blueprints/leveraging-public-workspaces.jpeg
   conclusion: Text
   tags:
-  - Workspace
-  - APIs
-  - Collection
-  - Environment
-  - Monitor
-  - Contributors
-  - Comments
-  - Watch
-  - Forks
+  - Workspaces
   roles:
   - Advocate
   - Engineering
@@ -3408,14 +3132,7 @@
   image: images/blueprints/making-quality-a-ubiquitous-part-of-operations.jpeg
   tags:
   - Testing
-  - Monitor
-  - Pipeline
-  - Security
-  - Design
-  - Documentation
-  - Governance
-  - Reports
-  - APM
+  - Quality
   roles:
   - Advocate
   - Architect
@@ -3561,18 +3278,6 @@
   tags:
   - Collection
   - Documentation
-  - Engagement
-  - Authentication
-  - Folders
-  - Request
-  - Examples
-  - Environment
-  - Variables
-  - Buttons
-  - Watch
-  - Forks
-  - Pull Requests
-  - Merging
   roles:
   - Advocate
   - Backend
@@ -3683,11 +3388,6 @@
   conclusion: Text
   tags:
   - Regulation
-  - Discovery
-  - Governance
-  - Observability
-  - Rules
-  - Reports
   - Compliance
   roles:
   - Architect
@@ -3755,15 +3455,8 @@
   image: images/blueprints/anatomy-of-individual-api-requests.jpeg
   conclusion: Text
   tags:
-  - Request
-  - Parameters
-  - Authentication
-  - Headers
-  - Body
-  - Settings
-  - Cookies
-  - Visualizer
-  - Networks
+  - Requests
+  - Responses
   roles:
   - Backend
   - Data
@@ -3852,15 +3545,6 @@
   conclusion: Text
   tags:
   - Security
-  - Folders
-  - Scripts
-  - Request
-  - Responses
-  - Automation
-  - Monitor
-  - Pipeline
-  - Reports
-  - APM
   roles:
   - Backend
   - Operations
@@ -3971,9 +3655,7 @@
   conclusion: Text
   tags:
   - Standards
-  - Patterns
-  - Templates
-  - Headers
+  - Governance
   roles:
   - Advocate
   - Architect
@@ -4056,16 +3738,6 @@
   image: images/blueprints/having-an-api-strategy.jpeg
   tags:
   - Strategy
-  - Domains
-  - Groups
-  - Team
-  - Workspace
-  - Design
-  - Documentation
-  - Management
-  - Testing
-  - Security
-  - Governance
   roles:
   - Advocate
   - Architect
@@ -4165,17 +3837,7 @@
   image: images/blueprints/investing-in-test-automation.jpeg
   tags:
   - Automation
-  - Workspace
-  - Team
-  - Repository
-  - OpenAPI
   - Testing
-  - Monitor
-  - Pipeline
-  - Environment
-  - Activity
-  - Reports
-  - APM
   roles:
   - Advocate
   - Architect
@@ -4288,11 +3950,6 @@
   image: images/blueprints/fundamental-api-testing.jpeg
   tags:
   - Testing
-  - Folders
-  - Scripts
-  - Runners
-  - Monitor
-  - Pipeline
   roles:
   - Advocate
   - Backend
@@ -4395,28 +4052,6 @@
   image: images/blueprints/the-base-of-the-api-lifecycle.jpeg
   tags:
   - Lifecycle
-  - Team
-  - Workspace
-  - Repository
-  - Design
-  - OpenAPI
-  - Mock Server
-  - Comments
-  - Documentation
-  - Examples
-  - Pipeline
-  - Gateways
-  - Usage Plans
-  - Testing
-  - Security
-  - Authentication
-  - Monitor
-  - Discovery
-  - Search
-  - Networks
-  - Activity
-  - Change Logs
-  - Notifications
   roles:
   - Advocate
   - Architect
@@ -4576,13 +4211,6 @@
   tags:
   - Versioning
   - Governance
-  - OpenAPI
-  - Rules
-  - Design
-  - Collection
-  - CLI
-  - IDE
-  - Pipeline
   roles:
   - Architect
   - Engineering
@@ -4666,11 +4294,9 @@
   conclusion: Text
   tags:
   - Visibility
-  - Networks
-  - Workspace
-  - Repository
-  - APIs
-  - Operations
+  - Public
+  - Partner
+  - Public
   roles:
   - Advocate
   - Architect
@@ -4770,15 +4396,7 @@
   image: images/blueprints/api-workspaces-as-the-foundation.jpeg 
   conclusion: Text
   tags:
-  - Workspace
-  - APIs
-  - Collection
-  - Environment
-  - Monitor
-  - Contributors
-  - Team
-  - Watch
-  - Activity
+  - Workspaces
   roles:
   - Advocate
   - Architect
@@ -4795,7 +4413,7 @@
   state: Work in Progress
   type: Base
   maturity: Foundational
-  level: 220
+  level: 110
   areas:
   - label: Contents
     description: API workspaces are often compared to Git Repository until you begin
@@ -4879,8 +4497,6 @@
   image: images/blueprints/platform-api-governance.jpeg 
   conclusion: Text
   tags:
-  - Platform
-  - Workspace
   - Governance
   roles:
   - Advocate
@@ -4999,8 +4615,7 @@
   image: images/blueprints/workspace-standardization.jpeg 
   conclusion: Text
   tags:
-  - Platform
-  - Workspace
+  - Workspaces
   roles:
   - Advocate
   - Architect
