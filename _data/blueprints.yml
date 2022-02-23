@@ -689,11 +689,8 @@
   - Governance
   roles:
   - Architect
-  - Backend
   - Operations
   - Engineering
-  - Frontend
-  - Mobile
   - Product  
   state: Ready for Use
   type: Design
@@ -2178,7 +2175,6 @@
   roles:
   - Advocate
   - Architect
-  - Backend
   - Operations
   - Engineering
   - Product
@@ -3280,11 +3276,6 @@
   - Documentation
   roles:
   - Advocate
-  - Backend
-  - Operations
-  - Engineering
-  - Frontend
-  - Mobile
   - Product
   - Support
   - Writer  
@@ -3659,7 +3650,6 @@
   roles:
   - Advocate
   - Architect
-  - Backend
   - CIO
   - CISO
   - CTO
@@ -4501,16 +4491,10 @@
   roles:
   - Advocate
   - Architect
-  - Backend
-  - Data
   - Operations
   - Engineering
-  - Frontend
-  - Mobile
   - Product
   - Security
-  - Support
-  - Writer  
   state: Work in Progress
   type: Base
   maturity: Foundational
@@ -4619,16 +4603,9 @@
   roles:
   - Advocate
   - Architect
-  - Backend
-  - Data
   - Operations
-  - Engineering
-  - Frontend
-  - Mobile
   - Product
-  - Security
   - Support
-  - Writer  
   state: Work in Progress
   type: Base
   maturity: Foundational
@@ -4718,3 +4695,159 @@
   discussion: ''
   yaml: ''
   collection_id: 12959542-4301fa94-c86d-4fa7-a55d-ea917970a2c5
+- name: What is an API?
+  version: '2022-02-22'
+  description: API stands for application programming interface. APIs are the little pieces of code that make it possible for digital devices, software applications, and data servers to talk with each other, and they’re the essential backbone of so many services we now rely on.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - CIO
+  - CEO
+  - CTO
+  - Sales
+  - Support
+  roles:
+  - Advocate 
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 101
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: ''
+- name: What are examples of APIs?
+  version: '2022-02-22'
+  description: Every company you think of when it comes to the online digital has APIs, with some of the most notable companies like Amazon, Facebook, Twitter, Google, Microsoft and others leading this digital expansion. Demonstrating how APIs have moved from a tech sector solution to a mainstream business solution that is touching almost every business sector today.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - CIO
+  - CEO
+  - CTO
+  - Sales
+  - Support
+  roles:
+  - Advocate 
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 102
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: ''  
+- name: Why do APIs matter?
+  version: '2022-02-22'
+  description: APIs have been behind every shift in the technological landscape during last twenty years. Commerce and payments — APIs. The social revolution introduced by Facebook and Twitter — APIs. Cloud computing — APIs. Mobile — APIs. Internet-connected devices — APIs. Machine learning — APIs. It is all APIs. If you are looking to be the one who defines the future of how business is conducted, you’ll need to be API-aware. You should care about APIs because it will play a role in defining almost every aspect of how you get business done in the next decade.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - CIO
+  - CEO
+  - CTO
+  - Sales
+  - Support
+  roles:
+  - Advocate 
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 103
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: ''   
+- name: What is your time to first call?
+  version: '2022-02-22'
+  description: Time to first call (TTFC) can be the most important API metric, but it’s not the only one. So why is it more important than other metrics, like later-stage usage or performance? As an API publisher, you API journey may look a little different. But the majority of developers “get it” and “buy in” once they have a chance to interact with an API on their own terms. Legitimately streamlining TTFC results in a larger market potential of better-educated users for the later stages of your developer journey.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - Advocate
+  - Architect
+  - Operations
+  - Engineering
+  - Support
+  roles:
+  - Advocate 
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 330
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: ''  
+- name: How to setup your first public workspace
+  version: '2022-02-22'
+  description: API builders are excited about public workspaces because it opens up an entirely new way to collaborate with folks beyond their immediate team. Some want users to learn about and use their API. Others want to stress test and gather user feedback to improve their API. Some are community organizers creating resource centers for data-driven initiatives.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - Advocate
+  - Architect
+  - Operations
+  - Engineering
+  - Support
+  roles:
+  - Advocate 
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 290
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: ''  
+- name: Public Workspaces and Your API Portal Working Together
+  version: '2022-02-22'
+  description: Postman public workspaces are quickly becoming an essential part of every public API. API producers want to increase adoption of their APIs and enable a faster time to first call (TTFC). A bazillion teams have created their first public workspace, and almost everyone has the same question--What is the best way to link my public workspace to my developer docs? You could simply drop a link to the public workspace in your developer docs, but clever producers want to know the best way to do it. In this article, let’s walk through examples of public APIs that have created a good experience for developers browsing docs to make their first API calls in Postman.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - Advocate
+  - Architect
+  - Operations
+  - Engineering
+  - Support
+  roles:
+  - Advocate 
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 310
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: ''  
