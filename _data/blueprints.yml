@@ -237,6 +237,7 @@
       label: Testing Governance
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Applications and Their APIs
   version: '2021-11-24'
   description: APIs are used to deliver resources and digital capabilities across
@@ -339,6 +340,7 @@
       label: Reports
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Build a Business Workflow
   version: '2021-09-11'
   description: This API lifecycle blueprint focuses on defining common business workflows,
@@ -351,21 +353,16 @@
   tags:
   - Workflows
   - Business
+  - Documentation
   roles:
   - Advocate
-  - Architect
   - Backend
-  - CIO
-  - CISO
-  - CTO
   - Data
   - Operations
-  - Engineering
   - Frontend
   - Mobile
   - Product
   - Sales
-  - Security
   - Support
   - Writer  
   state: Ready for Use
@@ -427,6 +424,7 @@
       label: Workflow Testing Monitor Results
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/29
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/business-workflows.md
+  blog_url: ''
 - name: Defining Capabilities Using Collections
   version: '2021-11-24'
   description: A capability collection is a small single-use collection designed to
@@ -539,6 +537,7 @@
       label: Collection Merge
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Creating a New GraphQL API
   version: '2021-09-11'
   description: This is a blueprint for pushing this API lifecycle blueprint to also
@@ -676,6 +675,7 @@
       context: 1
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/28
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/creating-a-new-graphql-api.md
+  blog_url: ''
 - name: An API Design Review
   version: '2021-09-11'
   description: A design review establishes a period in which an API designer or developer
@@ -756,6 +756,7 @@
       label: Design Review Outcomes
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/33
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/test-automation.md
+  blog_url: ''
 - name: API Discovery as the Default
   version: '2021-11-24'
   description: API discovery is about being able to find and see your API resources
@@ -862,6 +863,7 @@
       label: New Integrations
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: API Documentation is Fundamental
   version: '2021-11-24'
   description: Discoverable, accessible, and always up-to-date API documentation is
@@ -933,6 +935,7 @@
       label: Collection Merge
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Generate Collection From Mobile Application API
   version: '2021-09-11'
   description: This blueprint introduces how APIs behind mobile applications can be
@@ -1026,6 +1029,7 @@
       label: Search
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/10
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/generate-collection-from-mobile-application.md
+  blog_url: ''
   collection_id: 12959542-2321d164-69b4-44de-ae43-9de23696c44d
 - name: Generate Collection From Web Application API
   version: '2021-09-11'
@@ -1121,6 +1125,7 @@
       label: Search
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/12
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/generate-collection-from-web-application.md
+  blog_url: ''
 - name: Generate OpenAPI Using Code Annotations
   version: '2021-09-11'
   description: This is a blueprint for entering the API lifecycle by generating an
@@ -1287,6 +1292,7 @@
       context: 1
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/15
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/generate-openapi-from-code-annotations.md
+  blog_url: ''
 - name: High-Level API Governance
   version: '2021-09-12'
   description: A blueprint for approaching the governance of APIs from the top-down,
@@ -1381,6 +1387,7 @@
       label: APM
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/45
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/low-level-governance.md
+  blog_url: ''
 - name: Import WSDL for an Existing SOAP Web Service
   version: '2021-09-11'
   description: " This is a blueprint for entering a standardized API lifecycle using
@@ -1394,14 +1401,11 @@
   - WSDL
   - SOAP
   roles:
-  - Advocate
   - Architect
   - Backend
   - Operations
   - Engineering
   - Product
-  - Support
-  - Writer  
   state: Ready for Use
   type: Web Services
   maturity: Foundational
@@ -1521,6 +1525,7 @@
       context: 1
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/32
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/import-wsdl-for-an-existing-soap-web-service.md
+  blog_url: ''
 - name: Internal Landscape Mapping
   version: '2021-12-06'
   description: A blueprint for helping jumpstart a mapping of the internal API landscape,
@@ -1534,6 +1539,7 @@
   - Teams
   - Roles
   - Domains
+  - Discovery
   roles:
   - Advocate
   - Architect
@@ -1597,6 +1603,7 @@
       label: Github Repository
   discussion: ''
   yaml: ''
+  blog_url: ''
   collection_id: 12959542-98ffae74-9c86-4df4-92f8-624b711084f5
 - name: Low Level API Governance
   version: '2021-09-12'
@@ -1719,6 +1726,7 @@
       label: APM
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/44
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/low-level-governance.md
+  blog_url: ''
 - name: Manually Define Collection for Existing API
   version: '2021-09-11'
   description: This is a blueprint for how to manually create a collection for an
@@ -1859,6 +1867,7 @@
       context: 1
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/13
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/manually-define-collection-for-an-existing-api.md
+  blog_url: ''
 - name: New API Using the AsyncAPI Specification
   version: '2021-09-11'
   description: This is a blueprint to try and define a new event-driven API using
@@ -1926,6 +1935,7 @@
       label: Relationships
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/19
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/new-api-using-the-asyncapi-specification.md
+  blog_url: ''
 - name: New API Using the OpenAPI Specification
   version: '2021-09-11'
   description: This provides a blueprint for beginning the API lifecycle by designing
@@ -2161,6 +2171,7 @@
       context: 1
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/9
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/new-api-using-the-openapi-specification.md
+  blog_url: ''
 - name: Bringing More Observability to Operations
   version: '2021-11-24'
   description: API observability involves being able to tap the existing outputs of
@@ -2303,6 +2314,7 @@
       label: APM
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Providing Onboarding Collections
   version: '2021-11-24'
   description: Providing collections that are dedicated to onboarding new users with
@@ -2409,6 +2421,7 @@
       label: Collection Merge
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Why OpenAPI Matters to Operations
   version: '2021-11-24'
   description: OpenAPI is an open-source specification for describing the surface
@@ -2515,6 +2528,7 @@
       label: Security
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Community Theatrical Production
   version: '2021-11-24'
   description: When it comes to reaching a community of API consumers it takes just
@@ -2585,6 +2599,7 @@
       label: Collection Fork
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Improving Team Productivity
   version: '2021-11-24'
   description: Team productivity is the desire of any enterprise organization, and
@@ -2710,6 +2725,7 @@
       label: Forks
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Prototype a New API Using a Postman Collection
   version: '2021-09-11'
   description: Bringing a new API to life in a design-first way using a Postman collection
@@ -2927,6 +2943,7 @@
       context: 1
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/16
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/prototype-a-new-api-using-collection.md
+  blog_url: ''
   collection_id: 12959542-770e02fc-b265-4614-ab1f-8f07de5f8d2a
 - name: Public Teams, Workspaces, and APIs
   version: '2021-11-24'
@@ -3047,6 +3064,7 @@
       label: Public Profile Members
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Leveraging Public Workspaces
   version: '2021-11-24'
   description: Make API workspaces public, provide the ability to engage with 3rd
@@ -3116,6 +3134,7 @@
       label: Forks
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Making Quality a Ubiquitous Part of Operations
   version: '2021-11-24'
   description: Assuring quality across teams when it comes to the delivery, operation,
@@ -3129,6 +3148,7 @@
   tags:
   - Testing
   - Quality
+  - Monitor
   roles:
   - Advocate
   - Architect
@@ -3260,6 +3280,7 @@
       label: APM
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Starting with a Reference Collection
   version: '2021-11-24'
   description: Every API needs to have a complete reference collection available for
@@ -3367,6 +3388,7 @@
       label: Collection Merge
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: API Regulation is Here
   version: '2021-11-24'
   description: The regulation of APIs in the banking, healthcare and other industries
@@ -3435,6 +3457,7 @@
       label: Reports
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Anatomy of Individual API Requests
   version: '2021-11-24'
   description: API requests are the fuel for the digital economy, reading and writing
@@ -3524,6 +3547,7 @@
       label: Response Time
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Putting Security in the Hands of Developers with Collections
   version: '2021-11-24'
   description: The security for APIs means security behind the applications and integrations
@@ -3634,6 +3658,7 @@
       label: APM
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Always Investing in Standards
   version: '2021-11-24'
   description: There are numerous web, industry, and enterprise standards to be considered
@@ -3717,6 +3742,7 @@
       label: Headers
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Having an API Strategy
   version: '2021-11-24'
   description: You just can't move forward an enterprise organization in a digital
@@ -3817,6 +3843,7 @@
       label: Organizational Standards
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: Investing in Test Automation
   version: '2021-09-11'
   description: Test automation is essential for delivering reliable and consistent
@@ -3929,6 +3956,7 @@
       label: APM
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/33
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/test-automation.md
+  blog_url: ''
 - name: Fundamental API Testing
   version: '2021-11-24'
   description: These blueprints provide an overview of API testing, outlining the
@@ -4032,6 +4060,7 @@
       label: Testing APM Integration
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: The Base of the API Lifecycle
   version: '2021-09-11'
   description: This blueprint illustrates what we consider to be the base of the API
@@ -4189,6 +4218,7 @@
       context: 1
   discussion: https://github.com/postman-open-technologies/lifecycle/discussions/27
   yaml: https://github.com/postman-open-technologies/lifecycle/blob/main/_blueprints/base.md
+  blog_url: ''
 - name: Versioning Governance
   version: '2021-12-06'
   description: Kicking off API governance efforts by starting with versioning across
@@ -4201,6 +4231,7 @@
   tags:
   - Versioning
   - Governance
+  - Change
   roles:
   - Architect
   - Engineering
@@ -4270,6 +4301,7 @@
       label: Pipeline Governance
   discussion: ''
   yaml: ''
+  blog_url: ''
   collection_id: 12959542-21947610-4663-40d0-8a3a-0ef72f805645
 - name: More Organizational Visibility
   version: '2021-11-24'
@@ -4376,6 +4408,7 @@
       label: Operations
   discussion: ''
   yaml: ''
+  blog_url: ''
 - name: API Workspaces as the Foundation
   version: '2021-11-24'
   description: Like Repository have done for code over the last decade, API workspaces
@@ -4478,6 +4511,7 @@
       label: Activity
   discussion: ''
   yaml: ''
+  blog_url: ''
   collection_id: 12959542-6e4798fd-d9d5-4824-a466-9fef299a11c7
 - name: Platform API Governance
   version: '2022-01-19'
@@ -4498,7 +4532,7 @@
   state: Work in Progress
   type: Base
   maturity: Foundational
-  level: 220
+  level: 270
   areas:
   - label: Definition
     description: Establishing a common base for each API, ensuring there is always
@@ -4592,6 +4626,7 @@
       label: Activity
   discussion: ''
   yaml: ''
+  blog_url: ''
   collection_id: 12959542-2cddb93b-1773-4d75-bfff-a3cfdfa5224f
 - name: Workspace Standardization
   version: '2022-01-19'
@@ -4694,11 +4729,12 @@
       label: Consumer Onboarding
   discussion: ''
   yaml: ''
+  blog_url: ''
   collection_id: 12959542-4301fa94-c86d-4fa7-a55d-ea917970a2c5
 - name: What is an API?
   version: '2022-02-22'
   description: API stands for application programming interface. APIs are the little pieces of code that make it possible for digital devices, software applications, and data servers to talk with each other, and they’re the essential backbone of so many services we now rely on.
-  collection_id: 
+  collection_id: ''
   image: images/blueprints/api-design-first.jpeg
   tags:
   - API
@@ -4721,6 +4757,8 @@
       label: API Lifecycle
   discussion: ''
   yaml: ''
+  blog_url: ''
+  blog_url: https://blog.postman.com/intro-to-apis-what-is-an-api/
 - name: What are examples of APIs?
   version: '2022-02-22'
   description: Every company you think of when it comes to the online digital has APIs, with some of the most notable companies like Amazon, Facebook, Twitter, Google, Microsoft and others leading this digital expansion. Demonstrating how APIs have moved from a tech sector solution to a mainstream business solution that is touching almost every business sector today.
@@ -4747,6 +4785,7 @@
       label: API Lifecycle
   discussion: ''
   yaml: ''  
+  blog_url: ''
 - name: Why do APIs matter?
   version: '2022-02-22'
   description: APIs have been behind every shift in the technological landscape during last twenty years. Commerce and payments — APIs. The social revolution introduced by Facebook and Twitter — APIs. Cloud computing — APIs. Mobile — APIs. Internet-connected devices — APIs. Machine learning — APIs. It is all APIs. If you are looking to be the one who defines the future of how business is conducted, you’ll need to be API-aware. You should care about APIs because it will play a role in defining almost every aspect of how you get business done in the next decade.
@@ -4773,6 +4812,7 @@
       label: API Lifecycle
   discussion: ''
   yaml: ''   
+  blog_url: https://blog.postman.com/intro-to-apis-why-you-should-care-about-apis/
 - name: What is your time to first call?
   version: '2022-02-22'
   description: Time to first call (TTFC) can be the most important API metric, but it’s not the only one. So why is it more important than other metrics, like later-stage usage or performance? As an API publisher, you API journey may look a little different. But the majority of developers “get it” and “buy in” once they have a chance to interact with an API on their own terms. Legitimately streamlining TTFC results in a larger market potential of better-educated users for the later stages of your developer journey.
@@ -4798,15 +4838,15 @@
       label: API Lifecycle
   discussion: ''
   yaml: ''  
+  blog_url: https://blog.postman.com/the-most-important-api-metric-is-time-to-first-call/
 - name: How to setup your first public workspace
   version: '2022-02-22'
   description: API builders are excited about public workspaces because it opens up an entirely new way to collaborate with folks beyond their immediate team. Some want users to learn about and use their API. Others want to stress test and gather user feedback to improve their API. Some are community organizers creating resource centers for data-driven initiatives.
   collection_id: 
   image: images/blueprints/api-design-first.jpeg
   tags:
-  - Onboarding
-  - Getting Started
-  - Documentation
+  - Workspaces
+  - Public
   roles:
   - Advocate 
   - Writers
@@ -4822,7 +4862,8 @@
     - name: API Lifecycle
       label: API Lifecycle
   discussion: ''
-  yaml: ''  
+  yaml: '' 
+  blog_url: https://blog.postman.com/how-to-set-up-public-workspaces/ 
 - name: Public Workspaces and Your API Portal Working Together
   version: '2022-02-22'
   description: Postman public workspaces are quickly becoming an essential part of every public API. API producers want to increase adoption of their APIs and enable a faster time to first call (TTFC). A bazillion teams have created their first public workspace, and almost everyone has the same question--What is the best way to link my public workspace to my developer docs? You could simply drop a link to the public workspace in your developer docs, but clever producers want to know the best way to do it. In this article, let’s walk through examples of public APIs that have created a good experience for developers browsing docs to make their first API calls in Postman.
@@ -4848,3 +4889,56 @@
       label: API Lifecycle
   discussion: ''
   yaml: ''  
+  blog_url: https://blog.postman.com/link-docs-to-public-workspace-for-better-developer-experience/
+- name: Syncing Your Specs with Collections
+  version: '2022-02-22'
+  description: Many teams use an API specification, such as OpenAPI, to describe the long-term relationship between an API producer and potential API consumers. They can then use the OpenAPI to generate user documentation in the form of a collection. And then keep their collection and specification up to date as their API grows.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - Collections
+  - OpenAPI
+  - Specifications
+  - Syncing
+  - Git
+  roles:
+  - Advocate 
+  - Writers
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 310
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: '' 
+  blog_url: https://blog.postman.com/latest-updates-to-syncing-your-specs-with-collections/  
+- name: Increasing Adoption of an API with a Public Workspace
+  version: '2022-02-22'
+  description: A public workspace provides an unprecedented opportunity to increase the exposure of your public API by making it available to 18M developers via the Postman API network. Providing a public space where consumers can watch, comment, and fork on your API artifacts, documentation, and even tests, mock servers, and monitors.
+  collection_id: 
+  image: images/blueprints/api-design-first.jpeg
+  tags:
+  - Workspaces
+  roles:
+  - Advocate 
+  - Writers
+  state: Work In Progress
+  type: Design
+  maturity: Optimized
+  level: 330
+  areas:
+  - label: Filler
+    description: This is just filler content
+    image: images/lifecycle-arrow-define.png
+    elements:
+    - name: API Lifecycle
+      label: API Lifecycle
+  discussion: ''
+  yaml: '' 
+  blog_url: https://blog.postman.com/increasing-adoption-of-an-api-with-a-public-workspace/  

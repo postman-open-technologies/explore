@@ -115,8 +115,28 @@ title: Explore
 						</h2>
 						<div id="collapse-{{ counter }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ counter }}" data-bs-parent="#accordion-{{ counter }}">
 						  <div class="accordion-body">
-							<img src="{{ blueprint.image }}" width="225" align="left" style="padding: 10px;">
-							{{ blueprint.description }}  [<a href="https://www.postman.com/postman/workspace/postman-open-technologies-lifecycle/documentation/{{ blueprint.collection_id }}" target="_blank">View Blueprint</a>]
+							
+							<table width="100%">
+								<tr>
+									<td valign="top" align="center">
+										<img src="{{ blueprint.image }}" width="225" align="left" style="padding: 10px;">
+									</td>
+									<td>
+										<p>{{ blueprint.description }}</p>
+										{% if blueprint.blog_url %}
+										<p><strong>Links: </strong></p>
+										<ul>
+											<li><a href="https://www.postman.com/postman/workspace/postman-open-technologies-lifecycle/documentation/{{ blueprint.collection_id }}" target="_blank">View Blueprint</a></li>
+											{% if blueprint.blog_url != '' %}<li><a href="{{ blueprint.blog_url }}" target="_blank">View Blog Post</a></li>{% endif %}							
+										</ul>
+										{% endif %}
+										<strong>Tags: </strong>
+										{% for tag in blueprint.tags %}	
+											{{ tag }}{% unless forloop.last %}, {% endunless %}
+										{% endfor %}
+									</td>
+								</tr>
+							</table>		
 						  </div>						  
 						</div>
 					  </div>					
