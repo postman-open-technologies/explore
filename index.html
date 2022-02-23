@@ -60,6 +60,7 @@ title: Explore
 			var slug = blueprints[i].name;
 			slug = slug.split(' ').join('-');
 			slug = slug.split(',').join('');
+			slug = slug.split('?').join('');
 			slug = slug.toLowerCase();
 			slug = slug.trim();
 			console.log("slug: " + slug);
