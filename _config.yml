@@ -12,3 +12,20 @@ github_branch: main
 
 version:      1.1.1
 markdown:     kramdown
+
+token: token
+
+actions_base_url: https://fjeszadetl.execute-api.us-east-1.amazonaws.com/staging
+answers_base_url: https://7x8n1z0mb2.execute-api.us-east-1.amazonaws.com/staging
+blueprints_base_url: https://lok608s285.execute-api.us-east-1.amazonaws.com/staging
+elements_base_url: https://hhjmvog4ak.execute-api.us-east-1.amazonaws.com/staging
+landscapes_base_url: https://f4l1hlhy89.execute-api.us-east-1.amazonaws.com/staging
+links_base_url: https://uxfsaljzgj.execute-api.us-east-1.amazonaws.com/staging
+personas_base_url: https://ur6v74kkx2.execute-api.us-east-1.amazonaws.com/staging
+questions_base_url: https://qtfvkxpbg4.execute-api.us-east-1.amazonaws.com/staging
+roles_base_url: https://ofpzlge8xk.execute-api.us-east-1.amazonaws.com/staging
+rules_base_url: https://9sq8h4wzs2.execute-api.us-east-1.amazonaws.com/staging
+tags_base_url: https://lgcjunwzmf.execute-api.us-east-1.amazonaws.com/staging
+tools_base_url: https://bh0dbbh8l5.execute-api.us-east-1.amazonaws.com/staging
+videos_base_url: https://f5dj4duj0m.execute-api.us-east-1.amazonaws.com/staging
+vocabularies_base_url: https://n7xsi00pob.execute-api.us-east-1.amazonaws.com/staging
