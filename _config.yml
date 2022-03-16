@@ -17,7 +17,7 @@ markdown:     kramdown
 
 token: token
 
-actions_base_url: https://fjeszadetl.execute-api.us-east-1.amazonaws.com/staging
+actions_base_url: https://azm5upof1e.execute-api.us-east-1.amazonaws.com/staging
 answers_base_url: https://7x8n1z0mb2.execute-api.us-east-1.amazonaws.com/staging
 blueprints_base_url: https://lok608s285.execute-api.us-east-1.amazonaws.com/staging
 elements_base_url: https://hhjmvog4ak.execute-api.us-east-1.amazonaws.com/staging
