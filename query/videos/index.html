@@ -6,5 +6,5 @@ layout: none
 {% assign videos = site.data.videos %}
 {% assign asyncapi = videos['asyncapi'] %}
 {% for video in asyncapi %}	
-	INSERT INTO videos(videoId,name,description,url,publishedAt,playlist,playlist_id) VALUES('{{ video.videoId }}','{{ video.title | escape | remove: '&quot;' | remove: """" | remove: '&#39;' }}','{{ video.description | escape | remove: '&quot;' | remove: """" | remove: '&#39;' }}','https://www.youtube.com/watch?v={{ video.videoId }}','{{ video.publishedAt }}','{{ video.playlist }}','{{ video.playlist_id }}');<br>
+	INSERT INTO videos(videoId,name,description,url,publishedAt,playlist,playlist_id) VALUES('{{ video.videoId }}','{{ video.title | escape }}','{{ video.description | escape }}','https://www.youtube.com/watch?v={{ video.videoId }}','{{ video.publishedAt }}','{{ video.playlist }}','{{ video.playlist_id }}');<br>
 {% endfor %}

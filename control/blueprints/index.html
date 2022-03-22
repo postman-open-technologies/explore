@@ -793,7 +793,7 @@ title: Admin - Blueprints
 				html += '<div class="accordion-item" id="blueprint-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
 				html += '<button id="toggle-row-' + row.id + '" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' + row.id + '" aria-expanded="false" aria-controls="collapse-' + row.id + '" style="color: #000;">';	
-				html += row.name + ' (' + row.level + ')';
+				html += row.name + ' (Level: ' + row.level + ')';
 				html += '</button>';	
 				html += '</h2>';	
 				html += '<div id="collapse-' + row.id + '" class="accordion-collapse collapse" aria-labelledby="heading-' + row.id + '" data-bs-parent="#accordion-' + row.id + '">';	
