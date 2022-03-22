@@ -46,7 +46,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://localhost:4000/control/blueprints/">Blueprints</a>
@@ -116,7 +116,7 @@
 			</div>	
 			<label for="limit" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Limit:</label>
 			<div class="col-1">				
-				<input type="text" class="form-control" id="limit" name="limit" value="5" style="text-align: center;">
+				<input type="text" class="form-control" id="limit" name="limit" value="25" style="text-align: center;">
 			</div>								
 			<div class="col-1">
 				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listLinks();" style="width: 75px;">
@@ -452,6 +452,16 @@
 				});
 				
 			}
+
+			if (window.addEventListener){
+				window.addEventListener("load", listLinks, false);
+			}
+			else if (window.attachEvent){
+				window.attachEvent("onload", listLinks);
+			}
+			else{
+				window.onload = listLinks;	
+			}				
 		
 		</script>		
 

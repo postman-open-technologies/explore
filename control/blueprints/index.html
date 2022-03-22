@@ -5,7 +5,6 @@ title: Admin - Blueprints
 
 <div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
-
 		<div class="row">
 			<div class="col">				
 				<input type="text" class="form-control" id="token" name="token" value="{{ site.token }}" placeholder="Token">
@@ -28,26 +27,140 @@ title: Admin - Blueprints
 				<input type="text" class="form-control" id="limit" name="limit" value="10" style="text-align: center;">
 			</div>								
 			<div class="col">
-				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listBlueprints();">
+				<input type="button" class="btn btn-primary" name="listblueprints" id="listblueprints" value="Search" onclick="listBlueprints();">
 			</div>
 			<div class="col">
-				<input type="button" class="btn btn-success" name="show" value="Add" onclick="openAddModal();">
+				<input type="button" class="btn btn-success" name="show" value="Add" onclick="openAddBueprintModal();">
 			</div>			
 		</div>								
-        
+		<script>
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listblueprints").click();
+			  }
+			});	
+			var input = document.getElementById("tags");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listblueprints").click();
+			  }
+			});	
+			</script>        
 		<div class="accordion" id="blueprintAccordian" style="margin-top: 15px;"></div>
 
 		<script>
 
 			const blueprint_base_url = '{{ site.blueprints_base_url }}';
+			const elements_base_url = '{{ site.elements_base_url }}';
 			const tag_base_url = '{{ site.tags_base_url }}';
 			const roles_base_url = '{{ site.roles_base_url }}';
 			
 			const token = document.getElementById("token").value;	
 
-			function listRoles(){
+			function autocomplete(inp, arr) {
+				/*the autocomplete function takes two arguments,
+				the text field element and an array of possible autocompleted values:*/
+				var currentFocus;
+				/*execute a function when someone writes in the text field:*/
+				inp.addEventListener("input", function(e) {
+					var a, b, i, val = this.value;
+					/*close any already open lists of autocompleted values*/
+					closeAllLists();
+					if (!val) { return false;}
+					currentFocus = -1;
+					/*create a DIV element that will contain the items (values):*/
+					a = document.createElement("DIV");
+					a.setAttribute("id", this.id + "autocomplete-list");
+					a.setAttribute("class", "autocomplete-items");
+					/*append the DIV element as a child of the autocomplete container:*/
+					this.parentNode.appendChild(a);
+					/*for each item in the array...*/
+					for (i = 0; i < arr.length; i++) {
+					/*check if the item starts with the same letters as the text field value:*/
+					//console.log(arr[i]);
+					if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+						/*create a DIV element for each matching element:*/
+						b = document.createElement("DIV");
+						/*make the matching letters bold:*/
+						b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+						b.innerHTML += arr[i].substr(val.length);
+						/*insert a input field that will hold the current array item's value:*/
+						b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+						/*execute a function when someone clicks on the item value (DIV element):*/
+							b.addEventListener("click", function(e) {
+							/*insert the value for the autocomplete text field:*/
+							//console.log("HERE:" + this.getElementsByTagName("input")[0].value);
+							inp.value = this.getElementsByTagName("input")[0].value;
+							/*close the list of autocompleted values,
+							(or any other open lists of autocompleted values:*/
+							closeAllLists();
+							addExistingElement();
+						});
+						a.appendChild(b);
+					}
+					}
+				});
+				/*execute a function presses a key on the keyboard:*/
+				inp.addEventListener("keydown", function(e) {
+					var x = document.getElementById(this.id + "autocomplete-list");
+					if (x) x = x.getElementsByTagName("div");
+					if (e.keyCode == 40) {
+					/*If the arrow DOWN key is pressed,
+					increase the currentFocus variable:*/
+					currentFocus++;
+					/*and and make the current item more visible:*/
+					addActive(x);
+					} else if (e.keyCode == 38) { //up
+					/*If the arrow UP key is pressed,
+					decrease the currentFocus variable:*/
+					currentFocus--;
+					/*and and make the current item more visible:*/
+					addActive(x);
+					} else if (e.keyCode == 13) {
+					/*If the ENTER key is pressed, prevent the form from being submitted,*/
+					e.preventDefault();
+					if (currentFocus > -1) {
+						/*and simulate a click on the "active" item:*/
+						if (x) x[currentFocus].click();
+					}
+					}
+				});
+				function addActive(x) {
+				/*a function to classify an item as "active":*/
+				if (!x) return false;
+				/*start by removing the "active" class on all items:*/
+				removeActive(x);
+				if (currentFocus >= x.length) currentFocus = 0;
+				if (currentFocus < 0) currentFocus = (x.length - 1);
+				/*add class "autocomplete-active":*/
+				x[currentFocus].classList.add("autocomplete-active");
+				}
+				function removeActive(x) {
+				/*a function to remove the "active" class from all autocomplete items:*/
+				for (var i = 0; i < x.length; i++) {
+					x[i].classList.remove("autocomplete-active");
+				}
+				}
+				function closeAllLists(elmnt) {
+				/*close all autocomplete lists in the document,
+				except the one passed as an argument:*/
+				var x = document.getElementsByClassName("autocomplete-items");
+				for (var i = 0; i < x.length; i++) {
+					if (elmnt != x[i] && elmnt != inp) {
+					x[i].parentNode.removeChild(x[i]);
+				}
+				}
+			}
+			/*execute a function when someone clicks in the document:*/
+			document.addEventListener("click", function (e) {
+				closeAllLists(e.target);
+			});
+			} 			
 
-				console.log("loading roles...");
+			function listElements(){
 
 				const options = {
 					method: 'get',
@@ -56,7 +169,40 @@ title: Admin - Blueprints
 						"x-api-key": token,
 					}
 				};		
-				console.log(roles_base_url + '/roles?limit=50&page=0');
+
+				fetch(elements_base_url + '/elements?limit=1000&page=0',options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {	
+							if(data){
+								var all_elements = [];
+								for (let i = 0; i < data.length; i++) {	
+									all_elements.push(data[i].name);
+								}		
+							document.getElementById("element-store").value = JSON.stringify(data, null, 2);
+							autocomplete(document.getElementById("add-element-label"), all_elements);	
+							}																				 
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});
+
+				}			
+
+			function listRoles(){
+
+				const options = {
+					method: 'get',
+					headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token,
+					}
+				};		
+
 				fetch(roles_base_url + '/roles?limit=50&page=0',options)
 					.then(function(response) {
 						if (!response.ok) {
@@ -80,26 +226,104 @@ title: Admin - Blueprints
 
 				}
 
-			function blueprintAreasElementsRow(row,b_id){
+				function deleteElement(b_id,a_id,e_id){
+
+					var options = {
+							method: "DELETE",
+							headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token
+							}
+						};
+					console.log(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id + '/elements/' + e_id);
+					fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id + '/elements/' + e_id,options)
+						.then(function(response) {
+							console.log("DELETED!");	
+							listBlueprintAreasElements(b_id,a_id)
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});	
+
+					}				
+
+				function addElement(){
+
+					var b_id = document.getElementById('add-element-blueprint-id').value;
+					var a_id = document.getElementById('add-element-area-id').value;
+					var label = document.getElementById('add-element-label').value;
+					var description = document.getElementById('add-element-description').value;
+					var image = '';
+
+					var postData = {};
+					postData.name = label;
+					postData.description = description;
+
+					var options = {
+							method: "POST",
+							headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token
+							},
+							body: JSON.stringify(postData)
+						};
+					//console.log(options);
+					console.log(elements_base_url + '/elements');
+					console.log(options);
+					fetch(elements_base_url + '/elements',options)
+						.then(function(response) {
+							response.json().then(function(data) {
+							
+							console.log("----");
+							console.log(data);
+							console.log("----");
+
+							var postData = {};
+							postData.label = label;
+							postData.element_id = data.id;
+
+							var options = {
+									method: "POST",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									},
+									body: JSON.stringify(postData)
+								};
+							
+							console.log(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id + '/elements');
+							console.log(options);
+
+							fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id + '/elements',options)
+								.then(function(response) {
+									response.json().then(function(data) {
+									//console.log(data);
+									listBlueprintAreasElements(b_id,a_id);
+								});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});	
+
+						});
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});	
+
+					$("#addElement").modal('hide');	
+
+					}				
+
+			function blueprintAreasElementsRow(b_id,a_id,row){
 
 				var html = '';				
-
-				html += '<div class="form-group" style="display: none;">';
-				html += '<textarea class="form-control" id="bstore~' + row.id + '" rows="5">' + JSON.stringify(row, null, 2) + '</textarea>';
-				html += '</div>';
-
-				html += '<div class="form-group">';
-					
-				html += '<label for="label-' + row.id + '"><strong>Label:</strong> (<a href="#" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteBlueprint(' + row.id + ',' + b_id + ') }">Delete Element</a>)</label>';
-				html += '<input type="text" style="width: 80%;" onchange="updateRowField(this);" class="form-control" id="label~' + row.id + '" placeholder="" value="' + row.label + '">';
-				html += '</div>';				
-
-				html += '<div class="form-group">';
-				html += '<label for="description-' + row.id + '"><strong>Description:</strong></label>';
-				html += '<textarea class="form-control" onchange="updateRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea>';
-				html += '</div>';			
-
-				html += '<hr>';
+				html += '<tr>';
+				html += '<td width="25%"><input type="text" onchange="updateElementRowField(this);" class="form-control" id="label~' + row.id + '" placeholder="" value="' + row.label + '"></td>';
+				html += '<td width="55%"><textarea class="form-control" onchange="updateElementRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea></td>';
+				html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteElement(' + b_id + ',' + a_id + ',' + row.id + ') }" style="width: 125px;"></td>';
+				html += '<textarea class="form-control" id="bstore~' + b_id + '~' + a_id + '~' + row.id + '" rows="5" style="display: none;">' + JSON.stringify(row, null, 2) + '</textarea>';
+				html += '</tr>';	
 
 				return html;
 				}
@@ -122,13 +346,12 @@ title: Admin - Blueprints
 						response.json().then(function(data) {
 							var rows = '';
 							if(data){
-								var rows = '<div class="row-auto">';
+								var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
 								//console.log(data);
 								for (let i = 0; i < data.length; i++) {
-									//rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteBlueprintArea(' + b_id + ',' + data[i].area_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
-									rows += blueprintAreasElementsRow(data[i],b_id);
+									rows += blueprintAreasElementsRow(b_id,a_id,data[i]);
 								}
-								rows += '</div>';
+								rows += '</table></center>';
 								document.getElementById("area-element-list~" + b_id + '-' + a_id).innerHTML = rows;							
 							}
 						});
@@ -139,40 +362,92 @@ title: Admin - Blueprints
 
 				}
 
+				function deleteArea(b_id,a_id){
+
+					var options = {
+							method: "DELETE",
+							headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token
+							}
+						};
+					console.log(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id);
+					fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id,options)
+						.then(function(response) {
+							console.log("DELETED!");	
+							listBlueprintAreas(b_id)(b_id)
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});	
+
+					}					
+
+				function updateBlueprintArea(b_id,a_id){
+
+					const postData = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id).value);
+
+					delete postData.id;
+					delete postData.blueprint_id;
+					var options = {
+							method: "PUT",
+							headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token
+							},
+							body: JSON.stringify(postData)
+						};
+					console.log(options);
+					fetch(blueprint_base_url + '/blueprints/' + b_id + "/areas/" + a_id,options)
+						.then(function(response) {
+							//console.log("Updated!");
+							//console.log(response);
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});				
+
+					}				
+
+				function updateBlueprintAreaRowField(u){
+
+					var ua = u.id.split("~");
+					var field = ua[0];
+					var b_id = ua[1];
+					var a_id = ua[2];
+
+					var bstore = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id).value);
+
+					bstore[field] = u.value;
+	
+					document.getElementById('bstore~' + b_id + "~" + a_id).value = JSON.stringify(bstore, null, 2);
+
+					updateBlueprintArea(b_id,a_id);
+
+					}				
+
 			function blueprintAreaRow(row,b_id){
 
 				var html = '';				
 
 				html += '<div class="form-group" style="display: none;">';
-				html += '<textarea class="form-control" id="bstore~' + row.id + '" rows="5">' + JSON.stringify(row, null, 2) + '</textarea>';
+				html += '<textarea class="form-control" id="bstore~' + b_id + '~' + row.id + '" rows="5">' + JSON.stringify(row, null, 2) + '</textarea>';
 				html += '</div>';
-
-				html += '<div class="form-group">';
 					
-				html += '<label for="label-' + row.id + '"><strong>Label:</strong> (<a href="#" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteBlueprint(' + row.id + ') }">Delete Area</a>)</label>';
-				html += '<input type="text" style="width: 80%;" onchange="updateRowField(this);" class="form-control" id="label~' + row.id + '" placeholder="" value="' + row.label + '">';
-				html += '</div>';				
-
-				html += '<div class="form-group">';
-				html += '<label for="description-' + row.id + '"><strong>Description:</strong></label>';
-				html += '<textarea class="form-control" onchange="updateRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea>';
+				html += '<div style="background-color: #CCC; padding: 10px; color: #000; font-weight: bold; font-size: 24px;">';
+				html += row.label;
 				html += '</div>';
 
-				html += '<div class="form-group">';
-				html += '<label for="image-' + row.id + '"><strong>Image:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="image~' + row.id + '" placeholder="images/blueprints/image.jpeg" value="' + row.image + '">';
-				html += '</div>';	
-
-				html += '<div class="container">';					
-				html += '<form class="row g-3">';
-				html += '<div class="col-auto">';
-				html += '<br><h3>Elements</h3>';
+				html += '<center><table style="width: 90%; border: 0px solid #000;">';					
+				html += '<tr><td style="width: 15%; text-align: right;"><strong>Sort Order:</strong></td><td><input type="text" onchange="updateBlueprintAreaRowField(this);" class="form-control" id="sort_order~' + b_id + '~' + row.id + '" placeholder="" value="' + row.sort_order + '"></td><td width="5%" align="center"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteArea(' + b_id + ',' + row.id + ') }" style="width: 125px;"></td></tr>';
+				html += '<tr><td style="width: 15%; text-align: right;"><strong>Label:</strong></td><td><input type="text" style="width: 100%;" onchange="updateBlueprintAreaRowField(this);" class="form-control" id="label~' + b_id + '~' + row.id + '" placeholder="" value="' + row.label + '"></td></td><td></td></tr>';
+				html += '<tr><td style="width: 15%; text-align: right;"><strong>Description:</strong></td><td><textarea class="form-control" style="width: 100%;" onchange="updateBlueprintAreaRowField(this);" id="description~' + b_id + '~' + row.id + '" rows="3">' + row.description + '</textarea></td></td><td></td></tr>';
+				html += '<tr><td style="width: 15%; text-align: right;"><strong>Image:</strong></td><td><input type="text" style="width: 100%;" class="form-control" onchange="updateBlueprintAreaRowField(this);" id="image~' + b_id + '~' + row.id + '" placeholder="images/blueprints/image.jpeg" value="' + row.image + '"></td></td><td></td></tr>';
+				html += '</table></center>';	
+				
+				html += '<br><div class="col-5">';
+				html += '<h5 style="padding-left: 55px;">Elements (<a href="#" onclick="openAddElementModal(' + b_id + ',' + row.id + ');">Add</a>)</h5>';
 				html += '</div>';					
-				html += '<div class="col-auto">';
-				html += '<input type="text" class="form-control" id="add-area-element~' + row.id + '" placeholder="">';
-				html += '<button type="button" onclick="addBlueprintAreaElement(' + row.id + ',' + b_id + ');" class="btn btn-primary mb-3">Add Area</button>';
-				html += '</div>';
-				html += '</form>';
 				html += '<div class="row">';			
 				html += '<div class="container" id="area-element-list~' + b_id + '-' + row.id + '" style="padding: 10px;">';
 				html += '</div>';						
@@ -184,8 +459,45 @@ title: Admin - Blueprints
 				return html;
 			}
 
+			function addArea(){
+				
+				var b_id = document.getElementById('add-area-blueprint-id').value;
+				var sort_order = document.getElementById('add-area-sort-order').value;
+				var label = document.getElementById('add-area-label').value;
+				var description = document.getElementById('add-area-description').value;
+				var image = document.getElementById('add-area-image').value;
+
+				var postData = {};
+				postData.sort_order = sort_order;
+				postData.label = label;
+				postData.description = description;
+				postData.image = image;
+
+				var options = {
+						method: "POST",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+
+				fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas',options)
+					.then(function(response) {
+						listBlueprintAreas(b_id);
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});	
+
+				$("#addArea").modal('hide');	
+
+				}	
+							
+
 			function listBlueprintAreas(b_id){
-				console.log("hello");
+				
+				//console.log("Loading Areas...");
 				const options = {
 					method: 'get',
 					headers: {
@@ -193,7 +505,7 @@ title: Admin - Blueprints
 						"x-api-key": token,
 					}
 				};		
-
+				//console.log(blueprint_base_url + '/blueprints/' + b_id + '/areas/');
 				fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/',options)
 					.then(function(response) {
 						if (!response.ok) {
@@ -205,7 +517,7 @@ title: Admin - Blueprints
 							if(data){
 								var rows = '<div class="row-auto">';
 								rows += '<form>';
-								//console.log(data);
+								console.log(data);
 								for (let i = 0; i < data.length; i++) {
 									//rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteBlueprintArea(' + b_id + ',' + data[i].area_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
 									rows += blueprintAreaRow(data[i],b_id);
@@ -295,7 +607,7 @@ title: Admin - Blueprints
 						console.log('Error: ' + err);
 				});					
 
-				$("#showMe").modal('hide');	
+				$("#addBlueprint").modal('hide');	
 
 			}
 
@@ -401,16 +713,37 @@ title: Admin - Blueprints
 						console.log('Error: ' + err);
 				});	
 
-				$("#showMe").modal('hide');	
+				$("#addBlueprint").modal('hide');	
 			}			
 			
-			function openAddModal(){
-				$("#showMe").modal('show');				
+			function openAddBueprintModal(){
+				$("#addBlueprint").modal('show');				
 			}
 
-			function closeAddModal(){
-				$("#showMe").modal('hide');				
-			}			
+			function closeAddBlueprintModal(){
+				$("#addBlueprint").modal('hide');				
+			}	
+			
+			function openAddAreaModal(b_id){
+				$("#addArea").modal('show');	
+				document.getElementById('add-area-blueprint-id').value = b_id;	
+				console.log("1) " + b_id);		
+			}
+
+			function closeAddAreaModal(){
+				$("#addArea").modal('hide');				
+			}	
+			
+			function openAddElementModal(b_id,a_id){
+
+				document.getElementById('add-element-blueprint-id').value = b_id;
+				document.getElementById('add-element-area-id').value = a_id;
+				$("#addElement").modal('show');				
+			}
+
+			function closeAddElementModal(){
+				$("#addElement").modal('hide');			
+			}				
 			
 			function updateBlueprint(id){
 
@@ -436,7 +769,7 @@ title: Admin - Blueprints
 
 			}
 
-			function updateRowField(u){
+			function updateBlueprintRowField(u){
 
 				var ua = u.id.split("~");
 				var field = ua[0];
@@ -466,53 +799,52 @@ title: Admin - Blueprints
 				html += '<div id="collapse-' + row.id + '" class="accordion-collapse collapse" aria-labelledby="heading-' + row.id + '" data-bs-parent="#accordion-' + row.id + '">';	
 				html += '<div class="accordion-body">';	
 
-				html += '<form>';
-
 				html += '<div class="form-group" style="display: none;">';
 				html += '<textarea class="form-control" id="bstore~' + row.id + '" rows="5">' + JSON.stringify(row, null, 2) + '</textarea>';
 				html += '</div>';
 
-				html += '<div class="form-group">';
-				html += '<label for="name-' + row.id + '"><strong>Name:</strong></label>';
-				html += '<input type="text" style="width: 100%;" onchange="updateRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '">';
-				html += '</div>';				
+				html += '<table style="border: 0px solid #000; width: 100%;">';
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Name:</strong></td>';
+				html += '<td><input type="text" style="width: 100%;" onchange="updateBlueprintRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '"></td>';
+				html += '</tr>';				
 
-				html += '<div class="form-group">';
-				html += '<label for="description-' + row.id + '"><strong>Description:</strong></label>';
-				html += '<textarea class="form-control" onchange="updateRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea>';
-				html += '</div>';
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Description:</strong></label></td>';
+				html += '<td><textarea class="form-control" onchange="updateBlueprintRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea></td>';
+				html += '</tr>';
 
-				html += '<div class="form-group">';
-				html += '<label for="image-' + row.id + '"><strong>Image:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="image~' + row.id + '" placeholder="images/blueprints/image.jpeg" value="' + row.image + '">';
-				html += '</div>';
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Image:</strong></label></td>';
+				html += '<td><input type="text" style="width: 100%;" class="form-control" onchange="updateBlueprintRowField(this);" id="image~' + row.id + '" placeholder="images/blueprints/image.jpeg" value="' + row.image + '"></td>';
+				html += '</tr>';
 
-				html += '<div class="form-group">';
-				html += '<label for="version-' + row.id + '"><strong>Version:</strong></label>';
-				html += '<input type="text" style="width: 20%;" class="form-control" onchange="updateRowField(this);" id="version~' + row.id + '" placeholder="2021-09-11" value="' + row.version + '">';
-				html += '</div>';				
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Version:</strong></label></td>';
+				html += '<td><input type="text" style="width: 20%;" class="form-control" onchange="updateBlueprintRowField(this);" id="version~' + row.id + '" placeholder="2021-09-11" value="' + row.version + '"></td>';
+				html += '</tr>';				
 				
-				html += '<div class="form-group">';
-				html += '<label for="collection-id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection-id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
-				html += '</div>';	
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Collection ID:</strong></label></td>';
+				html += '<td><input type="text" style="width: 100%;" class="form-control" onchange="updateBlueprintRowField(this);" id="collection-id~' + row.id + '" placeholder="" value="' + row.collection_id + '"></td>';
+				html += '</tr>';	
 				
-				html += '<div class="form-group">';
-				html += '<label for="state-' + row.id + '"><strong>State:</strong></label>';
-				html += '<input type="text" style="width: 20%;" class="form-control" onchange="updateRowField(this);" id="state~' + row.id + '" placeholder="" value="' + row.state + '">';
-				html += '</div>';	
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>State:</strong></label></td>';
+				html += '<td><input type="text" style="width: 20%;" class="form-control" onchange="updateBlueprintRowField(this);" id="state~' + row.id + '" placeholder="" value="' + row.state + '"></td>';
+				html += '</tr>';	
 				
-				html += '<div class="form-group">';
-				html += '<label for="maturity-' + row.id + '"><strong>Maturity:</strong></label>';
-				html += '<input type="text" style="width: 20%;" class="form-control" onchange="updateRowField(this);" id="maturity~' + row.id + '" placeholder="" value="' + row.maturity + '">';
-				html += '</div>';	
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Maturity:</strong></label></td>';
+				html += '<td><input type="text" style="width: 20%;" class="form-control" onchange="updateBlueprintRowField(this);" id="maturity~' + row.id + '" placeholder="" value="' + row.maturity + '"></td>';
+				html += '</tr>';	
 				
-				html += '<div class="form-group">';
-				html += '<label for="level-' + row.id + '"><strong>Level:</strong></label>';
-				html += '<input type="text" style="width: 20%;" class="form-control" onchange="updateRowField(this);" id="level~' + row.id + '" placeholder="" value="' + row.level + '">';
-				html += '</div>';	
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Level:</strong></label></td>';
+				html += '<td><input type="text" style="width: 20%;" class="form-control" onchange="updateBlueprintRowField(this);" id="level~' + row.id + '" placeholder="" value="' + row.level + '"></td>';
+				html += '</tr>';	
 				
-				html += '</form>';
+				html += '</table>';
 
 				html += '<hr>';
 
@@ -539,15 +871,8 @@ title: Admin - Blueprints
 
 				html += '<form class="row g-3">';
 				html += '<div class="col-auto">';
-				html += '<h3>Areas</h3>';
-				html += '</div>';					
-				html += '<div class="col-auto">';
-				html += '<input type="text" class="form-control" id="add-area~' + row.id + '" placeholder="">';
-				html += '</div>';
-				html += '<div class="col-auto">';
-				html += '<button type="button" onclick="addBlueprintArea(' + row.id + ');" class="btn btn-primary mb-3">Add Area</button>';
-				html += '</div>';
-				html += '</form>';	
+				html += '<h3>Areas (<a href="#" onclick="openAddAreaModal(' + row.id + ');">Add</a>)</h3>';
+				html += '</div>';									
 				html += '<div class="container">';
 				html += '<div class="row">';			
 				html += '<div class="container" id="area-list~' + row.id + '">';
@@ -555,7 +880,8 @@ title: Admin - Blueprints
 				html += '</div>';						
 				html += '</div>';
 				html += '</div>';
-				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE BLUEPRINT" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteBlueprint(' + row.id + ') }" style="width: 125px;"></center>';				
+				html += '</form>';
+				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE BLUEPRINT" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteBlueprint(' + row.id + ') }" style=""></center>';				
 				html += '</div>';	
 				html += '</div>';	
 				html += '</div>';								
@@ -601,11 +927,21 @@ title: Admin - Blueprints
 				
 			}
 
-			if (window.addEventListener)
+			if (window.addEventListener){
 				window.addEventListener("load", listRoles, false);
-			else if (window.attachEvent)
+				window.addEventListener("load", listElements, false);
+				window.addEventListener("load", listBlueprints, false);
+			}
+			else if (window.attachEvent){
 				window.attachEvent("onload", listRoles);
-			else window.onload = listRoles;		
+				window.attachEvent("onload", listElements);
+				window.attachEvent("onload", listBlueprints);
+			}
+			else{
+				window.onload = listRoles;		
+				window.onload = listElements;	
+				window.onload = listBlueprints;	
+			}
 	
 		</script>		
 
@@ -613,11 +949,11 @@ title: Admin - Blueprints
 </div>
 
 
-<div class="modal fade bd-example-modal-lg" id="showMe" tabindex="-1" role="dialog" aria-labelledby="showMeLabel" aria-hidden="true" style="width: 100%">
+<div class="modal fade bd-example-modal-lg" id="addBlueprint" tabindex="-1" role="dialog" aria-labelledby="addBlueprintLabel" aria-hidden="true" style="width: 100%">
 	<div class="modal-dialog modal-xl" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h5 class="modal-title" id="showMeLabel">New Blueprint</h5>
+		  <h5 class="modal-title" id="addBlueprintLabel">New Blueprint</h5>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddModal();">
 			<span aria-hidden="true">&times;</span>
 		  </button>
@@ -657,6 +993,154 @@ title: Admin - Blueprints
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddModal();">Close</button>
 		  <button type="button" class="btn btn-primary" onclick="addBlueprint();">Add</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <div class="modal fade bd-example-modal-lg" id="addArea" tabindex="-1" role="dialog" aria-labelledby="addAreaLabel" aria-hidden="true" style="width: 100%">
+	<div class="modal-dialog modal-xl" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="addAreaLabel">New Area</h5>
+		  <input type="hidden" id="add-area-blueprint-id" value="">
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddAreaModal();">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <form>
+			<div class="form-group">
+			  <label for="add-area-sort-order" class="col-form-label">Sort:</label>
+			  <input type="text" class="form-control" id="add-area-sort-order" style="width: 100px; text-align:center;" value="1">
+			</div>	
+			<div class="form-group">
+				<label for="add-area-label" class="col-form-label">Label:</label>
+				<input type="text" class="form-control" id="add-area-label">
+			</div>			  				
+			<div class="form-group">
+			  <label for="add-area-description" class="col-form-label">Description:</label>
+			  <textarea class="form-control" id="add-area-description"></textarea>
+			</div>
+			<div class="form-group">
+			  <label for="add-area-image" class="col-form-label">Image:</label>
+			  <input type="text" class="form-control" id="add-area-image">
+			</div>				  
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddAreaModal();">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addArea();">Add</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+<style>
+	.autocomplete {
+	/*the container must be positioned relative:*/
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	}
+	input {
+	border: 1px solid transparent;
+	background-color: #f1f1f1;
+	padding: 10px;
+	font-size: 16px;
+	}
+	input[type=text] {
+	background-color: #f1f1f1;
+	width: 100%;
+	}
+	textarea {
+	background-color: #f1f1f1;
+	width: 100%;
+	}	
+	input[type=submit] {
+	background-color: DodgerBlue;
+	color: #fff;
+	}
+	.autocomplete-items {
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	/*position the autocomplete items to be the same width as the container:*/
+	top: 100%;
+	left: 0;
+	right: 0;
+	}
+	.autocomplete-items div {
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #d4d4d4;
+	}
+	.autocomplete-items div:hover {
+	/*when hovering an item:*/
+	background-color: #e9e9e9;
+	}
+	.autocomplete-active {
+	/*when navigating through the items using the arrow keys:*/
+	background-color: DodgerBlue !important;
+	color: #ffffff;
+	}	
+</style>
+
+
+  <textarea class="form-control" id="element-store" rows="5" style="display: none;"></textarea>
+  <div class="modal fade bd-example-modal-lg" id="addElement" tabindex="-1" role="dialog" aria-labelledby="addElementLabel" aria-hidden="true" style="width: 100%">
+	<div class="modal-dialog modal-xl" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="addElementLabel">New Element</h5>
+		  <input type="hidden" id="add-element-blueprint-id" value="">
+		  <input type="hidden" id="add-element-area-id" value="">
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddElementModal();">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">			
+			<script>
+				function addExistingElement()
+					{
+
+					console.log("Changing!");
+					
+					var elements = JSON.parse(document.getElementById("element-store").value);
+					var name = document.getElementById("add-element-label").value;
+
+					for (let i = 0; i < elements.length; i++) {
+						//console.log(elements[i].name + ' == ' + name);
+						if(elements[i].name == document.getElementById("add-element-label").value){
+							console.log(elements[i]);
+							document.getElementById("add-element-id").value = elements[i].id;
+							document.getElementById("add-element-description").value = elements[i].description;							
+						}
+						}
+					}
+			</script>
+			<form>
+				<input type="hidden" class="form-control" id="add-element-id" value="">
+				<div class="form-group">
+					<label for="add-element-label" class="col-form-label">Name:</label>
+					<div class="autocomplete">
+						<input type="text" class="form-control" id="add-element-label">
+					</div>
+				</div>					
+				<div class="form-group">
+					<label for="add-element-description" class="col-form-label">Description:</label>
+					<div>
+						<textarea class="form-control" id="add-element-description"></textarea>
+					</div>
+				</div>			  
+			</form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddElementModal();">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addElement();">Add</button>
 		</div>
 	  </div>
 	</div>
