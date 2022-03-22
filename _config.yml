@@ -3,8 +3,8 @@ description: Exploring the lifecycle
 
 image: https://postman-toolboxes2.s3.amazonaws.com/assets/api.png
 
-#url: /explore
-url: 
+url: /explore
+#url: 
 
 email: kin@postman.com
 
