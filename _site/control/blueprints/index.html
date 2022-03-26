@@ -152,6 +152,11 @@
 			const elements_base_url = 'https://hhjmvog4ak.execute-api.us-east-1.amazonaws.com/staging';
 			const tag_base_url = 'https://lgcjunwzmf.execute-api.us-east-1.amazonaws.com/staging';
 			const roles_base_url = 'https://ofpzlge8xk.execute-api.us-east-1.amazonaws.com/staging';
+			const links_base_url = 'https://uxfsaljzgj.execute-api.us-east-1.amazonaws.com/staging';
+			const videos_base_url = 'https://f5dj4duj0m.execute-api.us-east-1.amazonaws.com/staging';
+
+			const questions_base_url = 'https://qtfvkxpbg4.execute-api.us-east-1.amazonaws.com/staging';
+			const answers_base_url = 'https://7x8n1z0mb2.execute-api.us-east-1.amazonaws.com/staging';
 			
 			const token = document.getElementById("token").value;	
 
@@ -286,7 +291,41 @@
 						console.log('Error: ' + err);
 				});
 
-				}			
+				}				
+													
+				
+				function listVideos(){
+
+					const options = {
+						method: 'get',
+						headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token,
+						}
+					};		
+
+					fetch(videos_base_url + '/videos?limit=1000&page=0',options)
+						.then(function(response) {
+							if (!response.ok) {
+								console.log('Error with Status Code: ' + response.status);
+								return;
+							}
+							response.json().then(function(data) {	
+								if(data){
+									var all_videos = [];
+									for (let i = 0; i < data.length; i++) {	
+										all_videos.push(data[i].name);
+									}		
+								document.getElementById("video-store").value = JSON.stringify(data, null, 2);
+								autocomplete(document.getElementById("add-video-name"), all_videos);	
+								}																				 
+							});
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});
+
+					}					
 
 			function listRoles(){
 
@@ -321,6 +360,962 @@
 
 				}
 
+				function updateBlueprintVideoRowField(u){
+
+					var ua = u.id.split("~");
+					var field = ua[2];
+					var id = ua[3];
+
+					var name = document.getElementById('blueprint~video~name~' + id).value;
+					var description = document.getElementById('blueprint~video~description~' + id).value;
+
+					var postData = {};
+					postData.name = name;
+					postData.description = description;
+
+					delete postData.id;
+					var options = {
+							method: "PUT",
+							headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token
+							},
+							body: JSON.stringify(postData)
+						};
+
+					fetch(blueprint_base_url + '/videos/' + id,options)
+						.then(function(response) {
+							console.log("Updated!");
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});				
+
+					}				
+
+				function deleteVideo(b_id,v_id){
+
+					var options = {
+							method: "DELETE",
+							headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token
+							}
+						};
+					console.log(blueprint_base_url + '/blueprints/' + b_id + '/videos/' + v_id);
+					fetch(blueprint_base_url + '/blueprints/' + b_id + '/videos/' + v_id,options)
+						.then(function(response) {
+							console.log("DELETED!");	
+							listBlueprintVideos(b_id)
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});	
+
+					}	
+
+				function addVideo(){
+
+					var b_id = document.getElementById('add-video-blueprint-id').value;
+					var a_id = document.getElementById('add-video-area-id').value;
+					var name = document.getElementById('add-video-name').value;
+					var description = document.getElementById('add-video-description').value;
+					var image = '';
+
+					var postData = {};
+					postData.name = name;
+					postData.description = description;
+
+					var options = {
+							method: "POST",
+							headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token
+							},
+							body: JSON.stringify(postData)
+						};
+					//console.log(options);
+					console.log(videos_base_url + '/videos');
+					console.log(options);
+					fetch(videos_base_url + '/videos',options)
+						.then(function(response) {
+							response.json().then(function(data) {
+							
+							console.log("----");
+							console.log(data);
+							console.log("----");
+
+							var postData = {};
+							postData.name = name;
+							postData.video_id = data.id;
+
+							var options = {
+									method: "POST",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									},
+									body: JSON.stringify(postData)
+								};
+							
+							console.log(videos_base_url + '/blueprints/' + b_id + '/videos');
+							console.log(options);
+
+							fetch(blueprint_base_url + '/blueprints/' + b_id + '/videos',options)
+								.then(function(response) {
+									response.json().then(function(data) {
+									//console.log(data);
+									listBlueprintVideos(b_id);
+								});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});	
+
+						});
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});	
+
+					$("#addVideo").modal('hide');	
+
+					}						
+
+				function blueprintVideosRow(b_id,row){
+
+					var html = '';				
+					html += '<tr>';
+					html += '<td width="25%"><input type="text" onchange="updateBlueprintVideoRowField(this);" class="form-control" id="blueprint~video~name~' + row.video_id + '" placeholder="" value="' + row.name + '"></td>';
+					html += '<td width="55%"><textarea class="form-control" onchange="updateBlueprintVideoRowField(this);" id="blueprint~video~description~' + row.video_id + '" rows="3">' + row.description + '</textarea></td>';
+					html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteVideo(' + b_id + ',' + row.video_id + ') }" style="width: 125px;"></td>';
+					html += '</tr>';	
+
+					return html;
+					}	
+
+				function listBlueprintVideos(b_id){
+						const options = {
+							method: 'get',
+							headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token,
+							}
+						};		
+
+						fetch(blueprint_base_url + '/blueprints/' + b_id + '/videos',options)
+							.then(function(response) {
+								if (!response.ok) {
+									console.log('Error with Status Code: ' + response.status);
+									return;
+								}
+								response.json().then(function(data) {
+									var rows = '';
+									if(data){
+										var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
+										//console.log(data);
+										if(data.length == 0){
+												rows += '<tr><td><p align="center">No Areas</p></td></tr>';
+											}
+										else{										
+											for (let i = 0; i < data.length; i++) {
+												rows += blueprintVideosRow(b_id,data[i]);
+											}
+										}
+										rows += '</table></center>';
+										document.getElementById("video-list~" + b_id).innerHTML = rows;							
+									}
+								});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});
+
+						}	
+						
+
+					function updateBlueprintRoleRowField(u){
+
+						var ua = u.id.split("~");
+						var field = ua[2];
+						var id = ua[3];
+
+						var name = document.getElementById('blueprint~role~name~' + id).value;
+						var description = document.getElementById('blueprint~role~description~' + id).value;
+
+						var postData = {};
+						postData.name = name;
+						postData.description = description;
+
+						delete postData.id;
+						var options = {
+								method: "PUT",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								},
+								body: JSON.stringify(postData)
+							};
+
+						fetch(blueprint_base_url + '/roles/' + id,options)
+							.then(function(response) {
+								console.log("Updated!");
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});				
+
+						}				
+
+						function deleteRole(b_id,v_id){
+
+						var options = {
+								method: "DELETE",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								}
+							};
+						console.log(blueprint_base_url + '/blueprints/' + b_id + '/roles/' + v_id);
+						fetch(blueprint_base_url + '/blueprints/' + b_id + '/roles/' + v_id,options)
+							.then(function(response) {
+								console.log("DELETED!");	
+								listBlueprintRoles(b_id)
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});	
+
+						}	
+
+						function addRole(){
+
+						var b_id = document.getElementById('add-role-blueprint-id').value;
+						var a_id = document.getElementById('add-role-area-id').value;
+						var name = document.getElementById('add-role-name').value;
+						var description = document.getElementById('add-role-description').value;
+						var image = '';
+
+						var postData = {};
+						postData.name = name;
+						postData.description = description;
+
+						var options = {
+								method: "POST",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								},
+								body: JSON.stringify(postData)
+							};
+						//console.log(options);
+						console.log(roles_base_url + '/roles');
+						console.log(options);
+						fetch(roles_base_url + '/roles',options)
+							.then(function(response) {
+								response.json().then(function(data) {
+								
+								console.log("----");
+								console.log(data);
+								console.log("----");
+
+								var postData = {};
+								postData.name = name;
+								postData.role_id = data.id;
+
+								var options = {
+										method: "POST",
+										headers: {
+										"Content-Type": "application/json",
+										"x-api-key": token
+										},
+										body: JSON.stringify(postData)
+									};
+								
+								console.log(roles_base_url + '/blueprints/' + b_id + '/roles');
+								console.log(options);
+
+								fetch(blueprint_base_url + '/blueprints/' + b_id + '/roles',options)
+									.then(function(response) {
+										response.json().then(function(data) {
+										//console.log(data);
+										listBlueprintRoles(b_id);
+									});
+									})
+									.catch(function(err) {
+										console.log('Error: ' + err);
+								});	
+
+							});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});	
+
+						$("#addRole").modal('hide');	
+
+						}						
+
+						function blueprintRolesRow(b_id,row){
+
+						var html = '';				
+						html += '<tr>';
+						html += '<td width="25%"><input type="text" onchange="updateBlueprintRoleRowField(this);" class="form-control" id="blueprint~role~name~' + row.role_id + '" placeholder="" value="' + row.name + '"></td>';
+						html += '<td width="55%"><textarea class="form-control" onchange="updateBlueprintRoleRowField(this);" id="blueprint~role~description~' + row.role_id + '" rows="3">' + row.description + '</textarea></td>';
+						html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteRole(' + b_id + ',' + row.role_id + ') }" style="width: 125px;"></td>';
+						html += '</tr>';	
+
+						return html;
+						}	
+
+						function listBlueprintRoles(b_id){
+							const options = {
+								method: 'get',
+								headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token,
+								}
+							};		
+
+							fetch(blueprint_base_url + '/blueprints/' + b_id + '/roles',options)
+								.then(function(response) {
+									if (!response.ok) {
+										console.log('Error with Status Code: ' + response.status);
+										return;
+									}
+									response.json().then(function(data) {
+										var rows = '';
+										if(data){
+											var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
+											//console.log(data);
+											if(data.length == 0){
+													rows += '<tr><td><p align="center">No Areas</p></td></tr>';
+												}
+											else{										
+												for (let i = 0; i < data.length; i++) {
+													rows += blueprintRolesRow(b_id,data[i]);
+												}
+											}
+											rows += '</table></center>';
+											document.getElementById("role-list~" + b_id).innerHTML = rows;							
+										}
+									});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});
+
+							}							
+												
+
+				function listLinks(){
+
+					const options = {
+						method: 'get',
+						headers: {
+							"Content-Type": "application/json",
+							"x-api-key": token,
+						}
+					};		
+
+					fetch(links_base_url + '/links?limit=1000&page=0',options)
+						.then(function(response) {
+							if (!response.ok) {
+								console.log('Error with Status Code: ' + response.status);
+								return;
+							}
+							response.json().then(function(data) {	
+								if(data){
+									var all_links = [];
+									for (let i = 0; i < data.length; i++) {	
+										all_links.push(data[i].name);
+									}		
+								document.getElementById("link-store").value = JSON.stringify(data, null, 2);
+								autocomplete(document.getElementById("add-link-name"), all_links);	
+								}																				 
+							});
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});
+
+					}							
+
+					function updateBlueprintLinkRowField(u){
+
+						var ua = u.id.split("~");
+						var field = ua[2];
+						var id = ua[3];
+
+						var name = document.getElementById('blueprint~link~name~' + id).value;
+						var description = document.getElementById('blueprint~link~description~' + id).value;
+
+						var postData = {};
+						postData.name = name;
+						postData.description = description;
+
+						delete postData.id;
+						var options = {
+								method: "PUT",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								},
+								body: JSON.stringify(postData)
+							};
+
+						fetch(links_base_url + '/links/' + id,options)
+							.then(function(response) {
+								console.log("Updated!");
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});				
+
+						}
+
+					function deleteLink(b_id,l_id){
+
+						var options = {
+								method: "DELETE",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								}
+							};
+						console.log(blueprint_base_url + '/blueprints/' + b_id + '/links/' + l_id);
+						fetch(blueprint_base_url + '/blueprints/' + b_id + '/links/' + l_id,options)
+							.then(function(response) {
+								console.log("DELETED!");	
+								listBlueprintLinks(b_id)
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});	
+
+						}	
+						
+					function addLink(){
+
+						var b_id = document.getElementById('add-link-blueprint-id').value;
+						var name = document.getElementById('add-link-name').value;
+						var description = document.getElementById('add-link-description').value;
+						var image = '';
+
+						var postData = {};
+						postData.name = name;
+						postData.description = description;
+
+						var options = {
+								method: "POST",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								},
+								body: JSON.stringify(postData)
+							};
+						//console.log(options);
+						console.log(links_base_url + '/links');
+						console.log(options);
+						fetch(links_base_url + '/links',options)
+							.then(function(response) {
+								response.json().then(function(data) {
+								
+								console.log("----");
+								console.log(data);
+								console.log("----");
+
+								var postData = {};
+								postData.name = name;
+								postData.link_id = data.id;
+
+								var options = {
+										method: "POST",
+										headers: {
+										"Content-Type": "application/json",
+										"x-api-key": token
+										},
+										body: JSON.stringify(postData)
+									};
+								
+								console.log(blueprint_base_url + '/blueprints/' + b_id + '/links');
+								console.log(options);
+
+								fetch(blueprint_base_url + '/blueprints/' + b_id + '/links',options)
+									.then(function(response) {
+										response.json().then(function(data) {
+										//console.log(data);
+										listBlueprintLinks(b_id);
+									});
+									})
+									.catch(function(err) {
+										console.log('Error: ' + err);
+								});	
+
+							});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});	
+
+						$("#addLink").modal('hide');	
+
+						}							
+						
+					function blueprintLinksRow(b_id,row){
+
+						var html = '';				
+						html += '<tr>';
+						html += '<td width="25%"><input type="text" onchange="updateBlueprintLinkRowField(this);" class="form-control" id="blueprint~link~name~' + row.link_id + '" placeholder="" value="' + row.name + '"></td>';
+						html += '<td width="55%"><textarea class="form-control" onchange="updateBlueprintLinkRowField(this);" id="blueprint~link~description~' + row.link_id + '" rows="3">' + row.description + '</textarea></td>';
+						html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteLink(' + b_id + ',' + row.link_id + ') }" style="width: 125px;"></td>';
+						html += '</tr>';	
+
+						return html;
+						}						
+					
+					function listBlueprintLinks(b_id){
+						const options = {
+							method: 'get',
+							headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token,
+							}
+						};		
+
+						fetch(blueprint_base_url + '/blueprints/' + b_id + '/links',options)
+							.then(function(response) {
+								if (!response.ok) {
+									console.log('Error with Status Code: ' + response.status);
+									return;
+								}
+								response.json().then(function(data) {
+									var rows = '';
+									if(data){
+										var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
+										//console.log(data);
+										if(data.length == 0){
+												rows += '<tr><td><p align="center">No Links</p></td></tr>';
+											}
+										else{										
+											for (let i = 0; i < data.length; i++) {
+												rows += blueprintLinksRow(b_id,data[i]);
+											}
+										}
+										rows += '</table></center>';
+										document.getElementById("link-list~" + b_id).innerHTML = rows;							
+									}
+								});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});
+
+						}
+
+					function listAnswers(){
+
+						const options = {
+							method: 'get',
+							headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token,
+							}
+						};		
+
+						fetch(answers_base_url + '/answers?limit=1000&page=0',options)
+							.then(function(response) {
+								if (!response.ok) {
+									console.log('Error with Status Code: ' + response.status);
+									return;
+								}
+								response.json().then(function(data) {	
+									if(data){
+										var all_answers = [];
+										for (let i = 0; i < data.length; i++) {	
+											all_answers.push(data[i].name);
+										}		
+									document.getElementById("answer-store").value = JSON.stringify(data, null, 2);
+									autocomplete(document.getElementById("add-answer-name"), all_answers);	
+									}																				 
+								});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});
+
+						}	
+
+					function updateBlueprintAnswerRowField(u){
+
+						var ua = u.id.split("~");
+						var field = ua[2];
+						var id = ua[3];
+
+						var name = document.getElementById('blueprint~answer~name~' + id).value;
+
+						var postData = {};
+						postData.name = name;
+						postData.description = description;
+
+						delete postData.id;
+						var options = {
+								method: "PUT",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								},
+								body: JSON.stringify(postData)
+							};
+
+						fetch(answers_base_url + '/answers/' + id,options)
+							.then(function(response) {
+								console.log("Updated!");
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});				
+
+						}
+
+						function deleteAnswer(b_id,l_id){
+
+						var options = {
+								method: "DELETE",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								}
+							};
+						console.log(blueprint_base_url + '/blueprints/' + b_id + '/answers/' + l_id);
+						fetch(blueprint_base_url + '/blueprints/' + b_id + '/answers/' + l_id,options)
+							.then(function(response) {
+								console.log("DELETED!");	
+								listBlueprintAnswers(b_id)
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});	
+
+						}	
+
+					function addAnswer(){
+
+						var b_id = document.getElementById('add-answer-blueprint-id').value;
+						var name = document.getElementById('add-answer-name').value;
+						var description = document.getElementById('add-answer-description').value;
+						var image = '';
+
+						var postData = {};
+						postData.name = name;
+						postData.description = description;
+
+						var options = {
+								method: "POST",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								},
+								body: JSON.stringify(postData)
+							};
+						fetch(answers_base_url + '/answers',options)
+							.then(function(response) {
+								response.json().then(function(data) {
+								
+								console.log("----");
+								console.log(data);
+								console.log("----");
+
+								var postData = {};
+								postData.name = name;
+								postData.answer_id = data.id;
+
+								var options = {
+										method: "POST",
+										headers: {
+										"Content-Type": "application/json",
+										"x-api-key": token
+										},
+										body: JSON.stringify(postData)
+									};
+								
+								console.log(blueprint_base_url + '/blueprints/' + b_id + '/answers');
+								console.log(options);
+
+								fetch(blueprint_base_url + '/blueprints/' + b_id + '/answers',options)
+									.then(function(response) {
+										response.json().then(function(data) {
+										//console.log(data);
+										listBlueprintAnswers(b_id);
+									});
+									})
+									.catch(function(err) {
+										console.log('Error: ' + err);
+								});	
+
+							});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});	
+
+						$("#addAnswer").modal('hide');	
+
+						}							
+
+					function blueprintAnswersRow(b_id,row){
+
+						var html = '';				
+						html += '<tr>';
+						html += '<td width="25%"><input type="text" onchange="updateBlueprintAnswerRowField(this);" class="form-control" id="blueprint~answer~name~' + row.answer_id + '" placeholder="" value="' + row.name + '"></td>';
+						html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteAnswer(' + b_id + ',' + row.answer_id + ') }" style="width: 125px;"></td>';
+						html += '</tr>';	
+
+						return html;
+						}						
+
+						function listBlueprintAnswers(b_id){
+						const options = {
+							method: 'get',
+							headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token,
+							}
+						};		
+
+						fetch(blueprint_base_url + '/blueprints/' + b_id + '/answers',options)
+							.then(function(response) {
+								if (!response.ok) {
+									console.log('Error with Status Code: ' + response.status);
+									return;
+								}
+								response.json().then(function(data) {
+									var rows = '';
+									if(data){
+										var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
+										//console.log(data);
+										if(data.length == 0){
+												rows += '<tr><td><p align="center">No Answers</p></td></tr>';
+											}
+										else{										
+											for (let i = 0; i < data.length; i++) {
+												rows += blueprintAnswersRow(b_id,data[i]);
+											}
+										}
+										rows += '</table></center>';
+										document.getElementById("answer-list~" + b_id).innerHTML = rows;							
+									}
+								});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});
+
+						}
+
+					function listQuestions(){
+
+						const options = {
+							method: 'get',
+							headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token,
+							}
+						};		
+
+						fetch(questions_base_url + '/questions?limit=1000&page=0',options)
+							.then(function(response) {
+								if (!response.ok) {
+									console.log('Error with Status Code: ' + response.status);
+									return;
+								}
+								response.json().then(function(data) {	
+									if(data){
+										var all_questions = [];
+										for (let i = 0; i < data.length; i++) {	
+											all_questions.push(data[i].name);
+										}		
+									document.getElementById("question-store").value = JSON.stringify(data, null, 2);
+									autocomplete(document.getElementById("add-question-name"), all_questions);	
+									}																				 
+								});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});
+
+						}	
+
+						function updateBlueprintQuestionRowField(u){
+
+							var ua = u.id.split("~");
+							var field = ua[2];
+							var id = ua[3];
+
+							var name = document.getElementById('blueprint~question~name~' + id).value;
+
+							var postData = {};
+							postData.name = name;
+
+							delete postData.id;
+							var options = {
+									method: "PUT",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									},
+									body: JSON.stringify(postData)
+								};
+
+							fetch(questions_base_url + '/questions/' + id,options)
+								.then(function(response) {
+									console.log("Updated!");
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});				
+
+							}
+
+						function deleteQuestion(b_id,l_id){
+
+							var options = {
+									method: "DELETE",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									}
+								};
+							console.log(blueprint_base_url + '/blueprints/' + b_id + '/questions/' + l_id);
+							fetch(blueprint_base_url + '/blueprints/' + b_id + '/questions/' + l_id,options)
+								.then(function(response) {
+									console.log("DELETED!");	
+									listBlueprintQuestions(b_id)
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});	
+
+							}	
+
+						function addQuestion(){
+
+							var b_id = document.getElementById('add-question-blueprint-id').value;
+							var name = document.getElementById('add-question-name').value;
+							var description = document.getElementById('add-question-description').value;
+							var image = '';
+
+							var postData = {};
+							postData.name = name;
+							postData.description = description;
+
+							var options = {
+									method: "POST",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									},
+									body: JSON.stringify(postData)
+								};
+							//console.log(options);
+							console.log(questions_base_url + '/questions');
+							console.log(options);
+							fetch(questions_base_url + '/questions',options)
+								.then(function(response) {
+									response.json().then(function(data) {
+									
+									console.log("----");
+									console.log(data);
+									console.log("----");
+
+									var postData = {};
+									postData.name = name;
+									postData.question_id = data.id;
+
+									var options = {
+											method: "POST",
+											headers: {
+											"Content-Type": "application/json",
+											"x-api-key": token
+											},
+											body: JSON.stringify(postData)
+										};
+									
+									console.log(blueprint_base_url + '/blueprints/' + b_id + '/questions');
+									console.log(options);
+
+									fetch(blueprint_base_url + '/blueprints/' + b_id + '/questions',options)
+										.then(function(response) {
+											response.json().then(function(data) {
+											//console.log(data);
+											listBlueprintQuestions(b_id);
+										});
+										})
+										.catch(function(err) {
+											console.log('Error: ' + err);
+									});	
+
+								});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});	
+
+							$("#addQuestion").modal('hide');	
+
+							}							
+
+						function blueprintQuestionsRow(b_id,row){
+
+							var html = '';				
+							html += '<tr>';
+							html += '<td width="25%"><input type="text" onchange="updateBlueprintQuestionRowField(this);" class="form-control" id="blueprint~question~name~' + row.question_id + '" placeholder="" value="' + row.name + '"></td>';
+							html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteQuestion(' + b_id + ',' + row.question_id + ') }" style="width: 125px;"></td>';
+							html += '</tr>';	
+
+							return html;
+							}						
+
+						function listBlueprintQuestions(b_id){
+							const options = {
+								method: 'get',
+								headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token,
+								}
+							};		
+
+							fetch(blueprint_base_url + '/blueprints/' + b_id + '/questions',options)
+								.then(function(response) {
+									if (!response.ok) {
+										console.log('Error with Status Code: ' + response.status);
+										return;
+									}
+									response.json().then(function(data) {
+										var rows = '';
+										if(data){
+											var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
+											//console.log(data);
+											if(data.length == 0){
+												rows += '<tr><td><p align="center">No Questions</p></td></tr>';
+											}
+											else{											
+												for (let i = 0; i < data.length; i++) {
+													rows += blueprintQuestionsRow(b_id,data[i]);
+												}
+											}
+											rows += '</table></center>';
+											document.getElementById("question-list~" + b_id).innerHTML = rows;							
+										}
+									});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});
+
+							}						
+
+						
 				function deleteElement(b_id,a_id,e_id){
 
 					var options = {
@@ -340,7 +1335,7 @@
 							console.log('Error: ' + err);
 					});	
 
-					}				
+					}						
 
 				function addElement(){
 
@@ -443,8 +1438,13 @@
 							if(data){
 								var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
 								//console.log(data);
-								for (let i = 0; i < data.length; i++) {
-									rows += blueprintAreasElementsRow(b_id,a_id,data[i]);
+								if(data.length == 0){
+									rows += '<p align="center">No Elements</p>';
+								}
+								else{								
+									for (let i = 0; i < data.length; i++) {
+										rows += blueprintAreasElementsRow(b_id,a_id,data[i]);
+									}
 								}
 								rows += '</table></center>';
 								document.getElementById("area-element-list~" + b_id + '-' + a_id).innerHTML = rows;							
@@ -568,6 +1568,8 @@
 				postData.description = description;
 				postData.image = image;
 
+				console.log(JSON.stringify(postData));
+
 				var options = {
 						method: "POST",
 						headers: {
@@ -579,6 +1581,7 @@
 
 				fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas',options)
 					.then(function(response) {
+						console.log(response);
 						listBlueprintAreas(b_id);
 					})
 					.catch(function(err) {
@@ -600,7 +1603,7 @@
 						"x-api-key": token,
 					}
 				};		
-				//console.log(blueprint_base_url + '/blueprints/' + b_id + '/areas/');
+				console.log(blueprint_base_url + '/blueprints/' + b_id + '/areas/');
 				fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/',options)
 					.then(function(response) {
 						if (!response.ok) {
@@ -609,10 +1612,11 @@
 						}
 						response.json().then(function(data) {
 							var rows = '';
+							console.log(data);
 							if(data){
 								var rows = '<div class="row-auto">';
 								rows += '<form>';
-								console.log(data);
+								console.log(data.length);
 								for (let i = 0; i < data.length; i++) {
 									//rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteBlueprintArea(' + b_id + ',' + data[i].area_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
 									rows += blueprintAreaRow(data[i],b_id);
@@ -624,6 +1628,10 @@
 								for (let i = 0; i < data.length; i++) {
 									listBlueprintAreasElements(b_id,data[i].id);
 								}								
+							}
+							else{
+								rows += '<p align="center">No Areas</p>';	
+								document.getElementById("area-list~" + b_id).innerHTML = rows;						
 							}
 						});
 					})
@@ -740,7 +1748,12 @@
 				var b_id = row_id.replace("collapse-","");						
 		
 				getBlueprintTags(b_id);
-				listBlueprintAreas(b_id)
+				listBlueprintAreas(b_id);
+				listBlueprintLinks(b_id);
+				listBlueprintVideos(b_id);
+				listBlueprintQuestions(b_id);
+				listBlueprintAnswers(b_id);
+				listBlueprintRoles(b_id);
 
 			 	//alert("bluerprint: " + b_id);
 			})
@@ -838,6 +1851,56 @@
 
 			function closeAddElementModal(){
 				$("#addElement").modal('hide');			
+			}	
+			
+			function openAddLinkModal(b_id){
+
+			document.getElementById('add-link-blueprint-id').value = b_id;
+			$("#addLink").modal('show');				
+			}
+
+			function closeAddLinkModal(){
+			$("#addLink").modal('hide');			
+			}	
+			
+			function openAddVideoModal(b_id){
+
+			document.getElementById('add-video-blueprint-id').value = b_id;
+			$("#addVideo").modal('show');				
+			}
+
+			function closeAddVideoModal(){
+			$("#addVideo").modal('hide');			
+			}	
+			
+			function openAddRoleModal(b_id){
+
+			document.getElementById('add-role-blueprint-id').value = b_id;
+			$("#addRole").modal('show');				
+			}
+
+			function closeAddRoleModal(){
+			$("#addRole").modal('hide');			
+			}				
+						
+			function openAddQuestionModal(b_id){
+
+			document.getElementById('add-question-blueprint-id').value = b_id;
+			$("#addQuestion").modal('show');				
+			}
+
+			function closeAddQuestionModal(){
+			$("#addQuestion").modal('hide');			
+			}	
+			
+			function openAddAnswerModal(b_id,a_id){
+
+			document.getElementById('add-answer-blueprint-id').value = b_id;
+			$("#addAnswer").modal('show');				
+			}
+
+			function closeAddAnswerModal(){
+			$("#addAnswer").modal('hide');			
 			}				
 			
 			function updateBlueprint(id){
@@ -888,7 +1951,7 @@
 				html += '<div class="accordion-item" id="blueprint-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
 				html += '<button id="toggle-row-' + row.id + '" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' + row.id + '" aria-expanded="false" aria-controls="collapse-' + row.id + '" style="color: #000;">';	
-				html += row.name + ' (' + row.level + ')';
+				html += row.name + ' (Level: ' + row.level + ')';
 				html += '</button>';	
 				html += '</h2>';	
 				html += '<div id="collapse-' + row.id + '" class="accordion-collapse collapse" aria-labelledby="heading-' + row.id + '" data-bs-parent="#accordion-' + row.id + '">';	
@@ -960,7 +2023,7 @@
 				html += 'List Tags Here';
 				html += '</div>';						
 				html += '</div>';
-				html += '</div>';	
+				html += '</div>';				
 
 				html += '<hr>';
 
@@ -976,6 +2039,82 @@
 				html += '</div>';
 				html += '</div>';
 				html += '</form>';
+
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Links (<a href="#" onclick="openAddLinkModal(' + row.id + ');">Add</a>)</h3>';
+				html += '</div>';					
+				html += '</form>';	
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="link-list~' + row.id + '">';
+				html += 'List Links Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';
+
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Videos (<a href="#" onclick="openAddVideoModal(' + row.id + ');">Add</a>)</h3>';
+				html += '</div>';					
+				html += '</form>';	
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="video-list~' + row.id + '">';
+				html += 'List Videos Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';	
+				
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Questions (<a href="#" onclick="openAddQuestionModal(' + row.id + ');">Add</a>)</h3>';
+				html += '</div>';					
+				html += '</form>';	
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="question-list~' + row.id + '">';
+				html += 'List Questions Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';	
+				
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Answers (<a href="#" onclick="openAddAnswerModal(' + row.id + '); return false;">Add</a>)</h3>';
+				html += '</div>';					
+				html += '</form>';	
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="answer-list~' + row.id + '">';
+				html += 'List Answers Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';
+
+				html += '<hr>';
+				
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Roles (<a href="#" onclick="openAddRolesModal(' + row.id + '); return false;">Add</a>)</h3>';
+				html += '</div>';					
+				html += '</form>';	
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="role-list~' + row.id + '">';
+				html += 'List Roles Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';				
+
 				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE BLUEPRINT" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteBlueprint(' + row.id + ') }" style=""></center>';				
 				html += '</div>';	
 				html += '</div>';	
@@ -1023,17 +2162,29 @@
 			}
 
 			if (window.addEventListener){
+				window.addEventListener("load", listVideos, false);
+				window.addEventListener("load", listLinks, false);
 				window.addEventListener("load", listRoles, false);
+				window.addEventListener("load", listQuestions, false);
+				window.addEventListener("load", listAnswers, false);
 				window.addEventListener("load", listElements, false);
 				window.addEventListener("load", listBlueprints, false);
 			}
 			else if (window.attachEvent){
+				window.attachEvent("onload", listVideos);
+				window.attachEvent("onload", listLinks);
 				window.attachEvent("onload", listRoles);
+				window.attachEvent("onload", listQuestions);
+				window.attachEvent("onload", listAnswers);
 				window.attachEvent("onload", listElements);
 				window.attachEvent("onload", listBlueprints);
 			}
 			else{
-				window.onload = listRoles;		
+				window.onload = listVideos;		
+				window.onload = listLinks;
+				window.onload = listRoles;
+				window.onload = listQuestions;
+				window.onload = listAnswers;
 				window.onload = listElements;	
 				window.onload = listBlueprints;	
 			}
@@ -1239,7 +2390,287 @@
 		</div>
 	  </div>
 	</div>
-  </div></main>
+  </div>
+
+  <textarea class="form-control" id="link-store" rows="5" style="display: none;"></textarea>
+<div class="modal fade bd-example-modal-lg" id="addLink" tabindex="-1" role="dialog" aria-labelledby="addLinkLabel" aria-hidden="true" style="width: 100%">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addLinkLabel">New Link</h5>
+        <input type="hidden" id="add-link-blueprint-id" value="">
+        <input type="hidden" id="add-link-area-id" value="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddLinkModal();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">			
+          <script>
+              function addExistingLink()
+                  {
+
+                  console.log("Changing!");
+                  
+                  var links = JSON.parse(document.getElementById("link-store").value);
+                  var name = document.getElementById("add-link-name").value;
+
+                  for (let i = 0; i < links.length; i++) {
+                      //console.log(links[i].name + ' == ' + name);
+                      if(links[i].name == document.getElementById("add-link-name").value){
+                          console.log(links[i]);
+                          document.getElementById("add-link-id").value = links[i].id;
+                          document.getElementById("add-link-description").value = links[i].description;							
+                      }
+                      }
+                  }
+          </script>
+          <form>
+              <input type="hidden" class="form-control" id="add-link-id" value="">
+              <div class="form-group">
+                  <label for="add-link-name" class="col-form-label">Name:</label>
+                  <div class="autocomplete">
+                      <input type="text" class="form-control" id="add-link-name">
+                  </div>
+              </div>					
+              <div class="form-group">
+                  <label for="add-link-description" class="col-form-description">Description:</label>
+                  <div>
+                      <textarea class="form-control" id="add-link-description"></textarea>
+                  </div>
+              </div>			  
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddLinkModal();">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addLink();">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<textarea class="form-control" id="video-store" rows="5" style="display: none;"></textarea>
+<div class="modal fade bd-example-modal-lg" id="addVideo" tabindex="-1" role="dialog" aria-labelledby="addVideoLabel" aria-hidden="true" style="width: 100%">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addVideoLabel">New Video</h5>
+        <input type="hidden" id="add-video-blueprint-id" value="">
+        <input type="hidden" id="add-video-area-id" value="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddVideoModal();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">			
+          <script>
+              function addExistingVideo()
+                  {
+
+                  console.log("Changing!");
+                  
+                  var videos = JSON.parse(document.getElementById("video-store").value);
+                  var name = document.getElementById("add-video-name").value;
+
+                  for (let i = 0; i < videos.length; i++) {
+                      //console.log(videos[i].name + ' == ' + name);
+                      if(videos[i].name == document.getElementById("add-video-name").value){
+                          console.log(videos[i]);
+                          document.getElementById("add-video-id").value = videos[i].id;
+                          document.getElementById("add-video-description").value = videos[i].description;							
+                      }
+                      }
+                  }
+          </script>
+          <form>
+              <input type="hidden" class="form-control" id="add-video-id" value="">
+              <div class="form-group">
+                  <label for="add-video-name" class="col-form-label">Name:</label>
+                  <div class="autocomplete">
+                      <input type="text" class="form-control" id="add-video-name">
+                  </div>
+              </div>					
+              <div class="form-group">
+                  <label for="add-video-description" class="col-form-description">Description:</label>
+                  <div>
+                      <textarea class="form-control" id="add-video-description"></textarea>
+                  </div>
+              </div>			  
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddVideoModal();">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addVideo();">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<textarea class="form-control" id="question-store" rows="5" style="display: none;"></textarea>
+<div class="modal fade bd-example-modal-lg" id="addQuestion" tabindex="-1" role="dialog" aria-labelledby="addQuestionLabel" aria-hidden="true" style="width: 100%">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addQuestionLabel">New Question</h5>
+        <input type="hidden" id="add-question-blueprint-id" value="">
+        <input type="hidden" id="add-question-area-id" value="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddQuestionModal();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">			
+          <script>
+              function addExistingQuestion()
+                  {
+
+                  console.log("Changing!");
+                  
+                  var questions = JSON.parse(document.getElementById("question-store").value);
+                  var name = document.getElementById("add-question-name").value;
+
+                  for (let i = 0; i < questions.length; i++) {
+                      //console.log(questions[i].name + ' == ' + name);
+                      if(questions[i].name == document.getElementById("add-question-name").value){
+                          console.log(questions[i]);
+                          document.getElementById("add-question-id").value = questions[i].id;
+                          document.getElementById("add-question-description").value = questions[i].description;							
+                      }
+                      }
+                  }
+          </script>
+          <form>
+              <input type="hidden" class="form-control" id="add-question-id" value="">
+              <div class="form-group">
+                  <label for="add-question-name" class="col-form-label">Name:</label>
+                  <div class="autocomplete">
+                      <input type="text" class="form-control" id="add-question-name">
+                  </div>
+              </div>					
+              <div class="form-group">
+                  <label for="add-question-description" class="col-form-label">Description:</label>
+                  <div>
+                      <textarea class="form-control" id="add-question-description"></textarea>
+                  </div>
+              </div>			  
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddQuestionModal();">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addQuestion();">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<textarea class="form-control" id="answer-store" rows="5" style="display: none;"></textarea>
+<div class="modal fade bd-example-modal-lg" id="addAnswer" tabindex="-1" role="dialog" aria-labelledby="addAnswerLabel" aria-hidden="true" style="width: 100%">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAnswerLabel">New Answer</h5>
+        <input type="hidden" id="add-answer-blueprint-id" value="">
+        <input type="hidden" id="add-answer-area-id" value="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddAnswerModal();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">			
+          <script>
+              function addExistingAnswer()
+                  {
+
+                  console.log("Changing!");
+                  
+                  var answers = JSON.parse(document.getElementById("answer-store").value);
+                  var name = document.getElementById("add-answer-name").value;
+
+                  for (let i = 0; i < answers.length; i++) {
+                      //console.log(answers[i].name + ' == ' + name);
+                      if(answers[i].name == document.getElementById("add-answer-name").value){
+                          console.log(answers[i]);
+                          document.getElementById("add-answer-id").value = answers[i].id;
+                          document.getElementById("add-answer-description").value = answers[i].description;							
+                      }
+                      }
+                  }
+          </script>
+          <form>
+              <input type="hidden" class="form-control" id="add-answer-id" value="">
+              <div class="form-group">
+                  <label for="add-answer-name" class="col-form-name">Name:</label>
+                  <div class="autocomplete">
+                      <input type="text" class="form-control" id="add-answer-name">
+                  </div>
+              </div>					
+              <div class="form-group">
+                  <label for="add-answer-description" class="col-form-label">Description:</label>
+                  <div>
+                      <textarea class="form-control" id="add-answer-description"></textarea>
+                  </div>
+              </div>			  
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddAnswerModal();">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addAnswer();">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<textarea class="form-control" id="role-store" rows="5" style="display: none;"></textarea>
+<div class="modal fade bd-example-modal-lg" id="addRole" tabindex="-1" role="dialog" aria-labelledby="addRoleLabel" aria-hidden="true" style="width: 100%">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRoleLabel">New Role</h5>
+        <input type="hidden" id="add-role-blueprint-id" value="">
+        <input type="hidden" id="add-role-area-id" value="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddRoleModal();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">			
+          <script>
+              function addExistingRole()
+                  {
+
+                  console.log("Changing!");
+                  
+                  var roles = JSON.parse(document.getElementById("role-store").value);
+                  var name = document.getElementById("add-role-name").value;
+
+                  for (let i = 0; i < roles.length; i++) {
+                      //console.log(roles[i].name + ' == ' + name);
+                      if(roles[i].name == document.getElementById("add-role-name").value){
+                          console.log(roles[i]);
+                          document.getElementById("add-role-id").value = roles[i].id;
+                          document.getElementById("add-role-description").value = roles[i].description;							
+                      }
+                      }
+                  }
+          </script>
+          <form>
+              <input type="hidden" class="form-control" id="add-role-id" value="">
+              <div class="form-group">
+                  <label for="add-role-name" class="col-form-name">Name:</label>
+                  <div class="autocomplete">
+                      <input type="text" class="form-control" id="add-role-name">
+                  </div>
+              </div>					
+              <div class="form-group">
+                  <label for="add-role-description" class="col-form-label">Description:</label>
+                  <div>
+                      <textarea class="form-control" id="add-role-description"></textarea>
+                  </div>
+              </div>			  
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddRoleModal();">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addRole();">Add</button>
+      </div>
+    </div>
+  </div>
+</div></main>
 
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">

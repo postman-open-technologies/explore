@@ -15,7 +15,7 @@ github_branch: main
 version:      1.1.1
 markdown:     kramdown
 
-token: token
+token: NM2pYmJQqK6Lq8Phinhdf7uLIRVfZ74J1YuWQKtG
 
 actions_base_url: https://azm5upof1e.execute-api.us-east-1.amazonaws.com/staging
 answers_base_url: https://7x8n1z0mb2.execute-api.us-east-1.amazonaws.com/staging
