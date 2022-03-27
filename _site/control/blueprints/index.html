@@ -346,12 +346,17 @@
 						response.json().then(function(data) {
 							var rows = '';
 							rows += '<option value="">Role</option>';
-							if(data){
+							var all_roles = [];
+							if(data){								
 								for (let i = 0; i < data.length; i++) {	
 									rows += '<option value="' + data[i].name + '">' + data[i].name + '</option>';
+									all_roles.push(data[i].name);
 								}								
 							}
-							document.getElementById('role').innerHTML = rows;
+							document.getElementById('role').innerHTML = rows;	
+							document.getElementById("role-store").value = JSON.stringify(data, null, 2);
+							autocomplete(document.getElementById("add-role-name"), all_roles);
+
 						});
 					})
 					.catch(function(err) {
@@ -2104,7 +2109,7 @@
 				
 				html += '<form class="row g-3">';
 				html += '<div class="col-auto">';
-				html += '<h3>Roles (<a href="#" onclick="openAddRolesModal(' + row.id + '); return false;">Add</a>)</h3>';
+				html += '<h3>Roles (<a href="#" onclick="openAddRoleModal(' + row.id + '); return false;">Add</a>)</h3>';
 				html += '</div>';					
 				html += '</form>';	
 				html += '<div class="container">';
