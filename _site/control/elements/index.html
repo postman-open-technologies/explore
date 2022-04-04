@@ -119,12 +119,29 @@
 				<input type="text" class="form-control" id="limit" name="limit" value="25" style="text-align: center;">
 			</div>								
 			<div class="col-1">
-				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listElements();" style="width: 75px;">
+				<input type="button" class="btn btn-primary" name="listelements" id="listelements" value="Search" onclick="listElements();" style="width: 75px;">
 			</div>
 			<div class="col-1">
 				<input type="button" class="btn btn-success" name="show" value="Add Element" onclick="openAddModal();" style="width: 125px;">
 			</div>			
-		</div>								
+		</div>
+		
+		<script>
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listelements").click();
+			  }
+			});	
+			var input = document.getElementById("tags");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listelements").click();
+			  }
+			});	
+		</script> 		
         
 		<div class="accordion" id="elementAccordian" style="margin-top: 15px;"></div>
 
@@ -298,6 +315,7 @@
 				fetch(element_base_url + '/elements/',options)
 					.then(function(response) {
 						console.log("Added!");
+						listElements();
 					})
 					.catch(function(err) {
 						console.log('Error: ' + err);

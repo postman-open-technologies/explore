@@ -143,7 +143,7 @@
 				document.getElementById("listblueprints").click();
 			  }
 			});	
-			</script>        
+		</script>        
 		<div class="accordion" id="blueprintAccordian" style="margin-top: 15px;"></div>
 
 		<script>
@@ -283,7 +283,7 @@
 									all_elements.push(data[i].name);
 								}		
 							document.getElementById("element-store").value = JSON.stringify(data, null, 2);
-							autocomplete(document.getElementById("add-element-label"), all_elements);	
+							autocomplete(document.getElementById("add-element-name"), all_elements);	
 							}																				 
 						});
 					})
@@ -804,12 +804,14 @@
 
 						var b_id = document.getElementById('add-link-blueprint-id').value;
 						var name = document.getElementById('add-link-name').value;
+						var url = document.getElementById('add-link-url').value;
 						var description = document.getElementById('add-link-description').value;
 						var image = '';
 
 						var postData = {};
 						postData.name = name;
 						postData.description = description;
+						postData.url = url;
 
 						var options = {
 								method: "POST",
@@ -871,9 +873,16 @@
 
 						var html = '';				
 						html += '<tr>';
-						html += '<td width="25%"><input type="text" onchange="updateBlueprintLinkRowField(this);" class="form-control" id="blueprint~link~name~' + row.link_id + '" placeholder="" value="' + row.name + '"></td>';
-						html += '<td width="55%"><textarea class="form-control" onchange="updateBlueprintLinkRowField(this);" id="blueprint~link~description~' + row.link_id + '" rows="3">' + row.description + '</textarea></td>';
-						html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteLink(' + b_id + ',' + row.link_id + ') }" style="width: 125px;"></td>';
+						html += '<td width="25%" align="right"><strong>Name:</strong></td><td><input type="text" onchange="updateBlueprintLinkRowField(this);" class="form-control" id="blueprint~link~name~' + row.link_id + '" placeholder="" value="' + row.name + '"></td><td></td>';
+						html += '</tr>';
+						html += '<tr>';
+						html += '<td width="25%" align="right"><strong>Description:</strong></td><td><textarea class="form-control" onchange="updateBlueprintLinkRowField(this);" id="blueprint~link~description~' + row.link_id + '" rows="3">' + row.description + '</textarea></td><td></td>';
+						html += '</tr>';
+						html += '<tr>';
+						html += '<td width="25%" align="right"><a href="' + row.url + '"><strong>URL:</strong></a>/td><td><input type="text" onchange="updateBlueprintLinkRowField(this);" class="form-control" id="blueprint~link~url~' + row.link_id + '" placeholder="" value="' + row.url + '"></td><td></td>';
+						html += '</tr>';
+						html += '<tr>';														
+						html += '<td width="25%" align="right"></td><td><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteLink(' + b_id + ',' + row.link_id + ') }" style="width: 125px;"></td><td></td>';
 						html += '</tr>';	
 
 						return html;
@@ -1346,12 +1355,12 @@
 
 					var b_id = document.getElementById('add-element-blueprint-id').value;
 					var a_id = document.getElementById('add-element-area-id').value;
-					var label = document.getElementById('add-element-label').value;
+					var name = document.getElementById('add-element-name').value;
 					var description = document.getElementById('add-element-description').value;
 					var image = '';
 
 					var postData = {};
-					postData.name = label;
+					postData.name = name;
 					postData.description = description;
 
 					var options = {
@@ -1362,7 +1371,6 @@
 							},
 							body: JSON.stringify(postData)
 						};
-					//console.log(options);
 					console.log(elements_base_url + '/elements');
 					console.log(options);
 					fetch(elements_base_url + '/elements',options)
@@ -1374,7 +1382,7 @@
 							console.log("----");
 
 							var postData = {};
-							postData.label = label;
+							postData.name = name;
 							postData.element_id = data.id;
 
 							var options = {
@@ -1410,11 +1418,19 @@
 
 					}				
 
+
+			function blueprintAreasElementsHTMLRow(b_id,a_id,row){
+
+				var html = '<li><strong>' + row.name + '</strong> - ' + row.description + '</li>';
+				return html;
+
+				}
+
 			function blueprintAreasElementsRow(b_id,a_id,row){
 
 				var html = '';				
 				html += '<tr>';
-				html += '<td width="25%"><input type="text" onchange="updateElementRowField(this);" class="form-control" id="label~' + row.id + '" placeholder="" value="' + row.label + '"></td>';
+				html += '<td width="25%"><input type="text" onchange="updateElementRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '"></td>';
 				html += '<td width="55%"><textarea class="form-control" onchange="updateElementRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea></td>';
 				html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteElement(' + b_id + ',' + a_id + ',' + row.id + ') }" style="width: 125px;"></td>';
 				html += '<textarea class="form-control" id="bstore~' + b_id + '~' + a_id + '~' + row.id + '" rows="5" style="display: none;">' + JSON.stringify(row, null, 2) + '</textarea>';
@@ -1446,13 +1462,25 @@
 								if(data.length == 0){
 									rows += '<p align="center">No Elements</p>';
 								}
-								else{								
+								else{	
+									var blueprint_html = document.getElementById("bview~" + b_id).value;							
+
+									var list = '<ul>';
 									for (let i = 0; i < data.length; i++) {
-										rows += blueprintAreasElementsRow(b_id,a_id,data[i]);
+										rows += blueprintAreasElementsRow(b_id,a_id,data[i]);											
+										list += blueprintAreasElementsHTMLRow(b_id,a_id,data[i]);																			
 									}
+									list += '</ul>';
+									document.getElementById("bview~" + b_id).value = blueprint_html;		
 								}
 								rows += '</table></center>';
-								document.getElementById("area-element-list~" + b_id + '-' + a_id).innerHTML = rows;							
+
+								// somehackystuff
+								blueprint_html_array = blueprint_html.split('~' + a_id + '~');
+								blueprint_html = blueprint_html_array[0] + list + blueprint_html_array[1];
+								document.getElementById("bview~" + b_id).value = blueprint_html;
+
+								document.getElementById("area-element-list~" + b_id + '-' + a_id).innerHTML = rows;															
 							}
 						});
 					})
@@ -1525,6 +1553,17 @@
 					updateBlueprintArea(b_id,a_id);
 
 					}				
+
+			function blueprintAreaHTMLRow(row,b_id){
+
+				var html = '';
+				html += '<h3 id="html-heading-' + row.id + '">' + row.label + '</h3>';				
+				html += '<p>' + row.description + '</p>';
+				html += '~' + row.id + '~';
+				
+				return html;
+
+			}
 
 			function blueprintAreaRow(row,b_id){
 
@@ -1619,25 +1658,24 @@
 							var rows = '';
 							console.log(data);
 							if(data){
-								var rows = '<div class="row-auto">';
-								rows += '<form>';
+								var rows = '';
 								console.log(data.length);
 								for (let i = 0; i < data.length; i++) {
 									//rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteBlueprintArea(' + b_id + ',' + data[i].area_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
 									rows += blueprintAreaRow(data[i],b_id);
-								}
-								rows += '</form>';
-								document.getElementById("area-list~" + b_id).innerHTML = rows;
-								
-								// GET ELEMENTS
-								for (let i = 0; i < data.length; i++) {
-									listBlueprintAreasElements(b_id,data[i].id);
-								}								
+									document.getElementById("area-list~" + b_id).innerHTML = rows;																		
+									
+									var blueprint_html = document.getElementById("bview~" + b_id).value;
+									blueprint_html += blueprintAreaHTMLRow(data[i],b_id);
+									document.getElementById("bview~" + b_id).value = blueprint_html;
+									
+									listBlueprintAreasElements(b_id,data[i].id);	
+								}															
 							}
 							else{
 								rows += '<p align="center">No Areas</p>';	
 								document.getElementById("area-list~" + b_id).innerHTML = rows;						
-							}
+							}							
 						});
 					})
 					.catch(function(err) {
@@ -1906,7 +1944,22 @@
 
 			function closeAddAnswerModal(){
 			$("#addAnswer").modal('hide');			
-			}				
+			}	
+			
+			function openViewBlueprintModal(b_id,a_id){
+			$("#viewBlueprint").modal('show');				
+			}
+
+			function closeViewBlueprintModal(){
+			$("#viewBlueprint").modal('hide');			
+			}			
+			
+			function viewBlueprint(id){
+
+				var viewHTML = document.getElementById('bview~' + id).value;
+				document.getElementById('viewBlueprintBody').innerHTML = viewHTML;
+				openViewBlueprintModal();
+			}			
 			
 			function updateBlueprint(id){
 
@@ -1950,8 +2003,19 @@
 
 			}
 
+			function blueprintHTMLRow(row,i){
+				var html = '';					
+				html += '<h2 id="html-heading-' + row.id + '">' + row.name + '</h2>';				
+				html += '<p>' + row.description + '</p>';
+				return html;
+			}
+
 			function blueprintRow(row,i){
 				var html = '';
+
+				html += '<div style="display: none;">';
+				html += '<textarea class="form-control" id="bview~' + row.id + '" rows="5">bview~' + row.id + '</textarea>';
+				html += '</div>';
 
 				html += '<div class="accordion-item" id="blueprint-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
@@ -1968,8 +2032,8 @@
 
 				html += '<table style="border: 0px solid #000; width: 100%;">';
 				html += '<tr>';
-				html += '<td width=10%" align="right"><strong>Name:</strong></td>';
-				html += '<td><input type="text" style="width: 100%;" onchange="updateBlueprintRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '"></td>';
+				html += '<td width=20%" align="right"><strong>Name: (<a href="#" onclick="viewBlueprint(' + row.id + ');">View</a>)</strong></td>';
+				html += '<td><input type="text" style="width: 90%;" onchange="updateBlueprintRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '"></td>';
 				html += '</tr>';				
 
 				html += '<tr>';
@@ -2155,9 +2219,15 @@
 							if(data){
 								for (let i = 0; i < data.length; i++) {
 									rows += blueprintRow(data[i],i);
-								}
+								}							
 							}
 							document.getElementById("blueprintAccordian").innerHTML = rows;
+							if(data){
+								for (let i = 0; i < data.length; i++) {
+									console.log("bview~" + data[i].id);
+									document.getElementById("bview~" + data[i].id).value = blueprintHTMLRow(data[i],i);
+								}								
+							}							
 						});
 					})
 					.catch(function(err) {
@@ -2360,11 +2430,11 @@
 					console.log("Changing!");
 					
 					var elements = JSON.parse(document.getElementById("element-store").value);
-					var name = document.getElementById("add-element-label").value;
+					var name = document.getElementById("add-element-name").value;
 
 					for (let i = 0; i < elements.length; i++) {
 						//console.log(elements[i].name + ' == ' + name);
-						if(elements[i].name == document.getElementById("add-element-label").value){
+						if(elements[i].name == document.getElementById("add-element-name").value){
 							console.log(elements[i]);
 							document.getElementById("add-element-id").value = elements[i].id;
 							document.getElementById("add-element-description").value = elements[i].description;							
@@ -2375,9 +2445,9 @@
 			<form>
 				<input type="hidden" class="form-control" id="add-element-id" value="">
 				<div class="form-group">
-					<label for="add-element-label" class="col-form-label">Name:</label>
+					<label for="add-element-name" class="col-form-label">Name:</label>
 					<div class="autocomplete">
-						<input type="text" class="form-control" id="add-element-label">
+						<input type="text" class="form-control" id="add-element-name">
 					</div>
 				</div>					
 				<div class="form-group">
@@ -2424,6 +2494,7 @@
                           console.log(links[i]);
                           document.getElementById("add-link-id").value = links[i].id;
                           document.getElementById("add-link-description").value = links[i].description;							
+						  document.getElementById("add-link-url").value = links[i].url;	
                       }
                       }
                   }
@@ -2441,7 +2512,13 @@
                   <div>
                       <textarea class="form-control" id="add-link-description"></textarea>
                   </div>
-              </div>			  
+              </div>
+              <div class="form-group">
+				<label for="add-link-url" class="col-form-label">URL:</label>
+				<div class="autocomplete">
+					<input type="text" class="form-control" id="add-link-url">
+				</div>
+			</div>			  			  
           </form>
       </div>
       <div class="modal-footer">
@@ -2671,6 +2748,27 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddRoleModal();">Close</button>
         <button type="button" class="btn btn-primary" onclick="addRole();">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="viewBlueprint" tabindex="-1" role="dialog" aria-labelledby="viewBlueprintLabel" aria-hidden="true" style="width: 100%">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRoleLabel">Blueprint View</h5>
+        <input type="hidden" id="add-role-blueprint-id" value="">
+        <input type="hidden" id="add-role-area-id" value="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeViewBlueprintModal();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="viewBlueprintBody">			
+		HELLO!!!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeViewBlueprintModal();">Close</button>
       </div>
     </div>
   </div>
