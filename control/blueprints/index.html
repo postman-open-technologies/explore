@@ -44,6 +44,7 @@ title: Admin - Blueprints
 			document.getElementById('search').value = search;
 
 			var token = getUrlVar('token');				
+			console.log("token:" + token);
 			if(token){
 				document.getElementById('token').value = token;		
 				changeToken(token);
@@ -51,6 +52,7 @@ title: Admin - Blueprints
 
 			var stored_token = Cookies.get('token');
 			if(stored_token){
+				console.log("stored_token:" + stored_token);
 				document.getElementById('token').value = stored_token;	
 			}
 
