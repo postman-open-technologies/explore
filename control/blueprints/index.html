@@ -6,8 +6,13 @@ title: Admin - Blueprints
 <div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
 		<div class="row">
+			<script>
+				function changeToken(t){
+					Cookies.set('token',t)
+				}
+			</script>
 			<div class="col">				
-				<input type="text" class="form-control" id="token" name="token" value="{{ site.token }}" placeholder="Token">
+				<input type="text" class="form-control" id="token" name="token" value="{{ site.token }}" placeholder="Token" onchange="changeToken();">
 			</div>
 			<div class="col-2">				
 				<input type="text" class="form-control" id="search" name="search" value="" placeholder="Search">
@@ -34,6 +39,21 @@ title: Admin - Blueprints
 			</div>			
 		</div>								
 		<script>
+
+			var search = getUrlVar('search');
+			document.getElementById('search').value = search;
+
+			var token = getUrlVar('token');				
+			if(token!=''){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token!=''){
+				document.getElementById('token').value = stored_token;	
+			}
+
 			var input = document.getElementById("search");
 			input.addEventListener("keyup", function(event) {
 			  if (event.keyCode === 13) {
@@ -63,7 +83,7 @@ title: Admin - Blueprints
 			const questions_base_url = '{{ site.questions_base_url }}';
 			const answers_base_url = '{{ site.answers_base_url }}';
 			
-			const token = document.getElementById("token").value;	
+		 	token = document.getElementById("token").value;	
 
 			function autocomplete(inp, arr) {
 				/*the autocomplete function takes two arguments,
