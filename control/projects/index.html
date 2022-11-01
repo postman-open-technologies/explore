@@ -1,11 +1,15 @@
 ---
 layout: default
-title: Admin - Personas
+title: Admin - Projects
 ---
 
 <div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
-
+		<script>
+			function changeToken(t){
+				Cookies.set('token',t)
+			}
+		</script>
 		<div class="row">
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
 			<div class="col">				
@@ -24,22 +28,47 @@ title: Admin - Personas
 				<input type="text" class="form-control" id="limit" name="limit" value="25" style="text-align: center;">
 			</div>								
 			<div class="col-1">
-				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listPersonas();" style="width: 75px;">
+				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listProjects();" style="width: 75px;">
 			</div>
 			<div class="col-1">
-				<input type="button" class="btn btn-success" name="show" value="Add Persona" onclick="openAddModal();" style="width: 125px;">
+				<input type="button" class="btn btn-success" name="show" value="Add Project" onclick="openAddModal();" style="width: 125px;">
 			</div>			
 		</div>								
-        
-		<div class="accordion" id="personaAccordian" style="margin-top: 15px;"></div>
+		<script>
+
+			var search = getUrlVar('search');
+			document.getElementById('search').value = search;
+
+			var token = getUrlVar('token');				
+			console.log("token:" + token);
+			if(token){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token){
+				console.log("stored_token:" + stored_token);
+				document.getElementById('token').value = stored_token;	
+				token = stored_token;
+			}
+
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listblueprints").click();
+			  }
+			});	
+		</script>        
+		<div class="accordion" id="projectAccordian" style="margin-top: 15px;"></div>
 
 		<script>
 
-			const persona_base_url = '{{ site.personas_base_url }}';
+			const project_base_url = '{{ site.projects_base_url }}';
 			const tag_base_url = '{{ site.tags_base_url }}';
-			const token = document.getElementById("token").value;	
 
-			function deletePersonaTag(id,tag_id){
+			function deleteProjectTag(id,tag_id){
 
 				var options = {
 						method: "DELETE",
@@ -48,9 +77,9 @@ title: Admin - Personas
 						"x-api-key": token
 						}
 					};
-				fetch(persona_base_url + '/personas/' + id + "/tags/" + tag_id,options)
+				fetch(project_base_url + '/projects/' + id + "/tags/" + tag_id,options)
 					.then(function(response) {						
-						getPersonaTags(id);
+						getProjectTags(id);
 						console.log("DELETED!");
 					})
 					.catch(function(err) {
@@ -59,13 +88,13 @@ title: Admin - Personas
 
 				}
 
-			function addPersonaTag(id){
+			function addProjectTag(id){
 
 				var name = document.getElementById('add-tag~' + id).value;
 
 				var postData = {};
 				postData.name = name;
-				console.log(postData);
+				console.log(token);
 
 				var options = {
 						method: "POST",
@@ -82,7 +111,7 @@ title: Admin - Personas
 						response.json().then(function(data) {
 							var tag_id = data.id;
 							var postData = {};
-							postData.persona_id = id;
+							postData.project_id = id;
 							postData.tag_id = tag_id;
 							var options = {
 									method: "POST",
@@ -93,9 +122,9 @@ title: Admin - Personas
 									body: JSON.stringify(postData)
 								};
 
-							fetch(persona_base_url + '/personas/' + id + '/tags',options)
+							fetch(project_base_url + '/projects/' + id + '/tags',options)
 								.then(function(response) {
-									getPersonaTags(id);							
+									getProjectTags(id);							
 								})
 								.catch(function(err) {
 									console.log('Error: ' + err);
@@ -112,8 +141,8 @@ title: Admin - Personas
 
 			}
 
-			function getPersonaTags(b_id){
-
+			function getProjectTags(b_id){
+				console.log(token);
 				const options = {
 					method: 'get',
 					headers: {
@@ -122,7 +151,7 @@ title: Admin - Personas
 					}
 				};		
 		
-				fetch(persona_base_url + '/personas/' + b_id + '/tags',options)
+				fetch(project_base_url + '/projects/' + b_id + '/tags',options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -131,7 +160,7 @@ title: Admin - Personas
 						response.json().then(function(data) {
 							var rows = '<div class="row-auto">';
 							for (let i = 0; i < data.length; i++) {
-								rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deletePersonaTag(' + b_id + ',' + data[i].tag_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
+								rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteProjectTag(' + b_id + ',' + data[i].tag_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
 							}
 							document.getElementById("tag-list~" + b_id).innerHTML = rows;
 						});
@@ -141,22 +170,22 @@ title: Admin - Personas
 				});				
 			}
 
-			$('#personaAccordian').on('show.bs.collapse', function (e) {
+			$('#projectAccordian').on('show.bs.collapse', function (e) {
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");						
 		
-				getPersonaTags(b_id);
+				getProjectTags(b_id);
 
 			 	//alert("bluerprint: " + b_id);
 			})
 
-			$('#personaAccordian').on('hidden.bs.collapse', function (e) {
+			$('#projectAccordian').on('hidden.bs.collapse', function (e) {
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");
 			 	//alert("bluerprint: " + b_id);
 			})	
 
-			function deletePersona(id){
+			function deleteProject(id){
 
 				var options = {
 						method: "DELETE",
@@ -166,10 +195,10 @@ title: Admin - Personas
 						}
 					};
 
-				fetch(persona_base_url + '/personas/' + id,options)
+				fetch(project_base_url + '/projects/' + id,options)
 					.then(function(response) {
 						console.log("DELETED!");
-						listPersonas();
+						listProjects();
 					})
 					.catch(function(err) {
 						console.log('Error: ' + err);
@@ -177,16 +206,16 @@ title: Admin - Personas
 
 			}
 
-			function addPersona(){
+			function addProject(){
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
-				var collection_id = document.getElementById('add-collection_id').value;
+				var url = document.getElementById('add-url').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
-				postData.collection_id = collection_id;
+				postData.url = url;
 
 				var options = {
 						method: "POST",
@@ -197,10 +226,10 @@ title: Admin - Personas
 						body: JSON.stringify(postData)
 					};
 
-				fetch(persona_base_url + '/personas/',options)
+				fetch(project_base_url + '/projects/',options)
 					.then(function(response) {
 						console.log("Added!");
-						listPersonas();
+						listProjects();
 					})
 					.catch(function(err) {
 						console.log('Error: ' + err);
@@ -217,7 +246,7 @@ title: Admin - Personas
 				$("#showMe").modal('hide');				
 			}			
 			
-			function updatePersona(id){
+			function updateProject(id){
 
 				const postData = JSON.parse(document.getElementById('bstore~' + id).value);
 
@@ -231,7 +260,7 @@ title: Admin - Personas
 						body: JSON.stringify(postData)
 					};
 
-				fetch(persona_base_url + '/personas/' + id,options)
+				fetch(project_base_url + '/projects/' + id,options)
 					.then(function(response) {
 						console.log("Updated!");
 					})
@@ -255,14 +284,14 @@ title: Admin - Personas
 
 				document.getElementById('bstore~' + id).value = JSON.stringify(bstore, null, 2);
 
-				updatePersona(id);
+				updateProject(id);
 
 			}
 
-			function personaRow(row){
+			function projectRow(row){
 				var html = '';
 
-				html += '<div class="accordion-item" id="persona-' + row.id + '">';					
+				html += '<div class="accordion-item" id="project-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
 				html += '<button id="toggle-row-' + row.id + '" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' + row.id + '" aria-expanded="false" aria-controls="collapse-' + row.id + '" style="color: #000;">';	
 				html += row.name;
@@ -288,8 +317,8 @@ title: Admin - Personas
 				html += '</div>';
 
 				html += '<div class="form-group">';
-				html += '<label for="collection_id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection_id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
+				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
 				html += '</div>';
 				
 				html += '</form>';
@@ -304,7 +333,7 @@ title: Admin - Personas
 				html += '<input type="text" class="form-control" id="add-tag~' + row.id + '" placeholder="">';
 				html += '</div>';
 				html += '<div class="col-auto">';
-				html += '<button type="button" onclick="addPersonaTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
+				html += '<button type="button" onclick="addProjectTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
 				html += '</div>';
 				html += '</form>';	
 				html += '<div class="container">';
@@ -314,7 +343,7 @@ title: Admin - Personas
 				html += '</div>';						
 				html += '</div>';
 				html += '</div>';
-				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deletePersona(' + row.id + ') }" style="width: 125px;"></center>';				
+				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteProject(' + row.id + ') }" style="width: 125px;"></center>';				
 				html += '</div>';	
 				html += '</div>';	
 				html += '</div>';	
@@ -322,7 +351,7 @@ title: Admin - Personas
 				return html;
 			}
 		
-			function listPersonas(){
+			function listProjects(){
 
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
@@ -336,7 +365,7 @@ title: Admin - Personas
 					}
 				};		
 		
-				fetch(persona_base_url + '/personas/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(project_base_url + '/projects/?page=' + page + '&limit=' + limit + '&search=' + search,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -346,10 +375,10 @@ title: Admin - Personas
 							var rows = '';
 							if(data){
 								for (let i = 0; i < data.length; i++) {
-									rows += personaRow(data[i],i);
+									rows += projectRow(data[i],i);
 								}
 							}
-							document.getElementById("personaAccordian").innerHTML = rows;
+							document.getElementById("projectAccordian").innerHTML = rows;
 						});
 					})
 					.catch(function(err) {
@@ -359,13 +388,13 @@ title: Admin - Personas
 			}
 
 			if (window.addEventListener){
-				window.addEventListener("load", listPersonas, false);
+				window.addEventListener("load", listProjects, false);
 			}
 			else if (window.attachEvent){
-				window.attachEvent("onload", listPersonas);
+				window.attachEvent("onload", listProjects);
 			}
 			else{
-				window.onload = listPersonas;	
+				window.onload = listProjects;	
 			}				
 		
 		</script>		
@@ -378,7 +407,7 @@ title: Admin - Personas
 	<div class="modal-dialog modal-xl" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h5 class="modal-title" id="showMeLabel">New Persona</h5>
+		  <h5 class="modal-title" id="showMeLabel">New Project</h5>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddModal();">
 			<span aria-hidden="true">&times;</span>
 		  </button>
@@ -394,14 +423,14 @@ title: Admin - Personas
 			  <textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
-			  <label for="add-collection_id" class="col-form-label">Collection ID:</label>
-			  <input type="text" class="form-control" id="add-collection_id">
+			  <label for="add-url" class="col-form-label">URL:</label>
+			  <input type="text" class="form-control" id="add-url">
 			</div>				  
 		  </form>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddModal();">Close</button>
-		  <button type="button" class="btn btn-primary" onclick="addPersona();">Add Persona</button>
+		  <button type="button" class="btn btn-primary" onclick="addProject();">Add Project</button>
 		</div>
 	  </div>
 	</div>

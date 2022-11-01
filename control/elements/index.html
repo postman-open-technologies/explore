@@ -5,7 +5,11 @@ title: Admin - Elements
 
 <div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
-
+		<script>
+			function changeToken(t){
+				Cookies.set('token',t)
+			}
+		</script>
 		<div class="row">
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
 			<div class="col">				
@@ -32,14 +36,25 @@ title: Admin - Elements
 		</div>
 		
 		<script>
+			var search = getUrlVar('search');
+			document.getElementById('search').value = search;
+
+			var token = getUrlVar('token');				
+			console.log("token:" + token);
+			if(token){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token){
+				console.log("stored_token:" + stored_token);
+				document.getElementById('token').value = stored_token;	
+				token = stored_token;
+			}
+
+
 			var input = document.getElementById("search");
-			input.addEventListener("keyup", function(event) {
-			  if (event.keyCode === 13) {
-				event.preventDefault();
-				document.getElementById("listelements").click();
-			  }
-			});	
-			var input = document.getElementById("tags");
 			input.addEventListener("keyup", function(event) {
 			  if (event.keyCode === 13) {
 				event.preventDefault();
@@ -54,7 +69,6 @@ title: Admin - Elements
 
 			const element_base_url = '{{ site.elements_base_url }}';
 			const tag_base_url = '{{ site.tags_base_url }}';
-			const token = document.getElementById("token").value;	
 
 			function deleteElementTag(id,tag_id){
 
@@ -131,9 +145,9 @@ title: Admin - Elements
 			}
 
 			function getElementTags(b_id){
-
+				console.log("token: " + token);
 				const options = {
-					method: 'get',
+					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
 						"x-api-key": token,
@@ -238,7 +252,7 @@ title: Admin - Elements
 			}			
 			
 			function updateElement(id){
-
+				console.log("TOKEN:" + token);
 				const postData = JSON.parse(document.getElementById('bstore~' + id).value);
 
 				delete postData.id;
@@ -352,6 +366,7 @@ title: Admin - Elements
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
+				console.log(search);
 		
 				const options = {
 					method: 'get',

@@ -66,9 +66,6 @@
           <li class="nav-item">
             <a class="nav-link" href="http://localhost:4000/control/elements/">Elements</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:4000/control/actions/">Actions</a>
-          </li>    
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="qaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Q&A
@@ -83,6 +80,9 @@
               Resources
             </a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
               <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
               <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
               <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
@@ -93,8 +93,6 @@
               Structure
             </a>
             <ul class="dropdown-menu" aria-labelledby="structureDropdown">
-              <a class="dropdown-item" href="http://localhost:4000/control/landscapes/">Landscapes</a>
-              <a class="dropdown-item" href="http://localhost:4000/control/personas/">Personas</a>
               <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
               <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
               <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
@@ -112,7 +110,11 @@
 
 <main class="flex-shrink-0"><div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
-
+		<script>
+			function changeToken(t){
+				Cookies.set('token',t)
+			}
+		</script>
 		<div class="row">
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
 			<div class="col">				
@@ -139,14 +141,25 @@
 		</div>
 		
 		<script>
+			var search = getUrlVar('search');
+			document.getElementById('search').value = search;
+
+			var token = getUrlVar('token');				
+			console.log("token:" + token);
+			if(token){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token){
+				console.log("stored_token:" + stored_token);
+				document.getElementById('token').value = stored_token;	
+				token = stored_token;
+			}
+
+
 			var input = document.getElementById("search");
-			input.addEventListener("keyup", function(event) {
-			  if (event.keyCode === 13) {
-				event.preventDefault();
-				document.getElementById("listelements").click();
-			  }
-			});	
-			var input = document.getElementById("tags");
 			input.addEventListener("keyup", function(event) {
 			  if (event.keyCode === 13) {
 				event.preventDefault();
@@ -159,9 +172,8 @@
 
 		<script>
 
-			const element_base_url = 'https://hhjmvog4ak.execute-api.us-east-1.amazonaws.com/staging';
-			const tag_base_url = 'https://lgcjunwzmf.execute-api.us-east-1.amazonaws.com/staging';
-			const token = document.getElementById("token").value;	
+			const element_base_url = 'https://3b2iqi9px6.execute-api.us-west-1.amazonaws.com/staging';
+			const tag_base_url = 'https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging';
 
 			function deleteElementTag(id,tag_id){
 
@@ -238,9 +250,9 @@
 			}
 
 			function getElementTags(b_id){
-
+				console.log("token: " + token);
 				const options = {
-					method: 'get',
+					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
 						"x-api-key": token,
@@ -345,7 +357,7 @@
 			}			
 			
 			function updateElement(id){
-
+				console.log("TOKEN:" + token);
 				const postData = JSON.parse(document.getElementById('bstore~' + id).value);
 
 				delete postData.id;
@@ -459,6 +471,7 @@
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
+				console.log(search);
 		
 				const options = {
 					method: 'get',

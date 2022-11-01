@@ -1276,7 +1276,53 @@ title: Admin - Blueprints
 							console.log('Error: ' + err);
 					});	
 
-					}						
+					}		
+					
+					function updateBlueprintAreaElement(b_id,a_id,e_id){
+
+						const postData = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id + "~" + e_id).value);
+
+						delete postData.id;
+						delete postData.blueprint_id;
+						delete postData.area_id;
+
+						var options = {
+								method: "PUT",
+								headers: {
+								"Content-Type": "application/json",
+								"x-api-key": token
+								},
+								body: JSON.stringify(postData)
+							};
+						console.log(options);
+						fetch(blueprint_base_url + '/elements/' + e_id,options)
+							.then(function(response) {
+								//console.log("Updated!");
+								//console.log(response);
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});				
+
+						}				
+
+					function updateBlueprintAreaElementRowField(u){
+
+						var ua = u.id.split("~");
+						var field = ua[0];
+						var b_id = ua[1];
+						var a_id = ua[2];
+						var e_id = ua[2];
+
+						var bstore = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id + "~" + e_id).value);
+
+						bstore[field] = u.value;
+
+						document.getElementById('bstore~' + b_id + "~" + a_id + "~" + e_id).value = JSON.stringify(bstore, null, 2);
+
+						updateBlueprintAreaElement(b_id,a_id,e_id);
+
+						}					
 
 				function addElement(){
 
@@ -1311,6 +1357,7 @@ title: Admin - Blueprints
 							var postData = {};
 							postData.name = name;
 							postData.element_id = data.id;
+							postData.description = description;
 
 							var options = {
 									method: "POST",
@@ -1348,17 +1395,27 @@ title: Admin - Blueprints
 
 			function blueprintAreasElementsHTMLRow(b_id,a_id,row){
 
-				var html = '<li><strong>' + row.name + '</strong> - ' + row.description + '</li>';
+				var description = row.description2;
+				if(!row.description2 || row.description2 == ''){
+					description = row.description1;
+				}
+
+				var html = '<li><strong>' + row.name + '</strong> - ' + description + '</li>';
 				return html;
 
 				}
 
 			function blueprintAreasElementsRow(b_id,a_id,row){
 
-				var html = '';				
+				var description = row.description2;
+				if(row.description2 == ''){
+					description = row.description1;
+				}
+
+				var html = '';							
 				html += '<tr>';
-				html += '<td width="25%"><input type="text" onchange="updateElementRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '"></td>';
-				html += '<td width="55%"><textarea class="form-control" onchange="updateElementRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea></td>';
+				html += '<td width="25%"><input type="text" onchange="updateBlueprintAreaElementRowField(this);" class="form-control" id="name~' + b_id + '~' + a_id + '~' + row.id + '" placeholder="" value="' + row.name + '"></td>';
+				html += '<td width="55%"><textarea class="form-control" onchange="updateBlueprintAreaElementRowField(this);" id="description~' + b_id + '~' + a_id + '~' + row.id + '" rows="3">' + description + '</textarea></td>';
 				html += '<td width="10%"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteElement(' + b_id + ',' + a_id + ',' + row.id + ') }" style="width: 125px;"></td>';
 				html += '<textarea class="form-control" id="bstore~' + b_id + '~' + a_id + '~' + row.id + '" rows="5" style="display: none;">' + JSON.stringify(row, null, 2) + '</textarea>';
 				html += '</tr>';	
@@ -1384,6 +1441,7 @@ title: Admin - Blueprints
 						response.json().then(function(data) {
 							var rows = '';
 							if(data){
+								var list = '';
 								var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
 								//console.log(data);
 								if(data.length == 0){
@@ -1392,7 +1450,7 @@ title: Admin - Blueprints
 								else{	
 									var blueprint_html = document.getElementById("bview~" + b_id).value;							
 
-									var list = '<ul>';
+									list += '<ul>';
 									for (let i = 0; i < data.length; i++) {
 										rows += blueprintAreasElementsRow(b_id,a_id,data[i]);											
 										list += blueprintAreasElementsHTMLRow(b_id,a_id,data[i]);																			
@@ -1403,8 +1461,13 @@ title: Admin - Blueprints
 								rows += '</table></center>';
 
 								// somehackystuff
-								blueprint_html_array = blueprint_html.split('~' + a_id + '~');
-								blueprint_html = blueprint_html_array[0] + list + blueprint_html_array[1];
+								console.log('~' + a_id + '~');
+								blueprint_html = blueprint_html.replace('~' + a_id + '~',list);
+								//console.log(blueprint_html_array);
+								//blueprint_html += list + blueprint_html_array[1];
+
+								//blueprint_html = blueprint_html + '<p>' + document.getElementById('footer~' + b_id + '~' + a_id).value + '</p>';
+								//blueprint_html.replace("null","");
 								document.getElementById("bview~" + b_id).value = blueprint_html;
 
 								document.getElementById("area-element-list~" + b_id + '-' + a_id).innerHTML = rows;															
@@ -1508,6 +1571,7 @@ title: Admin - Blueprints
 				html += '<tr><td style="width: 15%; text-align: right;"><strong>Sort Order:</strong></td><td><input type="text" onchange="updateBlueprintAreaRowField(this);" class="form-control" id="sort_order~' + b_id + '~' + row.id + '" placeholder="" value="' + row.sort_order + '"></td><td width="5%" align="center"><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteArea(' + b_id + ',' + row.id + ') }" style="width: 125px;"></td></tr>';
 				html += '<tr><td style="width: 15%; text-align: right;"><strong>Label:</strong></td><td><input type="text" style="width: 100%;" onchange="updateBlueprintAreaRowField(this);" class="form-control" id="label~' + b_id + '~' + row.id + '" placeholder="" value="' + row.label + '"></td></td><td></td></tr>';
 				html += '<tr><td style="width: 15%; text-align: right;"><strong>Description:</strong></td><td><textarea class="form-control" style="width: 100%;" onchange="updateBlueprintAreaRowField(this);" id="description~' + b_id + '~' + row.id + '" rows="3">' + row.description + '</textarea></td></td><td></td></tr>';
+				html += '<tr><td style="width: 15%; text-align: right;"><strong>Footer:</strong></td><td><textarea class="form-control" style="width: 100%;" onchange="updateBlueprintAreaRowField(this);" id="footer~' + b_id + '~' + row.id + '" rows="3">' + row.footer + '</textarea></td></td><td></td></tr>';
 				html += '<tr><td style="width: 15%; text-align: right;"><strong>Image:</strong></td><td><input type="text" style="width: 100%;" class="form-control" onchange="updateBlueprintAreaRowField(this);" id="image~' + b_id + '~' + row.id + '" placeholder="images/blueprints/image.jpeg" value="' + row.image + '"></td></td><td></td></tr>';
 				html += '</table></center>';	
 				
@@ -1531,12 +1595,14 @@ title: Admin - Blueprints
 				var sort_order = document.getElementById('add-area-sort-order').value;
 				var label = document.getElementById('add-area-label').value;
 				var description = document.getElementById('add-area-description').value;
+				var footer = document.getElementById('add-area-footer').value;
 				var image = document.getElementById('add-area-image').value;
 
 				var postData = {};
 				postData.sort_order = sort_order;
 				postData.label = label;
 				postData.description = description;
+				postData.footer = footer;
 				postData.image = image;
 
 				console.log(JSON.stringify(postData));
@@ -1648,7 +1714,7 @@ title: Admin - Blueprints
 						body: JSON.stringify(postData)
 					};
 
-				fetch(tag_base_url + '/tags/',options)
+				fetch(tag_base_url + '/tags',options)
 					.then(function(response) {
 
 						response.json().then(function(data) {
@@ -1687,7 +1753,7 @@ title: Admin - Blueprints
 			function getBlueprintTags(b_id){
 
 				const options = {
-					method: 'get',
+					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
 						"x-api-key": token,
@@ -1759,6 +1825,7 @@ title: Admin - Blueprints
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
+				var footer = document.getElementById('add-footer').value;
 				var image = document.getElementById('add-image').value;
 				var version = document.getElementById('add-version').value;
 				var state = document.getElementById('add-state').value;
@@ -1941,7 +2008,7 @@ title: Admin - Blueprints
 				var html = '';
 
 				html += '<div style="display: none;">';
-				html += '<textarea class="form-control" id="bview~' + row.id + '" rows="5">bview~' + row.id + '</textarea>';
+				html += '<textarea class="form-control" id="bview~' + row.id + '" rows="5"></textarea>';
 				html += '</div>';
 
 				html += '<div class="accordion-item" id="blueprint-' + row.id + '">';					
@@ -1967,6 +2034,11 @@ title: Admin - Blueprints
 				html += '<td width=10%" align="right"><strong>Description:</strong></label></td>';
 				html += '<td><textarea class="form-control" onchange="updateBlueprintRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea></td>';
 				html += '</tr>';
+
+				html += '<tr>';
+				html += '<td width=10%" align="right"><strong>Footer:</strong></label></td>';
+				html += '<td><textarea class="form-control" onchange="updateBlueprintRowField(this);" id="footer~' + row.id + '" rows="3">' + row.footer + '</textarea></td>';
+				html += '</tr>';				
 
 				html += '<tr>';
 				html += '<td width=10%" align="right"><strong>Image:</strong></label></td>';
@@ -2151,7 +2223,7 @@ title: Admin - Blueprints
 							document.getElementById("blueprintAccordian").innerHTML = rows;
 							if(data){
 								for (let i = 0; i < data.length; i++) {
-									console.log("bview~" + data[i].id);
+									//console.log("bview~" + data[i].id);
 									document.getElementById("bview~" + data[i].id).value = blueprintHTMLRow(data[i],i);
 								}								
 							}							
@@ -2216,6 +2288,10 @@ title: Admin - Blueprints
 			  <textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
+				<label for="message-text" class="col-form-label">Footer:</label>
+				<textarea class="form-control" id="add-footer"></textarea>
+			  </div>			
+			<div class="form-group">
 			  <label for="recipient-name" class="col-form-label">Image:</label>
 			  <input type="text" class="form-control" id="add-image">
 			</div>				  
@@ -2269,6 +2345,10 @@ title: Admin - Blueprints
 			  <label for="add-area-description" class="col-form-label">Description:</label>
 			  <textarea class="form-control" id="add-area-description"></textarea>
 			</div>
+			<div class="form-group">
+				<label for="add-area-footer" class="col-form-label">Footer:</label>
+				<textarea class="form-control" id="add-area-footer"></textarea>
+			  </div>			
 			<div class="form-group">
 			  <label for="add-area-image" class="col-form-label">Image:</label>
 			  <input type="text" class="form-control" id="add-area-image">
@@ -2380,7 +2460,7 @@ title: Admin - Blueprints
 				<div class="form-group">
 					<label for="add-element-description" class="col-form-label">Description:</label>
 					<div>
-						<textarea class="form-control" id="add-element-description"></textarea>
+						<textarea class="form-control" id="add-element-description" style="height: 400px;"></textarea>
 					</div>
 				</div>			  
 			</form>

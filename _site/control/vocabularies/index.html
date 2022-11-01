@@ -66,9 +66,6 @@
           <li class="nav-item">
             <a class="nav-link" href="http://localhost:4000/control/elements/">Elements</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:4000/control/actions/">Actions</a>
-          </li>    
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="qaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Q&A
@@ -83,6 +80,9 @@
               Resources
             </a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
               <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
               <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
               <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
@@ -93,8 +93,6 @@
               Structure
             </a>
             <ul class="dropdown-menu" aria-labelledby="structureDropdown">
-              <a class="dropdown-item" href="http://localhost:4000/control/landscapes/">Landscapes</a>
-              <a class="dropdown-item" href="http://localhost:4000/control/personas/">Personas</a>
               <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
               <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
               <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
@@ -112,7 +110,11 @@
 
 <main class="flex-shrink-0"><div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
-
+		<script>
+			function changeToken(t){
+				Cookies.set('token',t)
+			}
+		</script>
 		<div class="row">
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
 			<div class="col">				
@@ -128,7 +130,7 @@
 			</div>	
 			<label for="limit" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Limit:</label>
 			<div class="col-1">				
-				<input type="text" class="form-control" id="limit" name="limit" value="5" style="text-align: center;">
+				<input type="text" class="form-control" id="limit" name="limit" value="100" style="text-align: center;">
 			</div>								
 			<div class="col-1">
 				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listVocabularies();" style="width: 75px;">
@@ -138,13 +140,39 @@
 			</div>			
 		</div>								
         
+		<script>
+
+			var search = getUrlVar('search');
+			document.getElementById('search').value = search;
+
+			var token = getUrlVar('token');				
+			console.log("token:" + token);
+			if(token){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token){
+				console.log("stored_token:" + stored_token);
+				document.getElementById('token').value = stored_token;	
+				token = stored_token;
+			}
+
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listblueprints").click();
+			  }
+			});	
+		</script>		
 		<div class="accordion" id="vocabularyAccordian" style="margin-top: 15px;"></div>
 
 		<script>
 
-			const vocabulary_base_url = 'https://n7xsi00pob.execute-api.us-east-1.amazonaws.com/staging';
-			const tag_base_url = 'https://lgcjunwzmf.execute-api.us-east-1.amazonaws.com/staging';
-			const token = document.getElementById("token").value;	
+			const vocabulary_base_url = 'https://47n3z44a22.execute-api.us-west-1.amazonaws.com/staging';
+			const tag_base_url = 'https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging';
 
 			function deleteVocabularyTag(id,tag_id){
 
@@ -288,12 +316,12 @@
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
-				var collection_id = document.getElementById('add-collection_id').value;
+				var priority = document.getElementById('add-priority').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
-				postData.collection_id = collection_id;
+				postData.priority = priority;
 
 				var options = {
 						method: "POST",
@@ -395,8 +423,8 @@
 				html += '</div>';
 
 				html += '<div class="form-group">';
-				html += '<label for="collection_id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection_id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
+				html += '<label for="priority-' + row.id + '"><strong>Priority:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="priority~' + row.id + '" placeholder="" value="' + row.priority + '">';
 				html += '</div>';
 				
 				html += '</form>';
@@ -464,6 +492,16 @@
 				});
 				
 			}
+
+			if (window.addEventListener){
+				window.addEventListener("load", listVocabularies, false);
+			}
+			else if (window.attachEvent){
+				window.attachEvent("onload", listVocabularies);
+			}
+			else{
+				window.onload = listVocabularies;	
+			}				
 		
 		</script>		
 
@@ -491,8 +529,8 @@
 			  <textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
-			  <label for="add-collection_id" class="col-form-label">Collection ID:</label>
-			  <input type="text" class="form-control" id="add-collection_id">
+			  <label for="add-priority" class="col-form-label">Priority:</label>
+			  <input type="text" class="form-control" id="add-priority">
 			</div>				  
 		  </form>
 		</div>

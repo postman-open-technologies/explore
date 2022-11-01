@@ -1,9 +1,114 @@
----
-layout: default
-title: Admin - Tools
----
 
-<div class="container" style="padding-top: 70px;">
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+   <meta name="generator" content="Hugo 0.88.1">
+   
+   <title>Admin - Projects</title>
+
+   <!---<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">--->
+   <link href="http://localhost:4000/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <meta name="theme-color" content="#7952b3">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Cookies.js - http://github.com/ScottHamper/Cookies -->
+    <script src="http://localhost:4000/assets/js/cookies.js"></script>
+
+    <script>
+
+        function getUrlVar(key){
+            var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+            return result && unescape(result[1]) || "";
+        }
+
+    </script>
+
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="http://localhost:4000/">Admin - Projects</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:4000/control/blueprints/">Blueprints</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:4000/control/elements/">Elements</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="qaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Q&A
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="qaDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/questions/">Questions</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/answers/">Answers</a>
+            </ul>
+          </li>  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
+            </ul>
+          </li>     
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="structureDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Structure
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="structureDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
+            </ul>
+          </li>                                                           
+        </ul>
+        <form class="d-flex">
+          <!--<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>-->
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="flex-shrink-0"><div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
 		<script>
 			function changeToken(t){
@@ -13,7 +118,7 @@ title: Admin - Tools
 		<div class="row">
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
 			<div class="col">				
-				<input type="text" class="form-control" id="token" name="token" value="{{ site.token }}">
+				<input type="text" class="form-control" id="token" name="token" value="token">
 			</div>
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Search:</label>
 			<div class="col">				
@@ -28,20 +133,19 @@ title: Admin - Tools
 				<input type="text" class="form-control" id="limit" name="limit" value="25" style="text-align: center;">
 			</div>								
 			<div class="col-1">
-				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listTools();" style="width: 75px;">
+				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listProjects();" style="width: 75px;">
 			</div>
 			<div class="col-1">
-				<input type="button" class="btn btn-success" name="show" value="Add Tool" onclick="openAddModal();" style="width: 125px;">
+				<input type="button" class="btn btn-success" name="show" value="Add Project" onclick="openAddModal();" style="width: 125px;">
 			</div>			
 		</div>								
-        
 		<script>
 
 			var search = getUrlVar('search');
 			document.getElementById('search').value = search;
 
 			var token = getUrlVar('token');				
-
+			console.log("token:" + token);
 			if(token){
 				document.getElementById('token').value = token;		
 				changeToken(token);
@@ -61,15 +165,15 @@ title: Admin - Tools
 				document.getElementById("listblueprints").click();
 			  }
 			});	
-		</script>		
-		<div class="accordion" id="toolAccordian" style="margin-top: 15px;"></div>
+		</script>        
+		<div class="accordion" id="projectAccordian" style="margin-top: 15px;"></div>
 
 		<script>
 
-			const tool_base_url = '{{ site.tools_base_url }}';
-			const tag_base_url = '{{ site.tags_base_url }}';
+			const project_base_url = 'https://ykkn4a4yx0.execute-api.us-west-1.amazonaws.com/staging';
+			const tag_base_url = 'https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging';
 
-			function deleteToolTag(id,tag_id){
+			function deleteProjectTag(id,tag_id){
 
 				var options = {
 						method: "DELETE",
@@ -78,9 +182,9 @@ title: Admin - Tools
 						"x-api-key": token
 						}
 					};
-				fetch(tool_base_url + '/tools/' + id + "/tags/" + tag_id,options)
+				fetch(project_base_url + '/projects/' + id + "/tags/" + tag_id,options)
 					.then(function(response) {						
-						getToolTags(id);
+						getProjectTags(id);
 						console.log("DELETED!");
 					})
 					.catch(function(err) {
@@ -89,13 +193,13 @@ title: Admin - Tools
 
 				}
 
-			function addToolTag(id){
+			function addProjectTag(id){
 
 				var name = document.getElementById('add-tag~' + id).value;
 
 				var postData = {};
 				postData.name = name;
-				console.log(postData);
+				console.log(token);
 
 				var options = {
 						method: "POST",
@@ -112,7 +216,7 @@ title: Admin - Tools
 						response.json().then(function(data) {
 							var tag_id = data.id;
 							var postData = {};
-							postData.tool_id = id;
+							postData.project_id = id;
 							postData.tag_id = tag_id;
 							var options = {
 									method: "POST",
@@ -123,9 +227,9 @@ title: Admin - Tools
 									body: JSON.stringify(postData)
 								};
 
-							fetch(tool_base_url + '/tools/' + id + '/tags',options)
+							fetch(project_base_url + '/projects/' + id + '/tags',options)
 								.then(function(response) {
-									getToolTags(id);							
+									getProjectTags(id);							
 								})
 								.catch(function(err) {
 									console.log('Error: ' + err);
@@ -142,8 +246,8 @@ title: Admin - Tools
 
 			}
 
-			function getToolTags(b_id){
-
+			function getProjectTags(b_id){
+				console.log(token);
 				const options = {
 					method: 'get',
 					headers: {
@@ -152,7 +256,7 @@ title: Admin - Tools
 					}
 				};		
 		
-				fetch(tool_base_url + '/tools/' + b_id + '/tags',options)
+				fetch(project_base_url + '/projects/' + b_id + '/tags',options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -161,7 +265,7 @@ title: Admin - Tools
 						response.json().then(function(data) {
 							var rows = '<div class="row-auto">';
 							for (let i = 0; i < data.length; i++) {
-								rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteToolTag(' + b_id + ',' + data[i].tag_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
+								rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteProjectTag(' + b_id + ',' + data[i].tag_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
 							}
 							document.getElementById("tag-list~" + b_id).innerHTML = rows;
 						});
@@ -171,22 +275,22 @@ title: Admin - Tools
 				});				
 			}
 
-			$('#toolAccordian').on('show.bs.collapse', function (e) {
+			$('#projectAccordian').on('show.bs.collapse', function (e) {
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");						
 		
-				getToolTags(b_id);
+				getProjectTags(b_id);
 
 			 	//alert("bluerprint: " + b_id);
 			})
 
-			$('#toolAccordian').on('hidden.bs.collapse', function (e) {
+			$('#projectAccordian').on('hidden.bs.collapse', function (e) {
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");
 			 	//alert("bluerprint: " + b_id);
 			})	
 
-			function deleteTool(id){
+			function deleteProject(id){
 
 				var options = {
 						method: "DELETE",
@@ -196,10 +300,10 @@ title: Admin - Tools
 						}
 					};
 
-				fetch(tool_base_url + '/tools/' + id,options)
+				fetch(project_base_url + '/projects/' + id,options)
 					.then(function(response) {
 						console.log("DELETED!");
-						listTools();
+						listProjects();
 					})
 					.catch(function(err) {
 						console.log('Error: ' + err);
@@ -207,17 +311,16 @@ title: Admin - Tools
 
 			}
 
-			function addTool(){
+			function addProject(){
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
 				var url = document.getElementById('add-url').value;
-				var collection_id = document.getElementById('add-collection_id').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
-				postData.collection_id = collection_id;
+				postData.url = url;
 
 				var options = {
 						method: "POST",
@@ -228,11 +331,10 @@ title: Admin - Tools
 						body: JSON.stringify(postData)
 					};
 
-				fetch(tool_base_url + '/tools/',options)
+				fetch(project_base_url + '/projects/',options)
 					.then(function(response) {
 						console.log("Added!");
-						console.log(response);
-						listTools();
+						listProjects();
 					})
 					.catch(function(err) {
 						console.log('Error: ' + err);
@@ -249,7 +351,7 @@ title: Admin - Tools
 				$("#showMe").modal('hide');				
 			}			
 			
-			function updateTool(id){
+			function updateProject(id){
 
 				const postData = JSON.parse(document.getElementById('bstore~' + id).value);
 
@@ -263,7 +365,7 @@ title: Admin - Tools
 						body: JSON.stringify(postData)
 					};
 
-				fetch(tool_base_url + '/tools/' + id,options)
+				fetch(project_base_url + '/projects/' + id,options)
 					.then(function(response) {
 						console.log("Updated!");
 					})
@@ -287,14 +389,14 @@ title: Admin - Tools
 
 				document.getElementById('bstore~' + id).value = JSON.stringify(bstore, null, 2);
 
-				updateTool(id);
+				updateProject(id);
 
 			}
 
-			function toolRow(row){
+			function projectRow(row){
 				var html = '';
 
-				html += '<div class="accordion-item" id="tool-' + row.id + '">';					
+				html += '<div class="accordion-item" id="project-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
 				html += '<button id="toggle-row-' + row.id + '" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' + row.id + '" aria-expanded="false" aria-controls="collapse-' + row.id + '" style="color: #000;">';	
 				html += row.name;
@@ -322,11 +424,6 @@ title: Admin - Tools
 				html += '<div class="form-group">';
 				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
 				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
-				html += '</div>';				
-
-				html += '<div class="form-group">';
-				html += '<label for="collection_id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection_id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
 				html += '</div>';
 				
 				html += '</form>';
@@ -341,7 +438,7 @@ title: Admin - Tools
 				html += '<input type="text" class="form-control" id="add-tag~' + row.id + '" placeholder="">';
 				html += '</div>';
 				html += '<div class="col-auto">';
-				html += '<button type="button" onclick="addToolTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
+				html += '<button type="button" onclick="addProjectTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
 				html += '</div>';
 				html += '</form>';	
 				html += '<div class="container">';
@@ -351,7 +448,7 @@ title: Admin - Tools
 				html += '</div>';						
 				html += '</div>';
 				html += '</div>';
-				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteTool(' + row.id + ') }" style="width: 125px;"></center>';				
+				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteProject(' + row.id + ') }" style="width: 125px;"></center>';				
 				html += '</div>';	
 				html += '</div>';	
 				html += '</div>';	
@@ -359,9 +456,7 @@ title: Admin - Tools
 				return html;
 			}
 		
-			function listTools(){
-
-				console.log("Listing!");
+			function listProjects(){
 
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
@@ -375,7 +470,7 @@ title: Admin - Tools
 					}
 				};		
 		
-				fetch(tool_base_url + '/tools/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(project_base_url + '/projects/?page=' + page + '&limit=' + limit + '&search=' + search,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -383,13 +478,12 @@ title: Admin - Tools
 						}
 						response.json().then(function(data) {
 							var rows = '';
-							console.log(data);
 							if(data){
 								for (let i = 0; i < data.length; i++) {
-									rows += toolRow(data[i],i);
+									rows += projectRow(data[i],i);
 								}
 							}
-							document.getElementById("toolAccordian").innerHTML = rows;
+							document.getElementById("projectAccordian").innerHTML = rows;
 						});
 					})
 					.catch(function(err) {
@@ -399,13 +493,13 @@ title: Admin - Tools
 			}
 
 			if (window.addEventListener){
-				window.addEventListener("load", listTools, false);
+				window.addEventListener("load", listProjects, false);
 			}
 			else if (window.attachEvent){
-				window.attachEvent("onload", listTools);
+				window.attachEvent("onload", listProjects);
 			}
 			else{
-				window.onload = listTools;	
+				window.onload = listProjects;	
 			}				
 		
 		</script>		
@@ -418,7 +512,7 @@ title: Admin - Tools
 	<div class="modal-dialog modal-xl" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h5 class="modal-title" id="showMeLabel">New Tool</h5>
+		  <h5 class="modal-title" id="showMeLabel">New Project</h5>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddModal();">
 			<span aria-hidden="true">&times;</span>
 		  </button>
@@ -434,19 +528,26 @@ title: Admin - Tools
 			  <textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="add-url" class="col-form-label">URL:</label>
-				<input type="text" class="form-control" id="add-url">
-			  </div>				
-			<div class="form-group">
-			  <label for="add-collection_id" class="col-form-label">Collection ID:</label>
-			  <input type="text" class="form-control" id="add-collection_id">
+			  <label for="add-url" class="col-form-label">URL:</label>
+			  <input type="text" class="form-control" id="add-url">
 			</div>				  
 		  </form>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddModal();">Close</button>
-		  <button type="button" class="btn btn-primary" onclick="addTool();">Add Tool</button>
+		  <button type="button" class="btn btn-primary" onclick="addProject();">Add Project</button>
 		</div>
 	  </div>
 	</div>
+  </div></main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Footer</span>
   </div>
+</footer>
+
+<script src="http://localhost:4000/assets/js/bootstrap.js"></script>    
+
+  </body>
+</html>

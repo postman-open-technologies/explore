@@ -5,7 +5,11 @@ title: Admin - Videos
 
 <div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
-
+		<script>
+			function changeToken(t){
+				Cookies.set('token',t)
+			}
+		</script>
 		<div class="row">
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
 			<div class="col">				
@@ -31,13 +35,39 @@ title: Admin - Videos
 			</div>			
 		</div>								
         
+		<script>
+
+			var search = getUrlVar('search');
+			document.getElementById('search').value = search;
+
+			var token = getUrlVar('token');				
+			console.log("token:" + token);
+			if(token){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token){
+				console.log("stored_token:" + stored_token);
+				document.getElementById('token').value = stored_token;	
+				token = stored_token;
+			}
+
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listblueprints").click();
+			  }
+			});		
+		</script>		
 		<div class="accordion" id="videoAccordian" style="margin-top: 15px;"></div>
 
 		<script>
 
 			const video_base_url = '{{ site.videos_base_url }}';
 			const tag_base_url = '{{ site.tags_base_url }}';
-			const token = document.getElementById("token").value;	
 
 			function deleteVideoTag(id,tag_id){
 

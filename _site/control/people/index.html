@@ -9,7 +9,7 @@
    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
    <meta name="generator" content="Hugo 0.88.1">
    
-   <title>Admin - Landscapes</title>
+   <title>Admin - Peoples</title>
 
    <!---<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">--->
    <link href="http://localhost:4000/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -51,7 +51,7 @@
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="http://localhost:4000/">Admin - Landscapes</a>
+      <a class="navbar-brand" href="http://localhost:4000/">Admin - Peoples</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -66,9 +66,6 @@
           <li class="nav-item">
             <a class="nav-link" href="http://localhost:4000/control/elements/">Elements</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:4000/control/actions/">Actions</a>
-          </li>    
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="qaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Q&A
@@ -83,6 +80,9 @@
               Resources
             </a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
               <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
               <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
               <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
@@ -93,8 +93,6 @@
               Structure
             </a>
             <ul class="dropdown-menu" aria-labelledby="structureDropdown">
-              <a class="dropdown-item" href="http://localhost:4000/control/landscapes/">Landscapes</a>
-              <a class="dropdown-item" href="http://localhost:4000/control/personas/">Personas</a>
               <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
               <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
               <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
@@ -112,7 +110,11 @@
 
 <main class="flex-shrink-0"><div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
-
+		<script>
+			function changeToken(t){
+				Cookies.set('token',t)
+			}
+		</script>
 		<div class="row">
 			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
 			<div class="col">				
@@ -128,25 +130,50 @@
 			</div>	
 			<label for="limit" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Limit:</label>
 			<div class="col-1">				
-				<input type="text" class="form-control" id="limit" name="limit" value="5" style="text-align: center;">
+				<input type="text" class="form-control" id="limit" name="limit" value="25" style="text-align: center;">
 			</div>								
 			<div class="col-1">
-				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listLandscapes();" style="width: 75px;">
+				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listPeoples();" style="width: 75px;">
 			</div>
 			<div class="col-1">
-				<input type="button" class="btn btn-success" name="show" value="Add Landscape" onclick="openAddModal();" style="width: 125px;">
+				<input type="button" class="btn btn-success" name="show" value="Add People" onclick="openAddModal();" style="width: 125px;">
 			</div>			
 		</div>								
-        
-		<div class="accordion" id="landscapeAccordian" style="margin-top: 15px;"></div>
+		<script>
+
+			var search = getUrlVar('search');
+			document.getElementById('search').value = search;
+
+			var token = getUrlVar('token');				
+			console.log("token:" + token);
+			if(token){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token){
+				console.log("stored_token:" + stored_token);
+				document.getElementById('token').value = stored_token;	
+				token = stored_token;
+			}
+
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listblueprints").click();
+			  }
+			});	
+		</script>        
+		<div class="accordion" id="peopleAccordian" style="margin-top: 15px;"></div>
 
 		<script>
 
-			const landscape_base_url = 'https://f4l1hlhy89.execute-api.us-east-1.amazonaws.com/staging';
-			const tag_base_url = 'https://lgcjunwzmf.execute-api.us-east-1.amazonaws.com/staging';
-			const token = document.getElementById("token").value;	
+			const people_base_url = 'https://nvrkuhfds2.execute-api.us-west-1.amazonaws.com/staging';
+			const tag_base_url = 'https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging';
 
-			function deleteLandscapeTag(id,tag_id){
+			function deletePeopleTag(id,tag_id){
 
 				var options = {
 						method: "DELETE",
@@ -155,9 +182,9 @@
 						"x-api-key": token
 						}
 					};
-				fetch(landscape_base_url + '/landscapes/' + id + "/tags/" + tag_id,options)
+				fetch(people_base_url + '/peoples/' + id + "/tags/" + tag_id,options)
 					.then(function(response) {						
-						getLandscapeTags(id);
+						getPeopleTags(id);
 						console.log("DELETED!");
 					})
 					.catch(function(err) {
@@ -166,13 +193,13 @@
 
 				}
 
-			function addLandscapeTag(id){
+			function addPeopleTag(id){
 
 				var name = document.getElementById('add-tag~' + id).value;
 
 				var postData = {};
 				postData.name = name;
-				console.log(postData);
+				console.log(token);
 
 				var options = {
 						method: "POST",
@@ -189,7 +216,7 @@
 						response.json().then(function(data) {
 							var tag_id = data.id;
 							var postData = {};
-							postData.landscape_id = id;
+							postData.people_id = id;
 							postData.tag_id = tag_id;
 							var options = {
 									method: "POST",
@@ -200,9 +227,9 @@
 									body: JSON.stringify(postData)
 								};
 
-							fetch(landscape_base_url + '/landscapes/' + id + '/tags',options)
+							fetch(people_base_url + '/peoples/' + id + '/tags',options)
 								.then(function(response) {
-									getLandscapeTags(id);							
+									getPeopleTags(id);							
 								})
 								.catch(function(err) {
 									console.log('Error: ' + err);
@@ -219,8 +246,8 @@
 
 			}
 
-			function getLandscapeTags(b_id){
-
+			function getPeopleTags(b_id){
+				console.log(token);
 				const options = {
 					method: 'get',
 					headers: {
@@ -229,7 +256,7 @@
 					}
 				};		
 		
-				fetch(landscape_base_url + '/landscapes/' + b_id + '/tags',options)
+				fetch(people_base_url + '/peoples/' + b_id + '/tags',options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -238,7 +265,7 @@
 						response.json().then(function(data) {
 							var rows = '<div class="row-auto">';
 							for (let i = 0; i < data.length; i++) {
-								rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteLandscapeTag(' + b_id + ',' + data[i].tag_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
+								rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deletePeopleTag(' + b_id + ',' + data[i].tag_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
 							}
 							document.getElementById("tag-list~" + b_id).innerHTML = rows;
 						});
@@ -248,22 +275,22 @@
 				});				
 			}
 
-			$('#landscapeAccordian').on('show.bs.collapse', function (e) {
+			$('#peopleAccordian').on('show.bs.collapse', function (e) {
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");						
 		
-				getLandscapeTags(b_id);
+				getPeopleTags(b_id);
 
 			 	//alert("bluerprint: " + b_id);
 			})
 
-			$('#landscapeAccordian').on('hidden.bs.collapse', function (e) {
+			$('#peopleAccordian').on('hidden.bs.collapse', function (e) {
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");
 			 	//alert("bluerprint: " + b_id);
 			})	
 
-			function deleteLandscape(id){
+			function deletePeople(id){
 
 				var options = {
 						method: "DELETE",
@@ -273,10 +300,10 @@
 						}
 					};
 
-				fetch(landscape_base_url + '/landscapes/' + id,options)
+				fetch(people_base_url + '/peoples/' + id,options)
 					.then(function(response) {
 						console.log("DELETED!");
-						listLandscapes();
+						listPeoples();
 					})
 					.catch(function(err) {
 						console.log('Error: ' + err);
@@ -284,26 +311,16 @@
 
 			}
 
-			function addLandscape(){
+			function addPeople(){
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
-				var version = document.getElementById('add-version').value;
-				var website = document.getElementById('add-website').value;
-				var api = document.getElementById('add-api').value;
-				var workspace = document.getElementById('add-workspace').value;
-				var rating = document.getElementById('add-rating').value;
-				var collection_id = document.getElementById('add-collection_id').value;
+				var url = document.getElementById('add-url').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
-				postData.version = version;
-				postData.website = website;
-				postData.api = api;
-				postData.workspace = workspace;
-				postData.rating = rating;
-				postData.collection_id = collection_id;
+				postData.url = url;
 
 				var options = {
 						method: "POST",
@@ -314,10 +331,10 @@
 						body: JSON.stringify(postData)
 					};
 
-				fetch(landscape_base_url + '/landscapes/',options)
+				fetch(people_base_url + '/peoples/',options)
 					.then(function(response) {
 						console.log("Added!");
-						listLandscapes();
+						listPeoples();
 					})
 					.catch(function(err) {
 						console.log('Error: ' + err);
@@ -334,7 +351,7 @@
 				$("#showMe").modal('hide');				
 			}			
 			
-			function updateLandscape(id){
+			function updatePeople(id){
 
 				const postData = JSON.parse(document.getElementById('bstore~' + id).value);
 
@@ -348,7 +365,7 @@
 						body: JSON.stringify(postData)
 					};
 
-				fetch(landscape_base_url + '/landscapes/' + id,options)
+				fetch(people_base_url + '/peoples/' + id,options)
 					.then(function(response) {
 						console.log("Updated!");
 					})
@@ -372,14 +389,14 @@
 
 				document.getElementById('bstore~' + id).value = JSON.stringify(bstore, null, 2);
 
-				updateLandscape(id);
+				updatePeople(id);
 
 			}
 
-			function landscapeRow(row){
+			function peopleRow(row){
 				var html = '';
 
-				html += '<div class="accordion-item" id="landscape-' + row.id + '">';					
+				html += '<div class="accordion-item" id="people-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
 				html += '<button id="toggle-row-' + row.id + '" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' + row.id + '" aria-expanded="false" aria-controls="collapse-' + row.id + '" style="color: #000;">';	
 				html += row.name;
@@ -405,33 +422,8 @@
 				html += '</div>';
 
 				html += '<div class="form-group">';
-				html += '<label for="version-' + row.id + '"><strong>Version:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="version~' + row.id + '" placeholder="" value="' + row.version + '">';
-				html += '</div>';	
-				
-				html += '<div class="form-group">';
-				html += '<label for="website-' + row.id + '"><strong>Website:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="website~' + row.id + '" placeholder="" value="' + row.website + '">';
-				html += '</div>';
-				
-				html += '<div class="form-group">';
-				html += '<label for="api-' + row.id + '"><strong>API:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="api~' + row.id + '" placeholder="" value="' + row.api + '">';
-				html += '</div>';		
-				
-				html += '<div class="form-group">';
-				html += '<label for="workspace-' + row.id + '"><strong>Workspace:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="workspace~' + row.id + '" placeholder="" value="' + row.workspace + '">';
-				html += '</div>';		
-				
-				html += '<div class="form-group">';
-				html += '<label for="rating-' + row.id + '"><strong>Rating:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="rating~' + row.id + '" placeholder="" value="' + row.rating + '">';
-				html += '</div>';								
-
-				html += '<div class="form-group">';
-				html += '<label for="collection_id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection_id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
+				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
 				html += '</div>';
 				
 				html += '</form>';
@@ -446,7 +438,7 @@
 				html += '<input type="text" class="form-control" id="add-tag~' + row.id + '" placeholder="">';
 				html += '</div>';
 				html += '<div class="col-auto">';
-				html += '<button type="button" onclick="addLandscapeTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
+				html += '<button type="button" onclick="addPeopleTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
 				html += '</div>';
 				html += '</form>';	
 				html += '<div class="container">';
@@ -456,7 +448,7 @@
 				html += '</div>';						
 				html += '</div>';
 				html += '</div>';
-				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteLandscape(' + row.id + ') }" style="width: 125px;"></center>';				
+				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deletePeople(' + row.id + ') }" style="width: 125px;"></center>';				
 				html += '</div>';	
 				html += '</div>';	
 				html += '</div>';	
@@ -464,7 +456,7 @@
 				return html;
 			}
 		
-			function listLandscapes(){
+			function listPeoples(){
 
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
@@ -478,7 +470,7 @@
 					}
 				};		
 		
-				fetch(landscape_base_url + '/landscapes/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(people_base_url + '/peoples/?page=' + page + '&limit=' + limit + '&search=' + search,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -488,10 +480,10 @@
 							var rows = '';
 							if(data){
 								for (let i = 0; i < data.length; i++) {
-									rows += landscapeRow(data[i],i);
+									rows += peopleRow(data[i],i);
 								}
 							}
-							document.getElementById("landscapeAccordian").innerHTML = rows;
+							document.getElementById("peopleAccordian").innerHTML = rows;
 						});
 					})
 					.catch(function(err) {
@@ -499,6 +491,16 @@
 				});
 				
 			}
+
+			if (window.addEventListener){
+				window.addEventListener("load", listPeoples, false);
+			}
+			else if (window.attachEvent){
+				window.attachEvent("onload", listPeoples);
+			}
+			else{
+				window.onload = listPeoples;	
+			}				
 		
 		</script>		
 
@@ -510,7 +512,7 @@
 	<div class="modal-dialog modal-xl" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h5 class="modal-title" id="showMeLabel">New Landscape</h5>
+		  <h5 class="modal-title" id="showMeLabel">New People</h5>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddModal();">
 			<span aria-hidden="true">&times;</span>
 		  </button>
@@ -526,35 +528,14 @@
 			  <textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="add-version" class="col-form-label">Version:</label>
-				<input type="text" class="form-control" id="add-version">
-			</div>	
-			<div class="form-group">
-				<label for="add-website" class="col-form-label">Website:</label>
-				<input type="text" class="form-control" id="add-website">
-			</div>
-			<div class="form-group">
-				<label for="add-api" class="col-form-label">API:</label>
-				<input type="text" class="form-control" id="add-api">
-			</div>
-			<div class="form-group">
-				<label for="add-workspace" class="col-form-label">Workspace:</label>
-				<input type="text" class="form-control" id="add-workspace">
-			</div>	
-			<div class="form-group">
-				<label for="add-rating" class="col-form-label">Rating:</label>
-				<input type="text" class="form-control" id="add-rating">
-			</div>														
-			<div class="form-group">
-			  <label for="add-collection_id" class="col-form-label">Collection ID:</label>
-			  <input type="text" class="form-control" id="add-collection_id">
+			  <label for="add-url" class="col-form-label">URL:</label>
+			  <input type="text" class="form-control" id="add-url">
 			</div>				  
 		  </form>
-
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddModal();">Close</button>
-		  <button type="button" class="btn btn-primary" onclick="addLandscape();">Add Landscape</button>
+		  <button type="button" class="btn btn-primary" onclick="addPeople();">Add People</button>
 		</div>
 	  </div>
 	</div>
