@@ -19,6 +19,10 @@ title: Admin - Vocabularies
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<label for="priority" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Priority:</label>
+			<div class="col-1">				
+				<input type="text" class="form-control" id="priority" name="priority" value="0" style="text-align: center;">
+			</div>				
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col-1">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
@@ -37,11 +41,19 @@ title: Admin - Vocabularies
         
 		<script>
 
-			var search = getUrlVar('search');
-			document.getElementById('search').value = search;
+			var search = getUrlVar('search');		
+			if(search){
+				document.getElementById('search').value = search;		
+				changeToken(search);
+			}
 
-			var token = getUrlVar('token');				
-			console.log("token:" + token);
+			var priority = getUrlVar('priority');		
+			if(priority){
+				document.getElementById('priority').value = priority;		
+				changeToken(priority);
+			}			
+
+			var token = getUrlVar('token');		
 			if(token){
 				document.getElementById('token').value = token;		
 				changeToken(token);
@@ -212,11 +224,15 @@ title: Admin - Vocabularies
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
 				var priority = document.getElementById('add-priority').value;
+				var domain = document.getElementById('add-domain').value;
+				var url = document.getElementById('add-url').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
 				postData.priority = priority;
+				postData.domain = domain;
+				postData.url = url;
 
 				var options = {
 						method: "POST",
@@ -261,7 +277,7 @@ title: Admin - Vocabularies
 						body: JSON.stringify(postData)
 					};
 
-				fetch(vocabulary_base_url + '/vocabularies/' + id,options)
+				fetch(vocabulary_base_url + '/vocabularies/' + id + '/',options)
 					.then(function(response) {
 						console.log("Updated!");
 					})
@@ -321,6 +337,16 @@ title: Admin - Vocabularies
 				html += '<label for="priority-' + row.id + '"><strong>Priority:</strong></label>';
 				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="priority~' + row.id + '" placeholder="" value="' + row.priority + '">';
 				html += '</div>';
+
+				html += '<div class="form-group">';
+				html += '<label for="name-' + row.id + '"><strong>Domain:</strong></label>';
+				html += '<input type="text" style="width: 100%;" onchange="updateRowField(this);" class="form-control" id="domain~' + row.id + '" placeholder="" value="' + row.domain + '">';
+				html += '</div>';		
+				
+				html += '<div class="form-group">';
+				html += '<label for="name-' + row.id + '"><strong>URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" onchange="updateRowField(this);" class="form-control" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
+				html += '</div>';					
 				
 				html += '</form>';
 
@@ -357,6 +383,7 @@ title: Admin - Vocabularies
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
+				var priority = document.getElementById("priority").value;
 		
 				const options = {
 					method: 'get',
@@ -366,7 +393,7 @@ title: Admin - Vocabularies
 					}
 				};		
 		
-				fetch(vocabulary_base_url + '/vocabularies/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(vocabulary_base_url + '/vocabularies/?page=' + page + '&limit=' + limit + '&search=' + search + '&priority=' + priority,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -426,7 +453,15 @@ title: Admin - Vocabularies
 			<div class="form-group">
 			  <label for="add-priority" class="col-form-label">Priority:</label>
 			  <input type="text" class="form-control" id="add-priority">
-			</div>				  
+			</div>		
+			<div class="form-group">
+				<label for="add-priority" class="col-form-label">Domain:</label>
+				<input type="text" class="form-control" id="add-domain">
+			  </div>	
+			  <div class="form-group">
+				<label for="add-priority" class="col-form-label">URL:</label>
+				<input type="text" class="form-control" id="add-url">
+			  </div>				  					  
 		  </form>
 		</div>
 		<div class="modal-footer">

@@ -3,8 +3,8 @@ description: Exploring the lifecycle
 
 image: https://postman-toolboxes2.s3.amazonaws.com/assets/api.png
 
-#url: /explore
-url: /
+url: /explore
+#url: /
 
 email: kin@postman.com
 
@@ -19,15 +19,22 @@ token: token
 
 actions_base_url: https://vexez2v4w5.execute-api.us-west-1.amazonaws.com/staging
 answers_base_url: https://x50jrd02h8.execute-api.us-west-1.amazonaws.com/staging
+blogs_base_url: https://e5nezzh8u5.execute-api.us-west-1.amazonaws.com/staging
 blueprints_base_url: https://4udoi6t3mh.execute-api.us-west-1.amazonaws.com/staging
+decks_base_url: https://fnkvs1v11k.execute-api.us-west-1.amazonaws.com/staging
 elements_base_url: https://3b2iqi9px6.execute-api.us-west-1.amazonaws.com/staging
+extensions_base_url: https://jjl23wv817.execute-api.us-west-1.amazonaws.com/staging
 links_base_url: https://78yhdhsr60.execute-api.us-west-1.amazonaws.com/staging
 organizations_base_url: https://n70lpt9l1l.execute-api.us-west-1.amazonaws.com/staging
+outcomes_base_url: https://b6wk89glmb.execute-api.us-west-1.amazonaws.com/staging
 peoples_base_url: https://nvrkuhfds2.execute-api.us-west-1.amazonaws.com/staging
 projects_base_url: https://ykkn4a4yx0.execute-api.us-west-1.amazonaws.com/staging
 questions_base_url: https://2o5v3kbgni.execute-api.us-west-1.amazonaws.com/staging
 roles_base_url: https://b4kx9lwqi2.execute-api.us-west-1.amazonaws.com/staging
 rules_base_url: https://hsjxv9z9j0.execute-api.us-west-1.amazonaws.com/staging
+slides_base_url: https://91a1kixyth.execute-api.us-west-1.amazonaws.com/staging
+specifications_base_url: https://r6a1drurab.execute-api.us-west-1.amazonaws.com/staging
+standards_base_url: https://1hlzgzesce.execute-api.us-west-1.amazonaws.com/staging
 tags_base_url: https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging
 tools_base_url: https://kac7bd592l.execute-api.us-west-1.amazonaws.com/staging
 videos_base_url: https://ceqrd5zkac.execute-api.us-west-1.amazonaws.com/staging

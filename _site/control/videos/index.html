@@ -61,6 +61,9 @@
             <a class="nav-link active" aria-current="page" href="http://localhost:4000/">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/control/editor/">Editor</a>
+          </li>          
+          <li class="nav-item">
             <a class="nav-link" href="http://localhost:4000/control/blueprints/">Blueprints</a>
           </li>          
           <li class="nav-item">
@@ -80,10 +83,13 @@
               Resources
             </a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/blogs/">Blogs</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/decks/">Decks</a>
               <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
               <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
               <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
               <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/slides/">Slides</a>
               <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
               <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
             </ul>
@@ -93,6 +99,9 @@
               Structure
             </a>
             <ul class="dropdown-menu" aria-labelledby="structureDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/outcomes/">Outcomes</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/specifications/">Specifications</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/standards/">Standards</a>
               <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
               <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
               <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
@@ -124,6 +133,9 @@
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<div class="col-2">				
+				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
+			</div>				
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col-1">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
@@ -142,8 +154,16 @@
         
 		<script>
 
-			var search = getUrlVar('search');
-			document.getElementById('search').value = search;
+
+		var search = getUrlVar('search');	
+			if(search){
+				document.getElementById('search').value = search;		
+			}
+			
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}	
 
 			var token = getUrlVar('token');				
 			console.log("token:" + token);
@@ -317,13 +337,11 @@
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
 				var url = document.getElementById('add-url').value;
-				var collection_id = document.getElementById('add-collection_id').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
 				postData.url = url;
-				postData.collection_id = collection_id;
 
 				var options = {
 						method: "POST",
@@ -428,11 +446,6 @@
 				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
 				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
 				html += '</div>';				
-
-				html += '<div class="form-group">';
-				html += '<label for="collection_id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection_id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
-				html += '</div>';
 				
 				html += '</form>';
 
@@ -538,11 +551,7 @@
 			<div class="form-group">
 				<label for="add-url" class="col-form-label">URL:</label>
 				<input type="text" class="form-control" id="add-url">
-			  </div>				
-			<div class="form-group">
-			  <label for="add-collection_id" class="col-form-label">Collection ID:</label>
-			  <input type="text" class="form-control" id="add-collection_id">
-			</div>				  
+			  </div>							  
 		  </form>
 		</div>
 		<div class="modal-footer">

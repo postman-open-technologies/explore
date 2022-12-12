@@ -19,6 +19,9 @@ title: Admin - Tools
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<div class="col-2">				
+				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
+			</div>				
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col-1">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
@@ -37,8 +40,15 @@ title: Admin - Tools
         
 		<script>
 
-			var search = getUrlVar('search');
-			document.getElementById('search').value = search;
+			var search = getUrlVar('search');	
+			if(search){
+				document.getElementById('search').value = search;		
+			}
+			
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}	
 
 			var token = getUrlVar('token');				
 
@@ -211,13 +221,10 @@ title: Admin - Tools
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
-				var url = document.getElementById('add-url').value;
-				var collection_id = document.getElementById('add-collection_id').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
-				postData.collection_id = collection_id;
 
 				var options = {
 						method: "POST",
@@ -323,11 +330,6 @@ title: Admin - Tools
 				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
 				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
 				html += '</div>';				
-
-				html += '<div class="form-group">';
-				html += '<label for="collection_id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection_id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
-				html += '</div>';
 				
 				html += '</form>';
 
@@ -432,15 +434,7 @@ title: Admin - Tools
 			<div class="form-group">
 			  <label for="message-text" class="col-form-label">Description:</label>
 			  <textarea class="form-control" id="add-description"></textarea>
-			</div>
-			<div class="form-group">
-				<label for="add-url" class="col-form-label">URL:</label>
-				<input type="text" class="form-control" id="add-url">
-			  </div>				
-			<div class="form-group">
-			  <label for="add-collection_id" class="col-form-label">Collection ID:</label>
-			  <input type="text" class="form-control" id="add-collection_id">
-			</div>				  
+			</div>			  
 		  </form>
 		</div>
 		<div class="modal-footer">

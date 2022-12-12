@@ -19,6 +19,9 @@ title: Admin - Organizations
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<div class="col-2">				
+				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
+			</div>				
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col-1">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
@@ -36,8 +39,15 @@ title: Admin - Organizations
 		</div>								
 		<script>
 
-			var search = getUrlVar('search');
-			document.getElementById('search').value = search;
+			var search = getUrlVar('search');	
+			if(search){
+				document.getElementById('search').value = search;		
+			}
+			
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}	
 
 			var token = getUrlVar('token');				
 			console.log("token:" + token);
@@ -317,9 +327,29 @@ title: Admin - Organizations
 				html += '</div>';
 
 				html += '<div class="form-group">';
-				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
+				html += '<label for="url-' + row.id + '"><strong>Website URL:</strong> (<a href="' + row.website_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="website_url~' + row.id + '" placeholder="" value="' + row.website_url + '">';
 				html += '</div>';
+
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Developer URL:</strong> (<a href="' + row.developer_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="developer_url~' + row.id + '" placeholder="" value="' + row.developer_url + '">';
+				html += '</div>';
+				
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Twitter URL:</strong> (<a href="' + row.twitter_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="twitter_url~' + row.id + '" placeholder="" value="' + row.twitter_url + '">';
+				html += '</div>';	
+				
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Github URL:</strong> (<a href="' + row.github_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="github_url~' + row.id + '" placeholder="" value="' + row.github_url + '">';
+				html += '</div>';	
+				
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Blog URL:</strong> (<a href="' + row.blog_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="blog_url~' + row.id + '" placeholder="" value="' + row.blog_url + '">';
+				html += '</div>';					
 				
 				html += '</form>';
 

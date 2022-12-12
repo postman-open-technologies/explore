@@ -61,6 +61,9 @@
             <a class="nav-link active" aria-current="page" href="http://localhost:4000/">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/control/editor/">Editor</a>
+          </li>          
+          <li class="nav-item">
             <a class="nav-link" href="http://localhost:4000/control/blueprints/">Blueprints</a>
           </li>          
           <li class="nav-item">
@@ -80,10 +83,13 @@
               Resources
             </a>
             <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/blogs/">Blogs</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/decks/">Decks</a>
               <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
               <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
               <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
               <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/slides/">Slides</a>
               <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
               <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
             </ul>
@@ -93,6 +99,9 @@
               Structure
             </a>
             <ul class="dropdown-menu" aria-labelledby="structureDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/outcomes/">Outcomes</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/specifications/">Specifications</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/standards/">Standards</a>
               <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
               <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
               <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
@@ -127,14 +136,18 @@
 			</div>	
 			<div class="col-1">				
 				<select class="form-control" id="role"></select>
-			</div>							
+			</div>		
+			<label for="rating" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Rating:</label>
+			<div class="col">				
+				<input type="text" class="form-control" id="rating" name="rating" value="0" style="text-align: center;">
+			</div>									
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
 			</div>	
 			<label for="limit" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Limit:</label>
 			<div class="col">				
-				<input type="text" class="form-control" id="limit" name="limit" value="10" style="text-align: center;">
+				<input type="text" class="form-control" id="limit" name="limit" value="100" style="text-align: center;">
 			</div>								
 			<div class="col">
 				<input type="button" class="btn btn-primary" name="listblueprints" id="listblueprints" value="Search" onclick="listBlueprints();">
@@ -145,15 +158,26 @@
 		</div>								
 		<script>
 
-			var search = getUrlVar('search');
-			document.getElementById('search').value = search;
-
-			var token = getUrlVar('token');				
-			console.log("token:" + token);
+			var token = getUrlVar('token');	
 			if(token){
 				document.getElementById('token').value = token;		
 				changeToken(token);
 			}
+
+			var search = getUrlVar('search');	
+			if(search){
+				document.getElementById('search').value = search;		
+			}
+			
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}		
+
+			var rating = getUrlVar('rating');	
+			if(rating){
+				document.getElementById('rating').value = rating;		
+			}				
 
 			var stored_token = Cookies.get('token');
 			if(stored_token){
@@ -1400,7 +1424,7 @@
 								body: JSON.stringify(postData)
 							};
 						console.log(options);
-						fetch(blueprint_base_url + '/elements/' + e_id,options)
+						fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id + '/elements/' + e_id,options)
 							.then(function(response) {
 								//console.log("Updated!");
 								//console.log(response);
@@ -1417,8 +1441,8 @@
 						var field = ua[0];
 						var b_id = ua[1];
 						var a_id = ua[2];
-						var e_id = ua[2];
-
+						var e_id = ua[3];
+						//console.log('bstore~' + b_id + "~" + a_id + "~" + e_id);
 						var bstore = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id + "~" + e_id).value);
 
 						bstore[field] = u.value;
@@ -1546,33 +1570,28 @@
 						response.json().then(function(data) {
 							var rows = '';
 							if(data){
+								var blueprint_html = document.getElementById("bview~" + b_id).value;	
 								var list = '';
 								var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
 								//console.log(data);
 								if(data.length == 0){
 									rows += '<p align="center">No Elements</p>';
 								}
-								else{	
-									var blueprint_html = document.getElementById("bview~" + b_id).value;							
+								else{																
 
 									list += '<ul>';
 									for (let i = 0; i < data.length; i++) {
+										console.log(data[i].name);
 										rows += blueprintAreasElementsRow(b_id,a_id,data[i]);											
 										list += blueprintAreasElementsHTMLRow(b_id,a_id,data[i]);																			
 									}
-									list += '</ul>';
-									document.getElementById("bview~" + b_id).value = blueprint_html;		
+									list += '</ul>';		
 								}
 								rows += '</table></center>';
 
 								// somehackystuff
-								console.log('~' + a_id + '~');
-								blueprint_html = blueprint_html.replace('~' + a_id + '~',list);
-								//console.log(blueprint_html_array);
-								//blueprint_html += list + blueprint_html_array[1];
+								blueprint_html = blueprint_html.replace('~area~' + a_id + '~',list);
 
-								//blueprint_html = blueprint_html + '<p>' + document.getElementById('footer~' + b_id + '~' + a_id).value + '</p>';
-								//blueprint_html.replace("null","");
 								document.getElementById("bview~" + b_id).value = blueprint_html;
 
 								document.getElementById("area-element-list~" + b_id + '-' + a_id).innerHTML = rows;															
@@ -1654,7 +1673,8 @@
 				var html = '';
 				html += '<h3 id="html-heading-' + row.id + '">' + row.label + '</h3>';				
 				html += '<p>' + row.description + '</p>';
-				html += '~' + row.id + '~';
+				html += '~area~' + row.id + '~';
+				html += '<p>' + row.footer + '</p>';
 				
 				return html;
 
@@ -1754,21 +1774,23 @@
 						}
 						response.json().then(function(data) {
 							var rows = '';
-							console.log(data);
 							if(data){
 								var rows = '';
 								console.log(data.length);
+								var blueprint_html = document.getElementById("bview~" + b_id).value;
+								var list  = '';
 								for (let i = 0; i < data.length; i++) {
-									//rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteBlueprintArea(' + b_id + ',' + data[i].area_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
+
 									rows += blueprintAreaRow(data[i],b_id);
 									document.getElementById("area-list~" + b_id).innerHTML = rows;																		
 									
-									var blueprint_html = document.getElementById("bview~" + b_id).value;
-									blueprint_html += blueprintAreaHTMLRow(data[i],b_id);
-									document.getElementById("bview~" + b_id).value = blueprint_html;
-									
+									// HTML View
+									list += blueprintAreaHTMLRow(data[i],b_id);	
+
 									listBlueprintAreasElements(b_id,data[i].id);	
-								}															
+								}	
+								blueprint_html = blueprint_html.replace('~' + b_id + '~',list);	
+								document.getElementById("bview~" + b_id).value = blueprint_html;														
 							}
 							else{
 								rows += '<p align="center">No Areas</p>';	
@@ -2106,6 +2128,8 @@
 				var html = '';					
 				html += '<h2 id="html-heading-' + row.id + '">' + row.name + '</h2>';				
 				html += '<p>' + row.description + '</p>';
+				html += '~' + row.id + '~';
+				html += '<p>' + row.footer + '</p>';
 				return html;
 			}
 
@@ -2156,8 +2180,8 @@
 				html += '</tr>';				
 				
 				html += '<tr>';
-				html += '<td width=10%" align="right"><strong>Collection ID:</strong></label></td>';
-				html += '<td><input type="text" style="width: 100%;" class="form-control" onchange="updateBlueprintRowField(this);" id="collection-id~' + row.id + '" placeholder="" value="' + row.collection_id + '"></td>';
+				html += '<td width=10%" align="right"><strong>Rating:</strong></label></td>';
+				html += '<td><input type="text" style="width: 5%; text-align: center;" class="form-control" onchange="updateBlueprintRowField(this);" id="rating~' + row.id + '" placeholder="" value="' + row.rating + '"></td>';
 				html += '</tr>';	
 				
 				html += '<tr>';
@@ -2299,6 +2323,7 @@
 			function listBlueprints(){
 
 				var page = document.getElementById("page").value;
+				var rating = document.getElementById("rating").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
 				var tags = document.getElementById("tags").value;
@@ -2312,7 +2337,7 @@
 					}
 				};		
 		
-				fetch(blueprint_base_url + '/blueprints/?page=' + page + '&limit=' + limit + '&search=' + search + '&tags=' + tags + '&role=' + role,options)
+				fetch(blueprint_base_url + '/blueprints/?page=' + page + '&limit=' + limit + '&rating=' + rating + '&search=' + search + '&tags=' + tags + '&role=' + role,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -2325,13 +2350,12 @@
 									rows += blueprintRow(data[i],i);
 								}							
 							}
-							document.getElementById("blueprintAccordian").innerHTML = rows;
+							document.getElementById("blueprintAccordian").innerHTML = rows;							
 							if(data){
 								for (let i = 0; i < data.length; i++) {
-									//console.log("bview~" + data[i].id);
 									document.getElementById("bview~" + data[i].id).value = blueprintHTMLRow(data[i],i);
 								}								
-							}							
+							}														
 						});
 					})
 					.catch(function(err) {

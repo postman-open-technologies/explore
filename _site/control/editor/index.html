@@ -1,0 +1,682 @@
+
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+   <meta name="generator" content="Hugo 0.88.1">
+   
+   <title>Admin - Editor</title>
+
+   <!---<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">--->
+   <link href="http://localhost:4000/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <meta name="theme-color" content="#7952b3">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Cookies.js - http://github.com/ScottHamper/Cookies -->
+    <script src="http://localhost:4000/assets/js/cookies.js"></script>
+
+    <script>
+
+        function getUrlVar(key){
+            var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+            return result && unescape(result[1]) || "";
+        }
+
+    </script>
+
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="http://localhost:4000/">Admin - Editor</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/control/editor/">Editor</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:4000/control/blueprints/">Blueprints</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:4000/control/elements/">Elements</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="qaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Q&A
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="qaDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/questions/">Questions</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/answers/">Answers</a>
+            </ul>
+          </li>  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/blogs/">Blogs</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/decks/">Decks</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/slides/">Slides</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
+            </ul>
+          </li>     
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="structureDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Structure
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="structureDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/outcomes/">Outcomes</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/specifications/">Specifications</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/standards/">Standards</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
+            </ul>
+          </li>                                                           
+        </ul>
+        <form class="d-flex">
+          <!--<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>-->
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="flex-shrink-0"><div class="container" style="padding-top: 70px; border: 0px solid #000;">
+	<div class="row">
+		<div class="col-8" style="border: 0px solid #000;">
+
+			<script>
+				function changeToken(t){
+					Cookies.set('token',t)
+				}
+			</script>
+			<div class="row">
+				<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
+				<div class="col">				
+					<input type="text" class="form-control" id="token" name="token" value="token">
+				</div>		
+			</div>	
+
+		<form>
+			<div class="mb-3">
+				<label for="title" class="form-label">Title</label>
+				<input type="text" class="form-control" id="title" aria-describedby="title">
+				<div id="emailHelp" class="form-text">Give your story a title.</div>
+			</div>
+			<div class="mb-3">
+				<label for="tags" class="form-label">Tags</label>
+				<script>
+					function changeTags(){
+						searchBlueprints();						
+						searchBlogs();	
+						searchVideos();
+						searchQuestions();
+						searchAnswers();
+						searchOrganizations();
+						searchTools();	
+					}
+				</script>
+				<input type="text" class="form-control" id="tags" aria-describedby="tags" onchange="changeTags();">
+				<div id="emailHelp" class="form-text">Add some tags to surface other content.</div>
+			</div>
+			</form>
+
+		<!-- Include Quill stylesheet -->
+		<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
+
+		<div class="mb-3">
+			<label for="tags" class="form-label">Body</label>		
+			<!-- Create the toolbar container -->
+			<div id="toolbar">
+				<span class="ql-formats">
+					<select class="ql-font"></select>
+					<select class="ql-size"></select>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-bold"></button>
+					<button class="ql-italic"></button>
+					<button class="ql-underline"></button>
+					<button class="ql-strike"></button>
+				</span>
+				<span class="ql-formats">
+					<select class="ql-color"></select>
+					<select class="ql-background"></select>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-script" value="sub"></button>
+					<button class="ql-script" value="super"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-header" value="1"></button>
+					<button class="ql-header" value="2"></button>
+					<button class="ql-blockquote"></button>
+					<button class="ql-code-block"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-list" value="ordered"></button>
+					<button class="ql-list" value="bullet"></button>
+					<button class="ql-indent" value="-1"></button>
+					<button class="ql-indent" value="+1"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-direction" value="rtl"></button>
+					<select class="ql-align"></select>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-link"></button>
+					<button class="ql-image"></button>
+					<button class="ql-video"></button>
+					<button class="ql-formula"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-clean"></button>
+				</span>
+			</div>
+
+			<script>
+	
+				var token = getUrlVar('token');				
+				console.log("token:" + token);
+				if(token){
+					document.getElementById('token').value = token;		
+					changeToken(token);
+				}
+	
+				var stored_token = Cookies.get('token');
+				if(stored_token){
+					console.log("stored_token:" + stored_token);
+					document.getElementById('token').value = stored_token;	
+					token = stored_token;
+				}
+
+				function copyLink(linkText) {
+					// Get the text field
+					var copyText = document.getElementById('link-' + linkText);
+
+					copyText.select();
+					copyText.setSelectionRange(0, 99999);
+					navigator.clipboard
+					.writeText(copyText.value)
+					.then(() => {
+						//alert("successfully copied");
+					})
+					.catch(() => {
+						//alert("something went wrong");
+					});
+
+					}				
+
+			</script>  					
+
+			<!-- Create the editor container -->
+			<div id="editor" style="height: 500px;"></div>
+			<input type="text" id="counter" value="0" style="display: none;" />
+			<!-- Include the Quill library -->
+			<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+			<!-- Initialize Quill editor -->
+			<script>
+
+			const blueprint_base_url = 'https://4udoi6t3mh.execute-api.us-west-1.amazonaws.com/staging';
+			const elements_base_url = 'https://3b2iqi9px6.execute-api.us-west-1.amazonaws.com/staging';
+			const tag_base_url = 'https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging';
+			const roles_base_url = 'https://b4kx9lwqi2.execute-api.us-west-1.amazonaws.com/staging';
+			const links_base_url = 'https://78yhdhsr60.execute-api.us-west-1.amazonaws.com/staging';
+			const videos_base_url = 'https://ceqrd5zkac.execute-api.us-west-1.amazonaws.com/staging';
+			const blogs_base_url = 'https://e5nezzh8u5.execute-api.us-west-1.amazonaws.com/staging';
+			const questions_base_url = 'https://2o5v3kbgni.execute-api.us-west-1.amazonaws.com/staging';
+			const answers_base_url = 'https://x50jrd02h8.execute-api.us-west-1.amazonaws.com/staging';
+			const organizations_base_url = 'https://n70lpt9l1l.execute-api.us-west-1.amazonaws.com/staging';
+			const tools_base_url = 'https://kac7bd592l.execute-api.us-west-1.amazonaws.com/staging';			
+			const vocabularies_base_url = 'https://47n3z44a22.execute-api.us-west-1.amazonaws.com/staging';	
+			
+			var editor = new Quill('#editor', {
+				modules: { toolbar: '#toolbar' },
+				theme: 'snow',
+			});
+
+			editor.on('text-change', function(delta, oldDelta, source) {
+			if (source == 'api') {
+				console.log("An API call triggered this change.");
+			} else if (source == 'user') {
+								
+				//console.log("A user action triggered this change.");
+				var counter = document.getElementById('counter').value;
+				counter = counter - 0;
+
+				if(counter == 25){
+				console.log("IN!!!");
+				var content = editor.getContents();
+				console.log(content.ops[0].insert);
+
+				var postData = {};
+				postData.content = content.ops[0].insert;
+				
+				const options = {
+					method: "POST",
+					headers: {
+					"Content-Type": "application/json",
+					"x-api-key": token
+					},
+					body: JSON.stringify(postData)
+				};		
+
+				fetch(vocabularies_base_url + '/vocabularies/content/links',options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {
+							var html = '<ul>';
+							if(data){
+								if(data.length > 0){
+								for (let i = 0; i < data.length; i++) {
+									let apos = String.fromCharCode(39);
+									html += '<li><input type="text" value="Hello World" id="link-' + data[i].id + '" style="display: none;">' + data[i].name + ' <a href="#" onclick="copyLink(' + apos + data[i].id + apos + '); return false;" target="_blank" style="color: #000;">COPY &rarr;</a></li>';
+								}	
+								document.getElementById('keywords-title').style.display = '';
+								document.getElementById('keywords').style.display = '';
+								}						
+							}	
+							html += '</ul>'
+							document.getElementById('keywords').innerHTML = html;
+							document.getElementById('counter').value = 0;
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});				
+				
+				}
+				document.getElementById('counter').value = counter + 1;				
+			}
+			});		
+
+			function searchBlueprints(){
+
+				var page = 0;
+				var limit = 10;
+				var tags = document.getElementById("tags").value;
+
+				document.getElementById('blueprints-title').style.display = 'none';
+				document.getElementById('blueprints').style.display = 'none';				
+
+				const options = {
+					method: 'get',
+					headers: {
+						"Content-Type": "application/json"
+					}
+				};		
+
+				fetch(blueprint_base_url + '/blueprints/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {
+							var html = '<ul>';
+							if(data){
+								if(data.length > 0){
+									for (let i = 0; i < data.length; i++) {
+
+										html += '<li>' + data[i].name + ' <a href="/control/blueprints/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+									}	
+									document.getElementById('blueprints-title').style.display = '';
+									document.getElementById('blueprints').style.display = '';
+								}						
+							}	
+							html += '</ul>'
+							document.getElementById('blueprints').innerHTML = html;
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});
+
+				}	
+				function searchVideos(){
+
+					var page = 0;
+					var limit = 10;
+					var tags = document.getElementById("tags").value;
+
+					document.getElementById('videos-title').style.display = 'none';
+					document.getElementById('videos').style.display = 'none';					
+
+					const options = {
+						method: 'get',
+						headers: {
+							"Content-Type": "application/json"
+						}
+					};		
+
+					fetch(videos_base_url + '/videos/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+						.then(function(response) {
+							if (!response.ok) {
+								console.log('Error with Status Code: ' + response.status);
+								return;
+							}
+							response.json().then(function(data) {
+								var html = '<ul>';
+								if(data){
+									if(data.length > 0){
+										for (let i = 0; i < data.length; i++) {
+
+											html += '<li>' + data[i].name + ' <a href="/control/videos/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+										}	
+										document.getElementById('videos-title').style.display = '';
+										document.getElementById('videos').style.display = '';
+									}															
+								}	
+								html += '</ul>'
+								document.getElementById('videos').innerHTML = html;
+							});
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});
+
+					}	
+					
+					function searchBlogs(){
+
+						var page = 0;
+						var limit = 10;
+						var tags = document.getElementById("tags").value;
+
+						document.getElementById('blogs-title').style.display = 'none';
+						document.getElementById('blogs').style.display = 'none';						
+
+						const options = {
+							method: 'get',
+							headers: {
+								"Content-Type": "application/json"
+							}
+						};		
+
+						fetch(blogs_base_url + '/blogs/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+							.then(function(response) {
+								if (!response.ok) {
+									console.log('Error with Status Code: ' + response.status);
+									return;
+								}
+								response.json().then(function(data) {
+									var html = '<ul>';
+									if(data){
+										if(data.length > 0){
+											for (let i = 0; i < data.length; i++) {
+
+												html += '<li>' + data[i].name + ' <a href="/control/blogs/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+											}	
+											document.getElementById('blogs-title').style.display = '';
+											document.getElementById('blogs').style.display = '';
+										}																
+									}	
+									html += '</ul>'
+									document.getElementById('blogs').innerHTML = html;
+								});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});
+
+						}
+						
+						function searchQuestions(){
+
+							var page = 0;
+							var limit = 10;
+							var tags = document.getElementById("tags").value;
+
+							document.getElementById('questions-title').style.display = 'none';
+							document.getElementById('questions').style.display = 'none';							
+
+							const options = {
+								method: 'get',
+								headers: {
+									"Content-Type": "application/json"
+								}
+							};		
+
+							fetch(questions_base_url + '/questions/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+								.then(function(response) {
+									if (!response.ok) {
+										console.log('Error with Status Code: ' + response.status);
+										return;
+									}
+									response.json().then(function(data) {
+										var html = '<ul>';
+										if(data){
+											if(data.length > 0){
+												for (let i = 0; i < data.length; i++) {
+
+													html += '<li>' + data[i].name + ' <a href="/control/questions/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+												}	
+												document.getElementById('questions-title').style.display = '';
+												document.getElementById('questions').style.display = '';
+											}						
+										}	
+										html += '</ul>'
+										document.getElementById('questions').innerHTML = html;
+									});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});
+
+							}	
+							
+							function searchAnswers(){
+
+								var page = 0;
+								var limit = 10;
+								var tags = document.getElementById("tags").value;
+
+								document.getElementById('answers-title').style.display = 'none';
+								document.getElementById('answers').style.display = 'none';								
+
+								const options = {
+									method: 'get',
+									headers: {
+										"Content-Type": "application/json"
+									}
+								};		
+
+								fetch(answers_base_url + '/answers/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+									.then(function(response) {
+										if (!response.ok) {
+											console.log('Error with Status Code: ' + response.status);
+											return;
+										}
+										response.json().then(function(data) {
+											var html = '<ul>';
+											if(data){
+												if(data.length > 0){
+													for (let i = 0; i < data.length; i++) {
+
+														html += '<li>' + data[i].name + ' <a href="/control/answers/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+													}	
+													document.getElementById('answers-title').style.display = '';
+													document.getElementById('answers').style.display = '';
+												}																			
+											}	
+											html += '</ul>'
+											document.getElementById('answers').innerHTML = html;
+										});
+									})
+									.catch(function(err) {
+										console.log('Error: ' + err);
+								});
+
+								}		
+								
+								function searchOrganizations(){
+
+									var page = 0;
+									var limit = 10;
+									var tags = document.getElementById("tags").value;
+
+									document.getElementById('organizations-title').style.display = 'none';
+									document.getElementById('organizations').style.display = 'none';									
+
+									const options = {
+										method: 'get',
+										headers: {
+											"Content-Type": "application/json"
+										}
+									};		
+
+									fetch(organizations_base_url + '/organizations/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+										.then(function(response) {
+											if (!response.ok) {
+												console.log('Error with Status Code: ' + response.status);
+												return;
+											}
+											response.json().then(function(data) {
+												var html = '<ul>';
+												if(data){
+													if(data.length > 0){
+														for (let i = 0; i < data.length; i++) {
+
+															html += '<li>' + data[i].name + ' <a href="/control/organizations/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+														}
+														document.getElementById('organizations-title').style.display = '';
+														document.getElementById('organizations').style.display = '';
+													}																					
+												}	
+												html += '</ul>'
+												document.getElementById('organizations').innerHTML = html;
+											});
+										})
+										.catch(function(err) {
+											console.log('Error: ' + err);
+									});
+
+									}	
+									
+									function searchTools(){
+
+										var page = 0;
+										var limit = 10;
+										var tags = document.getElementById("tags").value;
+
+										document.getElementById('tools-title').style.display = 'none';
+										document.getElementById('tools').style.display = 'none';										
+
+										const options = {
+											method: 'get',
+											headers: {
+												"Content-Type": "application/json"
+											}
+										};		
+
+										fetch(tools_base_url + '/tools/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+											.then(function(response) {
+												if (!response.ok) {
+													console.log('Error with Status Code: ' + response.status);
+													return;
+												}
+												response.json().then(function(data) {
+													var html = '<ul>';
+													if(data){
+														if(data.length > 0){
+															for (let i = 0; i < data.length; i++) {
+
+																html += '<li>' + data[i].name + ' <a href="/control/tools/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+															}	
+															document.getElementById('tools-title').style.display = '';
+															document.getElementById('tools').style.display = '';
+														}																					
+													}	
+													html += '</ul>'
+													document.getElementById('tools').innerHTML = html;
+												});
+											})
+											.catch(function(err) {
+												console.log('Error: ' + err);
+										});
+
+										}									
+			</script>
+
+			</div>
+		</div>
+		<div class="col-4" style="border: 0px solid #000;">
+
+			<h3 id="keywords-title" style="display: none;">Keywords</h3>
+			<div id="keywords" style="display: none;"><center>Enter tags to see keywords</center></div>
+
+			<h3 id="blueprints-title" style="display: none;">Blueprints</h3>
+			<div id="blueprints" style="display: none;"></div>
+
+			<h3 id="blogs-title" style="display: none;">Blogs</h3>
+			<div id="blogs" style="display: none;"></div>				
+
+			<h3 id="videos-title" style="display: none;">Videos</h3>
+			<div id="videos" style="display: none;"></div>	
+			
+			<h3 id="questions-title" style="display: none;">Questions</h3>
+			<div id="questions" style="display: none;"></div>	
+			
+			<h3 id="answers-title" style="display: none;">Answers</h3>
+			<div id="answers" style="display: none;"></div>				
+
+			<h3 id="organizations-title" style="display: none;">Organizations</h3>
+			<div id="organizations" style="display: none;"></div>				
+
+			<h3 id="tools-title" style="display: none;">Tools</h3>
+			<div id="tools" style="display: none;"></div>				
+
+		</div>		
+	</div>
+</div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Footer</span>
+  </div>
+</footer>
+
+<script src="http://localhost:4000/assets/js/bootstrap.js"></script>    
+
+  </body>
+</html>

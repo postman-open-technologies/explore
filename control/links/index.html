@@ -317,7 +317,7 @@ title: Admin - Links
 				html += '</div>';
 
 				html += '<div class="form-group">';
-				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
+				html += '<label for="url-' + row.id + '"><strong>URL:</strong> (<a href="' + row.url + '" target="_blank">View</a>)</label>';
 				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
 				html += '</div>';
 				
