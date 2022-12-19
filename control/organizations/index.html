@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: control
 title: Admin - Organizations
 ---
 
@@ -19,6 +19,7 @@ title: Admin - Organizations
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Tags:</label>
 			<div class="col-2">				
 				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
 			</div>				
@@ -28,13 +29,13 @@ title: Admin - Organizations
 			</div>	
 			<label for="limit" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Limit:</label>
 			<div class="col-1">				
-				<input type="text" class="form-control" id="limit" name="limit" value="25" style="text-align: center;">
+				<input type="text" class="form-control" id="limit" name="limit" value="100" style="text-align: center;">
 			</div>								
 			<div class="col-1">
 				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listOrganizations();" style="width: 75px;">
 			</div>
 			<div class="col-1">
-				<input type="button" class="btn btn-success" name="show" value="Add Organization" onclick="openAddModal();" style="width: 125px;">
+				<input type="button" class="btn btn-success" name="show" value="Add" onclick="openAddModal();" style="width: 125px;">
 			</div>			
 		</div>								
 		<script>
@@ -76,7 +77,237 @@ title: Admin - Organizations
 		<script>
 
 			const organization_base_url = '{{ site.organizations_base_url }}';
+			const element_base_url = '{{ site.elements_base_url }}';
 			const tag_base_url = '{{ site.tags_base_url }}';
+
+			function deleteOrganizationElement(b_id,a_id){
+
+				var options = {
+						method: "DELETE",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						}
+					};
+				console.log(organization_base_url + '/organizations/' + b_id + '/elements/' + a_id);
+				fetch(organization_base_url + '/organizations/' + b_id + '/elements/' + a_id,options)
+					.then(function(response) {
+						console.log("DELETED!");	
+						listOrganizationElements(b_id)(b_id)
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});	
+
+				}					
+
+			function updateOrganizationElement(b_id,a_id){
+
+				const postData = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id).value);
+
+				delete postData.id;
+				delete postData.organization_id;
+				var options = {
+						method: "PUT",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+				console.log(options);
+				fetch(organization_base_url + '/organizations/' + b_id + "/elements/" + a_id,options)
+					.then(function(response) {
+						//console.log("Updated!");
+						//console.log(response);
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});				
+
+			}				
+
+			function updateOrganizationElementRowField(u){
+
+				var ua = u.id.split("~");
+				var field = ua[0];
+				var b_id = ua[1];
+				var a_id = ua[2];
+
+				var bstore = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id).value);
+
+				bstore[field] = u.value;
+
+				document.getElementById('bstore~' + b_id + "~" + a_id).value = JSON.stringify(bstore, null, 2);
+
+				updateOrganizationElement(b_id,a_id);
+
+			}			
+			
+			function addOrganizationElement(id){
+
+				var name = document.getElementById('add-element~' + id).value;
+
+				var postData = {};
+				postData.name = name;
+				console.log(token);
+
+				var options = {
+						method: "POST",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+
+				fetch(element_base_url + '/elements/',options)
+					.then(function(response) {
+
+						response.json().then(function(data) {
+							var element_id = data.id;
+							var postData = {};
+							postData.organization_id = id;
+							postData.element_id = element_id;
+							var options = {
+									method: "POST",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									},
+									body: JSON.stringify(postData)
+								};
+
+							fetch(organization_base_url + '/organizations/' + id + '/elements',options)
+								.then(function(response) {
+									getOrganizationTags(id);							
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});		
+						
+						});	
+
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});					
+
+				$("#showMe").modal('hide');	
+
+				}			
+
+			function organizationElementHTMLRow(row,b_id){
+
+				var html = '';
+				html += '<h3 id="html-heading-' + row.id + '">' + row.label + '</h3>';				
+				html += '<p>' + row.description + '</p>';
+				html += '~element~' + row.id + '~';
+				html += '<p>' + row.footer + '</p>';
+
+				return html;
+
+			}
+
+			function organizationElementRow(row,b_id){
+
+				if(row.rating ==1){
+					var html = '<li><strong>' + row.name + ' (<a href="#" onclick="deleteOrganizationElement(' + b_id + ',' + row.id + ')">Delete</a>)</strong></li>';	
+				}
+				else{
+					var html = '<li>' + row.name + ' (<a href="#" onclick="deleteOrganizationElement(' + b_id + ',' + row.id + ')">Delete</a>)</li>';	
+				}
+
+				return html;
+				}
+
+				function addElement(){
+
+				var b_id = document.getElementById('add-element-organization-id').value;
+				var sort_order = document.getElementById('add-element-sort-order').value;
+				var label = document.getElementById('add-element-label').value;
+				var description = document.getElementById('add-element-description').value;
+				var footer = document.getElementById('add-element-footer').value;
+				var image = document.getElementById('add-element-image').value;
+
+				var postData = {};
+				postData.sort_order = sort_order;
+				postData.label = label;
+				postData.description = description;
+				postData.footer = footer;
+				postData.image = image;
+
+				console.log(JSON.stringify(postData));
+
+				var options = {
+					method: "POST",
+					headers: {
+					"Content-Type": "application/json",
+					"x-api-key": token
+					},
+					body: JSON.stringify(postData)
+				};
+
+				fetch(organization_base_url + '/organizations/' + b_id + '/elements',options)
+				.then(function(response) {
+					console.log(response);
+					listOrganizationElements(b_id);
+				})
+				.catch(function(err) {
+					console.log('Error: ' + err);
+				});	
+
+				$("#addElement").modal('hide');	
+
+			}	
+					
+			function listOrganizationElements(b_id){
+
+				const options = {
+					method: 'get',
+					headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token,
+					}
+					};		
+
+				fetch(organization_base_url + '/organizations/' + b_id + '/elements/',options)
+				.then(function(response) {
+					if (!response.ok) {
+						console.log('Error with Status Code: ' + response.status);
+						return;
+					}
+					response.json().then(function(data) {
+						var rows = '';
+						if(data){
+							var rows = '';
+							console.log(data.length);
+							var organization_html = document.getElementById("bview~" + b_id).value;
+							var list  = '<ul>';
+							for (let i = 0; i < data.length; i++) {
+
+								rows += organizationElementRow(data[i],b_id);
+								document.getElementById("element-list~" + b_id).innerHTML = rows;																		
+								
+								// HTML View
+								list += organizationElementHTMLRow(data[i],b_id);	
+
+							}	
+							list += '</ul>';
+							organization_html = organization_html.replace('~' + b_id + '~',list);	
+							document.getElementById("bview~" + b_id).value = organization_html;														
+						}
+						else{
+							rows += '<p align="center">No Elements</p>';	
+							document.getElementById("element-list~" + b_id).innerHTML = rows;						
+						}							
+					});
+				})
+				.catch(function(err) {
+					console.log('Error: ' + err);
+				});
+
+			}
 
 			function deleteOrganizationTag(id,tag_id){
 
@@ -181,18 +412,18 @@ title: Admin - Organizations
 			}
 
 			$('#organizationAccordian').on('show.bs.collapse', function (e) {
+
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");						
 		
+				listOrganizationElements(b_id);
 				getOrganizationTags(b_id);
 
-			 	//alert("bluerprint: " + b_id);
 			})
 
 			$('#organizationAccordian').on('hidden.bs.collapse', function (e) {
 				var row_id = e.target.id;
 				var b_id = row_id.replace("collapse-","");
-			 	//alert("bluerprint: " + b_id);
 			})	
 
 			function deleteOrganization(id){
@@ -220,12 +451,20 @@ title: Admin - Organizations
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
-				var url = document.getElementById('add-url').value;
+				var website_url = document.getElementById('add-website_url').value;
+				var developer_url = document.getElementById('add-developer_url').value;
+				var twitter_url = document.getElementById('add-twitter_url').value;
+				var github_url = document.getElementById('add-github_url').value;
+				var blog_url = document.getElementById('add-blog_url').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
-				postData.url = url;
+				postData.website_url = website_url;
+				postData.developer_url = developer_url;
+				postData.twitter_url = twitter_url;
+				postData.github_url = github_url;
+				postData.blog_url = blog_url;
 
 				var options = {
 						method: "POST",
@@ -301,6 +540,10 @@ title: Admin - Organizations
 			function organizationRow(row){
 				var html = '';
 
+				html += '<div style="display: none;">';
+				html += '<textarea class="form-control" id="bview~' + row.id + '" rows="5"></textarea>';
+				html += '</div>';
+
 				html += '<div class="accordion-item" id="organization-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
 				html += '<button id="toggle-row-' + row.id + '" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' + row.id + '" aria-expanded="false" aria-controls="collapse-' + row.id + '" style="color: #000;">';	
@@ -365,7 +608,8 @@ title: Admin - Organizations
 				html += '<div class="col-auto">';
 				html += '<button type="button" onclick="addOrganizationTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
 				html += '</div>';
-				html += '</form>';	
+				html += '</form>';
+
 				html += '<div class="container">';
 				html += '<div class="row">';			
 				html += '<div class="container" id="tag-list~' + row.id + '">';
@@ -373,7 +617,31 @@ title: Admin - Organizations
 				html += '</div>';						
 				html += '</div>';
 				html += '</div>';
+
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Elements</h3>';
+				html += '</div>';					
+				html += '<div class="col-auto">';
+				html += '<input type="text" class="form-control" id="add-element~' + row.id + '" placeholder="">';
+				html += '</div>';
+				html += '<div class="col-auto">';
+				html += '<button type="button" onclick="addOrganizationElement(' + row.id + ');" class="btn btn-primary mb-3">Add Element</button>';
+				html += '</div>';
+				html += '</form>';
+					
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="element-list~' + row.id + '">';
+				html += 'List Elements Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';				
+				
 				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteOrganization(' + row.id + ') }" style="width: 125px;"></center>';				
+
 				html += '</div>';	
 				html += '</div>';	
 				html += '</div>';	
@@ -386,6 +654,7 @@ title: Admin - Organizations
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
+				var tags = document.getElementById("tags").value;
 		
 				const options = {
 					method: 'get',
@@ -395,7 +664,7 @@ title: Admin - Organizations
 					}
 				};		
 		
-				fetch(organization_base_url + '/organizations/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(organization_base_url + '/organizations/?page=' + page + '&limit=' + limit + '&search=' + search + '&tags=' + tags,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -453,9 +722,25 @@ title: Admin - Organizations
 			  <textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
-			  <label for="add-url" class="col-form-label">URL:</label>
-			  <input type="text" class="form-control" id="add-url">
-			</div>				  
+			  <label for="add-website_url" class="col-form-label">Website URL:</label>
+			  <input type="text" class="form-control" id="add-website_url">
+			</div>	
+			<div class="form-group">
+				<label for="add-developer_url" class="col-form-label">Developer URL:</label>
+				<input type="text" class="form-control" id="add-developer_url">
+			  </div>
+			  <div class="form-group">
+				<label for="add-twitter_url" class="col-form-label">Twitter URL:</label>
+				<input type="text" class="form-control" id="add-twitter_url">
+			  </div>
+			  <div class="form-group">
+				<label for="add-github_url" class="col-form-label">Github URL:</label>
+				<input type="text" class="form-control" id="add-github_url">
+			  </div>			  			  		
+			  <div class="form-group">
+				<label for="add-blog_url" class="col-form-label">Blog URL:</label>
+				<input type="text" class="form-control" id="add-blog_url">
+			  </div>				  
 		  </form>
 		</div>
 		<div class="modal-footer">

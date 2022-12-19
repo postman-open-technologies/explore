@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: control
 title: Admin - Peoples
 ---
 
@@ -19,6 +19,10 @@ title: Admin - Peoples
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Tags:</label>
+			<div class="col-2">				
+				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
+			</div>				
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col-1">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
@@ -39,8 +43,12 @@ title: Admin - Peoples
 			var search = getUrlVar('search');
 			document.getElementById('search').value = search;
 
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}
+
 			var token = getUrlVar('token');				
-			console.log("token:" + token);
 			if(token){
 				document.getElementById('token').value = token;		
 				changeToken(token);
@@ -210,12 +218,22 @@ title: Admin - Peoples
 
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
-				var url = document.getElementById('add-url').value;
+				var website_url = document.getElementById('add-website_url').value;
+				var blog_url = document.getElementById('add-blog_url').value;
+				var twitter_url = document.getElementById('add-twitter_url').value;
+				var mastodon_url = document.getElementById('add-mastodon_url').value;
+				var linkedin_url = document.getElementById('add-linkedin_url').value;
+				var github_url = document.getElementById('add-github_url').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
-				postData.url = url;
+				postData.website_url = website_url;
+				postData.blog_url = blog_url;
+				postData.twitter_url = twitter_url;
+				postData.mastodon_url = mastodon_url;
+				postData.linkedin_url = linkedin_url;
+				postData.github_url = github_url;
 
 				var options = {
 						method: "POST",
@@ -317,9 +335,34 @@ title: Admin - Peoples
 				html += '</div>';
 
 				html += '<div class="form-group">';
-				html += '<label for="url-' + row.id + '"><strong>URL:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="url~' + row.id + '" placeholder="" value="' + row.url + '">';
+				html += '<label for="website_url-' + row.id + '"><strong>Website URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="website_url~' + row.id + '" placeholder="" value="' + row.website_url + '">';
 				html += '</div>';
+
+				html += '<div class="form-group">';
+				html += '<label for="blog_url-' + row.id + '"><strong>Blog URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="blog_url~' + row.id + '" placeholder="" value="' + row.blog_url + '">';
+				html += '</div>';
+				
+				html += '<div class="form-group">';
+				html += '<label for="twitter_url-' + row.id + '"><strong>Twitter URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="twitter_url~' + row.id + '" placeholder="" value="' + row.twitter_url + '">';
+				html += '</div>';
+				
+				html += '<div class="form-group">';
+				html += '<label for="mastodon_url-' + row.id + '"><strong>Mastodon URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="mastodon_url~' + row.id + '" placeholder="" value="' + row.mastodon_url + '">';
+				html += '</div>';
+
+				html += '<div class="form-group">';
+				html += '<label for="linkedin_url-' + row.id + '"><strong>LinkedIn URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="linkedin_url~' + row.id + '" placeholder="" value="' + row.linkedin_url + '">';
+				html += '</div>';
+				
+				html += '<div class="form-group">';
+				html += '<label for="github_url-' + row.id + '"><strong>GitHub URL:</strong></label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="github_url~' + row.id + '" placeholder="" value="' + row.github_url + '">';
+				html += '</div>';				
 				
 				html += '</form>';
 
@@ -356,6 +399,7 @@ title: Admin - Peoples
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
+				var tags = document.getElementById("tags").value;
 		
 				const options = {
 					method: 'get',
@@ -365,7 +409,7 @@ title: Admin - Peoples
 					}
 				};		
 		
-				fetch(people_base_url + '/peoples/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(people_base_url + '/peoples/?page=' + page + '&limit=' + limit + '&search=' + search + '&tags=' + tags,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);
@@ -423,9 +467,29 @@ title: Admin - Peoples
 			  <textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
-			  <label for="add-url" class="col-form-label">URL:</label>
-			  <input type="text" class="form-control" id="add-url">
-			</div>				  
+			  <label for="add-website_url" class="col-form-label">Website URL:</label>
+			  <input type="text" class="form-control" id="add-website_url">
+			</div>		
+			<div class="form-group">
+				<label for="add-blog_url" class="col-form-label">Blog URL:</label>
+				<input type="text" class="form-control" id="add-blog_url">
+			</div>	
+			<div class="form-group">
+				<label for="add-twitter_url" class="col-form-label">Twitter URL:</label>
+				<input type="text" class="form-control" id="add-twitter_url">
+			</div>	
+			<div class="form-group">
+				<label for="add-mastodon_url" class="col-form-label">Mastodon URL:</label>
+				<input type="text" class="form-control" id="add-mastodon_url">
+			</div>		
+			<div class="form-group">
+				<label for="add-linkedin_url" class="col-form-label">LinkedIn URL:</label>
+				<input type="text" class="form-control" id="add-linkedin_url">
+			</div>	
+			<div class="form-group">
+				<label for="add-github_url" class="col-form-label">GitHub URL:</label>
+				<input type="text" class="form-control" id="add-github_url">
+			</div>						  					  
 		  </form>
 		</div>
 		<div class="modal-footer">

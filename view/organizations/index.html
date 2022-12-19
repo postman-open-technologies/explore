@@ -1,0 +1,728 @@
+---
+layout: view
+title: Admin - Organizations
+---
+
+<div class="container" style="padding-top: 70px;">
+	<div class="row align-top">
+		<script>
+			function changeToken(t){
+				Cookies.set('token',t)
+			}
+		</script>
+		<div class="row">
+			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
+			<div class="col">				
+				<input type="text" class="form-control" id="token" name="token" value="{{ site.token }}">
+			</div>
+			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Search:</label>
+			<div class="col">				
+				<input type="text" class="form-control" id="search" name="search" value="">
+			</div>	
+			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Tags:</label>
+			<div class="col-2">				
+				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
+			</div>				
+			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
+			<div class="col-1">				
+				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
+			</div>	
+			<label for="limit" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Limit:</label>
+			<div class="col-1">				
+				<input type="text" class="form-control" id="limit" name="limit" value="100" style="text-align: center;">
+			</div>								
+			<div class="col-1">
+				<input type="button" class="btn btn-primary" name="list" value="Search" onclick="listOrganizations();" style="width: 75px;">
+			</div>
+			<div class="col-1">
+				<input type="button" class="btn btn-success" name="show" value="Add" onclick="openAddModal();" style="width: 125px;">
+			</div>			
+		</div>								
+		<script>
+
+			var search = getUrlVar('search');	
+			if(search){
+				document.getElementById('search').value = search;		
+			}
+			
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}	
+
+			var token = getUrlVar('token');				
+			console.log("token:" + token);
+			if(token){
+				document.getElementById('token').value = token;		
+				changeToken(token);
+			}
+
+			var stored_token = Cookies.get('token');
+			if(stored_token){
+				console.log("stored_token:" + stored_token);
+				document.getElementById('token').value = stored_token;	
+				token = stored_token;
+			}
+
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("listblueprints").click();
+			  }
+			});	
+		</script>        
+		<div class="accordion" id="organizationAccordian" style="margin-top: 15px;"></div>
+
+		<script>
+
+			const organization_base_url = '{{ site.organizations_base_url }}';
+			const element_base_url = '{{ site.elements_base_url }}';
+			const tag_base_url = '{{ site.tags_base_url }}';
+
+			function deleteOrganizationElement(b_id,a_id){
+
+				var options = {
+						method: "DELETE",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						}
+					};
+				console.log(organization_base_url + '/organizations/' + b_id + '/elements/' + a_id);
+				fetch(organization_base_url + '/organizations/' + b_id + '/elements/' + a_id,options)
+					.then(function(response) {
+						console.log("DELETED!");	
+						listOrganizationElements(b_id)(b_id)
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});	
+
+				}					
+
+			function updateOrganizationElement(b_id,a_id){
+
+				const postData = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id).value);
+
+				delete postData.id;
+				delete postData.organization_id;
+				var options = {
+						method: "PUT",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+				console.log(options);
+				fetch(organization_base_url + '/organizations/' + b_id + "/elements/" + a_id,options)
+					.then(function(response) {
+						//console.log("Updated!");
+						//console.log(response);
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});				
+
+			}				
+
+			function updateOrganizationElementRowField(u){
+
+				var ua = u.id.split("~");
+				var field = ua[0];
+				var b_id = ua[1];
+				var a_id = ua[2];
+
+				var bstore = JSON.parse(document.getElementById('bstore~' + b_id + "~" + a_id).value);
+
+				bstore[field] = u.value;
+
+				document.getElementById('bstore~' + b_id + "~" + a_id).value = JSON.stringify(bstore, null, 2);
+
+				updateOrganizationElement(b_id,a_id);
+
+			}			
+			
+			function addOrganizationElement(id){
+
+				var name = document.getElementById('add-element~' + id).value;
+
+				var postData = {};
+				postData.name = name;
+				console.log(token);
+
+				var options = {
+						method: "POST",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+
+				fetch(element_base_url + '/elements/',options)
+					.then(function(response) {
+
+						response.json().then(function(data) {
+							var element_id = data.id;
+							var postData = {};
+							postData.organization_id = id;
+							postData.element_id = element_id;
+							var options = {
+									method: "POST",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									},
+									body: JSON.stringify(postData)
+								};
+
+							fetch(organization_base_url + '/organizations/' + id + '/elements',options)
+								.then(function(response) {
+									getOrganizationTags(id);							
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});		
+						
+						});	
+
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});					
+
+				$("#showMe").modal('hide');	
+
+				}			
+
+			function organizationElementHTMLRow(row,b_id){
+
+				var html = '';
+				html += '<h3 id="html-heading-' + row.id + '">' + row.label + '</h3>';				
+				html += '<p>' + row.description + '</p>';
+				html += '~element~' + row.id + '~';
+				html += '<p>' + row.footer + '</p>';
+
+				return html;
+
+			}
+
+			function organizationElementRow(row,b_id){
+
+				if(row.rating ==1){
+					var html = '<li><strong>' + row.name + ' (<a href="#" onclick="deleteOrganizationElement(' + b_id + ',' + row.id + ')">Delete</a>)</strong></li>';	
+				}
+				else{
+					var html = '<li>' + row.name + ' (<a href="#" onclick="deleteOrganizationElement(' + b_id + ',' + row.id + ')">Delete</a>)</li>';	
+				}
+
+				return html;
+				}
+
+				function addElement(){
+
+				var b_id = document.getElementById('add-element-organization-id').value;
+				var sort_order = document.getElementById('add-element-sort-order').value;
+				var label = document.getElementById('add-element-label').value;
+				var description = document.getElementById('add-element-description').value;
+				var footer = document.getElementById('add-element-footer').value;
+				var image = document.getElementById('add-element-image').value;
+
+				var postData = {};
+				postData.sort_order = sort_order;
+				postData.label = label;
+				postData.description = description;
+				postData.footer = footer;
+				postData.image = image;
+
+				console.log(JSON.stringify(postData));
+
+				var options = {
+					method: "POST",
+					headers: {
+					"Content-Type": "application/json",
+					"x-api-key": token
+					},
+					body: JSON.stringify(postData)
+				};
+
+				fetch(organization_base_url + '/organizations/' + b_id + '/elements',options)
+				.then(function(response) {
+					console.log(response);
+					listOrganizationElements(b_id);
+				})
+				.catch(function(err) {
+					console.log('Error: ' + err);
+				});	
+
+				$("#addElement").modal('hide');	
+
+			}	
+					
+			function listOrganizationElements(b_id){
+
+				const options = {
+					method: 'get',
+					headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token,
+					}
+					};		
+
+				fetch(organization_base_url + '/organizations/' + b_id + '/elements/',options)
+				.then(function(response) {
+					if (!response.ok) {
+						console.log('Error with Status Code: ' + response.status);
+						return;
+					}
+					response.json().then(function(data) {
+						var rows = '';
+						if(data){
+							var rows = '';
+							console.log(data.length);
+							var organization_html = document.getElementById("bview~" + b_id).value;
+							var list  = '<ul>';
+							for (let i = 0; i < data.length; i++) {
+
+								rows += organizationElementRow(data[i],b_id);
+								document.getElementById("element-list~" + b_id).innerHTML = rows;																		
+								
+								// HTML View
+								list += organizationElementHTMLRow(data[i],b_id);	
+
+							}	
+							list += '</ul>';
+							organization_html = organization_html.replace('~' + b_id + '~',list);	
+							document.getElementById("bview~" + b_id).value = organization_html;														
+						}
+						else{
+							rows += '<p align="center">No Elements</p>';	
+							document.getElementById("element-list~" + b_id).innerHTML = rows;						
+						}							
+					});
+				})
+				.catch(function(err) {
+					console.log('Error: ' + err);
+				});
+
+			}
+
+			function deleteOrganizationTag(id,tag_id){
+
+				var options = {
+						method: "DELETE",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						}
+					};
+				fetch(organization_base_url + '/organizations/' + id + "/tags/" + tag_id,options)
+					.then(function(response) {						
+						getOrganizationTags(id);
+						console.log("DELETED!");
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});	
+
+				}
+
+			function addOrganizationTag(id){
+
+				var name = document.getElementById('add-tag~' + id).value;
+
+				var postData = {};
+				postData.name = name;
+				console.log(token);
+
+				var options = {
+						method: "POST",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+
+				fetch(tag_base_url + '/tags/',options)
+					.then(function(response) {
+
+						response.json().then(function(data) {
+							var tag_id = data.id;
+							var postData = {};
+							postData.organization_id = id;
+							postData.tag_id = tag_id;
+							var options = {
+									method: "POST",
+									headers: {
+									"Content-Type": "application/json",
+									"x-api-key": token
+									},
+									body: JSON.stringify(postData)
+								};
+
+							fetch(organization_base_url + '/organizations/' + id + '/tags',options)
+								.then(function(response) {
+									getOrganizationTags(id);							
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});		
+						
+						});	
+
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});					
+
+				$("#showMe").modal('hide');	
+
+			}
+
+			function getOrganizationTags(b_id){
+				console.log(token);
+				const options = {
+					method: 'get',
+					headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token,
+					}
+				};		
+		
+				fetch(organization_base_url + '/organizations/' + b_id + '/tags',options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {
+							var rows = '<div class="row-auto">';
+							for (let i = 0; i < data.length; i++) {
+								rows += '<div class="col-auto">' + data[i].name + '  <a href="#" onclick="deleteOrganizationTag(' + b_id + ',' + data[i].tag_id + '); return false;" style="text-decoration: none;">&#10060;</a></div>';
+							}
+							document.getElementById("tag-list~" + b_id).innerHTML = rows;
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});				
+			}
+
+			$('#organizationAccordian').on('show.bs.collapse', function (e) {
+
+				var row_id = e.target.id;
+				var b_id = row_id.replace("collapse-","");						
+		
+				listOrganizationElements(b_id);
+				getOrganizationTags(b_id);
+
+			})
+
+			$('#organizationAccordian').on('hidden.bs.collapse', function (e) {
+				var row_id = e.target.id;
+				var b_id = row_id.replace("collapse-","");
+			})	
+
+			function deleteOrganization(id){
+
+				var options = {
+						method: "DELETE",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						}
+					};
+
+				fetch(organization_base_url + '/organizations/' + id,options)
+					.then(function(response) {
+						console.log("DELETED!");
+						listOrganizations();
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});	
+
+			}
+
+			function addOrganization(){
+
+				var name = document.getElementById('add-name').value;
+				var description = document.getElementById('add-description').value;
+				var url = document.getElementById('add-url').value;
+
+				var postData = {};
+				postData.name = name;
+				postData.description = description;
+				postData.url = url;
+
+				var options = {
+						method: "POST",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+
+				fetch(organization_base_url + '/organizations/',options)
+					.then(function(response) {
+						console.log("Added!");
+						listOrganizations();
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});	
+
+				$("#showMe").modal('hide');	
+			}			
+			
+			function openAddModal(){
+				$("#showMe").modal('show');				
+			}
+
+			function closeAddModal(){
+				$("#showMe").modal('hide');				
+			}			
+			
+			function updateOrganization(id){
+
+				const postData = JSON.parse(document.getElementById('bstore~' + id).value);
+
+				delete postData.id;
+				var options = {
+						method: "PUT",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						},
+						body: JSON.stringify(postData)
+					};
+
+				fetch(organization_base_url + '/organizations/' + id,options)
+					.then(function(response) {
+						console.log("Updated!");
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});				
+
+			}
+
+			function updateRowField(u){
+
+				var ua = u.id.split("~");
+				var field = ua[0];
+				var id = ua[1];
+
+				var bstore = JSON.parse(document.getElementById('bstore~' + id).value);
+				
+				bstore[field] = u.value;
+
+				document.getElementById('toggle-row-' + id).innerHTML = bstore.name;
+
+				document.getElementById('bstore~' + id).value = JSON.stringify(bstore, null, 2);
+
+				updateOrganization(id);
+
+			}
+
+			function organizationRow(row){
+				var html = '';
+
+				html += '<div style="display: none;">';
+				html += '<textarea class="form-control" id="bview~' + row.id + '" rows="5"></textarea>';
+				html += '</div>';
+
+				html += '<div class="accordion-item" id="organization-' + row.id + '">';					
+				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
+				html += '<button id="toggle-row-' + row.id + '" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-' + row.id + '" aria-expanded="false" aria-controls="collapse-' + row.id + '" style="color: #000;">';	
+				html += row.name;
+				html += '</button>';	
+				html += '</h2>';	
+				html += '<div id="collapse-' + row.id + '" class="accordion-collapse collapse" aria-labelledby="heading-' + row.id + '" data-bs-parent="#accordion-' + row.id + '">';	
+				html += '<div class="accordion-body">';	
+
+				html += '<form>';
+
+				html += '<div class="form-group" style="display: none;">';
+				html += '<textarea class="form-control" id="bstore~' + row.id + '" rows="5">' + JSON.stringify(row, null, 2) + '</textarea>';
+				html += '</div>';
+
+				html += '<div class="form-group">';
+				html += '<label for="name-' + row.id + '"><strong>Name:</strong></label>';
+				html += '<input type="text" style="width: 100%;" onchange="updateRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '">';
+				html += '</div>';				
+
+				html += '<div class="form-group">';
+				html += '<label for="description-' + row.id + '"><strong>Description:</strong></label>';
+				html += '<textarea class="form-control" onchange="updateRowField(this);" id="description~' + row.id + '" rows="3">' + row.description + '</textarea>';
+				html += '</div>';
+
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Website URL:</strong> (<a href="' + row.website_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="website_url~' + row.id + '" placeholder="" value="' + row.website_url + '">';
+				html += '</div>';
+
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Developer URL:</strong> (<a href="' + row.developer_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="developer_url~' + row.id + '" placeholder="" value="' + row.developer_url + '">';
+				html += '</div>';
+				
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Twitter URL:</strong> (<a href="' + row.twitter_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="twitter_url~' + row.id + '" placeholder="" value="' + row.twitter_url + '">';
+				html += '</div>';	
+				
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Github URL:</strong> (<a href="' + row.github_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="github_url~' + row.id + '" placeholder="" value="' + row.github_url + '">';
+				html += '</div>';	
+				
+				html += '<div class="form-group">';
+				html += '<label for="url-' + row.id + '"><strong>Blog URL:</strong> (<a href="' + row.blog_url + '" target="_blank">View</a>)</label>';
+				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="blog_url~' + row.id + '" placeholder="" value="' + row.blog_url + '">';
+				html += '</div>';					
+				
+				html += '</form>';
+
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Tags</h3>';
+				html += '</div>';					
+				html += '<div class="col-auto">';
+				html += '<input type="text" class="form-control" id="add-tag~' + row.id + '" placeholder="">';
+				html += '</div>';
+				html += '<div class="col-auto">';
+				html += '<button type="button" onclick="addOrganizationTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
+				html += '</div>';
+				html += '</form>';
+
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="tag-list~' + row.id + '">';
+				html += 'List Tags Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';
+
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Elements</h3>';
+				html += '</div>';					
+				html += '<div class="col-auto">';
+				html += '<input type="text" class="form-control" id="add-element~' + row.id + '" placeholder="">';
+				html += '</div>';
+				html += '<div class="col-auto">';
+				html += '<button type="button" onclick="addOrganizationElement(' + row.id + ');" class="btn btn-primary mb-3">Add Element</button>';
+				html += '</div>';
+				html += '</form>';
+					
+				html += '<div class="container">';
+				html += '<div class="row">';			
+				html += '<div class="container" id="element-list~' + row.id + '">';
+				html += 'List Elements Here';
+				html += '</div>';						
+				html += '</div>';
+				html += '</div>';				
+				
+				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteOrganization(' + row.id + ') }" style="width: 125px;"></center>';				
+
+				html += '</div>';	
+				html += '</div>';	
+				html += '</div>';	
+
+				return html;
+			}
+		
+			function listOrganizations(){
+
+				var page = document.getElementById("page").value;
+				var limit = document.getElementById("limit").value;
+				var search = document.getElementById("search").value;
+				var tags = document.getElementById("tags").value;
+		
+				const options = {
+					method: 'get',
+					headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token,
+					}
+				};		
+		
+				fetch(organization_base_url + '/organizations/?page=' + page + '&limit=' + limit + '&search=' + search + '&tags=' + tags,options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {
+							var rows = '';
+							if(data){
+								for (let i = 0; i < data.length; i++) {
+									rows += organizationRow(data[i],i);
+								}
+							}
+							document.getElementById("organizationAccordian").innerHTML = rows;
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});
+				
+			}
+
+			if (window.addEventListener){
+				window.addEventListener("load", listOrganizations, false);
+			}
+			else if (window.attachEvent){
+				window.attachEvent("onload", listOrganizations);
+			}
+			else{
+				window.onload = listOrganizations;	
+			}				
+		
+		</script>		
+
+	</div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="showMe" tabindex="-1" role="dialog" aria-labelledby="showMeLabel" aria-hidden="true" style="width: 100%">
+	<div class="modal-dialog modal-xl" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="showMeLabel">New Organization</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddModal();">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <form>
+			  <div class="form-group">
+			  <label for="recipient-name" class="col-form-label">Name:</label>
+			  <input type="text" class="form-control" id="add-name">
+			  </div>					
+			<div class="form-group">
+			  <label for="message-text" class="col-form-label">Description:</label>
+			  <textarea class="form-control" id="add-description"></textarea>
+			</div>
+			<div class="form-group">
+			  <label for="add-url" class="col-form-label">URL:</label>
+			  <input type="text" class="form-control" id="add-url">
+			</div>				  
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddModal();">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addOrganization();">Add Organization</button>
+		</div>
+	  </div>
+	</div>
+  </div>

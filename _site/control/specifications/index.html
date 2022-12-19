@@ -133,6 +133,10 @@
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<label for="tags" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Tags:</label>
+			<div class="col-2">				
+				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
+			</div>							
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col-1">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
@@ -153,8 +157,12 @@
 			var search = getUrlVar('search');
 			document.getElementById('search').value = search;
 
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}
+
 			var token = getUrlVar('token');				
-			console.log("token:" + token);
 			if(token){
 				document.getElementById('token').value = token;		
 				changeToken(token);
@@ -494,6 +502,7 @@
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
+				var tags = document.getElementById("tags").value;
 		
 				const options = {
 					method: 'get',
@@ -503,7 +512,7 @@
 					}
 				};		
 		
-				fetch(specification_base_url + '/specifications/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(specification_base_url + '/specifications/?page=' + page + '&limit=' + limit + '&search=' + search + '&tags=' + tags,options)
 					.then(function(response) {
 						if (!response.ok) {
 							console.log('Error with Status Code: ' + response.status);

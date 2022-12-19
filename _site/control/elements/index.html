@@ -129,10 +129,18 @@
 			<div class="col">				
 				<input type="text" class="form-control" id="token" name="token" value="token">
 			</div>
-			<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Search:</label>
+			<label for="search" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Search:</label>
 			<div class="col">				
 				<input type="text" class="form-control" id="search" name="search" value="">
 			</div>	
+			<label for="tags" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Tags:</label>
+			<div class="col-2">				
+				<input type="text" class="form-control" id="tags" name="tags" value="" placeholder="tag,tag,tag">
+			</div>				
+			<label for="rating" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Rating:</label>
+			<div class="col-1">				
+				<input type="text" class="form-control" id="rating" name="rating" value="1" style="text-align: center;">
+			</div>			
 			<label for="page" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Page:</label>
 			<div class="col-1">				
 				<input type="text" class="form-control" id="page" name="page" value="0" style="text-align: center;">
@@ -153,8 +161,18 @@
 			var search = getUrlVar('search');
 			document.getElementById('search').value = search;
 
+			var tags = getUrlVar('tags');	
+			if(tags){
+				document.getElementById('tags').value = tags;		
+			}
+			
+			var rating = getUrlVar('rating');	
+			if(rating){
+				document.getElementById('rating').value = rating;		
+			}				
+
 			var token = getUrlVar('token');				
-			console.log("token:" + token);
+			//console.log("token:" + token);
 			if(token){
 				document.getElementById('token').value = token;		
 				changeToken(token);
@@ -162,7 +180,7 @@
 
 			var stored_token = Cookies.get('token');
 			if(stored_token){
-				console.log("stored_token:" + stored_token);
+				//console.log("stored_token:" + stored_token);
 				document.getElementById('token').value = stored_token;	
 				token = stored_token;
 			}
@@ -184,6 +202,31 @@
 			const element_base_url = 'https://3b2iqi9px6.execute-api.us-west-1.amazonaws.com/staging';
 			const tag_base_url = 'https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging';
 
+			function mergeElements(id){
+
+				var merge_id = document.getElementById('element-merge~' + id).value;
+				//console.log("MERGE ID: " + merge_id);
+
+				var options = {
+						method: "POST",
+						headers: {
+						"Content-Type": "application/json",
+						"x-api-key": token
+						}
+					};
+
+				fetch(element_base_url + '/elements/' + id + '/merge/' + merge_id,options)
+					.then(function(response) {
+						listElements();
+					})
+					.catch(function(err) {
+						//console.log('Error: ' + err);
+				});					
+
+				$("#showMe").modal('hide');	
+
+				}
+
 			function deleteElementTag(id,tag_id){
 
 				var options = {
@@ -197,10 +240,10 @@
 				fetch(element_base_url + '/elements/' + id + "/tags/" + tag_id,options)
 					.then(function(response) {						
 						getElementTags(id);
-						console.log("DELETED!");
+						//console.log("DELETED!");
 					})
 					.catch(function(err) {
-						console.log('Error: ' + err);
+						//console.log('Error: ' + err);
 				});	
 
 				}
@@ -211,7 +254,7 @@
 
 				var postData = {};
 				postData.name = name;
-				console.log(postData);
+				//console.log(postData);
 
 				var options = {
 						method: "POST",
@@ -244,14 +287,14 @@
 									getElementTags(id);							
 								})
 								.catch(function(err) {
-									console.log('Error: ' + err);
+									//console.log('Error: ' + err);
 							});		
 						
 						});	
 
 					})
 					.catch(function(err) {
-						console.log('Error: ' + err);
+						//console.log('Error: ' + err);
 				});					
 
 				$("#showMe").modal('hide');	
@@ -259,7 +302,7 @@
 			}
 
 			function getElementTags(b_id){
-				console.log("token: " + token);
+				//console.log("token: " + token);
 				const options = {
 					method: 'GET',
 					headers: {
@@ -271,7 +314,7 @@
 				fetch(element_base_url + '/elements/' + b_id + '/tags',options)
 					.then(function(response) {
 						if (!response.ok) {
-							console.log('Error with Status Code: ' + response.status);
+							//console.log('Error with Status Code: ' + response.status);
 							return;
 						}
 						response.json().then(function(data) {
@@ -283,7 +326,7 @@
 						});
 					})
 					.catch(function(err) {
-						console.log('Error: ' + err);
+						//console.log('Error: ' + err);
 				});				
 			}
 
@@ -314,11 +357,10 @@
 
 				fetch(element_base_url + '/elements/' + id,options)
 					.then(function(response) {
-						console.log("DELETED!");
 						listElements();
 					})
 					.catch(function(err) {
-						console.log('Error: ' + err);
+						//console.log('Error: ' + err);
 				});	
 
 			}
@@ -328,13 +370,11 @@
 				var name = document.getElementById('add-name').value;
 				var description = document.getElementById('add-description').value;
 				var version = document.getElementById('add-version').value;
-				var collection_id = document.getElementById('add-collection_id').value;
 
 				var postData = {};
 				postData.name = name;
 				postData.description = description;
 				postData.version = version;
-				postData.collection_id = collection_id;
 
 				var options = {
 						method: "POST",
@@ -347,11 +387,11 @@
 
 				fetch(element_base_url + '/elements/',options)
 					.then(function(response) {
-						console.log("Added!");
+						//console.log("Added!");
 						listElements();
 					})
 					.catch(function(err) {
-						console.log('Error: ' + err);
+						//console.log('Error: ' + err);
 				});	
 
 				$("#showMe").modal('hide');	
@@ -366,7 +406,7 @@
 			}			
 			
 			function updateElement(id){
-				console.log("TOKEN:" + token);
+				//console.log("TOKEN:" + token);
 				const postData = JSON.parse(document.getElementById('bstore~' + id).value);
 
 				delete postData.id;
@@ -381,10 +421,10 @@
 
 				fetch(element_base_url + '/elements/' + id,options)
 					.then(function(response) {
-						console.log("Updated!");
+						//console.log("Updated!");
 					})
 					.catch(function(err) {
-						console.log('Error: ' + err);
+						//console.log('Error: ' + err);
 				});				
 
 			}
@@ -426,7 +466,7 @@
 				html += '</div>';
 
 				html += '<div class="form-group">';
-				html += '<label for="name-' + row.id + '"><strong>Name:</strong></label>';
+				html += '<label for="name-' + row.id + '"><strong>Name:</strong>(' + row.id + ')</label>';
 				html += '<input type="text" style="width: 100%;" onchange="updateRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '">';
 				html += '</div>';				
 
@@ -438,14 +478,28 @@
 				html += '<div class="form-group">';
 				html += '<label for="version-' + row.id + '"><strong>Version:</strong></label>';
 				html += '<input type="text" style="width: 20%;" class="form-control" onchange="updateRowField(this);" id="version~' + row.id + '" placeholder="2021-09-11" value="' + row.version + '">';
-				html += '</div>';				
+				html += '</div>';	
 				
 				html += '<div class="form-group">';
-				html += '<label for="collection-id-' + row.id + '"><strong>Collection ID:</strong></label>';
-				html += '<input type="text" style="width: 100%;" class="form-control" onchange="updateRowField(this);" id="collection-id~' + row.id + '" placeholder="" value="' + row.collection_id + '">';
+				html += '<label for="version-' + row.id + '"><strong>Rating:</strong></label>';
+				html += '<input type="text" style="width: 20%;" class="form-control" onchange="updateRowField(this);" id="rating~' + row.id + '" placeholder="0" value="' + row.rating + '">';
 				html += '</div>';				
 				
 				html += '</form>';
+
+				html += '<hr>';
+
+				html += '<form class="row g-3">';
+				html += '<div class="col-auto">';
+				html += '<h3>Merge ID:</h3>';
+				html += '</div>';					
+				html += '<div class="col-auto">';
+				html += '<input type="text" class="form-control" id="element-merge~' + row.id + '" placeholder="">';
+				html += '</div>';
+				html += '<div class="col-auto">';
+				html += '<button type="button" onclick="mergeElements(' + row.id + ');" class="btn btn-primary mb-3">Merge</button>';
+				html += '</div>';
+				html += '</form>';				
 
 				html += '<hr>';
 
@@ -460,6 +514,7 @@
 				html += '<button type="button" onclick="addElementTag(' + row.id + ');" class="btn btn-primary mb-3">Add Tag</button>';
 				html += '</div>';
 				html += '</form>';	
+
 				html += '<div class="container">';
 				html += '<div class="row">';			
 				html += '<div class="container" id="tag-list~' + row.id + '">';
@@ -467,7 +522,9 @@
 				html += '</div>';						
 				html += '</div>';
 				html += '</div>';
+
 				html += '<hr><center><input type="button" class="btn btn-danger" name="delete" value="DELETE" onclick="if (confirm(' + "'" + 'Are you sure you want to delete?' + "'" + ') == true) { deleteElement(' + row.id + ') }" style="width: 125px;"></center>';				
+
 				html += '</div>';	
 				html += '</div>';	
 				html += '</div>';	
@@ -477,9 +534,14 @@
 		
 			function listElements(){
 
+				console.log("Searching...");
+
 				var page = document.getElementById("page").value;
 				var limit = document.getElementById("limit").value;
 				var search = document.getElementById("search").value;
+				var tags = document.getElementById("tags").value;
+				var rating = document.getElementById("rating").value;
+				
 				console.log(search);
 		
 				const options = {
@@ -490,15 +552,15 @@
 					}
 				};		
 		
-				fetch(element_base_url + '/elements/?page=' + page + '&limit=' + limit + '&search=' + search,options)
+				fetch(element_base_url + '/elements/?page=' + page + '&limit=' + limit + '&search=' + search + '&tags=' + tags + '&rating=' + rating,options)
 					.then(function(response) {
 						if (!response.ok) {
-							console.log('Error with Status Code: ' + response.status);
+							//console.log('Error with Status Code: ' + response.status);
 							return;
 						}
 						response.json().then(function(data) {
 							var rows = '';
-							console.log(data);
+							//console.log(data);
 							if(data){
 								for (let i = 0; i < data.length; i++) {
 									rows += elementRow(data[i],i);
@@ -508,7 +570,7 @@
 						});
 					})
 					.catch(function(err) {
-						console.log('Error: ' + err);
+						//console.log('Error: ' + err);
 				});
 				
 			}
@@ -540,22 +602,18 @@
 		</div>
 		<div class="modal-body">
 		  <form>
-			  <div class="form-group">
-			  <label for="recipient-name" class="col-form-label">Name:</label>
-			  <input type="text" class="form-control" id="add-name">
-			  </div>					
 			<div class="form-group">
-			  <label for="message-text" class="col-form-label">Description:</label>
-			  <textarea class="form-control" id="add-description"></textarea>
+		  	<label for="recipient-name" class="col-form-label">Name:</label>
+			  	<input type="text" class="form-control" id="add-name">
+			</div>					
+			<div class="form-group">
+			  	<label for="message-text" class="col-form-label">Description:</label>
+			  	<textarea class="form-control" id="add-description"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="recipient-name" class="col-form-label">Version:</label>
 				<input type="text" class="form-control" id="add-version" style="width: 20%;">
-			  </div>				
-			<div class="form-group">
-			  <label for="add-collection_id" class="col-form-label">Collection ID:</label>
-			  <input type="text" class="form-control" id="add-collection_id">
-			</div>				  			  					
+			</div>							  			  					
 		  </form>
 		</div>
 		<div class="modal-footer">

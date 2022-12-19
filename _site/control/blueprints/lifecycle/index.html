@@ -1,0 +1,735 @@
+
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+   <meta name="generator" content="Hugo 0.88.1">
+   
+   <title>Admin - Blueprints - Lifecycle</title>
+
+   <!---<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">--->
+   <link href="http://localhost:4000/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <meta name="theme-color" content="#7952b3">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Cookies.js - http://github.com/ScottHamper/Cookies -->
+    <script src="http://localhost:4000/assets/js/cookies.js"></script>
+
+    <script>
+
+        function getUrlVar(key){
+            var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+            return result && unescape(result[1]) || "";
+        }
+
+    </script>
+
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="http://localhost:4000/">Admin - Blueprints - Lifecycle</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="http://localhost:4000/control/editor/">Editor</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:4000/control/blueprints/">Blueprints</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:4000/control/elements/">Elements</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="qaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Q&A
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="qaDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/questions/">Questions</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/answers/">Answers</a>
+            </ul>
+          </li>  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/blogs/">Blogs</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/decks/">Decks</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/organizations/">Organizations</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/projects/">Projects</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/people/">People</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/links/">Links</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/slides/">Slides</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/tools/">Tools</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/videos/">Videos</a>
+            </ul>
+          </li>     
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="structureDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Structure
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="structureDropdown">
+              <a class="dropdown-item" href="http://localhost:4000/control/outcomes/">Outcomes</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/specifications/">Specifications</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/standards/">Standards</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/roles/">Roles</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/rules/">Rules</a>
+              <a class="dropdown-item" href="http://localhost:4000/control/vocabularies/">Vocabularies</a>
+            </ul>
+          </li>                                                           
+        </ul>
+        <form class="d-flex">
+          <!--<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>-->
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="flex-shrink-0"><style id="compiled-css" type="text/css">
+h2{
+padding: 0;
+margin: 0;
+font-size: 24px;
+}
+h2{
+padding: 0px 0px 8px 0px;
+margin: 0px auto;
+text-align: center;
+font-size: 20px;
+text-decoration: underline;
+}
+h3{
+padding: 0px auto;
+margin: 5px auto;
+text-align: center;
+font-size: 16px;
+border: 1px solid #000;
+}
+#container{
+width: 90%;
+margin: 0 auto;
+padding: 2px auto;
+background-color: #FFF;
+border-radius: 10px;
+padding: 10px;
+overflow: hidden;
+}
+#header{
+background-color: FFF;
+width: 100%;
+margin: 0 auto;
+border-radius: 0px;
+margin-bottom: 0px;
+padding-top: 0px;
+padding-bottom: 0px;
+}
+
+#business{
+background-color: #FFF;
+border: 1px solid #000;
+float: left;
+width: 150px;
+margin: 10px;
+padding: 10px 2px 2px 2px;
+border-radius: 10px;
+min-height: 475px;
+background: linear-gradient(to bottom, white 0%, #8abdff 100%)
+}    
+
+#technical{
+background-color: #FFF;
+border: 1px solid #000;
+float: left;
+width: 150px;
+margin: 10px;
+padding: 10px 2px 2px 2px;
+border-radius: 10px;
+min-height: 475px;
+background: linear-gradient(to bottom, white 0%, #ffc895 100%)
+}  
+#inner{
+    background-color: FFF;
+    border: 1px solid #000;
+    float: left;
+    width: 92%;
+    margin: 5px;
+    padding: 10px 3px 3px 3px;
+    border-radius: 10px;
+    font-size: 12px;
+    min-height: 60px;
+    display: -webkit-flex;
+    display: flex;
+    background-color: #FFF;
+}  
+
+.inner-text{
+    width: 100%; 
+    margin: 0px 0px 0px 0px;
+    padding: 8px 0px 0px 0px;
+    text-align: center; 
+    border: 0px solid #000; 
+    position: relative;  
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 50px;
+    display: inline;
+}
+
+.icon{
+width: 25px; height: 25px; top: -19px; right: -10px; position: absolute; padding:0px; margin: 0px; border: 0px solid #000; 
+}
+.icon2{
+width: 25px; height: 25px; top: -19px; left: -10px; position: absolute; padding:0px; margin: 0px;border: 0px solid #000; 
+}
+.icon3{
+width: 25px; height: 25px; top: 7px; left: -10px; position: absolute; padding:0px; margin: 0px;border: 0px solid #000; 
+}
+.icon4{
+width: 25px; height: 25px; top: 35px; left: -10px; position: absolute; padding:0px; margin: 0px;border: 0px solid #000; 
+}
+</style>
+<style>
+	.autocomplete {
+	/*the container must be positioned relative:*/
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	}
+	input {
+	border: 1px solid transparent;
+	background-color: #f1f1f1;
+	padding: 10px;
+	font-size: 16px;
+	}
+	input[type=text] {
+	background-color: #f1f1f1;
+	width: 100%;
+	}
+	textarea {
+	background-color: #f1f1f1;
+	width: 100%;
+	}	
+	input[type=submit] {
+	background-color: DodgerBlue;
+	color: #fff;
+	}
+	.autocomplete-items {
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	/*position the autocomplete items to be the same width as the container:*/
+	top: 100%;
+	left: 0;
+	right: 0;
+	}
+	.autocomplete-items div {
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #d4d4d4;
+	}
+	.autocomplete-items div:hover {
+	/*when hovering an item:*/
+	background-color: #e9e9e9;
+	}
+	.autocomplete-active {
+	/*when navigating through the items using the arrow keys:*/
+	background-color: DodgerBlue !important;
+	color: #ffffff;
+	}	
+</style>
+<textarea class="form-control" id="element-store" rows="5" style="display: none;"></textarea>
+<div style="padding: 30px; margin: 30px;">
+
+	<div class="row align-top">
+        <script>
+            function changeToken(t){
+                Cookies.set('token',t)
+            }
+        </script>        
+		<div class="row">
+            <div class="col">			
+                <input type="text" class="form-control" id="token" name="token" value="token" placeholder="Token" onchange="changeToken();" style="width: 250px;">
+            </div>
+            <div class="col">
+                <select id="blueprints" class="form-select" onchange="listAreas(this);">
+                    <option value="0">Select a Blueprint</option>
+                </select>
+            </div>		
+        </div>							
+    <script>
+
+        var area_count = 0;
+        var area_tcount = 0;
+
+        var element_count = 0;
+        var element_tcount = 0;        
+
+        var token = getUrlVar('token');	
+        if(token){
+            document.getElementById('token').value = token;		
+            changeToken(token);
+        }			
+
+        var stored_token = Cookies.get('token');
+        if(stored_token){
+            document.getElementById('token').value = stored_token;	
+        }
+
+
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function(e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false;}
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                //console.log(arr[i]);
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function(e) {
+                        /*insert the value for the autocomplete text field:*/
+                        //console.log("HERE:" + this.getElementsByTagName("input")[0].value);
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                        addExistingElement();
+                    });
+                    a.appendChild(b);
+                }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function(e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+                } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+                } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+                }
+            });
+            function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+            }
+            function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+            }
+        }        
+
+    }
+
+        const blueprint_base_url = 'https://4udoi6t3mh.execute-api.us-west-1.amazonaws.com/staging';
+        const elements_base_url = 'https://3b2iqi9px6.execute-api.us-west-1.amazonaws.com/staging';
+        const tag_base_url = 'https://gxv6655yvd.execute-api.us-west-1.amazonaws.com/staging';
+        const roles_base_url = 'https://b4kx9lwqi2.execute-api.us-west-1.amazonaws.com/staging';
+        const links_base_url = 'https://78yhdhsr60.execute-api.us-west-1.amazonaws.com/staging';
+        const videos_base_url = 'https://ceqrd5zkac.execute-api.us-west-1.amazonaws.com/staging';
+
+        const questions_base_url = 'https://2o5v3kbgni.execute-api.us-west-1.amazonaws.com/staging';
+        const answers_base_url = 'https://x50jrd02h8.execute-api.us-west-1.amazonaws.com/staging';
+        
+        token = document.getElementById("token").value;	   
+        
+        function listElements(){
+
+            const options = {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": token,
+                }
+            };		
+
+            fetch(elements_base_url + '/elements?limit=1000&page=0',options)
+                .then(function(response) {
+                    if (!response.ok) {
+                        console.log('Error with Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then(function(data) {	
+                        if(data){
+                            var all_elements = [];
+                            for (let i = 0; i < data.length; i++) {	
+                                all_elements.push(data[i].name);
+                            }		
+                        document.getElementById("element-store").value = JSON.stringify(data, null, 2);
+                        autocomplete(document.getElementById("add-element-name"), all_elements);	
+                        }																				 
+                    });
+                })
+                .catch(function(err) {
+                    console.log('Error: ' + err);
+            });
+
+            }
+
+        function editElement(){
+            $("#editElement").modal('show');				
+        }
+
+        function closeEditElement(){
+            $("#editElement").modal('hide');				
+        }	        
+
+        function deleteElement(id){
+            console.log("Delete Element!");
+        }
+
+        function areaElementHTML(b_id,a_id,e){
+
+            var h = '';
+
+            console.log(e.name);
+
+            h += '<!--ELEMENT-->'; 
+            h += '<div id="inner" data-intro="Element Tip" style="width: 92%; opacity: 100;">';
+            h += '<div class="inner-text" style="padding:0px;">';
+            h += '<button style="background-color:#FFF; border-color:#FFF; color:#000; font-size: 13px; font-weight: bold;" type="button" class="btn btn-secondary" data-bs-trigger="hover" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="' + e.description + '" onclick="editElement();">';
+            h += '<img src="../../../images/icons/' + e.icon + '" width="50" style="padding: 0px;"><br>';
+            h += e.name;
+            h += '</button>';
+            h += '</div>';
+            h += '</div>';
+            h += '<!--ELEMENT-->';
+
+            return h;
+
+        }
+
+        function listBlueprintAreasElements(b_id,a){
+
+            var element_html = '';
+
+            var a_id = a.id;
+
+            const options = {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": token,
+                }
+            };		
+
+            fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/' + a_id + '/elements',options)
+                .then(function(response) {
+                    if (!response.ok) {
+                        console.log('Error with Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then(function(data) {
+                        if(data){
+                            element_tcount = data.length;
+
+                            blueprint_html = document.getElementById('blueprint').value;  
+
+                            var element_html = '';
+                            for (let i = 0; i < data.length; i++) {                                
+                                element_html += areaElementHTML(b_id,a_id,data[i]);                                
+                                element_count++;	
+                            }                  		
+                            
+                            blueprint_html = blueprint_html.replace('elements~' + a_id,element_html);
+                            document.getElementById('blueprint').value = blueprint_html;    
+                            document.getElementById('map').innerHTML = document.getElementById('blueprint').value;                          
+
+                        }
+                    });
+                })
+                .catch(function(err) {
+                    console.log('Error: ' + err);
+            });
+
+            return element_html;
+
+        }    
+        
+        function editArea(){
+            $("#editArea").modal('show');				
+        }    
+        
+        function closeEditArea(){
+            $("#editArea").modal('hide');				
+        }	        
+
+        function deleteArea(id){
+            console.log("Delete Area!");
+        }
+
+        function areaHTML(a){
+
+            var h = '';
+
+            console.log('-------');
+            console.log(a.label);
+            console.log('-------');
+
+            h += '<!--AREA-->';
+            h += '<div id="technical" style="min-height: 1100px;">';
+            h += '<h2 data-intro="Area Tip" style="opacity: 100;" onclick="editArea();">' + a.label + '</h2>';            
+            h += 'elements~' + a.id;   
+            h += '</div>';
+            h += '<!--AREA-->';
+
+            return h;
+        }
+
+        function listAreas(b){
+
+            var b_id = b.value;
+            console.log("b_id: " + b_id);               
+
+            //console.log("Loading Areas...");
+
+            const options = {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": token,
+                }
+            };		
+
+            fetch(blueprint_base_url + '/blueprints/' + b_id + '/areas/',options)
+                .then(function(response) {
+                    if (!response.ok) {
+                        console.log('Error with Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then(function(data) {
+
+                        if(data){   
+                            area_tcount = data.length;                                          
+                            for (let i = 0; i < data.length; i++) {    
+                                var html = document.getElementById('blueprint').value;                        
+                                html += areaHTML(data[i]); 
+                                document.getElementById('blueprint').value = html;                             
+                                listBlueprintAreasElements(b_id,data[i]);	
+                                area_count++;
+                            }														
+                        }
+                        else{
+					
+                        }							
+                    });
+                })
+                .catch(function(err) {
+                    console.log('Error: ' + err);
+            });         
+        }
+
+        function listBlueprints(){
+
+            var page = "0";
+            var limit = "500";
+            var search = '';
+            var tags = '';
+            var role = '';
+
+            const options = {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": token,
+                }
+            };		
+
+            fetch(blueprint_base_url + '/blueprints/?page=' + page + '&limit=' + limit,options)
+                .then(function(response) {
+                    if (!response.ok) {
+                        console.log('Error with Status Code: ' + response.status);
+                        return;
+                    }
+                    response.json().then(function(data) {
+                        if(data){
+                            var blueprint = document.getElementById("blueprints");
+                            for (let i = 0; i < data.length; i++) {
+                                var option = document.createElement("OPTION");
+                                option.innerHTML = data[i].level + ') ' + data[i].name;
+                                option.value =  data[i].id;
+                                blueprint.options.add(option);
+                            }						                        
+                        }																			
+                    });
+                })
+                .catch(function(err) {
+                    console.log('Error: ' + err);
+            });
+
+            }    
+
+            if (window.addEventListener){
+                window.addEventListener("load", listBlueprints, false);
+                window.addEventListener("load", listElements, false);
+            }
+            else if (window.attachEvent){
+                window.attachEvent("onload", listBlueprints);
+                window.attachEvent("onload", listElements);
+            }
+            else{
+                window.onload = listBlueprints;	
+                window.onload = listElements;	
+            }        
+    </script> 
+
+    <table border="0" align="center" width="100%">
+        <tr>
+            <td id="map">  
+                    
+
+            </td>
+        </tr> 
+    </table>        
+    <textarea id="blueprint" name="blueprint" rows="10" cols="100" style="display: none;"></textarea>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="editArea" tabindex="-1" role="dialog" aria-labelledby="editAreaLabel" aria-hidden="true" style="width: 100%">
+	<div class="modal-dialog modal-xl" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="editAreaLabel">Edit Area</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeEditArea();">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <form>
+            <div class="form-group">
+                <label for="add-element-name" class="col-form-label">Name:</label>
+                <div class="autocomplete">
+                    <input type="text" class="form-control" id="add-element-name">
+                </div>
+            </div>
+			<div class="col">
+				<input type="button" class="btn btn-success" name="show" value="Delete Area" onclick="deleteArea();">
+			</div>	            
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeEditArea();">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="editArea();">Add</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg" id="editElement" tabindex="-1" role="dialog" aria-labelledby="editElementLabel" aria-hidden="true" style="width: 100%">
+	<div class="modal-dialog modal-xl" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="editElementLabel">Edit Element</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeEditElement();">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<div class="col">
+				<input type="button" class="btn btn-success" name="show" value="Delete Element" onclick="deleteElement();">
+			</div>			  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeEditElement();">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="editElement();">Add</button>
+		</div>
+	  </div>
+	</div>
+  </div></main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Footer</span>
+  </div>
+</footer>
+
+<script src="http://localhost:4000/assets/js/bootstrap.js"></script>    
+
+  </body>
+</html>

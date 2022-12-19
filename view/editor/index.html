@@ -1,0 +1,556 @@
+---
+layout: view
+title: Admin - Editor
+---
+
+<div class="container" style="padding-top: 70px; border: 0px solid #000;">
+	<div class="row">
+		<div class="col-8" style="border: 0px solid #000;">
+
+			<script>
+				function changeToken(t){
+					Cookies.set('token',t)
+				}
+			</script>
+			<div class="row">
+				<label for="token" class="col-sm-2 col-form-label" style="text-align:right; width: 50px;">Token:</label>
+				<div class="col">				
+					<input type="text" class="form-control" id="token" name="token" value="{{ site.token }}">
+				</div>		
+			</div>	
+
+		<form>
+			<div class="mb-3">
+				<label for="title" class="form-label">Title</label>
+				<input type="text" class="form-control" id="title" aria-describedby="title">
+				<div id="emailHelp" class="form-text">Give your story a title.</div>
+			</div>
+			<div class="mb-3">
+				<label for="tags" class="form-label">Tags</label>
+				<script>
+					function changeTags(){
+						searchBlueprints();						
+						searchBlogs();	
+						searchVideos();
+						searchQuestions();
+						searchAnswers();
+						searchOrganizations();
+						searchTools();	
+					}
+				</script>
+				<input type="text" class="form-control" id="tags" aria-describedby="tags" onchange="changeTags();">
+				<div id="emailHelp" class="form-text">Add some tags to surface other content.</div>
+			</div>
+			</form>
+
+		<!-- Include Quill stylesheet -->
+		<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
+
+		<div class="mb-3">
+			<label for="tags" class="form-label">Body</label>		
+			<!-- Create the toolbar container -->
+			<div id="toolbar">
+				<span class="ql-formats">
+					<select class="ql-font"></select>
+					<select class="ql-size"></select>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-bold"></button>
+					<button class="ql-italic"></button>
+					<button class="ql-underline"></button>
+					<button class="ql-strike"></button>
+				</span>
+				<span class="ql-formats">
+					<select class="ql-color"></select>
+					<select class="ql-background"></select>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-script" value="sub"></button>
+					<button class="ql-script" value="super"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-header" value="1"></button>
+					<button class="ql-header" value="2"></button>
+					<button class="ql-blockquote"></button>
+					<button class="ql-code-block"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-list" value="ordered"></button>
+					<button class="ql-list" value="bullet"></button>
+					<button class="ql-indent" value="-1"></button>
+					<button class="ql-indent" value="+1"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-direction" value="rtl"></button>
+					<select class="ql-align"></select>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-link"></button>
+					<button class="ql-image"></button>
+					<button class="ql-video"></button>
+					<button class="ql-formula"></button>
+				</span>
+				<span class="ql-formats">
+					<button class="ql-clean"></button>
+				</span>
+			</div>
+
+			<script>
+	
+				var token = getUrlVar('token');				
+				console.log("token:" + token);
+				if(token){
+					document.getElementById('token').value = token;		
+					changeToken(token);
+				}
+	
+				var stored_token = Cookies.get('token');
+				if(stored_token){
+					console.log("stored_token:" + stored_token);
+					document.getElementById('token').value = stored_token;	
+					token = stored_token;
+				}
+
+				function copyLink(linkText) {
+					// Get the text field
+					var copyText = document.getElementById('link-' + linkText);
+
+					copyText.select();
+					copyText.setSelectionRange(0, 99999);
+					navigator.clipboard
+					.writeText(copyText.value)
+					.then(() => {
+						//alert("successfully copied");
+					})
+					.catch(() => {
+						//alert("something went wrong");
+					});
+
+					}				
+
+			</script>  					
+
+			<!-- Create the editor container -->
+			<div id="editor" style="height: 500px;"></div>
+			<input type="text" id="counter" value="0" style="display: none;" />
+			<!-- Include the Quill library -->
+			<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+			<!-- Initialize Quill editor -->
+			<script>
+
+			const blueprint_base_url = '{{ site.blueprints_base_url }}';
+			const elements_base_url = '{{ site.elements_base_url }}';
+			const tag_base_url = '{{ site.tags_base_url }}';
+			const roles_base_url = '{{ site.roles_base_url }}';
+			const links_base_url = '{{ site.links_base_url }}';
+			const videos_base_url = '{{ site.videos_base_url }}';
+			const blogs_base_url = '{{ site.blogs_base_url }}';
+			const questions_base_url = '{{ site.questions_base_url }}';
+			const answers_base_url = '{{ site.answers_base_url }}';
+			const organizations_base_url = '{{ site.organizations_base_url }}';
+			const tools_base_url = '{{ site.tools_base_url }}';			
+			const vocabularies_base_url = '{{ site.vocabularies_base_url }}';	
+			
+			var editor = new Quill('#editor', {
+				modules: { toolbar: '#toolbar' },
+				theme: 'snow',
+			});
+
+			editor.on('text-change', function(delta, oldDelta, source) {
+			if (source == 'api') {
+				console.log("An API call triggered this change.");
+			} else if (source == 'user') {
+								
+				//console.log("A user action triggered this change.");
+				var counter = document.getElementById('counter').value;
+				counter = counter - 0;
+
+				if(counter == 25){
+				console.log("IN!!!");
+				var content = editor.getContents();
+				console.log(content.ops[0].insert);
+
+				var postData = {};
+				postData.content = content.ops[0].insert;
+				
+				const options = {
+					method: "POST",
+					headers: {
+					"Content-Type": "application/json",
+					"x-api-key": token
+					},
+					body: JSON.stringify(postData)
+				};		
+
+				fetch(vocabularies_base_url + '/vocabularies/content/links',options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {
+							var html = '<ul>';
+							if(data){
+								if(data.length > 0){
+								for (let i = 0; i < data.length; i++) {
+									let apos = String.fromCharCode(39);
+									html += '<li><input type="text" value="Hello World" id="link-' + data[i].id + '" style="display: none;">' + data[i].name + ' <a href="#" onclick="copyLink(' + apos + data[i].id + apos + '); return false;" target="_blank" style="color: #000;">COPY &rarr;</a></li>';
+								}	
+								document.getElementById('keywords-title').style.display = '';
+								document.getElementById('keywords').style.display = '';
+								}						
+							}	
+							html += '</ul>'
+							document.getElementById('keywords').innerHTML = html;
+							document.getElementById('counter').value = 0;
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});				
+				
+				}
+				document.getElementById('counter').value = counter + 1;				
+			}
+			});		
+
+			function searchBlueprints(){
+
+				var page = 0;
+				var limit = 10;
+				var tags = document.getElementById("tags").value;
+
+				document.getElementById('blueprints-title').style.display = 'none';
+				document.getElementById('blueprints').style.display = 'none';				
+
+				const options = {
+					method: 'get',
+					headers: {
+						"Content-Type": "application/json"
+					}
+				};		
+
+				fetch(blueprint_base_url + '/blueprints/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {
+							var html = '<ul>';
+							if(data){
+								if(data.length > 0){
+									for (let i = 0; i < data.length; i++) {
+
+										html += '<li>' + data[i].name + ' <a href="/control/blueprints/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+									}	
+									document.getElementById('blueprints-title').style.display = '';
+									document.getElementById('blueprints').style.display = '';
+								}						
+							}	
+							html += '</ul>'
+							document.getElementById('blueprints').innerHTML = html;
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});
+
+				}	
+				function searchVideos(){
+
+					var page = 0;
+					var limit = 10;
+					var tags = document.getElementById("tags").value;
+
+					document.getElementById('videos-title').style.display = 'none';
+					document.getElementById('videos').style.display = 'none';					
+
+					const options = {
+						method: 'get',
+						headers: {
+							"Content-Type": "application/json"
+						}
+					};		
+
+					fetch(videos_base_url + '/videos/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+						.then(function(response) {
+							if (!response.ok) {
+								console.log('Error with Status Code: ' + response.status);
+								return;
+							}
+							response.json().then(function(data) {
+								var html = '<ul>';
+								if(data){
+									if(data.length > 0){
+										for (let i = 0; i < data.length; i++) {
+
+											html += '<li>' + data[i].name + ' <a href="/control/videos/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+										}	
+										document.getElementById('videos-title').style.display = '';
+										document.getElementById('videos').style.display = '';
+									}															
+								}	
+								html += '</ul>'
+								document.getElementById('videos').innerHTML = html;
+							});
+						})
+						.catch(function(err) {
+							console.log('Error: ' + err);
+					});
+
+					}	
+					
+					function searchBlogs(){
+
+						var page = 0;
+						var limit = 10;
+						var tags = document.getElementById("tags").value;
+
+						document.getElementById('blogs-title').style.display = 'none';
+						document.getElementById('blogs').style.display = 'none';						
+
+						const options = {
+							method: 'get',
+							headers: {
+								"Content-Type": "application/json"
+							}
+						};		
+
+						fetch(blogs_base_url + '/blogs/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+							.then(function(response) {
+								if (!response.ok) {
+									console.log('Error with Status Code: ' + response.status);
+									return;
+								}
+								response.json().then(function(data) {
+									var html = '<ul>';
+									if(data){
+										if(data.length > 0){
+											for (let i = 0; i < data.length; i++) {
+
+												html += '<li>' + data[i].name + ' <a href="/control/blogs/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+											}	
+											document.getElementById('blogs-title').style.display = '';
+											document.getElementById('blogs').style.display = '';
+										}																
+									}	
+									html += '</ul>'
+									document.getElementById('blogs').innerHTML = html;
+								});
+							})
+							.catch(function(err) {
+								console.log('Error: ' + err);
+						});
+
+						}
+						
+						function searchQuestions(){
+
+							var page = 0;
+							var limit = 10;
+							var tags = document.getElementById("tags").value;
+
+							document.getElementById('questions-title').style.display = 'none';
+							document.getElementById('questions').style.display = 'none';							
+
+							const options = {
+								method: 'get',
+								headers: {
+									"Content-Type": "application/json"
+								}
+							};		
+
+							fetch(questions_base_url + '/questions/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+								.then(function(response) {
+									if (!response.ok) {
+										console.log('Error with Status Code: ' + response.status);
+										return;
+									}
+									response.json().then(function(data) {
+										var html = '<ul>';
+										if(data){
+											if(data.length > 0){
+												for (let i = 0; i < data.length; i++) {
+
+													html += '<li>' + data[i].name + ' <a href="/control/questions/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+												}	
+												document.getElementById('questions-title').style.display = '';
+												document.getElementById('questions').style.display = '';
+											}						
+										}	
+										html += '</ul>'
+										document.getElementById('questions').innerHTML = html;
+									});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});
+
+							}	
+							
+							function searchAnswers(){
+
+								var page = 0;
+								var limit = 10;
+								var tags = document.getElementById("tags").value;
+
+								document.getElementById('answers-title').style.display = 'none';
+								document.getElementById('answers').style.display = 'none';								
+
+								const options = {
+									method: 'get',
+									headers: {
+										"Content-Type": "application/json"
+									}
+								};		
+
+								fetch(answers_base_url + '/answers/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+									.then(function(response) {
+										if (!response.ok) {
+											console.log('Error with Status Code: ' + response.status);
+											return;
+										}
+										response.json().then(function(data) {
+											var html = '<ul>';
+											if(data){
+												if(data.length > 0){
+													for (let i = 0; i < data.length; i++) {
+
+														html += '<li>' + data[i].name + ' <a href="/control/answers/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+													}	
+													document.getElementById('answers-title').style.display = '';
+													document.getElementById('answers').style.display = '';
+												}																			
+											}	
+											html += '</ul>'
+											document.getElementById('answers').innerHTML = html;
+										});
+									})
+									.catch(function(err) {
+										console.log('Error: ' + err);
+								});
+
+								}		
+								
+								function searchOrganizations(){
+
+									var page = 0;
+									var limit = 10;
+									var tags = document.getElementById("tags").value;
+
+									document.getElementById('organizations-title').style.display = 'none';
+									document.getElementById('organizations').style.display = 'none';									
+
+									const options = {
+										method: 'get',
+										headers: {
+											"Content-Type": "application/json"
+										}
+									};		
+
+									fetch(organizations_base_url + '/organizations/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+										.then(function(response) {
+											if (!response.ok) {
+												console.log('Error with Status Code: ' + response.status);
+												return;
+											}
+											response.json().then(function(data) {
+												var html = '<ul>';
+												if(data){
+													if(data.length > 0){
+														for (let i = 0; i < data.length; i++) {
+
+															html += '<li>' + data[i].name + ' <a href="/control/organizations/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+														}
+														document.getElementById('organizations-title').style.display = '';
+														document.getElementById('organizations').style.display = '';
+													}																					
+												}	
+												html += '</ul>'
+												document.getElementById('organizations').innerHTML = html;
+											});
+										})
+										.catch(function(err) {
+											console.log('Error: ' + err);
+									});
+
+									}	
+									
+									function searchTools(){
+
+										var page = 0;
+										var limit = 10;
+										var tags = document.getElementById("tags").value;
+
+										document.getElementById('tools-title').style.display = 'none';
+										document.getElementById('tools').style.display = 'none';										
+
+										const options = {
+											method: 'get',
+											headers: {
+												"Content-Type": "application/json"
+											}
+										};		
+
+										fetch(tools_base_url + '/tools/?page=' + page + '&limit=' + limit + '&tags=' + tags,options)
+											.then(function(response) {
+												if (!response.ok) {
+													console.log('Error with Status Code: ' + response.status);
+													return;
+												}
+												response.json().then(function(data) {
+													var html = '<ul>';
+													if(data){
+														if(data.length > 0){
+															for (let i = 0; i < data.length; i++) {
+
+																html += '<li>' + data[i].name + ' <a href="/control/tools/?search=' + data[i].name + '" target="_blank" style="color: #000;">&rarr;</a></li>';
+															}	
+															document.getElementById('tools-title').style.display = '';
+															document.getElementById('tools').style.display = '';
+														}																					
+													}	
+													html += '</ul>'
+													document.getElementById('tools').innerHTML = html;
+												});
+											})
+											.catch(function(err) {
+												console.log('Error: ' + err);
+										});
+
+										}									
+			</script>
+
+			</div>
+		</div>
+		<div class="col-4" style="border: 0px solid #000;">
+
+			<h3 id="keywords-title" style="display: none;">Keywords</h3>
+			<div id="keywords" style="display: none;"><center>Enter tags to see keywords</center></div>
+
+			<h3 id="blueprints-title" style="display: none;">Blueprints</h3>
+			<div id="blueprints" style="display: none;"></div>
+
+			<h3 id="blogs-title" style="display: none;">Blogs</h3>
+			<div id="blogs" style="display: none;"></div>				
+
+			<h3 id="videos-title" style="display: none;">Videos</h3>
+			<div id="videos" style="display: none;"></div>	
+			
+			<h3 id="questions-title" style="display: none;">Questions</h3>
+			<div id="questions" style="display: none;"></div>	
+			
+			<h3 id="answers-title" style="display: none;">Answers</h3>
+			<div id="answers" style="display: none;"></div>				
+
+			<h3 id="organizations-title" style="display: none;">Organizations</h3>
+			<div id="organizations" style="display: none;"></div>				
+
+			<h3 id="tools-title" style="display: none;">Tools</h3>
+			<div id="tools" style="display: none;"></div>				
+
+		</div>		
+	</div>
+</div>
