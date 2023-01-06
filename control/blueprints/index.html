@@ -6,14 +6,21 @@ title: Admin - Blueprints
 <div class="container" style="padding-top: 70px;">
 	<div class="row align-top">
 		<div class="row">
+			<textarea id="blueprints_json" cols="100" rows="5" style="display: none;"></textarea>
 			<script>
 				function changeToken(t){
 					Cookies.set('token',t)
 				}
+				function changeGToken(t){
+					Cookies.set('gtoken',t)
+				}				
 			</script>
 			<div class="col">				
-				<input type="text" class="form-control" id="token" name="token" value="{{ site.token }}" placeholder="Token" onchange="changeToken();">
+				<input type="text" width="100" class="form-control" id="token" name="token" value="" placeholder="Bllueprint Token" onchange="changeToken();"><br>
 			</div>
+			<div class="col">				
+				<input type="text" width="100" class="form-control" id="gtoken" name="gtoken" value="" placeholder="Github Token" onchange="changeToken();"><br>
+			</div>			
 			<div class="col-2">				
 				<input type="text" class="form-control" id="search" name="search" value="" placeholder="Search">
 			</div>	
@@ -40,7 +47,10 @@ title: Admin - Blueprints
 			</div>
 			<div class="col">
 				<input type="button" class="btn btn-success" name="show" value="Add" onclick="openAddBueprintModal();">
-			</div>			
+			</div>	
+			<div class="col">
+				<input type="button" class="btn btn-success" name="show" value="Publish" onclick="publishREADMEToGithub();">
+			</div>						
 		</div>								
 		<script>
 
@@ -49,6 +59,12 @@ title: Admin - Blueprints
 				document.getElementById('token').value = token;		
 				changeToken(token);
 			}
+
+			var gtoken = getUrlVar('gtoken');	
+			if(gtoken){
+				document.getElementById('gtoken').value = gtoken;		
+				changeGToken(gtoken);
+			}			
 
 			var search = getUrlVar('search');	
 			if(search){
@@ -63,13 +79,22 @@ title: Admin - Blueprints
 			var rating = getUrlVar('rating');	
 			if(rating){
 				document.getElementById('rating').value = rating;		
+			}	
+			
+			var limit = getUrlVar('limit');	
+			if(limit){
+				document.getElementById('limit').value = limit;		
 			}				
 
 			var stored_token = Cookies.get('token');
 			if(stored_token){
-				console.log("stored_token:" + stored_token);
 				document.getElementById('token').value = stored_token;	
 			}
+
+			var stored_gtoken = Cookies.get('gtoken');
+			if(stored_gtoken){
+				document.getElementById('gtoken').value = stored_gtoken;	
+			}			
 
 			var input = document.getElementById("search");
 			input.addEventListener("keyup", function(event) {
@@ -101,6 +126,282 @@ title: Admin - Blueprints
 			const answers_base_url = '{{ site.answers_base_url }}';
 			
 		 	token = document.getElementById("token").value;	
+			gtoken = document.getElementById("gtoken").value;	
+
+			function publishREADMEToGithub(){
+
+				const options = {
+					method: 'get',
+					headers: {
+						"Accept": "application/vnd.github+json",
+						"Authorization": 'Bearer ' + gtoken
+					}
+				};	
+
+				fetch('https://api.github.com/repos/postman-open-technologies/lifecycle/contents/README.md',options)
+					.then(function(response) {
+						if (!response.ok) {
+							console.log('Error with Status Code: ' + response.status);
+							return;
+						}
+						response.json().then(function(data) {	
+
+							var sha = data.sha;
+
+							var markdown = '# API Lifecycle & Governance Blueprints' + '\n';
+							markdown += 'This is our Git managed process for centralizing the ideation and creation of consistent content, providing a single reference for concepts across the API lifecycle and operations--feel free to use, fork, and submit any content.' + '\n';
+
+							markdown += '## Blueprints' + '\n';
+							markdown += 'A blueprint is just a concept. It begins with an idea, grows with discussion and research, and then becomes an outline, which can be used as a buffet of concepts to work with when producing blog posts, videos, decks, and other reusable content.' + '\n';
+
+							markdown += '### Postman' + '\n';
+							markdown += 'These are blueprints that are specific to Postman, and how we operate different aspects of Open Tech.' + '\n';
+
+							var group_level = 0;
+							var b = document.getElementById("blueprints_json").value;
+							b = JSON.parse(b);
+
+							markdown += '## 100 Series Blueprints \n';
+							for (i = 0; i < b.length; i++) {
+								var name = b[i].name;
+								var level = b[i].level;
+
+								let first = level.substring(0,1);
+
+								var slug = name.toLowerCase();
+								slug = slug.replaceAll('?','');								
+								slug = slug.replaceAll('/','');		
+								slug = slug.replaceAll('&','');	
+								slug = slug.replaceAll(' ','-');
+								slug = slug.replaceAll('--','-');
+								slug = slug.replaceAll('--','-');
+
+								if(first==1){
+									markdown += '- [' + name + '](blueprints/' + slug + '.md) \n';
+								}
+							}
+
+							markdown += '## 200 Series Blueprints \n';
+							for (i = 0; i < b.length; i++) {
+								var name = b[i].name;
+								var level = b[i].level;
+
+								let first = level.substring(0,1);
+
+								var slug = name.toLowerCase();
+								slug = slug.replaceAll('?','');								
+								slug = slug.replaceAll('/','');		
+								slug = slug.replaceAll('&','');	
+								slug = slug.replaceAll(' ','-');
+								slug = slug.replaceAll('--','-');
+								slug = slug.replaceAll('--','-');
+
+								if(first==2){
+									markdown += '- [' + name + '](blueprints/' + slug + '.md) \n';
+								}								
+							}	
+							
+							markdown += '## 300 Series Blueprints \n';
+							for (i = 0; i < b.length; i++) {
+								var name = b[i].name;
+								var level = b[i].level;
+
+								let first = level.substring(0,1);
+
+								var slug = name.toLowerCase();
+								slug = slug.replaceAll('?','');								
+								slug = slug.replaceAll('/','');		
+								slug = slug.replaceAll('&','');	
+								slug = slug.replaceAll(' ','-');
+								slug = slug.replaceAll('--','-');
+								slug = slug.replaceAll('--','-');
+
+								if(first==3){
+									markdown += '- [' + name + '](blueprints/' + slug + '.md) \n';
+								}
+							}				
+							
+							markdown += '## 400 Series Blueprints \n';
+							for (i = 0; i < b.length; i++) {
+								var name = b[i].name;
+								var level = b[i].level;
+
+								let first = level.substring(0,1);
+
+								var slug = name.toLowerCase();
+								slug = slug.replaceAll('?','');								
+								slug = slug.replaceAll('/','');		
+								slug = slug.replaceAll('&','');	
+								slug = slug.replaceAll(' ','-');
+								slug = slug.replaceAll('--','-');
+								slug = slug.replaceAll('--','-');
+
+								if(first==4){
+									markdown += '- [' + name + '](blueprints/' + slug + '.md) \n';
+								}
+							}
+
+							markdown += '## Process' + '\n';
+							markdown += 'The process we are using to move blueprints forward is an ever evolving one, but to help encourage participation across the team, and even from the community, here are steps we are taking to create new blueprints, and iterate upon existing ones.' + '\n';
+
+							markdown += '- **Ideas** - Use a miro board to get all the concepts on the table in a visual way.' + '\n';
+							markdown += '- **Discussion** - Use Github issue to discuss each concept as we iterate upon.' + '\n';
+							markdown += '- **Outline** - Use individual markdown files as the source of outline for each version.' + '\n';
+							markdown += '- **Deck** - Create a deck to convey the concept for use in demos and presentations.' + '\n';
+							markdown += '- **Slide** - Create a single slide to convey the concept for use in slide decks.' + '\n';
+							markdown += '- **Blog** - Publish a blog post to support the concept and help tell the sotry.' + '\n';
+							markdown += '- **Video** - Publish a video using Space Camp, Exploratory, or Level Up process.' + '\n';
+							markdown += '- **PDF** - Create a one sheet PDF that can be easily shared with anyone via email or link.' + '\n';
+
+							markdown += 'This process will continue to evolve as we move forward with more blueprints. This set of instructions is designed to focus on fleshing out as many blueprints as possible, providing areas and elements for each, but then iterating upon actions and other links, videos, and resources with future versions--we will shift the process as we progress.' + '\n';	
+
+							var c = {};
+							c.name = "Kin Lane";
+							c.email = "kinlane@gmail.com";
+
+							var m = {};
+							m.message = 'Rebuilding README from API';
+							m.committer = c;
+							m.sha = sha;
+							m.content = btoa(unescape(encodeURIComponent(markdown)))
+
+							const options = {
+								method: 'PUT',
+								headers: {
+									"Accept": "application/vnd.github+json",
+									"Authorization": 'Bearer ' + gtoken									
+								},
+								body: JSON.stringify(m)
+							};	
+
+							fetch('https://api.github.com/repos/postman-open-technologies/lifecycle/contents/README.md',options)
+								.then(function(response) {
+									if (!response.ok) {
+										console.log('Error with Status Code: ' + response.status);
+										return;
+									}
+									response.json().then(function(data) {	
+										//console.log(data);																			 
+									});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});	
+
+
+						});
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});
+
+				}	
+				
+			function publishBlueprint(id){
+				var markdown = document.getElementById('bview2~' + id).value;
+				var name = document.getElementById('name~' + id).value;
+
+				var slug = name.toLowerCase();
+				slug = slug.replaceAll('/','');	
+				slug = slug.replaceAll('?','');								
+				slug = slug.replaceAll('&','');	
+				slug = slug.replaceAll(' ','-');
+				slug = slug.replaceAll('--','-');
+				slug = slug.replaceAll('--','-');	
+
+				const options = {
+					method: 'get',
+					headers: {
+						"Accept": "application/vnd.github+json",
+						"Authorization": 'Bearer ' + gtoken
+					}
+				};	
+
+				fetch('https://api.github.com/repos/postman-open-technologies/lifecycle/contents/blueprints/' + slug + '.md',options)
+					.then(function(response) {
+
+						if (!response.ok) {
+
+							var c = {};
+							c.name = "Kin Lane";
+							c.email = "kinlane@gmail.com";
+
+							var m = {};
+							m.message = 'Rebuilding Blueprint from API';
+							m.committer = c;
+							m.content = btoa(unescape(encodeURIComponent(markdown)))
+
+							const options = {
+								method: 'PUT',
+								headers: {
+									"Accept": "application/vnd.github+json",
+									"Authorization": 'Bearer ' + gtoken									
+								},
+								body: JSON.stringify(m)
+							};	
+
+							fetch('https://api.github.com/repos/postman-open-technologies/lifecycle/contents/blueprints/' + slug + '.md',options)
+								.then(function(response) {
+									if (!response.ok) {
+										console.log('Error with Status Code: ' + response.status);
+										return;
+									}
+									response.json().then(function(data) {	
+										//console.log(data);																			 
+									});
+								})
+								.catch(function(err) {
+									console.log('Error: ' + err);
+							});	
+
+						}
+						else{
+							var sha = '';
+							response.json().then(function(data) {	
+								sha = data.sha;	
+								
+								var c = {};
+								c.name = "Kin Lane";
+								c.email = "kinlane@gmail.com";
+
+								var m = {};
+								m.message = 'Rebuilding Blueprint from API';
+								m.committer = c;
+								m.sha = sha;
+								m.content = btoa(markdown);
+
+								const options = {
+									method: 'PUT',
+									headers: {
+										"Accept": "application/vnd.github+json",
+										"Authorization": 'Bearer ' + gtoken									
+									},
+									body: JSON.stringify(m)
+								};	
+
+								fetch('https://api.github.com/repos/postman-open-technologies/lifecycle/contents/blueprints/' + slug + '.md',options)
+									.then(function(response) {
+										if (!response.ok) {
+											console.log('Error with Status Code: ' + response.status);
+											return;
+										}
+										response.json().then(function(data) {	
+											//console.log(data);																			 
+										});
+									})
+									.catch(function(err) {
+										console.log('Error: ' + err);
+								});									
+
+							});	
+						}						
+												
+					})
+					.catch(function(err) {
+						console.log('Error: ' + err);
+				});							
+
+			}
 
 			function autocomplete(inp, arr) {
 				/*the autocomplete function takes two arguments,
@@ -1420,6 +1721,18 @@ title: Admin - Blueprints
 
 				}
 
+				function blueprintAreasElementsMarkdownRow(b_id,a_id,row){
+
+					var description = row.description2;
+					if(!row.description2 || row.description2 == ''){
+						description = row.description1;
+					}
+
+					var markdown = '- **' + row.name + '** - ' + description + ' \n';
+					return markdown;
+
+					}				
+
 			function blueprintAreasElementsRow(b_id,a_id,row){
 
 				var description = row.description2;
@@ -1457,6 +1770,7 @@ title: Admin - Blueprints
 							var rows = '';
 							if(data){
 								var blueprint_html = document.getElementById("bview~" + b_id).value;	
+								var blueprint_markdown = document.getElementById("bview2~" + b_id).value;
 								var list = '';
 								var rows = '<center><table style="border: 0px solid #000; width: 80%;">';
 								//console.log(data);
@@ -1466,10 +1780,12 @@ title: Admin - Blueprints
 								else{																
 
 									list += '<ul>';
+									blist = '';
 									for (let i = 0; i < data.length; i++) {
 										console.log(data[i].name);
 										rows += blueprintAreasElementsRow(b_id,a_id,data[i]);											
 										list += blueprintAreasElementsHTMLRow(b_id,a_id,data[i]);																			
+										blist += blueprintAreasElementsMarkdownRow(b_id,a_id,data[i]);	
 									}
 									list += '</ul>';		
 								}
@@ -1477,8 +1793,10 @@ title: Admin - Blueprints
 
 								// somehackystuff
 								blueprint_html = blueprint_html.replace('~area~' + a_id + '~',list);
+								blueprint_markdown = blueprint_markdown.replace('~area~' + a_id + '~',blist);
 
 								document.getElementById("bview~" + b_id).value = blueprint_html;
+								document.getElementById("bview2~" + b_id).value = blueprint_markdown;
 
 								document.getElementById("area-element-list~" + b_id + '-' + a_id).innerHTML = rows;															
 							}
@@ -1565,6 +1883,18 @@ title: Admin - Blueprints
 				return html;
 
 			}
+
+			function blueprintAreaMarkdownRow(row,b_id){
+
+				var markdown = '';
+				markdown += '### ' + row.label + ' \n';				
+				markdown += row.description + ' \n\n';
+				markdown += '~area~' + row.id + '~';
+				markdown += row.footer + ' \n';
+
+				return markdown;
+
+				}			
 
 			function blueprintAreaRow(row,b_id){
 
@@ -1664,7 +1994,9 @@ title: Admin - Blueprints
 								var rows = '';
 								console.log(data.length);
 								var blueprint_html = document.getElementById("bview~" + b_id).value;
+								var blueprint_markdown = document.getElementById("bview2~" + b_id).value;
 								var list  = '';
+								var mlist  = '';
 								for (let i = 0; i < data.length; i++) {
 
 									rows += blueprintAreaRow(data[i],b_id);
@@ -1673,10 +2005,16 @@ title: Admin - Blueprints
 									// HTML View
 									list += blueprintAreaHTMLRow(data[i],b_id);	
 
+									mlist += blueprintAreaMarkdownRow(data[i],b_id);	
+
 									listBlueprintAreasElements(b_id,data[i].id);	
 								}	
 								blueprint_html = blueprint_html.replace('~' + b_id + '~',list);	
+								blueprint_markdown = blueprint_markdown.replace('~' + b_id + '~',mlist);	
+								
 								document.getElementById("bview~" + b_id).value = blueprint_html;														
+
+								document.getElementById("bview2~" + b_id).value = blueprint_markdown;	
 							}
 							else{
 								rows += '<p align="center">No Areas</p>';	
@@ -2019,12 +2357,25 @@ title: Admin - Blueprints
 				return html;
 			}
 
+			function blueprintMarkdownRow(row,i){
+				var markdown = '';					
+				markdown += '## ' + row.name + ' \n';				
+				markdown += row.description + ' \n\n';
+				markdown += '~' + row.id + '~';
+				markdown += row.footer + ' \n';
+				return markdown;
+			}			
+
 			function blueprintRow(row,i){
 				var html = '';
 
 				html += '<div style="display: none;">';
 				html += '<textarea class="form-control" id="bview~' + row.id + '" rows="5"></textarea>';
-				html += '</div>';
+				html += '</div>';	
+				
+				html += '<div style="display: none;">';
+				html += '<textarea class="form-control" id="bview2~' + row.id + '" rows="5"></textarea>';
+				html += '</div>';				
 
 				html += '<div class="accordion-item" id="blueprint-' + row.id + '">';					
 				html += '<h2 class="accordion-header" id="heading-' + row.id + '">';	
@@ -2041,7 +2392,7 @@ title: Admin - Blueprints
 
 				html += '<table style="border: 0px solid #000; width: 100%;">';
 				html += '<tr>';
-				html += '<td width=20%" align="right"><strong>Name: (<a href="#" onclick="viewBlueprint(' + row.id + ');">View</a>)</strong></td>';
+				html += '<td width=20%" align="right"><strong>Name: (<a href="#" onclick="viewBlueprint(' + row.id + ');">View</a>)</strong><input type="button" class="btn btn-danger" name="delete" value="Publish" onclick="publishBlueprint(' + row.id + ')" style=""></td>';
 				html += '<td><input type="text" style="width: 90%;" onchange="updateBlueprintRowField(this);" class="form-control" id="name~' + row.id + '" placeholder="" value="' + row.name + '"></td>';
 				html += '</tr>';				
 
@@ -2237,10 +2588,15 @@ title: Admin - Blueprints
 								}							
 							}
 							document.getElementById("blueprintAccordian").innerHTML = rows;							
+							document.getElementById("blueprints_json").value = JSON.stringify(data);		
+
 							if(data){
 								for (let i = 0; i < data.length; i++) {
 									document.getElementById("bview~" + data[i].id).value = blueprintHTMLRow(data[i],i);
-								}								
+								}	
+								for (let i = 0; i < data.length; i++) {
+									document.getElementById("bview2~" + data[i].id).value = blueprintMarkdownRow(data[i],i);
+								}																
 							}														
 						});
 					})
